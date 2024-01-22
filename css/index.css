@@ -4,6 +4,7 @@
   font-family: "Courier New", Courier, monospace;
   font-size: 28px;
   font-weight: bold;
+  letter-spacing: -1px;
 }
 
 main {
@@ -43,6 +44,7 @@ button {
   font-family: "Courier New", Courier, monospace;
   font-size: 28px;
   font-weight: bold;
+  letter-spacing: -1px;
 }
 
 main {
@@ -59,6 +61,7 @@ main {
   font-family: "Courier New", Courier, monospace;
   font-size: 28px;
   font-weight: bold;
+  letter-spacing: -1px;
 }
 
 main {
@@ -73,7 +76,8 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 10vh;
+  height: 100px;
+  gap: 30px;
 }
 .header .container .header__navigation .header__navigation-logo {
   height: 100%;
@@ -82,6 +86,16 @@ main {
   min-width: 55%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+.header .container .header__navigation .header__navigation-list .header__navigation-list-element {
+  text-align: center;
+}
+.header .container .header__navigation .header__navigation-list .header__navigation-list-separator {
+  width: 1px;
+  height: 20px;
+  background-color: #9f9f9f;
 }
 .header .container .header__navigation .header__navigation-settings {
   display: flex;
@@ -91,14 +105,14 @@ main {
 .header .container .header__navigation .header__navigation-settings .themes-switcher-container {
   display: flex;
   align-items: center;
+  justify-content: space-around;
   background-color: #9f9f9f;
   color: #232e2f;
   border-radius: 25px;
   padding: 5px;
 }
-.header .container .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher-sign {
-  margin-right: 20px;
-  font-size: 20px;
+.header .container .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher-icon {
+  width: 24px;
 }
 .header .container .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher {
   position: relative;
@@ -151,6 +165,7 @@ main {
   font-family: "Courier New", Courier, monospace;
   font-size: 28px;
   font-weight: bold;
+  letter-spacing: -1px;
 }
 
 main {
@@ -166,7 +181,7 @@ main {
   justify-content: space-between;
   align-items: center;
   font-size: 20px;
-  height: 10vh;
+  height: 100px;
 }
 .footer .container .footer__social {
   display: flex;

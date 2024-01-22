@@ -10,7 +10,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 10vh;
+            height: 100px;
+            gap: 30px;
 
             .header__navigation-logo {
                 height: 100%;
@@ -20,11 +21,20 @@
                 min-width: 55%;
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
+                gap: 30px;
 
 
                 .header__navigation-list-element {
+                    text-align: center;
 
                     header__navigation-list-element-link {}
+                }
+
+                .header__navigation-list-separator {
+                    width: 1px;
+                    height: 20px;
+                    background-color: $text_color_primary;
                 }
             }
 
@@ -36,14 +46,14 @@
                 .themes-switcher-container {
                     display: flex;
                     align-items: center;
+                    justify-content: space-around;
                     background-color: $text_color_primary;
                     color: $background_color_primary;
                     border-radius: 25px;
                     padding: 5px;
 
-                    .themes-switcher-sign {
-                        margin-right: 20px;
-                        font-size: 20px;
+                    .themes-switcher-icon {
+                        width: 24px;
                     }
 
                     .themes-switcher {
