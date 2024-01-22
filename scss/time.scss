@@ -1,0 +1,11 @@
+@import './base';
+@import './js-classes';
+@import './variables/variables';
+@import './templates/templates';
+
+@import './blocks/header';
+@import './blocks/footer';
+
+main {
+    @extend %secondary_style;
+}
