@@ -2,4 +2,68 @@
 
 header {
     @extend %primary_style;
+
+    .header__navigation {
+
+        .header__navigation-logo {}
+
+        .header__navigation-list {
+
+            .header__navigation-list-element {}
+        }
+
+        .header__navigation-settings {
+
+            .themes-switcher-sign {}
+
+            .themes-switcher {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 34px;
+
+                input {
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+
+                    &:checked+.themes-switcher__slider {
+                        background-color: #366c67;
+                    }
+
+                    &:checked+.themes-switcher__slider:before {
+                        transform: translateX(26px);
+                    }
+                }
+            }
+
+            .themes-switcher__slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                transition: .4s;
+                border-radius: 40%;
+
+                &:before {
+                    position: absolute;
+                    content: "";
+                    height: 26px;
+                    width: 26px;
+                    left: 4px;
+                    bottom: 4px;
+                    background-color: white;
+                    transition: .4s;
+                    border-radius: 40%;
+                }
+            }
+
+            .language-button {}
+
+            .language-separator {}
+        }
+    }
 }
