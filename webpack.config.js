@@ -4,10 +4,17 @@ let path = require('path');
 
 module.exports = {
   mode: 'production',
-  entry: './js/index.js',
+  // entry: './js/index.js',
+  entry: {
+    mainPage: "./js/index.js",
+    time: {
+      import: "./js/page.js",
+      filename: "otherBundles/[name].js",
+    },
+  },
   output: {
     filename: 'bundle.js',
-    path: __dirname + '/js'
+    path: __dirname + '/js/build'
   },
   watch: true,
 
