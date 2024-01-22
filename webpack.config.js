@@ -22,6 +22,10 @@ module.exports = {
       import: "./js/register.js",
       filename: "otherBundles/bundle_[name].js",
     },
+    sign_in: {
+      import: "./js/sign_in.js",
+      filename: "otherBundles/bundle_[name].js",
+    },
   },
   output: {
     filename: 'bundle.js',
