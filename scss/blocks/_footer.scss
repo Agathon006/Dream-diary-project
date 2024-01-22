@@ -1,0 +1,31 @@
+@import '../templates/templates';
+
+.footer {
+    @extend %primary_style;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 20px;
+        height: 100px;
+
+        .footer__data {
+
+            .footer__data-element {}
+        }
+
+        .footer__plot {
+        }
+
+        .footer__social {
+
+            .footer__social-link {
+            }
+
+            .footer__social-link-image {
+                height: 100%;
+            }
+        }
+    }
+}
