@@ -18,6 +18,10 @@ module.exports = {
       import: "./js/music.js",
       filename: "otherBundles/bundle_[name].js",
     },
+    register: {
+      import: "./js/register.js",
+      filename: "otherBundles/bundle_[name].js",
+    },
   },
   output: {
     filename: 'bundle.js',
