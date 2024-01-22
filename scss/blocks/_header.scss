@@ -13,9 +13,13 @@
             height: 100px;
             gap: 30px;
 
-            .header__navigation-logo {
-                height: 100%;
+            .header__navigation-home-link {
+
+                .header__navigation-logo {
+                    height: 90px;
+                }
             }
+
 
             .header__navigation-list {
                 min-width: 55%;

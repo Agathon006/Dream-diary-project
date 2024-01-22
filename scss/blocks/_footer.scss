@@ -15,8 +15,7 @@
             .footer__data-element {}
         }
 
-        .footer__plot {
-        }
+        .footer__plot {}
 
         .footer__social {
             display: flex;
@@ -24,10 +23,10 @@
             .footer__social-link {
                 display: block;
                 margin: 10px;
-            }
 
-            .footer__social-link-image {
-                width: 48px;
+                .footer__social-link-image {
+                    width: 48px;
+                }
             }
         }
     }
