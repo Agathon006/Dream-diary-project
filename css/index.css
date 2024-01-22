@@ -7,15 +7,15 @@
 }
 
 main {
-  background-color: #00ddff;
-  color: #e7e7e7;
+  background-color: #9f9f9f;
+  color: #232e2f;
   font-family: Inter;
   font-size: 20px;
   font-weight: 400;
 }
 
-.body-wrapper {
-  min-height: 100vh;
+.main {
+  min-height: 80vh;
 }
 
 .container {
@@ -46,8 +46,8 @@ button {
 }
 
 main {
-  background-color: #00ddff;
-  color: #e7e7e7;
+  background-color: #9f9f9f;
+  color: #232e2f;
   font-family: Inter;
   font-size: 20px;
   font-weight: 400;
@@ -62,8 +62,8 @@ main {
 }
 
 main {
-  background-color: #00ddff;
-  color: #e7e7e7;
+  background-color: #9f9f9f;
+  color: #232e2f;
   font-family: Inter;
   font-size: 20px;
   font-weight: 400;
@@ -73,7 +73,7 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
+  height: 10vh;
 }
 .header .container .header__navigation .header__navigation-logo {
   height: 100%;
@@ -154,8 +154,8 @@ main {
 }
 
 main {
-  background-color: #00ddff;
-  color: #e7e7e7;
+  background-color: #9f9f9f;
+  color: #232e2f;
   font-family: Inter;
   font-size: 20px;
   font-weight: 400;
@@ -166,8 +166,15 @@ main {
   justify-content: space-between;
   align-items: center;
   font-size: 20px;
-  height: 100px;
+  height: 10vh;
+}
+.footer .container .footer__social {
+  display: flex;
+}
+.footer .container .footer__social .footer__social-link {
+  display: block;
+  margin: 10px;
 }
 .footer .container .footer__social .footer__social-link-image {
-  height: 100%;
+  width: 48px;
 }/*# sourceMappingURL=index.css.map */
