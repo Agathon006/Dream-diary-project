@@ -1,0 +1,5 @@
+@import '../templates/templates';
+
+header {
+    @extend %primary_style;
+}

@@ -5,3 +5,6 @@
 @import './blocks/header';
 @import './blocks/footer';
 
+main {
+    @extend %secondary_style;
+}

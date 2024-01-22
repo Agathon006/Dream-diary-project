@@ -1,1 +1,40 @@
-/*# sourceMappingURL=index.css.map */
+.body-wrapper {
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 70%;
+  margin: auto;
+}
+
+header {
+  background-color: #232e2f;
+  color: #9f9f9f;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+main {
+  background-color: rgba(5, 48, 48, 0.7882352941);
+  color: #e7e7e7;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+header {
+  background-color: #232e2f;
+  color: #9f9f9f;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+main {
+  background-color: rgba(5, 48, 48, 0.7882352941);
+  color: #e7e7e7;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 400;
+}/*# sourceMappingURL=index.css.map */
