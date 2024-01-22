@@ -7,7 +7,7 @@ header, button, a {
 }
 
 main {
-  background-color: rgba(5, 48, 48, 0.7882352941);
+  background-color: #00ddff;
   color: #e7e7e7;
   font-family: Inter;
   font-size: 20px;
@@ -33,6 +33,10 @@ button {
   cursor: pointer;
 }
 
+.underlined {
+  text-decoration: underline;
+}
+
 header, a, button {
   background-color: #232e2f;
   color: #9f9f9f;
@@ -42,7 +46,7 @@ header, a, button {
 }
 
 main {
-  background-color: rgba(5, 48, 48, 0.7882352941);
+  background-color: #00ddff;
   color: #e7e7e7;
   font-family: Inter;
   font-size: 20px;
@@ -58,7 +62,7 @@ header, a, button {
 }
 
 main {
-  background-color: rgba(5, 48, 48, 0.7882352941);
+  background-color: #00ddff;
   color: #e7e7e7;
   font-family: Inter;
   font-size: 20px;
@@ -69,10 +73,10 @@ header .header__navigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 100px;
 }
 header .header__navigation .header__navigation-logo {
-  width: 100px;
-  height: 100px;
+  height: 100%;
 }
 header .header__navigation .header__navigation-list {
   min-width: 55%;
@@ -87,6 +91,10 @@ header .header__navigation .header__navigation-settings {
 header .header__navigation .header__navigation-settings .themes-switcher-container {
   display: flex;
   align-items: center;
+  background-color: #9f9f9f;
+  color: #232e2f;
+  border-radius: 25px;
+  padding: 5px;
 }
 header .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher-sign {
   margin-right: 20px;
@@ -116,7 +124,7 @@ header .header__navigation .header__navigation-settings .themes-switcher-contain
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #232e2f;
   transition: 0.4s;
   border-radius: 40%;
 }
