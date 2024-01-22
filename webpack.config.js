@@ -8,7 +8,11 @@ module.exports = {
     mainPage: "./js/index.js",
     time: {
       import: "./js/time.js",
-      filename: "otherBundles/[name].js",
+      filename: "otherBundles/bundle_[name].js",
+    },
+    moon: {
+      import: "./js/moon.js",
+      filename: "otherBundles/bundle_[name].js",
     },
   },
   output: {
