@@ -37,6 +37,11 @@ button {
 
 .underlined {
   text-decoration: underline;
+  color: #dedede;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 .footer, .header, a, button {
