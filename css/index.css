@@ -87,8 +87,8 @@ main {
   height: 100px;
   gap: 30px;
 }
-.header .container .header__navigation .header__navigation-logo {
-  height: 100%;
+.header .container .header__navigation .header__navigation-home-link .header__navigation-logo {
+  height: 90px;
 }
 .header .container .header__navigation .header__navigation-list {
   min-width: 55%;
@@ -224,6 +224,6 @@ main {
   display: block;
   margin: 10px;
 }
-.footer .container .footer__social .footer__social-link-image {
+.footer .container .footer__social .footer__social-link .footer__social-link-image {
   width: 48px;
 }/*# sourceMappingURL=index.css.map */
