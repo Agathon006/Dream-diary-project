@@ -14,6 +14,10 @@ module.exports = {
       import: "./js/moon.js",
       filename: "otherBundles/bundle_[name].js",
     },
+    music: {
+      import: "./js/music.js",
+      filename: "otherBundles/bundle_[name].js",
+    },
   },
   output: {
     filename: 'bundle.js',
