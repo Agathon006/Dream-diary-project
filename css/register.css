@@ -11,7 +11,7 @@
 .main {
   background-color: #9f9f9f;
   color: #000000;
-  font-family: Inter;
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 20px;
   font-weight: 400;
 }
@@ -57,7 +57,7 @@ button {
 .main {
   background-color: #9f9f9f;
   color: #000000;
-  font-family: Inter;
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 20px;
   font-weight: 400;
 }
@@ -75,7 +75,7 @@ button {
 .main {
   background-color: #9f9f9f;
   color: #000000;
-  font-family: Inter;
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 20px;
   font-weight: 400;
 }
@@ -205,7 +205,7 @@ button {
 .main {
   background-color: #9f9f9f;
   color: #000000;
-  font-family: Inter;
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 20px;
   font-weight: 400;
 }
@@ -226,4 +226,57 @@ button {
 }
 .footer .container .footer__social .footer__social-link .footer__social-link-image {
   width: 48px;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+}
+.main .form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+.main .form-wrapper .register-title {
+  margin-bottom: 20px;
+  font-size: 40px;
+}
+.main .form-wrapper .register-form {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(233, 233, 233);
+  padding: 0 20px 20px;
+  width: 300px;
+}
+.main .form-wrapper .register-form .register-form__span {
+  margin-top: 15px;
+  font-size: 14px;
+  font-weight: 900;
+}
+.main .form-wrapper .register-form .register-form__input {
+  margin-top: 5px;
+  cursor: pointer;
+  padding: 7px 14px;
+  border-radius: 5px;
+}
+.main .form-wrapper .register-form .register-form__input:hover {
+  background-color: rgb(233, 233, 233);
+}
+.main .form-wrapper .register-form .register-form__span-small {
+  font-size: 14px;
+  text-align: center;
+  letter-spacing: 1px;
+  margin: 10px 0;
+}
+.main .form-wrapper .register-form .register-form__submit {
+  border-radius: 20px;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+  font-size: 26px;
+  font-weight: 600;
+}
+.main .form-wrapper .register-form .register-form__submit:hover {
+  background-color: #9f9f9f;
 }/*# sourceMappingURL=register.css.map */

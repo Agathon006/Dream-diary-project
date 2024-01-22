@@ -6,6 +6,6 @@
 @import './blocks/header';
 @import './blocks/footer';
 
-main {
+.main {
     @extend %secondary_style;
 }
