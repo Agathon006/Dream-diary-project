@@ -1,13 +1,39 @@
+header, button, a {
+  background-color: #232e2f;
+  color: #9f9f9f;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+main {
+  background-color: rgba(5, 48, 48, 0.7882352941);
+  color: #e7e7e7;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 400;
+}
+
 .body-wrapper {
   min-height: 100vh;
 }
 
 .container {
-  max-width: 70%;
+  max-width: 80%;
   margin: auto;
 }
 
-header {
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+header, a, button {
   background-color: #232e2f;
   color: #9f9f9f;
   font-family: "Courier New", Courier, monospace;
@@ -23,7 +49,7 @@ main {
   font-weight: 400;
 }
 
-header {
+header, a, button {
   background-color: #232e2f;
   color: #9f9f9f;
   font-family: "Courier New", Courier, monospace;
@@ -39,24 +65,51 @@ main {
   font-weight: 400;
 }
 
-header .header__navigation .header__navigation-settings .themes-switcher {
+header .header__navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .header__navigation .header__navigation-logo {
+  width: 100px;
+  height: 100px;
+}
+header .header__navigation .header__navigation-list {
+  min-width: 55%;
+  display: flex;
+  justify-content: space-between;
+}
+header .header__navigation .header__navigation-settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+header .header__navigation .header__navigation-settings .themes-switcher-container {
+  display: flex;
+  align-items: center;
+}
+header .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher-sign {
+  margin-right: 20px;
+  font-size: 20px;
+}
+header .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 30px;
+  height: 17px;
 }
-header .header__navigation .header__navigation-settings .themes-switcher input {
+header .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher input {
   opacity: 0;
   width: 0;
   height: 0;
 }
-header .header__navigation .header__navigation-settings .themes-switcher input:checked + .themes-switcher__slider {
+header .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher input:checked + .themes-switcher__slider {
   background-color: #366c67;
 }
-header .header__navigation .header__navigation-settings .themes-switcher input:checked + .themes-switcher__slider:before {
-  transform: translateX(26px);
+header .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher input:checked + .themes-switcher__slider:before {
+  transform: translateX(13px);
 }
-header .header__navigation .header__navigation-settings .themes-switcher__slider {
+header .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher__slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -67,14 +120,25 @@ header .header__navigation .header__navigation-settings .themes-switcher__slider
   transition: 0.4s;
   border-radius: 40%;
 }
-header .header__navigation .header__navigation-settings .themes-switcher__slider:before {
+header .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher__slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
   background-color: white;
   transition: 0.4s;
   border-radius: 40%;
+}
+header .header__navigation .header__navigation-settings .language-container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+header .header__navigation .header__navigation-settings .language-container .language-button {
+  font-size: 20px;
+}
+header .header__navigation .header__navigation-settings .language-container .language-separator {
+  font-size: 20px;
 }/*# sourceMappingURL=index.css.map */

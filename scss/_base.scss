@@ -1,8 +1,22 @@
+@import './templates/templates';
+
 .body-wrapper {
     min-height: 100vh;
 }
 
 .container {
-    max-width: 70%;
+    max-width: 80%;
     margin: auto;
+}
+
+a {
+    @extend %primary_style;
+    text-decoration: none;
+}
+
+button {
+    @extend %primary_style;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
 }

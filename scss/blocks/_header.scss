@@ -4,66 +4,100 @@ header {
     @extend %primary_style;
 
     .header__navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-        .header__navigation-logo {}
+        .header__navigation-logo {
+            width: 100px;
+            height: 100px;
+        }
 
         .header__navigation-list {
+            min-width: 55%;
+            display: flex;
+            justify-content: space-between;
 
-            .header__navigation-list-element {}
+
+            .header__navigation-list-element {
+
+                header__navigation-list-element-link {}
+            }
         }
 
         .header__navigation-settings {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-            .themes-switcher-sign {}
+            .themes-switcher-container {
+                display: flex;
+                align-items: center;
 
-            .themes-switcher {
-                position: relative;
-                display: inline-block;
-                width: 60px;
-                height: 34px;
+                .themes-switcher-sign {
+                    margin-right: 20px;
+                    font-size: 20px;
+                }
 
-                input {
-                    opacity: 0;
-                    width: 0;
-                    height: 0;
+                .themes-switcher {
+                    position: relative;
+                    display: inline-block;
+                    width: 30px;
+                    height: 17px;
 
-                    &:checked+.themes-switcher__slider {
-                        background-color: #366c67;
-                    }
+                    input {
+                        opacity: 0;
+                        width: 0;
+                        height: 0;
 
-                    &:checked+.themes-switcher__slider:before {
-                        transform: translateX(26px);
+                        &:checked+.themes-switcher__slider {
+                            background-color: #366c67;
+                        }
+
+                        &:checked+.themes-switcher__slider:before {
+                            transform: translateX(13px);
+                        }
                     }
                 }
-            }
 
-            .themes-switcher__slider {
-                position: absolute;
-                cursor: pointer;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #ccc;
-                transition: .4s;
-                border-radius: 40%;
-
-                &:before {
+                .themes-switcher__slider {
                     position: absolute;
-                    content: "";
-                    height: 26px;
-                    width: 26px;
-                    left: 4px;
-                    bottom: 4px;
-                    background-color: white;
+                    cursor: pointer;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: #ccc;
                     transition: .4s;
                     border-radius: 40%;
+
+                    &:before {
+                        position: absolute;
+                        content: "";
+                        height: 13px;
+                        width: 13px;
+                        left: 2px;
+                        bottom: 2px;
+                        background-color: white;
+                        transition: .4s;
+                        border-radius: 40%;
+                    }
                 }
             }
 
-            .language-button {}
+            .language-container {
+                margin-top: 10px;
+                display: flex;
+                align-items: center;
 
-            .language-separator {}
+                .language-button {
+                    font-size: 20px;
+                }
+
+                .language-separator {
+                    font-size: 20px;
+                }
+            }
         }
     }
 }
