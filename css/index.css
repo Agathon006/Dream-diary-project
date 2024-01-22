@@ -5,6 +5,7 @@
   font-size: 28px;
   font-weight: bold;
   letter-spacing: -1px;
+  transition: 0.5s;
 }
 
 main {
@@ -45,6 +46,7 @@ button {
   font-size: 28px;
   font-weight: bold;
   letter-spacing: -1px;
+  transition: 0.5s;
 }
 
 main {
@@ -62,6 +64,7 @@ main {
   font-size: 28px;
   font-weight: bold;
   letter-spacing: -1px;
+  transition: 0.5s;
 }
 
 main {
@@ -92,17 +95,39 @@ main {
 .header .container .header__navigation .header__navigation-list .header__navigation-list-element {
   text-align: center;
 }
+.header .container .header__navigation .header__navigation-list .header__navigation-list-element .header__navigation-list-element-link:hover {
+  color: #dedede;
+}
 .header .container .header__navigation .header__navigation-list .header__navigation-list-separator {
   width: 1px;
   height: 20px;
   background-color: #9f9f9f;
 }
-.header .container .header__navigation .header__navigation-settings {
+.header .container .header__navigation .header__navigation-end {
+  display: flex;
+  align-items: center;
+}
+.header .container .header__navigation .header__navigation-end .header__navigation-end-account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+.header .container .header__navigation .header__navigation-end .header__navigation-end-account .header__navigation-end-account-link:hover {
+  color: #dedede;
+}
+.header .container .header__navigation .header__navigation-end .header__navigation-end-account .header__navigation-end-account-separator {
+  height: 1px;
+  width: 100%;
+  margin: 5px 0;
+  background-color: #9f9f9f;
+}
+.header .container .header__navigation .header__navigation-end .header__navigation-end-settings {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.header .container .header__navigation .header__navigation-settings .themes-switcher-container {
+.header .container .header__navigation .header__navigation-end .header__navigation-end-settings .themes-switcher-container {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -111,27 +136,27 @@ main {
   border-radius: 25px;
   padding: 5px;
 }
-.header .container .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher-icon {
+.header .container .header__navigation .header__navigation-end .header__navigation-end-settings .themes-switcher-container .themes-switcher-icon {
   width: 24px;
 }
-.header .container .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher {
+.header .container .header__navigation .header__navigation-end .header__navigation-end-settings .themes-switcher-container .themes-switcher {
   position: relative;
   display: inline-block;
   width: 30px;
   height: 17px;
 }
-.header .container .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher input {
+.header .container .header__navigation .header__navigation-end .header__navigation-end-settings .themes-switcher-container .themes-switcher input {
   opacity: 0;
   width: 0;
   height: 0;
 }
-.header .container .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher input:checked + .themes-switcher__slider {
+.header .container .header__navigation .header__navigation-end .header__navigation-end-settings .themes-switcher-container .themes-switcher input:checked + .themes-switcher__slider {
   background-color: #366c67;
 }
-.header .container .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher input:checked + .themes-switcher__slider:before {
+.header .container .header__navigation .header__navigation-end .header__navigation-end-settings .themes-switcher-container .themes-switcher input:checked + .themes-switcher__slider:before {
   transform: translateX(13px);
 }
-.header .container .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher__slider {
+.header .container .header__navigation .header__navigation-end .header__navigation-end-settings .themes-switcher-container .themes-switcher__slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -142,7 +167,7 @@ main {
   transition: 0.4s;
   border-radius: 40%;
 }
-.header .container .header__navigation .header__navigation-settings .themes-switcher-container .themes-switcher__slider:before {
+.header .container .header__navigation .header__navigation-end .header__navigation-end-settings .themes-switcher-container .themes-switcher__slider:before {
   position: absolute;
   content: "";
   height: 13px;
@@ -153,11 +178,14 @@ main {
   transition: 0.4s;
   border-radius: 40%;
 }
-.header .container .header__navigation .header__navigation-settings .language-container {
+.header .container .header__navigation .header__navigation-end .header__navigation-end-settings .language-container {
   margin-top: 10px;
   display: flex;
   align-items: center;
   font-size: 20px;
+}
+.header .container .header__navigation .header__navigation-end .header__navigation-end-settings .language-container .language-button:hover {
+  color: #dedede;
 }
 .footer, a, button, .header {
   background-color: #232e2f;
@@ -166,6 +194,7 @@ main {
   font-size: 28px;
   font-weight: bold;
   letter-spacing: -1px;
+  transition: 0.5s;
 }
 
 main {
