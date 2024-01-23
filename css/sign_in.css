@@ -44,6 +44,15 @@ button {
   visibility: hidden;
 }
 
+.wrong-input {
+  border: 2px red solid;
+}
+
+.wrong-span {
+  color: red;
+  font-size: 14px;
+}
+
 .footer, .header, a, button {
   background-color: #232e2f;
   color: #9f9f9f;

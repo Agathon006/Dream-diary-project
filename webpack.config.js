@@ -5,25 +5,25 @@ let path = require('path');
 module.exports = {
   mode: 'production',
   entry: {
-    mainPage: "./js/index.js",
+    mainPage: "./js/pages/home/",
     time: {
-      import: "./js/time.js",
+      import: "./js/pages/time/",
       filename: "otherBundles/bundle_[name].js",
     },
     moon: {
-      import: "./js/moon.js",
+      import: "./js/pages/moon/",
       filename: "otherBundles/bundle_[name].js",
     },
     music: {
-      import: "./js/music.js",
+      import: "./js/pages/music/",
       filename: "otherBundles/bundle_[name].js",
     },
     register: {
-      import: "./js/register.js",
+      import: "./js/pages/register/",
       filename: "otherBundles/bundle_[name].js",
     },
     sign_in: {
-      import: "./js/sign_in.js",
+      import: "./js/pages/sign_in/",
       filename: "otherBundles/bundle_[name].js",
     },
   },

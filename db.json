@@ -1,1 +1,10 @@
-{}
+{
+  "admins": [
+    {
+      "nickname": "Admin",
+      "password": "123457",
+      "id": "f663"
+    }
+  ],
+  "users": []
+}
