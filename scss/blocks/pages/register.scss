@@ -8,4 +8,63 @@
 
 .main {
     @extend %secondary_style;
+    display: flex;
+    justify-content: center;
+
+    .form-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+
+        .register-title {
+            margin-bottom: 20px;
+            font-size: 40px;
+        }
+
+        .register-form {
+            display: flex;
+            flex-direction: column;
+            background-color: rgb(233, 233, 233);
+            padding: 0 20px 20px;
+            width: 300px;
+
+            .register-form__span {
+                margin-top: 15px;
+                font-size: 14px;
+                font-weight: 900;
+            }
+
+            .register-form__input {
+                margin-top: 5px;
+                cursor: pointer;
+                padding: 7px 14px;
+                border-radius: 5px;
+
+                &:hover {
+                    background-color: rgb(233, 233, 233);
+                }
+            }
+
+            .register-form__span-small {
+                font-size: 14px;
+                text-align: center;
+                letter-spacing: 1px;
+                margin: 10px 0;
+            }
+
+            .register-form__submit {
+                border-radius: 20px;
+                padding: 10px 0;
+                cursor: pointer;
+                transition: .5s;
+                font-size: 26px;
+                font-weight: 600;
+
+                &:hover {
+                    background-color: $text_color_primary;
+                }
+            }
+        }
+    }
 }

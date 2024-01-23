@@ -43,7 +43,8 @@
                     </div>
                     <div class="header__navigation-end-settings">
                         <div class="themes-switcher-container">
-                            <img src="../icons/header/dark-theme.svg" alt="dark-theme-icon" class="themes-switcher-icon">
+                            <img src="../icons/header/dark-theme.svg" alt="dark-theme-icon"
+                                class="themes-switcher-icon">
                             <label class="themes-switcher">
                                 <input type="checkbox" checked>
                                 <span class="themes-switcher__slider"></span>
@@ -60,10 +61,19 @@
         </div>
     </header>
     <main class="main">
-        <div class="container">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi sapiente dolorum debitis corporis labore
-                quo reprehenderit facilis unde hic saepe non mollitia pariatur quam, commodi tempore nam maxime ex? Ad.
-            </p>
+        <div class="form-wrapper">
+            <h1 class="register-title">Make the most of your sleep</h1>
+            <form action="#" class="register-form" id="register-form">
+                <span class="register-form__span">Nickname(5-15 characters)</span>
+                <input type="text" required="true" name="nickname" class="register-form__input" id="nickname-input">
+                <span class="register-form__span">Email</span>
+                <input type="text" required="true" name="email" class="register-form__input" id="email-input">
+                <span class="register-form__span">Password(6+ characters)</span>
+                <input type="password" required="true" name="password" class="register-form__input" id="password-input">
+                <span class="register-form__span-small">By clicking register, you agree to the application
+                    polices.</span>
+                <input type="submit" name="register" value="Register" class="register-form__submit" id="register-form-submit">
+            </form>
         </div>
     </main>
     <footer class="footer">

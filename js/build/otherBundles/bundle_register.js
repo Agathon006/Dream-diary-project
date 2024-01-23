@@ -1,3 +1,296 @@
-/*! For license information please see bundle_register.js.LICENSE.txt */
-(()=>{var t={702:function(t,e,r){t.exports=function(){"use strict";function t(t){return"function"==typeof t}var e=Array.isArray?Array.isArray:function(t){return"[object Array]"===Object.prototype.toString.call(t)},n=0,o=void 0,i=void 0,s=function(t,e){v[n]=t,v[n+1]=e,2===(n+=2)&&(i?i(p):b())};var u="undefined"!=typeof window?window:void 0,c=u||{},a=c.MutationObserver||c.WebKitMutationObserver,f="undefined"==typeof self&&"undefined"!=typeof process&&"[object process]"==={}.toString.call(process),l="undefined"!=typeof Uint8ClampedArray&&"undefined"!=typeof importScripts&&"undefined"!=typeof MessageChannel;function h(){var t=setTimeout;return function(){return t(p,1)}}var v=new Array(1e3);function p(){for(var t=0;t<n;t+=2)(0,v[t])(v[t+1]),v[t]=void 0,v[t+1]=void 0;n=0}var d,_,y,w,b=void 0;function g(t,e){var r=this,n=new this.constructor(j);void 0===n[A]&&k(n);var o=r._state;if(o){var i=arguments[o-1];s((function(){return N(o,n,i,r._result)}))}else L(r,n,t,e);return n}function m(t){if(t&&"object"==typeof t&&t.constructor===this)return t;var e=new this(j);return T(e,t),e}b=f?function(){return process.nextTick(p)}:a?(_=0,y=new a(p),w=document.createTextNode(""),y.observe(w,{characterData:!0}),function(){w.data=_=++_%2}):l?((d=new MessageChannel).port1.onmessage=p,function(){return d.port2.postMessage(0)}):void 0===u?function(){try{var t=Function("return this")().require("vertx");return void 0!==(o=t.runOnLoop||t.runOnContext)?function(){o(p)}:h()}catch(t){return h()}}():h();var A=Math.random().toString(36).substring(2);function j(){}var E=void 0,x=1,O=2;function S(e,r,n){r.constructor===e.constructor&&n===g&&r.constructor.resolve===m?function(t,e){e._state===x?P(t,e._result):e._state===O?C(t,e._result):L(e,void 0,(function(e){return T(t,e)}),(function(e){return C(t,e)}))}(e,r):void 0===n?P(e,r):t(n)?function(t,e,r){s((function(t){var n=!1,o=function(t,e,r,n){try{t.call(e,r,n)}catch(t){return t}}(r,e,(function(r){n||(n=!0,e!==r?T(t,r):P(t,r))}),(function(e){n||(n=!0,C(t,e))}),t._label);!n&&o&&(n=!0,C(t,o))}),t)}(e,r,n):P(e,r)}function T(t,e){if(t===e)C(t,new TypeError("You cannot resolve a promise with itself"));else if(o=typeof(n=e),null===n||"object"!==o&&"function"!==o)P(t,e);else{var r=void 0;try{r=e.then}catch(e){return void C(t,e)}S(t,e,r)}var n,o}function M(t){t._onerror&&t._onerror(t._result),F(t)}function P(t,e){t._state===E&&(t._result=e,t._state=x,0!==t._subscribers.length&&s(F,t))}function C(t,e){t._state===E&&(t._state=O,t._result=e,s(M,t))}function L(t,e,r,n){var o=t._subscribers,i=o.length;t._onerror=null,o[i]=e,o[i+x]=r,o[i+O]=n,0===i&&t._state&&s(F,t)}function F(t){var e=t._subscribers,r=t._state;if(0!==e.length){for(var n=void 0,o=void 0,i=t._result,s=0;s<e.length;s+=3)n=e[s],o=e[s+r],n?N(r,n,o,i):o(i);t._subscribers.length=0}}function N(e,r,n,o){var i=t(n),s=void 0,u=void 0,c=!0;if(i){try{s=n(o)}catch(t){c=!1,u=t}if(r===s)return void C(r,new TypeError("A promises callback cannot return that same promise."))}else s=o;r._state!==E||(i&&c?T(r,s):!1===c?C(r,u):e===x?P(r,s):e===O&&C(r,s))}var Y=0;function k(t){t[A]=Y++,t._state=void 0,t._result=void 0,t._subscribers=[]}var D=function(){function t(t,r){this._instanceConstructor=t,this.promise=new t(j),this.promise[A]||k(this.promise),e(r)?(this.length=r.length,this._remaining=r.length,this._result=new Array(this.length),0===this.length?P(this.promise,this._result):(this.length=this.length||0,this._enumerate(r),0===this._remaining&&P(this.promise,this._result))):C(this.promise,new Error("Array Methods must be provided an Array"))}return t.prototype._enumerate=function(t){for(var e=0;this._state===E&&e<t.length;e++)this._eachEntry(t[e],e)},t.prototype._eachEntry=function(t,e){var r=this._instanceConstructor,n=r.resolve;if(n===m){var o=void 0,i=void 0,s=!1;try{o=t.then}catch(t){s=!0,i=t}if(o===g&&t._state!==E)this._settledAt(t._state,e,t._result);else if("function"!=typeof o)this._remaining--,this._result[e]=t;else if(r===q){var u=new r(j);s?C(u,i):S(u,t,o),this._willSettleAt(u,e)}else this._willSettleAt(new r((function(e){return e(t)})),e)}else this._willSettleAt(n(t),e)},t.prototype._settledAt=function(t,e,r){var n=this.promise;n._state===E&&(this._remaining--,t===O?C(n,r):this._result[e]=r),0===this._remaining&&P(n,this._result)},t.prototype._willSettleAt=function(t,e){var r=this;L(t,void 0,(function(t){return r._settledAt(x,e,t)}),(function(t){return r._settledAt(O,e,t)}))},t}();var q=function(){function e(t){this[A]=Y++,this._result=this._state=void 0,this._subscribers=[],j!==t&&("function"!=typeof t&&function(){throw new TypeError("You must pass a resolver function as the first argument to the promise constructor")}(),this instanceof e?function(t,e){try{e((function(e){T(t,e)}),(function(e){C(t,e)}))}catch(e){C(t,e)}}(this,t):function(){throw new TypeError("Failed to construct 'Promise': Please use the 'new' operator, this object constructor cannot be called as a function.")}())}return e.prototype.catch=function(t){return this.then(null,t)},e.prototype.finally=function(e){var r=this,n=r.constructor;return t(e)?r.then((function(t){return n.resolve(e()).then((function(){return t}))}),(function(t){return n.resolve(e()).then((function(){throw t}))})):r.then(e,e)},e}();return q.prototype.then=g,q.all=function(t){return new D(this,t).promise},q.race=function(t){var r=this;return e(t)?new r((function(e,n){for(var o=t.length,i=0;i<o;i++)r.resolve(t[i]).then(e,n)})):new r((function(t,e){return e(new TypeError("You must pass an array to race."))}))},q.resolve=m,q.reject=function(t){var e=new this(j);return C(e,t),e},q._setScheduler=function(t){i=t},q._setAsap=function(t){s=t},q._asap=s,q.polyfill=function(){var t=void 0;if(void 0!==r.g)t=r.g;else if("undefined"!=typeof self)t=self;else try{t=Function("return this")()}catch(t){throw new Error("polyfill failed because global object is unavailable in this environment")}var e=t.Promise;if(e){var n=null;try{n=Object.prototype.toString.call(e.resolve())}catch(t){}if("[object Promise]"===n&&!e.cast)return}t.Promise=q},q.Promise=q,q}()},746:()=>{window.NodeList&&!NodeList.prototype.forEach&&(NodeList.prototype.forEach=function(t,e){e=e||window;for(var r=0;r<this.length;r++)t.call(e,this[r],r,this)})}},e={};function r(n){var o=e[n];if(void 0!==o)return o.exports;var i=e[n]={exports:{}};return t[n].call(i.exports,i,i.exports,r),i.exports}r.n=t=>{var e=t&&t.__esModule?()=>t.default:()=>t;return r.d(e,{a:e}),e},r.d=(t,e)=>{for(var n in e)r.o(e,n)&&!r.o(t,n)&&Object.defineProperty(t,n,{enumerable:!0,get:e[n]})},r.g=function(){if("object"==typeof globalThis)return globalThis;try{return this||new Function("return this")()}catch(t){if("object"==typeof window)return window}}(),r.o=(t,e)=>Object.prototype.hasOwnProperty.call(t,e),(()=>{"use strict";r(746),r(702).polyfill(),window.addEventListener("DOMContentLoaded",(()=>{}))})()})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./js/pages/register/controller.js":
+/*!*****************************************!*\
+  !*** ./js/pages/register/controller.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Controller)
+/* harmony export */ });
+class Controller {
+  constructor(view, model) {
+    this.view = view;
+    this.model = model;
+  }
+  init() {
+    this._initFormListener();
+  }
+  _initFormListener() {
+    const form = this.view.getRegistrerFormElement(),
+      SubmitButton = this.view.getSubmitInputElement();
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      this.view.clearClassWrongInputFromElements();
+      this.view.clearClassWrongSpanFromElements();
+      const formData = new FormData(form);
+      const formInfo = Object.fromEntries(formData);
+      if (!this._isFormValidationOkay()) {
+        return;
+      }
+      const isNicknameInDb = this._getPromiseIsNicknameExist();
+      const isEmailInDb = this._getPromiseIsEmailExist();
+      Promise.all([isNicknameInDb, isEmailInDb]).then(data => {
+        if (!(data[0] || data[1])) {
+          const data = JSON.stringify(formInfo);
+          this.model.registerNewUser(data).then(response => {
+            if (!response.ok) {
+              this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+            }
+            return true;
+          }).then(response => {
+            // переводим пользователя в home?
+          }).catch(error => {
+            this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
+          });
+        }
+      }).catch(error => {
+        this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
+      });
+    });
+  }
+  _isFormValidationOkay() {
+    const form = this.view.getRegistrerFormElement(),
+      nicknameInput = this.view.getNicknameInputElement(),
+      emailInput = this.view.getEmailInputElement(),
+      passwordInput = this.view.getPasswordInputElement();
+    const formData = new FormData(form);
+    const formInfo = Object.fromEntries(formData);
+    let isValidationOkay = true;
+    if (!this.model.isNicknameOkay(formInfo.nickname)) {
+      this.view.addClassWrongInput(nicknameInput);
+      this.view.createWrongSpanElement(nicknameInput, "Nickname must consist of 5-15 numbers/letters and can't start with a number");
+      isValidationOkay = false;
+    }
+    if (!this.model.isEmailOkay(formInfo.email)) {
+      this.view.addClassWrongInput(emailInput);
+      this.view.createWrongSpanElement(emailInput, "Incorrect email");
+      isValidationOkay = false;
+    }
+    if (!this.model.isPasswordOkay(formInfo.password)) {
+      this.view.addClassWrongInput(passwordInput);
+      this.view.createWrongSpanElement(passwordInput, "Password must have 6-200 symbols with at least 1 uppercase and 1 lowercase letter");
+      isValidationOkay = false;
+    }
+    return isValidationOkay;
+  }
+  _getPromiseIsNicknameExist() {
+    return this.model.isNicknameInDb(formInfo.nickname).then(response => {
+      if (!response.ok) {
+        this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+      }
+      return response.json();
+    }).then(data => {
+      if (data.length) {
+        this.view.addClassWrongInput(nicknameInput);
+        this.view.createWrongSpanElement(nicknameInput, "That nickname is already used");
+        return true;
+      }
+      return false;
+    });
+  }
+  _getPromiseIsEmailExist() {
+    return this.model.isEmailInDb(formInfo.email).then(response => {
+      if (!response.ok) {
+        this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+      }
+      return response.json();
+    }).then(data => {
+      if (data.length) {
+        this.view.addClassWrongInput(emailInput);
+        this.view.createWrongSpanElement(emailInput, "That email is already used");
+        return true;
+      }
+      return false;
+    });
+  }
+}
+
+/***/ }),
+
+/***/ "./js/pages/register/model.js":
+/*!************************************!*\
+  !*** ./js/pages/register/model.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Model)
+/* harmony export */ });
+class Model {
+  isNicknameOkay(nicknameInput) {
+    return nicknameInput.match(/^[a-zA-Z][a-zA-Z0-9_]{4,14}$/);
+  }
+  isEmailOkay(emailInput) {
+    return emailInput.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+  }
+  isPasswordOkay(passwordInput) {
+    return passwordInput.match(/^(?=.*[a-z])(?=.*[A-Z]).{6,200}$/);
+  }
+  isNicknameInDb(nickname) {
+    return fetch(`http://localhost:3000/users?nickname=${nickname}`);
+  }
+  isEmailInDb(email) {
+    return fetch(`http://localhost:3000/users?email=${email}`);
+  }
+  registerNewUser(data) {
+    return fetch('http://localhost:3000/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: data
+    });
+  }
+}
+
+/***/ }),
+
+/***/ "./js/pages/register/view.js":
+/*!***********************************!*\
+  !*** ./js/pages/register/view.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ View)
+/* harmony export */ });
+class View {
+  static ID = {
+    REGISTER_FORM: {
+      FORM: 'register-form',
+      NICKNAME_INPUT: 'nickname-input',
+      EMAIL_INPUT: 'email-input',
+      PASSWORD_INPUT: 'password-input',
+      SUBMIT_INPUT: 'register-form-submit'
+    }
+  };
+  static JS_CLASSES = {
+    REGISTER_FORM: {
+      WRONG_INPUT: 'wrong-input',
+      WRONG_SPAN: 'wrong-span'
+    }
+  };
+  getRegistrerFormElement() {
+    return document.querySelector(`#${View.ID.REGISTER_FORM.FORM}`);
+  }
+  getNicknameInputElement() {
+    return document.querySelector(`#${View.ID.REGISTER_FORM.NICKNAME_INPUT}`);
+  }
+  getEmailInputElement() {
+    return document.querySelector(`#${View.ID.REGISTER_FORM.EMAIL_INPUT}`);
+  }
+  getPasswordInputElement() {
+    return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_INPUT}`);
+  }
+  getSubmitInputElement() {
+    return document.querySelector(`#${View.ID.REGISTER_FORM.SUBMIT_INPUT}`);
+  }
+  addClassWrongInput(element) {
+    element.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
+  }
+  createWrongSpanElement(element, message) {
+    let warningSpan = document.createElement('span');
+    warningSpan.innerText = message;
+    warningSpan.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_SPAN);
+    element.parentNode.insertBefore(warningSpan, element.nextSibling);
+  }
+  clearClassWrongInputFromElements() {
+    document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT}`).forEach(item => {
+      item.classList.remove(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
+    });
+  }
+  clearClassWrongSpanFromElements() {
+    document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.WRONG_SPAN}`).forEach(item => {
+      item.remove();
+    });
+  }
+}
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+/*!************************************!*\
+  !*** ./js/pages/register/index.js ***!
+  \************************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _model_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./model.js */ "./js/pages/register/model.js");
+/* harmony import */ var _view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./view.js */ "./js/pages/register/view.js");
+/* harmony import */ var _controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controller.js */ "./js/pages/register/controller.js");
+
+
+
+
+
+window.addEventListener('DOMContentLoaded', () => {
+  new _controller_js__WEBPACK_IMPORTED_MODULE_2__["default"](new _view_js__WEBPACK_IMPORTED_MODULE_1__["default"](), new _model_js__WEBPACK_IMPORTED_MODULE_0__["default"]()).init();
+});
+})();
+
+/******/ })()
+;
 //# sourceMappingURL=bundle_register.js.map

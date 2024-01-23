@@ -11,7 +11,7 @@
 .main {
   background-color: #9f9f9f;
   color: #000000;
-  font-family: Inter;
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 20px;
   font-weight: 400;
 }
@@ -44,6 +44,15 @@ button {
   visibility: hidden;
 }
 
+.wrong-input {
+  border: 2px red solid;
+}
+
+.wrong-span {
+  color: red;
+  font-size: 14px;
+}
+
 .footer, .header, a, button {
   background-color: #232e2f;
   color: #9f9f9f;
@@ -57,7 +66,7 @@ button {
 .main {
   background-color: #9f9f9f;
   color: #000000;
-  font-family: Inter;
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 20px;
   font-weight: 400;
 }
@@ -75,7 +84,7 @@ button {
 .main {
   background-color: #9f9f9f;
   color: #000000;
-  font-family: Inter;
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 20px;
   font-weight: 400;
 }
@@ -205,7 +214,7 @@ button {
 .main {
   background-color: #9f9f9f;
   color: #000000;
-  font-family: Inter;
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 20px;
   font-weight: 400;
 }
