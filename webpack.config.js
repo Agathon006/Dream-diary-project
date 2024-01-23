@@ -3,7 +3,7 @@
 let path = require('path');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: {
     mainPage: "./js/pages/home/",
     time: {
