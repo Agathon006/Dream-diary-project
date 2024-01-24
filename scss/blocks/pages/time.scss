@@ -8,11 +8,13 @@
 
 .main {
     @extend %secondary_style;
+
+    .container {
+        padding: 20px 0;
+    }
 }
 
-.container {
-    padding: 20px 0;
-}
+
 
 .title {
     font-size: 40px;
