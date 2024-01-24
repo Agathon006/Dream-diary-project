@@ -88,6 +88,11 @@ export default class Controller {
     }
 
     _getPromiseIsNicknameExist() {
+        const form = this.view.getRegistrerFormElement(),
+            nicknameInput = this.view.getNicknameInputElement();
+        const formData = new FormData(form);
+        const formInfo = Object.fromEntries(formData);
+
         return this.model.isNicknameInDb(formInfo.nickname)
             .then(response => {
                 if (!response.ok) {
@@ -106,6 +111,12 @@ export default class Controller {
     }
 
     _getPromiseIsEmailExist() {
+        const form = this.view.getRegistrerFormElement(),
+            emailInput = this.view.getEmailInputElement();
+
+        const formData = new FormData(form);
+        const formInfo = Object.fromEntries(formData);
+
         return this.model.isEmailInDb(formInfo.email)
             .then(response => {
                 if (!response.ok) {

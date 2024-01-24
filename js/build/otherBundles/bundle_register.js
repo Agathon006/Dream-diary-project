@@ -79,6 +79,10 @@ class Controller {
     return isValidationOkay;
   }
   _getPromiseIsNicknameExist() {
+    const form = this.view.getRegistrerFormElement(),
+      nicknameInput = this.view.getNicknameInputElement();
+    const formData = new FormData(form);
+    const formInfo = Object.fromEntries(formData);
     return this.model.isNicknameInDb(formInfo.nickname).then(response => {
       if (!response.ok) {
         this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
@@ -94,6 +98,10 @@ class Controller {
     });
   }
   _getPromiseIsEmailExist() {
+    const form = this.view.getRegistrerFormElement(),
+      emailInput = this.view.getEmailInputElement();
+    const formData = new FormData(form);
+    const formInfo = Object.fromEntries(formData);
     return this.model.isEmailInDb(formInfo.email).then(response => {
       if (!response.ok) {
         this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
