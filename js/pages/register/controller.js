@@ -21,6 +21,7 @@ export default class Controller {
 
             const formData = new FormData(form);
             const formInfo = Object.fromEntries(formData);
+            formInfo.role = 'user';
 
             if (!this._isFormValidationOkay()) {
                 return;
@@ -33,6 +34,14 @@ export default class Controller {
             Promise.all([isNicknameInDb, isEmailInDb])
                 .then(data => {
                     if (!(data[0] || data[1])) {
+                        const jwt = require('jsonwebtoken');
+                        const payload = formInfo;
+                        const secretKey = 'asdk8asba8';
+                        const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
+
+                        // formInfo.token = token;
+
+                        localStorage.token = token;
 
                         const data = JSON.stringify(formInfo);
 

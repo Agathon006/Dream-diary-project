@@ -1,5 +1,7 @@
 'use strict';
 
+const webpack = require('webpack');
+
 let path = require('path');
 
 module.exports = {
@@ -44,13 +46,34 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [['@babel/preset-env', {
-                debug: true,
-                corejs: 3,
-                useBuiltIns: "usage"
+              debug: true,
+              corejs: 3,
+              useBuiltIns: "usage"
             }]]
           }
         }
       }
     ]
-  }
+  },
+  resolve: {
+    fallback: {
+      crypto: require.resolve("crypto-browserify"),
+      stream: require.resolve("stream-browserify"),
+      buffer: require.resolve("buffer"),
+    },
+    alias: {
+        process: "process/browser",
+    },
+  },
+  plugins: [
+    // fix "process is not defined" error:
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
+    // Work around for Buffer is undefined:
+    // https://github.com/webpack/changelog-v5/issues/10
+    new webpack.ProvidePlugin({
+        Buffer: ['buffer', 'Buffer'],
+    }),
+  ],
 };

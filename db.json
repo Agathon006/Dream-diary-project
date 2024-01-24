@@ -1,35 +1,3 @@
 {
-  "admins": [
-    {
-      "nickname": "Admin",
-      "password": "123457",
-      "id": "f663"
-    }
-  ],
-  "users": [
-    {
-      "id": "0194",
-      "nickname": "Agathon006",
-      "email": "agaton615@gmail.com",
-      "password": "2051868Dd"
-    },
-    {
-      "id": "0266",
-      "nickname": "Agathon007",
-      "email": "agaton215@gmail.com",
-      "password": "2051868Dd"
-    },
-    {
-      "id": "63cf",
-      "nickname": "Agathon008",
-      "email": "agat006@mail.ru",
-      "password": "2051868Dd"
-    },
-    {
-      "id": "f643",
-      "nickname": "Agathon021",
-      "email": "agaton125@gmail.com",
-      "password": "sadasdasdDd"
-    }
-  ]
+  "users": []
 }
