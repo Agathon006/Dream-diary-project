@@ -5,6 +5,11 @@
 
 .hidden {
     visibility: hidden;
+    opacity: 0;
+}
+
+.disabled {
+    display: none;
 }
 
 .wrong-input {
