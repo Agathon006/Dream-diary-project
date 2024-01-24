@@ -1,5 +1,6 @@
 @import '../templates/templates';
 @import '../variables/variables';
+@import '../js_classes';
 
 .header {
     @extend %primary_style;

@@ -5562,7 +5562,7 @@ class Model {
       expiresIn: '24h'
     });
     localStorage.token = token;
-    localStorage.secretKey = 'asdk8asba8';
+    localStorage.secretKey = secretKey;
   }
 }
 
