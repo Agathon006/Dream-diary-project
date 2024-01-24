@@ -1,3 +1,11 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "5793",
+      "nickname": "Agathon006",
+      "email": "agaton615@gmail.com",
+      "password": "asdasdasDSAAS",
+      "role": "user"
+    }
+  ]
 }

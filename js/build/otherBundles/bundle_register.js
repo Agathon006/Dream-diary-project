@@ -5433,16 +5433,7 @@ class Controller {
       const isEmailInDb = this._getPromiseIsEmailExist();
       Promise.all([isNicknameInDb, isEmailInDb]).then(data => {
         if (!(data[0] || data[1])) {
-          const jwt = __webpack_require__(/*! jsonwebtoken */ "./node_modules/jsonwebtoken/index.js");
-          const payload = formInfo;
-          const secretKey = 'asdk8asba8';
-          const token = jwt.sign(payload, secretKey, {
-            expiresIn: '1h'
-          });
-
-          // formInfo.token = token;
-
-          localStorage.token = token;
+          this.model.createJwt(formInfo);
           const data = JSON.stringify(formInfo);
           this.model.registerNewUser(data).then(response => {
             if (!response.ok) {
@@ -5450,7 +5441,7 @@ class Controller {
             }
             return true;
           }).then(response => {
-            // переводим пользователя в home?
+            window.location.href = "../index.html";
           }).catch(error => {
             this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
           });
@@ -5562,6 +5553,16 @@ class Model {
       },
       body: data
     });
+  }
+  createJwt(userData) {
+    const jwt = __webpack_require__(/*! jsonwebtoken */ "./node_modules/jsonwebtoken/index.js");
+    const payload = userData;
+    const secretKey = '8dshsdf8s3hfsdh8fshf8dhfs3hhfhfsh38fh';
+    const token = jwt.sign(payload, secretKey, {
+      expiresIn: '24h'
+    });
+    localStorage.token = token;
+    localStorage.secretKey = 'asdk8asba8';
   }
 }
 

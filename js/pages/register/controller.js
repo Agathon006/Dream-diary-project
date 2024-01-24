@@ -34,14 +34,7 @@ export default class Controller {
             Promise.all([isNicknameInDb, isEmailInDb])
                 .then(data => {
                     if (!(data[0] || data[1])) {
-                        const jwt = require('jsonwebtoken');
-                        const payload = formInfo;
-                        const secretKey = 'asdk8asba8';
-                        const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
-
-                        // formInfo.token = token;
-
-                        localStorage.token = token;
+                        this.model.createJwt(formInfo);
 
                         const data = JSON.stringify(formInfo);
 
@@ -53,7 +46,7 @@ export default class Controller {
                                 return true;
                             })
                             .then((response) => {
-                                // переводим пользователя в home?
+                                window.location.href = "../index.html";
                             })
                             .catch((error) => {
                                 this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
