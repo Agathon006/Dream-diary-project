@@ -53,6 +53,25 @@ button {
   font-weight: 400;
 }
 
+.underlined {
+  text-decoration: underline;
+  color: #dedede;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.wrong-input {
+  border: 2px red solid;
+}
+
+.wrong-span {
+  color: red;
+  font-size: 14px;
+}
+
 .footer, .header, a, button {
   background-color: #232e2f;
   color: #9f9f9f;
@@ -69,6 +88,25 @@ button {
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 20px;
   font-weight: 400;
+}
+
+.underlined {
+  text-decoration: underline;
+  color: #dedede;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.wrong-input {
+  border: 2px red solid;
+}
+
+.wrong-span {
+  color: red;
+  font-size: 14px;
 }
 
 .header .container .header__navigation {
@@ -199,6 +237,25 @@ button {
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 20px;
   font-weight: 400;
+}
+
+.underlined {
+  text-decoration: underline;
+  color: #dedede;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.wrong-input {
+  border: 2px red solid;
+}
+
+.wrong-span {
+  color: red;
+  font-size: 14px;
 }
 
 .footer .container {
