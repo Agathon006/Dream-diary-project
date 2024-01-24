@@ -31,4 +31,14 @@ export default class Model {
         })
     }
 
+    createJwt(userData) {
+        const jwt = require('jsonwebtoken');
+        const payload = userData;
+        const secretKey = '8dshsdf8s3hfsdh8fshf8dhfs3hhfhfsh38fh';
+        const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
+
+        localStorage.token = token;
+        localStorage.secretKey = 'asdk8asba8';
+    }
+
 }

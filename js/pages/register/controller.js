@@ -21,6 +21,7 @@ export default class Controller {
 
             const formData = new FormData(form);
             const formInfo = Object.fromEntries(formData);
+            formInfo.role = 'user';
 
             if (!this._isFormValidationOkay()) {
                 return;
@@ -33,6 +34,7 @@ export default class Controller {
             Promise.all([isNicknameInDb, isEmailInDb])
                 .then(data => {
                     if (!(data[0] || data[1])) {
+                        this.model.createJwt(formInfo);
 
                         const data = JSON.stringify(formInfo);
 
@@ -44,7 +46,7 @@ export default class Controller {
                                 return true;
                             })
                             .then((response) => {
-                                // переводим пользователя в home?
+                                window.location.href = "../index.html";
                             })
                             .catch((error) => {
                                 this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
@@ -88,6 +90,11 @@ export default class Controller {
     }
 
     _getPromiseIsNicknameExist() {
+        const form = this.view.getRegistrerFormElement(),
+            nicknameInput = this.view.getNicknameInputElement();
+        const formData = new FormData(form);
+        const formInfo = Object.fromEntries(formData);
+
         return this.model.isNicknameInDb(formInfo.nickname)
             .then(response => {
                 if (!response.ok) {
@@ -106,6 +113,12 @@ export default class Controller {
     }
 
     _getPromiseIsEmailExist() {
+        const form = this.view.getRegistrerFormElement(),
+            emailInput = this.view.getEmailInputElement();
+
+        const formData = new FormData(form);
+        const formInfo = Object.fromEntries(formData);
+
         return this.model.isEmailInDb(formInfo.email)
             .then(response => {
                 if (!response.ok) {
