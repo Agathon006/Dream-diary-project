@@ -132,17 +132,23 @@ button {
 }
 .header .container .header__navigation .header__navigation-list .header__navigation-list-element .header__navigation-list-element-link:not(:first-child) {
   color: #585858;
+  opacity: 0.7;
 }
 .header .container .header__navigation .header__navigation-list .header__navigation-list-element .underlined:hover {
   color: #dedede;
 }
 .header .container .header__navigation .header__navigation-list .header__navigation-list-element .locked-page {
+  opacity: 0;
   cursor: pointer;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(1.5);
-  z-index: 0;
+  z-index: 1;
+  transition: 0.5s;
+}
+.header .container .header__navigation .header__navigation-list .header__navigation-list-element .locked-page:hover {
+  opacity: 1;
 }
 .header .container .header__navigation .header__navigation-list .locked-page {
   cursor: pointer;
@@ -293,4 +299,52 @@ button {
 }
 .footer .container .footer__social .footer__social-link .footer__social-link-image {
   width: 48px;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+}
+.main .form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+.main .form-wrapper .register-title {
+  margin-bottom: 20px;
+  font-size: 40px;
+}
+.main .form-wrapper .register-form {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(233, 233, 233);
+  padding: 0 20px 20px;
+  width: 300px;
+}
+.main .form-wrapper .register-form .register-form__span {
+  margin-top: 15px;
+  font-size: 14px;
+  font-weight: 900;
+}
+.main .form-wrapper .register-form .register-form__input {
+  margin-top: 5px;
+  cursor: pointer;
+  padding: 7px 14px;
+  border-radius: 5px;
+}
+.main .form-wrapper .register-form .register-form__input:hover {
+  background-color: rgb(233, 233, 233);
+}
+.main .form-wrapper .register-form .register-form__submit {
+  border-radius: 20px;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+  font-size: 26px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+.main .form-wrapper .register-form .register-form__submit:hover {
+  background-color: #9f9f9f;
 }/*# sourceMappingURL=sign_in.css.map */

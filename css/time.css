@@ -132,17 +132,23 @@ button {
 }
 .header .container .header__navigation .header__navigation-list .header__navigation-list-element .header__navigation-list-element-link:not(:first-child) {
   color: #585858;
+  opacity: 0.7;
 }
 .header .container .header__navigation .header__navigation-list .header__navigation-list-element .underlined:hover {
   color: #dedede;
 }
 .header .container .header__navigation .header__navigation-list .header__navigation-list-element .locked-page {
+  opacity: 0;
   cursor: pointer;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(1.5);
-  z-index: 0;
+  z-index: 1;
+  transition: 0.5s;
+}
+.header .container .header__navigation .header__navigation-list .header__navigation-list-element .locked-page:hover {
+  opacity: 1;
 }
 .header .container .header__navigation .header__navigation-list .locked-page {
   cursor: pointer;
