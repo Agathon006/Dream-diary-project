@@ -32,38 +32,13 @@
 
                 .header__navigation-list-element {
                     text-align: center;
-                    position: relative;
 
                     .header__navigation-list-element-link {
-
-                        &:not(:first-child) {
-                            color: #585858;
-                        }
-                    }
-
-                    .underlined {
 
                         &:hover {
                             color: #dedede;
                         }
                     }
-
-                    .locked-page {
-                        cursor: pointer;
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%) scale(1.5);
-                        z-index: 0;
-                    }
-                }
-
-                .locked-page {
-                    cursor: pointer;
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    z-index: 0;
                 }
 
                 .header__navigation-list-separator {

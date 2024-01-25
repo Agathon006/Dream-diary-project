@@ -1,10 +1,59 @@
 {
   "users": [
     {
-      "id": "29b2",
+      "id": "2f6d",
       "nickname": "Agathon006",
       "email": "agaton615@gmail.com",
-      "password": "asdasdasSADA",
+      "password": "2051868Dd",
+      "role": "user"
+    },
+    {
+      "id": "71f3",
+      "nickname": "Agathons006",
+      "email": "agaton6s15@gmail.com",
+      "password": "20DFKOdkodo",
+      "role": "user"
+    },
+    {
+      "id": "074d",
+      "nickname": "AgatShon006",
+      "email": "agatonS615@gmail.com",
+      "password": "sadsaDSADAS",
+      "role": "user"
+    },
+    {
+      "id": "1477",
+      "nickname": "Agathasdon006",
+      "email": "agat0sad06@mail.ru",
+      "password": "asdasdasDSASD",
+      "role": "user"
+    },
+    {
+      "id": "073a",
+      "nickname": "AgathasSdon006",
+      "email": "agatS0sad06@mail.ru",
+      "password": "ASDASdsaas",
+      "role": "user"
+    },
+    {
+      "id": "c9a1",
+      "nickname": "AgathassSdon006",
+      "email": "agatS0ssad06@mail.ru",
+      "password": "dasdasDSAAS",
+      "role": "user"
+    },
+    {
+      "id": "ddf0",
+      "nickname": "Agathasdason006",
+      "email": "agatasd006@mail.ru",
+      "password": "asdasdsaDSADSA",
+      "role": "user"
+    },
+    {
+      "id": "852b",
+      "nickname": "AgathASDon006",
+      "email": "agat0ASD06@mail.ru",
+      "password": "ASDASdsadas",
       "role": "user"
     }
   ]

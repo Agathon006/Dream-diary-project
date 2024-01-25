@@ -5441,7 +5441,7 @@ class Controller {
             }
             return true;
           }).then(response => {
-            window.location.href = "../index.html";
+            window.location.href = "./registered_home.html";
           }).catch(error => {
             this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
           });

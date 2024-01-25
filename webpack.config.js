@@ -8,6 +8,10 @@ module.exports = {
   mode: 'development',
   entry: {
     mainPage: "./js/pages/home/",
+    registered_home: {
+      import: "./js/pages/registered_home/",
+      filename: "otherBundles/bundle_[name].js",
+    },
     time: {
       import: "./js/pages/time/",
       filename: "otherBundles/bundle_[name].js",
