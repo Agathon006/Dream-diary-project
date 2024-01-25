@@ -22,28 +22,10 @@ class Controller {
     setInterval(this._updateClocks, 1000);
   }
   _updateClocks() {
-    const subtitle = this.view.getSubtitle('CURRENT'),
-      subtitleNewYork = this.view.getSubtitle('NEW_YORK'),
-      subtitleLondon = this.view.getSubtitle('LONDON'),
-      subtitleTokyo = this.view.getSubtitle('TOKYO'),
-      subtitleBerlin = this.view.getSubtitle('BERLIN'),
-      subtitleChina = this.view.getSubtitle('CHINA'),
-      subtitleSydney = this.view.getSubtitle('SYDNEY'),
-      subtitleCalifornia = this.view.getSubtitle('CALIFORNIA'),
-      subtitleIndia = this.view.getSubtitle('INDIA');
     const currentDate = new Date();
     const hours = currentDate.getHours(),
       minutes = currentDate.getMinutes(),
       seconds = currentDate.getSeconds();
-    this.view.transformCurrentClock(hours, minutes, seconds);
-    this.view.transformNewYorkClock(hours, minutes, seconds);
-    this.view.transformLondonClock(hours, minutes, seconds);
-    this.view.transformTokyoClock(hours, minutes, seconds);
-    this.view.transformBerlinClock(hours, minutes, seconds);
-    this.view.transformChinaClock(hours, minutes, seconds);
-    this.view.transformSydneyClock(hours, minutes, seconds);
-    this.view.transformCaliforniaClock(hours, minutes, seconds);
-    this.view.transformIndiaClock(hours, minutes, seconds);
     const options = {
       year: 'numeric',
       month: 'short',
@@ -53,33 +35,24 @@ class Controller {
       second: '2-digit',
       timeZoneName: 'short'
     };
-    const formattedDate = currentDate.toLocaleString('en-US', options);
-    subtitle.textContent = formattedDate;
-    currentDate.setHours(currentDate.getHours() - 8);
-    const formattedDateNewYork = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("-5");
-    subtitleNewYork.textContent = formattedDateNewYork;
-    currentDate.setHours(currentDate.getHours() + 5);
-    const formattedDateLondon = currentDate.toLocaleString('en-US', options).slice(0, -2).concat(" -");
-    subtitleLondon.textContent = formattedDateLondon;
-    currentDate.setHours(currentDate.getHours() + 9);
-    const formattedDateTokyo = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+9");
-    subtitleTokyo.textContent = formattedDateTokyo;
-    currentDate.setHours(currentDate.getHours() - 8);
-    const formattedDateBerlin = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+1");
-    subtitleBerlin.textContent = formattedDateBerlin;
-    currentDate.setHours(currentDate.getHours() + 7);
-    const formattedDateChina = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+8");
-    subtitleChina.textContent = formattedDateChina;
-    currentDate.setHours(currentDate.getHours() + 3);
-    const formattedDateSydney = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+11");
-    subtitleSydney.textContent = formattedDateSydney;
-    currentDate.setHours(currentDate.getHours() + 5);
-    const formattedDateCalifornia = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("-8");
-    subtitleCalifornia.textContent = formattedDateCalifornia;
-    currentDate.setHours(currentDate.getHours() - 11);
-    currentDate.setMinutes(currentDate.getMinutes() + 30);
-    const formattedDateIndia = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+5:30");
-    subtitleIndia.textContent = formattedDateIndia;
+    this.view.transformCurrentClock(hours, minutes, seconds);
+    this.view.transformCurrentSubtitle(currentDate, options);
+    this.view.transformNewYorkClock(hours, minutes, seconds);
+    this.view.transformNewYorkSubtitle(currentDate, options);
+    this.view.transformLondonClock(hours, minutes, seconds);
+    this.view.transformLondonSubtitle(currentDate, options);
+    this.view.transformTokyoClock(hours, minutes, seconds);
+    this.view.transformTokyoSubtitle(currentDate, options);
+    this.view.transformBerlinClock(hours, minutes, seconds);
+    this.view.transformBerlinSubtitle(currentDate, options);
+    this.view.transformChinaClock(hours, minutes, seconds);
+    this.view.transformChinaSubtitle(currentDate, options);
+    this.view.transformSydneyClock(hours, minutes, seconds);
+    this.view.transformSydneySubtitle(currentDate, options);
+    this.view.transformCaliforniaClock(hours, minutes, seconds);
+    this.view.transformCaliforniaSubtitle(currentDate, options);
+    this.view.transformIndiaClock(hours, minutes, seconds);
+    this.view.transformIndiaSubtitle(currentDate, options);
   }
 }
 
@@ -159,45 +132,81 @@ class View {
     this.getMinuteContainer('CURRENT').style.transform = `rotate(${6 * minutes + 0.1 * seconds}deg)`;
     this.getHourContainer('CURRENT').style.transform = `rotate(${30 * hours + 0.5 * minutes}deg)`;
   }
+  transformCurrentSubtitle(currentDate, options) {
+    this.getSubtitle('CURRENT').textContent = currentDate.toLocaleString('en-US', options);
+  }
   transformNewYorkClock(hours, minutes, seconds) {
     this.getSecondContainer('NEW_YORK').style.transform = `rotate(${6 * seconds}deg)`;
     this.getMinuteContainer('NEW_YORK').style.transform = `rotate(${6 * minutes + 0.1 * seconds}deg)`;
     this.getHourContainer('NEW_YORK').style.transform = `rotate(${30 * hours + 0.5 * minutes - 240}deg)`;
+  }
+  transformNewYorkSubtitle(currentDate, options) {
+    currentDate.setHours(currentDate.getHours() - 8);
+    this.getSubtitle('NEW_YORK').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("-5");
   }
   transformLondonClock(hours, minutes, seconds) {
     this.getSecondContainer('LONDON').style.transform = `rotate(${6 * seconds}deg)`;
     this.getMinuteContainer('LONDON').style.transform = `rotate(${6 * minutes + 0.1 * seconds}deg)`;
     this.getHourContainer('LONDON').style.transform = `rotate(${30 * hours + 0.5 * minutes - 90}deg)`;
   }
+  transformLondonSubtitle(currentDate, options) {
+    currentDate.setHours(currentDate.getHours() + 5);
+    this.getSubtitle('LONDON').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat(" -");
+  }
   transformTokyoClock(hours, minutes, seconds) {
     this.getSecondContainer('TOKYO').style.transform = `rotate(${6 * seconds}deg)`;
     this.getMinuteContainer('TOKYO').style.transform = `rotate(${6 * minutes + 0.1 * seconds}deg)`;
     this.getHourContainer('TOKYO').style.transform = `rotate(${30 * hours + 0.5 * minutes - 180}deg)`;
+  }
+  transformTokyoSubtitle(currentDate, options) {
+    currentDate.setHours(currentDate.getHours() + 9);
+    this.getSubtitle('TOKYO').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+9");
   }
   transformBerlinClock(hours, minutes, seconds) {
     this.getSecondContainer('BERLIN').style.transform = `rotate(${6 * seconds}deg)`;
     this.getMinuteContainer('BERLIN').style.transform = `rotate(${6 * minutes + 0.1 * seconds}deg)`;
     this.getHourContainer('BERLIN').style.transform = `rotate(${30 * hours + 0.5 * minutes - 60}deg)`;
   }
+  transformBerlinSubtitle(currentDate, options) {
+    currentDate.setHours(currentDate.getHours() - 8);
+    this.getSubtitle('BERLIN').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+1");
+  }
   transformChinaClock(hours, minutes, seconds) {
     this.getSecondContainer('CHINA').style.transform = `rotate(${6 * seconds}deg)`;
     this.getMinuteContainer('CHINA').style.transform = `rotate(${6 * minutes + 0.1 * seconds}deg)`;
     this.getHourContainer('CHINA').style.transform = `rotate(${30 * hours + 0.5 * minutes - 210}deg)`;
+  }
+  transformChinaSubtitle(currentDate, options) {
+    currentDate.setHours(currentDate.getHours() + 7);
+    this.getSubtitle('CHINA').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+8");
   }
   transformSydneyClock(hours, minutes, seconds) {
     this.getSecondContainer('SYDNEY').style.transform = `rotate(${6 * seconds}deg)`;
     this.getMinuteContainer('SYDNEY').style.transform = `rotate(${6 * minutes + 0.1 * seconds}deg)`;
     this.getHourContainer('SYDNEY').style.transform = `rotate(${30 * hours + 0.5 * minutes - 120}deg)`;
   }
+  transformSydneySubtitle(currentDate, options) {
+    currentDate.setHours(currentDate.getHours() + 3);
+    this.getSubtitle('SYDNEY').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+11");
+  }
   transformCaliforniaClock(hours, minutes, seconds) {
     this.getSecondContainer('CALIFORNIA').style.transform = `rotate(${6 * seconds}deg)`;
     this.getMinuteContainer('CALIFORNIA').style.transform = `rotate(${6 * minutes + 0.1 * seconds}deg)`;
     this.getHourContainer('CALIFORNIA').style.transform = `rotate(${30 * hours + 0.5 * minutes - 330}deg)`;
   }
+  transformCaliforniaSubtitle(currentDate, options) {
+    currentDate.setHours(currentDate.getHours() + 5);
+    this.getSubtitle('CALIFORNIA').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("-8");
+  }
   transformIndiaClock(hours, minutes, seconds) {
     this.getSecondContainer('INDIA').style.transform = `rotate(${6 * seconds}deg)`;
     this.getMinuteContainer('INDIA').style.transform = `rotate(${6 * minutes + 0.1 * seconds + 180}deg)`;
     this.getHourContainer('INDIA').style.transform = `rotate(${30 * hours + 0.5 * minutes - 285}deg)`;
+  }
+  transformIndiaSubtitle(currentDate, options) {
+    currentDate.setHours(currentDate.getHours() - 11);
+    currentDate.setMinutes(currentDate.getMinutes() + 30);
+    this.getSubtitle('INDIA').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+5:30");
   }
 }
 
