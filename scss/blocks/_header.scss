@@ -38,6 +38,7 @@
 
                         &:not(:first-child) {
                             color: #585858;
+                            opacity: .7;
                         }
                     }
 
@@ -49,12 +50,18 @@
                     }
 
                     .locked-page {
+                        opacity: 0;
                         cursor: pointer;
                         position: absolute;
                         top: 50%;
                         left: 50%;
                         transform: translate(-50%, -50%) scale(1.5);
-                        z-index: 0;
+                        z-index: 1;
+                        transition: .5s;
+
+                        &:hover {
+                            opacity: 1;
+                        }
                     }
                 }
 
