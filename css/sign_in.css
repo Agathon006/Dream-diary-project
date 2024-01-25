@@ -336,6 +336,12 @@ button {
 .main .form-wrapper .register-form .register-form__input:hover {
   background-color: rgb(233, 233, 233);
 }
+.main .form-wrapper .register-form .register-form__span-small {
+  font-size: 14px;
+  text-align: center;
+  letter-spacing: 1px;
+  margin: 10px 0;
+}
 .main .form-wrapper .register-form .register-form__submit {
   border-radius: 20px;
   padding: 10px 0;
@@ -347,4 +353,15 @@ button {
 }
 .main .form-wrapper .register-form .register-form__submit:hover {
   background-color: #9f9f9f;
+}
+.main .form-wrapper .register-form .register-form__bottom {
+  margin-top: 10px;
+}
+.main .form-wrapper .register-form .register-form__bottom .register-form__bottom-link {
+  color: #232e2f;
+  font-size: 20px;
+  background-color: transparent;
+}
+.main .form-wrapper .register-form .register-form__bottom .register-form__bottom-link:hover {
+  text-decoration: underline;
 }/*# sourceMappingURL=sign_in.css.map */
