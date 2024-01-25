@@ -65,6 +65,20 @@
                     background-color: $text_color_primary;
                 }
             }
+
+            .register-form__bottom {
+                margin-top: 10px;
+
+                .register-form__bottom-link {
+                    color: #232e2f;
+                    font-size: 20px;
+                    background-color: transparent;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
         }
     }
 }

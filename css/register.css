@@ -352,4 +352,15 @@ button {
 }
 .main .form-wrapper .register-form .register-form__submit:hover {
   background-color: #9f9f9f;
+}
+.main .form-wrapper .register-form .register-form__bottom {
+  margin-top: 10px;
+}
+.main .form-wrapper .register-form .register-form__bottom .register-form__bottom-link {
+  color: #232e2f;
+  font-size: 20px;
+  background-color: transparent;
+}
+.main .form-wrapper .register-form .register-form__bottom .register-form__bottom-link:hover {
+  text-decoration: underline;
 }/*# sourceMappingURL=register.css.map */
