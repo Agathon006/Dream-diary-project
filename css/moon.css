@@ -299,4 +299,14 @@ button {
 }
 .footer .container .footer__social .footer__social-link .footer__social-link-image {
   width: 48px;
+}
+
+.main .container .wrapper {
+  padding-top: 20px;
+}
+.main .container .wrapper .title {
+  font-size: 36px;
+}
+.main .container .wrapper .plot {
+  margin: 10px 0;
 }/*# sourceMappingURL=moon.css.map */

@@ -1,6 +1,5 @@
 export default class Model {
 
-
     isNicknameOkay(nicknameInput) {
         return nicknameInput.match(/^[a-zA-Z][a-zA-Z0-9_]{4,14}$/);
     }
