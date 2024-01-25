@@ -8,4 +8,20 @@
 
 .main {
     @extend %secondary_style;
+
+    .container {
+
+        .wrapper {
+            padding-top: 20px;
+
+            .title {
+                font-size: 36px;
+            }
+
+            .plot {
+                margin: 10px 0;
+            }
+        }
+
+    }
 }
