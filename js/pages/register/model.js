@@ -21,30 +21,8 @@ export default class Model {
     }
 
     sendConfirmationCode(email, verificationCode) {
-        const nodemailer = require('nodemailer');
 
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'dreamDiaryProjectAgathon006@gmail.com',
-                pass: '0275674Dd'
-            }
-        });
-
-        let mailOptions = {
-            from: 'dreamDiaryProjectAgathon006@gmail.com',
-            to: email,
-            subject: 'Подтверждение электронной почты',
-            text: `Ваш код подтверждения: ${verificationCode}`
-        };
-
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Email отправлен: ' + info.response);
-            }
-        });
+        // imitation...
     }
 
     generateRandomCode(length) {

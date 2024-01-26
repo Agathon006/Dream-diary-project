@@ -5433,27 +5433,21 @@ class Controller {
       const isEmailInDb = this._getPromiseIsEmailExist();
       Promise.all([isNicknameInDb, isEmailInDb]).then(data => {
         if (!(data[0] || data[1])) {
-          // this.model.createJwt(formInfo);
-
+          this.model.createJwt(formInfo);
           const data = JSON.stringify(formInfo);
           const verificationCode = this.model.generateRandomCode(6);
           console.log(formInfo.email, verificationCode);
-
-          // this.model.sendConfirmationCode(data.email, verificationCode);
-
-          // this.model.registerNewUser(data)
-          //     .then((response) => {
-          //         if (!response.ok) {
-          //             this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
-          //         }
-          //         return true;
-          //     })
-          //     .then((response) => {
-          //         window.location.href = "./registered_home.html";
-          //     })
-          //     .catch((error) => {
-          //         this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
-          //     });
+          this.model.sendConfirmationCode(data.email, verificationCode);
+          this.model.registerNewUser(data).then(response => {
+            if (!response.ok) {
+              this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+            }
+            return true;
+          }).then(response => {
+            window.location.href = "./registered_home.html";
+          }).catch(error => {
+            this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
+          });
         }
       }).catch(error => {
         this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
@@ -5555,27 +5549,8 @@ class Model {
     return fetch(`http://localhost:3000/users?email=${email}`);
   }
   sendConfirmationCode(email, verificationCode) {
-    const nodemailer = __webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'nodemailer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-    let transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'dreamDiaryProjectAgathon006@gmail.com',
-        pass: '0275674Dd'
-      }
-    });
-    let mailOptions = {
-      from: 'dreamDiaryProjectAgathon006@gmail.com',
-      to: email,
-      subject: 'Подтверждение электронной почты',
-      text: `Ваш код подтверждения: ${verificationCode}`
-    };
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email отправлен: ' + info.response);
-      }
-    });
+
+    // imitation...
   }
   generateRandomCode(length) {
     let result = '';
