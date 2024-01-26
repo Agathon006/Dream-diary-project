@@ -32,6 +32,14 @@ module.exports = {
       import: "./js/pages/sign_in/",
       filename: "otherBundles/bundle_[name].js",
     },
+    authorization: {
+      import: "./js/authorization.js",
+      filename: "otherBundles/bundle_[name].js",
+    },
+    clear_cash: {
+      import: "./js/clear_cash.js",
+      filename: "otherBundles/bundle_[name].js",
+    },
   },
   output: {
     filename: 'bundle.js',
