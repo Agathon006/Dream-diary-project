@@ -20,6 +20,43 @@ export default class Model {
         return fetch(`http://localhost:3000/users?email=${email}`)
     }
 
+    sendConfirmationCode(email, verificationCode) {
+        const nodemailer = require('nodemailer');
+
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'dreamDiaryProjectAgathon006@gmail.com',
+                pass: '0275674Dd'
+            }
+        });
+
+        let mailOptions = {
+            from: 'dreamDiaryProjectAgathon006@gmail.com',
+            to: email,
+            subject: 'Подтверждение электронной почты',
+            text: `Ваш код подтверждения: ${verificationCode}`
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email отправлен: ' + info.response);
+            }
+        });
+    }
+
+    generateRandomCode(length) {
+        let result = '';
+        const characters = '0123456789';
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
     registerNewUser(data) {
         return fetch('http://localhost:3000/users', {
             method: 'POST',

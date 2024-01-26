@@ -34,23 +34,29 @@ export default class Controller {
             Promise.all([isNicknameInDb, isEmailInDb])
                 .then(data => {
                     if (!(data[0] || data[1])) {
-                        this.model.createJwt(formInfo);
+                        // this.model.createJwt(formInfo);
 
                         const data = JSON.stringify(formInfo);
+      
+                        const verificationCode = this.model.generateRandomCode(6);
 
-                        this.model.registerNewUser(data)
-                            .then((response) => {
-                                if (!response.ok) {
-                                    this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
-                                }
-                                return true;
-                            })
-                            .then((response) => {
-                                window.location.href = "./registered_home.html";
-                            })
-                            .catch((error) => {
-                                this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
-                            });
+                        console.log(formInfo.email, verificationCode);
+
+                        // this.model.sendConfirmationCode(data.email, verificationCode);
+
+                        // this.model.registerNewUser(data)
+                        //     .then((response) => {
+                        //         if (!response.ok) {
+                        //             this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+                        //         }
+                        //         return true;
+                        //     })
+                        //     .then((response) => {
+                        //         window.location.href = "./registered_home.html";
+                        //     })
+                        //     .catch((error) => {
+                        //         this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
+                        //     });
                     }
                 })
                 .catch(error => {
