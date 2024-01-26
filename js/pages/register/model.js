@@ -5,7 +5,7 @@ export default class Model {
     }
 
     isEmailOkay(emailInput) {
-        return emailInput.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+        return emailInput.match(/^[\w-.]+@gmail.com$/);
     }
 
     isPasswordOkay(passwordInput) {
