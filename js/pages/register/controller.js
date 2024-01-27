@@ -34,29 +34,7 @@ export default class Controller {
             Promise.all([isNicknameInDb, isEmailInDb])
                 .then(data => {
                     if (!(data[0] || data[1])) {
-                        this.model.createJwt(formInfo);
-
-                        const data = JSON.stringify(formInfo);
-      
-                        const verificationCode = this.model.generateRandomCode(6);
-
-                        console.log(formInfo.email, verificationCode);
-
-                        this.model.sendConfirmationCode(data.email, verificationCode);
-
-                        this.model.registerNewUser(data)
-                            .then((response) => {
-                                if (!response.ok) {
-                                    this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
-                                }
-                                return true;
-                            })
-                            .then((response) => {
-                                window.location.href = "./registered_home.html";
-                            })
-                            .catch((error) => {
-                                this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
-                            });
+                        this._initCodeFormListener(formInfo, SubmitButton);
                     }
                 })
                 .catch(error => {
@@ -140,5 +118,71 @@ export default class Controller {
                 }
                 return false;
             })
+    }
+
+    _initCodeFormListener(formInfo, SubmitButton) {
+        const form = this.view.getCodeFormElement();
+        const numberInputs = this.view.getCodeFormNumberInputs();
+        const devMessage = this.view.getDevMessageElement();
+        const devMessageCode = this.view.getDevMessageCodeElement();
+        const verificationCode = this.model.generateRandomCode(6);
+
+        form.classList.remove('hidden');
+
+        form.addEventListener('mouseover', () => {
+            devMessage.classList.remove('hidden');
+        })
+
+        devMessageCode.innerText = verificationCode;
+        console.log(verificationCode);
+
+        numberInputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                if (input.value.length > 1) {
+                    input.value = input.value.slice(1);
+                }
+                if (input.value.length >= 1 && index < numberInputs.length - 1) {
+                    numberInputs[index + 1].focus();
+                } else {
+                    if (this._isVerificationCodeCorrect(numberInputs, verificationCode, form)) {
+
+                        this.model.createJwt(formInfo);
+
+                        const data = JSON.stringify(formInfo);
+
+                        this.model.registerNewUser(data)
+                            .then((response) => {
+                                if (!response.ok) {
+                                    this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+                                }
+                                return true;
+                            })
+                            .then((response) => {
+                                window.location.href = "./registered_home.html";
+                            })
+                            .catch((error) => {
+                                this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
+                            });
+                    };
+                }
+            });
+        });
+    }
+
+    _isVerificationCodeCorrect(numberInputs, verificationCode, form) {
+        this.view.clearClassWrongInputFromElements();
+        this.view.clearClassWrongSpanFromElements();
+        numberInputs.forEach((input, index) => {
+            if (input.value !== verificationCode[index]) {
+                this.view.addClassWrongInput(form);
+                return;
+            }
+        });
+        if (form.classList.contains('wrong-input')) {
+            return false;
+        } else {
+            this.view.addClassRightInput(form);
+            return true;
+        }
     }
 }

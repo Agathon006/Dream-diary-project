@@ -20,11 +20,6 @@ export default class Model {
         return fetch(`http://localhost:3000/users?email=${email}`)
     }
 
-    sendConfirmationCode(email, verificationCode) {
-
-        // imitation...
-    }
-
     generateRandomCode(length) {
         let result = '';
         const characters = '0123456789';
