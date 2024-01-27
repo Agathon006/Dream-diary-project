@@ -32,6 +32,14 @@ module.exports = {
       import: "./js/pages/sign_in/",
       filename: "otherBundles/bundle_[name].js",
     },
+    authorization: {
+      import: "./js/authorization.js",
+      filename: "otherBundles/bundle_[name].js",
+    },
+    clear_cash: {
+      import: "./js/clear_cash.js",
+      filename: "otherBundles/bundle_[name].js",
+    },
   },
   output: {
     filename: 'bundle.js',
@@ -70,14 +78,9 @@ module.exports = {
     },
   },
   plugins: [
-    // fix "process is not defined" error:
     new webpack.ProvidePlugin({
       process: 'process/browser',
-    }),
-    // Work around for Buffer is undefined:
-    // https://github.com/webpack/changelog-v5/issues/10
-    new webpack.ProvidePlugin({
-        Buffer: ['buffer', 'Buffer'],
+      Buffer: ['buffer', 'Buffer']
     }),
   ],
 };

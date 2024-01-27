@@ -5,7 +5,7 @@ export default class Model {
     }
 
     isEmailOkay(emailInput) {
-        return emailInput.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+        return emailInput.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/);
     }
 
     isPasswordOkay(passwordInput) {
@@ -18,6 +18,30 @@ export default class Model {
 
     isEmailInDb(email) {
         return fetch(`http://localhost:3000/users?email=${email}`)
+    }
+
+    generateRandomCode(length) {
+        let result = '';
+        const characters = '0123456789';
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
+    passIfNumber(input) {
+        if (input.value.length === 1) {
+            if (!input.value.match(/^[0-9]$/)) {
+                input.value = input.value.slice(1);
+            }
+        } else if (input.value.length === 2) {
+            if (!input.value.match(/^[0-9][0-9]$/)) {
+                input.value = input.value.slice(0, -1);
+            } else {
+                input.value = input.value.slice(1);
+            }
+        }
     }
 
     registerNewUser(data) {

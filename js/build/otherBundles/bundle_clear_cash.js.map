@@ -1,0 +1,1 @@
+{"version":3,"file":"otherBundles/bundle_clear_cash.js","mappings":";;;;;AAAAA,YAAY,CAACC,KAAK,CAAC,CAAC,C","sources":["webpack://dream_diary_project/./js/clear_cash.js"],"sourcesContent":["localStorage.clear();"],"names":["localStorage","clear"],"sourceRoot":""}

@@ -5397,172 +5397,6 @@ PEMEncoder.prototype.encode = function encode(data, options) {
 
 /***/ }),
 
-/***/ "./js/pages/sign_in/controller.js":
-/*!****************************************!*\
-  !*** ./js/pages/sign_in/controller.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Controller)
-/* harmony export */ });
-class Controller {
-  constructor(view, model) {
-    this.view = view;
-    this.model = model;
-  }
-  init() {
-    this._initFormListener();
-  }
-  _initFormListener() {
-    const form = this.view.getRegistrerFormElement(),
-      SubmitButton = this.view.getSubmitInputElement();
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      this.view.clearClassWrongInputFromElements();
-      this.view.clearClassWrongSpanFromElements();
-      const formData = new FormData(form);
-      const formInfo = Object.fromEntries(formData);
-      if (!this._isFormValidationOkay()) {
-        return;
-      }
-      this.model.getPromiseDbUsers().then(response => {
-        if (!response.ok) {
-          this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
-        }
-        return response.json();
-      }).then(data => {
-        if (data.some(user => user.email === formInfo.email && user.password === formInfo.password)) {
-          this.model.createJwt(formInfo);
-          window.location.href = "./registered_home.html";
-        }
-        this.view.createWrongSpanElement(SubmitButton, `Incorrect email or password`);
-      }).catch(error => {
-        this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
-      });
-    });
-  }
-  _isFormValidationOkay() {
-    const form = this.view.getRegistrerFormElement(),
-      emailInput = this.view.getEmailInputElement(),
-      passwordInput = this.view.getPasswordInputElement();
-    const formData = new FormData(form);
-    const formInfo = Object.fromEntries(formData);
-    let isValidationOkay = true;
-    if (!this.model.isEmailOkay(formInfo.email)) {
-      this.view.addClassWrongInput(emailInput);
-      this.view.createWrongSpanElement(emailInput, "Incorrect email");
-      isValidationOkay = false;
-    }
-    if (!this.model.isPasswordOkay(formInfo.password)) {
-      this.view.addClassWrongInput(passwordInput);
-      this.view.createWrongSpanElement(passwordInput, "Password must have 6-200 symbols with at least 1 uppercase and 1 lowercase letter");
-      isValidationOkay = false;
-    }
-    return isValidationOkay;
-  }
-}
-
-/***/ }),
-
-/***/ "./js/pages/sign_in/model.js":
-/*!***********************************!*\
-  !*** ./js/pages/sign_in/model.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Model)
-/* harmony export */ });
-class Model {
-  isEmailOkay(emailInput) {
-    return emailInput.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
-  }
-  isPasswordOkay(passwordInput) {
-    return passwordInput.match(/^(?=.*[a-z])(?=.*[A-Z]).{6,200}$/);
-  }
-  getPromiseDbUsers() {
-    return fetch('http://localhost:3000/users');
-  }
-  createJwt(userData) {
-    const jwt = __webpack_require__(/*! jsonwebtoken */ "./node_modules/jsonwebtoken/index.js");
-    const payload = userData;
-    const secretKey = '8dshsdf8s3hfsdh8fshf8dhfs3hhfhfsh38fh';
-    const token = jwt.sign(payload, secretKey, {
-      expiresIn: '24h'
-    });
-    localStorage.token = token;
-    localStorage.secretKey = secretKey;
-  }
-}
-
-/***/ }),
-
-/***/ "./js/pages/sign_in/view.js":
-/*!**********************************!*\
-  !*** ./js/pages/sign_in/view.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ View)
-/* harmony export */ });
-class View {
-  static ID = {
-    REGISTER_FORM: {
-      FORM: 'register-form',
-      EMAIL_INPUT: 'email-input',
-      PASSWORD_INPUT: 'password-input',
-      SUBMIT_INPUT: 'register-form-submit'
-    }
-  };
-  static JS_CLASSES = {
-    REGISTER_FORM: {
-      WRONG_INPUT: 'wrong-input',
-      WRONG_SPAN: 'wrong-span'
-    }
-  };
-  getRegistrerFormElement() {
-    return document.querySelector(`#${View.ID.REGISTER_FORM.FORM}`);
-  }
-  getEmailInputElement() {
-    return document.querySelector(`#${View.ID.REGISTER_FORM.EMAIL_INPUT}`);
-  }
-  getPasswordInputElement() {
-    return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_INPUT}`);
-  }
-  getSubmitInputElement() {
-    return document.querySelector(`#${View.ID.REGISTER_FORM.SUBMIT_INPUT}`);
-  }
-  addClassWrongInput(element) {
-    element.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
-  }
-  createWrongSpanElement(element, message) {
-    let warningSpan = document.createElement('span');
-    warningSpan.innerText = message;
-    warningSpan.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_SPAN);
-    element.parentNode.insertBefore(warningSpan, element.nextSibling);
-  }
-  clearClassWrongInputFromElements() {
-    document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT}`).forEach(item => {
-      item.classList.remove(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
-    });
-  }
-  clearClassWrongSpanFromElements() {
-    document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.WRONG_SPAN}`).forEach(item => {
-      item.remove();
-    });
-  }
-}
-
-/***/ }),
-
 /***/ "./node_modules/base64-js/index.js":
 /*!*****************************************!*\
   !*** ./node_modules/base64-js/index.js ***!
@@ -52418,18 +52252,6 @@ module.exports = /*#__PURE__*/JSON.parse('{"2.16.840.1.101.3.4.1.1":"aes-128-ecb
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -52440,22 +52262,6 @@ module.exports = /*#__PURE__*/JSON.parse('{"2.16.840.1.101.3.4.1.1":"aes-128-ecb
 /******/ 				if (typeof window === 'object') return window;
 /******/ 			}
 /******/ 		})();
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/node module decorator */
@@ -52472,23 +52278,19 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!***********************************!*\
-  !*** ./js/pages/sign_in/index.js ***!
-  \***********************************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _model_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./model.js */ "./js/pages/sign_in/model.js");
-/* harmony import */ var _view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./view.js */ "./js/pages/sign_in/view.js");
-/* harmony import */ var _controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controller.js */ "./js/pages/sign_in/controller.js");
+/*!*****************************!*\
+  !*** ./js/authorization.js ***!
+  \*****************************/
 
 
-
-
-
-window.addEventListener('DOMContentLoaded', () => {
-  new _controller_js__WEBPACK_IMPORTED_MODULE_2__["default"](new _view_js__WEBPACK_IMPORTED_MODULE_1__["default"](), new _model_js__WEBPACK_IMPORTED_MODULE_0__["default"]()).init();
-});
+const jwt = __webpack_require__(/*! jsonwebtoken */ "./node_modules/jsonwebtoken/index.js");
+try {
+  jwt.verify(localStorage.getItem('token'), localStorage.getItem('secretKey'));
+} catch {
+  window.location.href = "../index.html";
+}
 })();
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle_sign_in.js.map
+//# sourceMappingURL=bundle_authorization.js.map
