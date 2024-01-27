@@ -121,16 +121,16 @@ export default class Controller {
     }
 
     _initCodeFormListener(formInfo, SubmitButton) {
-        const form = this.view.getCodeFormElement();
-        const numberInputs = this.view.getCodeFormNumberInputs();
-        const devMessage = this.view.getDevMessageElement();
-        const devMessageCode = this.view.getDevMessageCodeElement();
-        const verificationCode = this.model.generateRandomCode(6);
+        const form = this.view.getCodeFormElement(),
+            numberInputs = this.view.getCodeFormNumberInputs(),
+            devMessage = this.view.getDevMessageElement(),
+            devMessageCode = this.view.getDevMessageCodeElement(),
+            verificationCode = this.model.generateRandomCode(6);
 
-        form.classList.remove('hidden');
+        this.view.removeClassHidden(form);
 
         form.addEventListener('mouseover', () => {
-            devMessage.classList.remove('hidden');
+            this.view.removeClassHidden(devMessage);
         })
 
         devMessageCode.innerText = verificationCode;
@@ -138,32 +138,32 @@ export default class Controller {
 
         numberInputs.forEach((input, index) => {
             input.addEventListener('input', () => {
-                if (input.value.length > 1) {
-                    input.value = input.value.slice(1);
-                }
-                if (input.value.length >= 1 && index < numberInputs.length - 1) {
-                    numberInputs[index + 1].focus();
-                } else {
-                    if (this._isVerificationCodeCorrect(numberInputs, verificationCode, form)) {
 
-                        this.model.createJwt(formInfo);
+                this.model.passIfNumber(input);
 
-                        const data = JSON.stringify(formInfo);
+                if (input.value.length === 1) {
+                    if (index < numberInputs.length - 1) {
+                        numberInputs[index + 1].focus();
+                    } else {
+                        if (this._isVerificationCodeCorrect(numberInputs, verificationCode, form)) {
 
-                        this.model.registerNewUser(data)
-                            .then((response) => {
-                                if (!response.ok) {
-                                    this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
-                                }
-                                return true;
-                            })
-                            .then((response) => {
-                                window.location.href = "./registered_home.html";
-                            })
-                            .catch((error) => {
-                                this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
-                            });
-                    };
+                            this.model.createJwt(formInfo);
+                            
+                            this.model.registerNewUser(JSON.stringify(formInfo))
+                                .then((response) => {
+                                    if (!response.ok) {
+                                        this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+                                    }
+                                    return true;
+                                })
+                                .then((response) => {
+                                    window.location.href = "./registered_home.html";
+                                })
+                                .catch((error) => {
+                                    this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
+                                });
+                        };
+                    }
                 }
             });
         });

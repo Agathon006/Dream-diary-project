@@ -26,6 +26,9 @@ export default class View {
         CODE_FORM: {
             NUMBER: 'code-form__number',
         },
+        COMMON: {
+            HIDDEN: 'hidden',
+        },
     }
 
     getRegistrerFormElement() {
@@ -62,6 +65,10 @@ export default class View {
 
     getDevMessageCodeElement() {
         return document.querySelector(`#${View.ID.DEV_MESSAGE.CODE}`);
+    }
+
+    removeClassHidden(element) {
+        element.classList.remove(View.JS_CLASSES.COMMON.HIDDEN);
     }
 
     addClassWrongInput(element) {

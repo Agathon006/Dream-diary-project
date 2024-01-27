@@ -5504,40 +5504,39 @@ class Controller {
     });
   }
   _initCodeFormListener(formInfo, SubmitButton) {
-    const form = this.view.getCodeFormElement();
-    const numberInputs = this.view.getCodeFormNumberInputs();
-    const devMessage = this.view.getDevMessageElement();
-    const devMessageCode = this.view.getDevMessageCodeElement();
-    const verificationCode = this.model.generateRandomCode(6);
-    form.classList.remove('hidden');
+    const form = this.view.getCodeFormElement(),
+      numberInputs = this.view.getCodeFormNumberInputs(),
+      devMessage = this.view.getDevMessageElement(),
+      devMessageCode = this.view.getDevMessageCodeElement(),
+      verificationCode = this.model.generateRandomCode(6);
+    this.view.removeClassHidden(form);
     form.addEventListener('mouseover', () => {
-      devMessage.classList.remove('hidden');
+      this.view.removeClassHidden(devMessage);
     });
     devMessageCode.innerText = verificationCode;
     console.log(verificationCode);
     numberInputs.forEach((input, index) => {
       input.addEventListener('input', () => {
-        if (input.value.length > 1) {
-          input.value = input.value.slice(1);
-        }
-        if (input.value.length >= 1 && index < numberInputs.length - 1) {
-          numberInputs[index + 1].focus();
-        } else {
-          if (this._isVerificationCodeCorrect(numberInputs, verificationCode, form)) {
-            this.model.createJwt(formInfo);
-            const data = JSON.stringify(formInfo);
-            this.model.registerNewUser(data).then(response => {
-              if (!response.ok) {
-                this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
-              }
-              return true;
-            }).then(response => {
-              window.location.href = "./registered_home.html";
-            }).catch(error => {
-              this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
-            });
+        this.model.passIfNumber(input);
+        if (input.value.length === 1) {
+          if (index < numberInputs.length - 1) {
+            numberInputs[index + 1].focus();
+          } else {
+            if (this._isVerificationCodeCorrect(numberInputs, verificationCode, form)) {
+              this.model.createJwt(formInfo);
+              this.model.registerNewUser(JSON.stringify(formInfo)).then(response => {
+                if (!response.ok) {
+                  this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+                }
+                return true;
+              }).then(response => {
+                window.location.href = "./registered_home.html";
+              }).catch(error => {
+                this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
+              });
+            }
+            ;
           }
-          ;
         }
       });
     });
@@ -5598,6 +5597,19 @@ class Model {
     }
     return result;
   }
+  passIfNumber(input) {
+    if (input.value.length === 1) {
+      if (!input.value.match(/^[0-9]$/)) {
+        input.value = input.value.slice(1);
+      }
+    } else if (input.value.length === 2) {
+      if (!input.value.match(/^[0-9][0-9]$/)) {
+        input.value = input.value.slice(0, -1);
+      } else {
+        input.value = input.value.slice(1);
+      }
+    }
+  }
   registerNewUser(data) {
     return fetch('http://localhost:3000/users', {
       method: 'POST',
@@ -5657,6 +5669,9 @@ class View {
     },
     CODE_FORM: {
       NUMBER: 'code-form__number'
+    },
+    COMMON: {
+      HIDDEN: 'hidden'
     }
   };
   getRegistrerFormElement() {
@@ -5685,6 +5700,9 @@ class View {
   }
   getDevMessageCodeElement() {
     return document.querySelector(`#${View.ID.DEV_MESSAGE.CODE}`);
+  }
+  removeClassHidden(element) {
+    element.classList.remove(View.JS_CLASSES.COMMON.HIDDEN);
   }
   addClassWrongInput(element) {
     element.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);

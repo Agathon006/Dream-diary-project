@@ -30,6 +30,20 @@ export default class Model {
         return result;
     }
 
+    passIfNumber(input) {
+        if (input.value.length === 1) {
+            if (!input.value.match(/^[0-9]$/)) {
+                input.value = input.value.slice(1);
+            }
+        } else if (input.value.length === 2) {
+            if (!input.value.match(/^[0-9][0-9]$/)) {
+                input.value = input.value.slice(0, -1);
+            } else {
+                input.value = input.value.slice(1);
+            }
+        }
+    }
+
     registerNewUser(data) {
         return fetch('http://localhost:3000/users', {
             method: 'POST',

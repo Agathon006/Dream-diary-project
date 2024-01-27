@@ -1,31 +1,10 @@
 {
   "users": [
     {
-      "id": "b8d9",
+      "id": "711d",
       "nickname": "Agathon006",
-      "email": "agat006@gmail.com",
-      "password": "gfhfgDSADAS",
-      "role": "user"
-    },
-    {
-      "id": "153d",
-      "nickname": "Agathons006",
-      "email": "agat0S06@gmail.com",
-      "password": "asdasDSADASD",
-      "role": "user"
-    },
-    {
-      "id": "d0f9",
-      "nickname": "Agatshon006",
       "email": "agaton615@gmail.com",
-      "password": "ASDASSdsadasd",
-      "role": "user"
-    },
-    {
-      "id": "8d6b",
-      "nickname": "ASDASdsad",
-      "email": "agat006@mail.ru",
-      "password": "sadsadDSADAS",
+      "password": "asdDSADSA",
       "role": "user"
     }
   ]
