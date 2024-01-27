@@ -5414,7 +5414,26 @@ class Controller {
     this.model = model;
   }
   init() {
+    this._googleSignInListener();
     this._initFormListener();
+  }
+  _googleSignInListener() {
+    window.handleCredentialResponse = response => {
+      // Under development (needed node js)
+
+      // // decodeJwtResponse() is a custom function defined by you
+      // // to decode the credential response.
+      // responsePayload = decodeJwtResponse(response.credential);
+
+      // console.log("ID: " + responsePayload.sub);
+      // console.log('Full Name: ' + responsePayload.name);
+      // console.log('Given Name: ' + responsePayload.given_name);
+      // console.log('Family Name: ' + responsePayload.family_name);
+      // console.log("Image URL: " + responsePayload.picture);
+      // console.log("Email: " + responsePayload.email);
+
+      alert('Sign in by services is under development, you need to register by basic way instead.');
+    };
   }
   _initFormListener() {
     const form = this.view.getRegistrerFormElement(),
@@ -5514,7 +5533,6 @@ class Controller {
       this.view.removeClassHidden(devMessage);
     });
     devMessageCode.innerText = verificationCode;
-    console.log(verificationCode);
     numberInputs.forEach((input, index) => {
       input.addEventListener('input', () => {
         this.model.passIfNumber(input);
@@ -5608,6 +5626,8 @@ class Model {
       } else {
         input.value = input.value.slice(1);
       }
+    } else {
+      input.value = '';
     }
   }
   registerNewUser(data) {
@@ -5671,7 +5691,8 @@ class View {
       NUMBER: 'code-form__number'
     },
     COMMON: {
-      HIDDEN: 'hidden'
+      HIDDEN: 'hidden',
+      NOT_EXIST: 'not-exist'
     }
   };
   getRegistrerFormElement() {
@@ -5703,6 +5724,9 @@ class View {
   }
   removeClassHidden(element) {
     element.classList.remove(View.JS_CLASSES.COMMON.HIDDEN);
+  }
+  removeClassNotExist(element) {
+    element.classList.remove(View.JS_CLASSES.COMMON.NOT_EXIST);
   }
   addClassWrongInput(element) {
     element.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);

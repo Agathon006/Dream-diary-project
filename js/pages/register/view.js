@@ -28,6 +28,7 @@ export default class View {
         },
         COMMON: {
             HIDDEN: 'hidden',
+            NOT_EXIST: 'not-exist',
         },
     }
 
@@ -69,6 +70,10 @@ export default class View {
 
     removeClassHidden(element) {
         element.classList.remove(View.JS_CLASSES.COMMON.HIDDEN);
+    }
+
+    removeClassNotExist(element) {
+        element.classList.remove(View.JS_CLASSES.COMMON.NOT_EXIST);
     }
 
     addClassWrongInput(element) {

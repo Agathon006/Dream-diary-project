@@ -5,7 +5,27 @@ export default class Controller {
     }
 
     init() {
+        this._googleSignInListener();
         this._initFormListener();
+    }
+
+    _googleSignInListener() {
+        window.handleCredentialResponse = (response) => {
+            // Under development (needed node js)
+
+            // // decodeJwtResponse() is a custom function defined by you
+            // // to decode the credential response.
+            // responsePayload = decodeJwtResponse(response.credential);
+
+            // console.log("ID: " + responsePayload.sub);
+            // console.log('Full Name: ' + responsePayload.name);
+            // console.log('Given Name: ' + responsePayload.given_name);
+            // console.log('Family Name: ' + responsePayload.family_name);
+            // console.log("Image URL: " + responsePayload.picture);
+            // console.log("Email: " + responsePayload.email);
+            
+            alert('Sign in by services is under development, you need to register by basic way instead.');
+        }
     }
 
     _initFormListener() {
@@ -134,7 +154,6 @@ export default class Controller {
         })
 
         devMessageCode.innerText = verificationCode;
-        console.log(verificationCode);
 
         numberInputs.forEach((input, index) => {
             input.addEventListener('input', () => {
@@ -148,7 +167,7 @@ export default class Controller {
                         if (this._isVerificationCodeCorrect(numberInputs, verificationCode, form)) {
 
                             this.model.createJwt(formInfo);
-                            
+
                             this.model.registerNewUser(JSON.stringify(formInfo))
                                 .then((response) => {
                                     if (!response.ok) {

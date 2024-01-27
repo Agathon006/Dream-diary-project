@@ -41,6 +41,8 @@ export default class Model {
             } else {
                 input.value = input.value.slice(1);
             }
+        } else {
+            input.value = '';
         }
     }
 
