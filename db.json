@@ -20,6 +20,13 @@
       "email": "agaton615@gmail.com",
       "password": "ASDASSdsadasd",
       "role": "user"
+    },
+    {
+      "id": "8d6b",
+      "nickname": "ASDASdsad",
+      "email": "agat006@mail.ru",
+      "password": "sadsadDSADAS",
+      "role": "user"
     }
   ]
 }

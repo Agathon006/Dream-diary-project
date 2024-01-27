@@ -5578,7 +5578,7 @@ class Model {
     return nicknameInput.match(/^[a-zA-Z][a-zA-Z0-9_]{4,14}$/);
   }
   isEmailOkay(emailInput) {
-    return emailInput.match(/^[\w-.]+@gmail.com$/);
+    return emailInput.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/);
   }
   isPasswordOkay(passwordInput) {
     return passwordInput.match(/^(?=.*[a-z])(?=.*[A-Z]).{6,200}$/);
