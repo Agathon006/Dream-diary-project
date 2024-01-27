@@ -79,6 +79,17 @@
                     <span class="register-form__span-small">Already registered?</span>
                     <a href="./sign_in.html" class="register-form__bottom-link">Sign in</a>
                 </div>
+                <div class="register-form-separator"></div>
+                <script src="https://accounts.google.com/gsi/client" async defer></script>
+                <div id="g_id_onload"
+                    data-client_id="325047958757-pn0gpbbmrp93qakd1g9ovm0sigkmih6q.apps.googleusercontent.com"
+                    data-callback="handleCredentialResponse">
+                </div>
+                <div class="g_id_signin" data-type="standard"></div>
+                <div class="dev-message google-message" id="google-message">
+                    <p class="dev-message__plot">Sign in by services is under development, you need to register by basic
+                        way instead.</p>
+                </div>
             </form>
             <form class="code-form hidden" id="code-form">
                 <p class="code-form__title">Enter your verification code</p>

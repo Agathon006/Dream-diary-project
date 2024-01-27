@@ -331,8 +331,15 @@ button {
   display: flex;
   flex-direction: column;
   background-color: rgb(233, 233, 233);
-  padding: 0 20px 20px;
+  padding: 0 20px;
   width: 300px;
+}
+.main .form-wrapper .register-form .register-form-separator {
+  align-self: center;
+  width: 80%;
+  height: 1px;
+  background-color: black;
+  margin: 10px 0;
 }
 .main .form-wrapper .register-form .register-form__span {
   margin-top: 15px;
@@ -376,8 +383,16 @@ button {
 .main .form-wrapper .register-form .register-form__bottom .register-form__bottom-link:hover {
   text-decoration: underline;
 }
+.main .form-wrapper .register-form .g_id_signin {
+  align-self: center;
+  margin-bottom: 10px;
+}
+.main .form-wrapper .register-form .google-message {
+  align-self: center;
+  width: 95%;
+}
 .main .form-wrapper .code-form {
-  margin-top: 10px;
+  margin: 10px 0;
   background-color: rgb(233, 233, 233);
   padding: 0 20px 20px;
   width: 300px;
@@ -405,11 +420,11 @@ button {
 }
 .main .form-wrapper .dev-message {
   position: relative;
-  margin: 10px 0;
   background-color: rgb(253, 255, 151);
-  padding: 5px 20px;
+  padding: 5px 10px;
   width: 300px;
   transition: 3s;
+  margin-bottom: 10px;
 }
 .main .form-wrapper .dev-message .dev-message__decor {
   position: absolute;
