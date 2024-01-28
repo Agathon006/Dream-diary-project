@@ -5446,37 +5446,45 @@ class Controller {
           });
           editButton.textContent = 'Save';
         } else {
-          this.model.isNicknameInDb(nincknameInput.value).then(response => {
-            if (!response.ok) {
-              this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+          const inputsValues = [];
+          inputs.forEach((input, index) => {
+            if (index === 1) {
+              return;
             }
-            return response.json();
-          }).then(data => {
-            if (data.length) {
-              //...
-              console.log('Nickname is alredy used');
-            } else {
-              const inputsValues = [];
-              inputs.forEach((input, index) => {
-                if (index === 1) {
-                  return;
-                }
-                ;
-                inputsValues.push(input.value);
-                input.classList.toggle('locked-input');
-              });
-              const editedUser = {};
-              editedUser.nickname = inputsValues[0];
-              editedUser.name = inputsValues[1];
-              editedUser.surname = inputsValues[2];
-              editedUser.birthDate = inputsValues[3];
-              editedUser.profileInfo = inputsValues[4];
-              console.log(editedUser);
-              console.log(emailInput.value);
-              this.model.editUser(userInfo.id, editedUser);
-              editButton.textContent = 'Edit';
-            }
+            ;
+            inputsValues.push(input.value);
+            input.classList.toggle('locked-input');
           });
+          const editedUser = {};
+          if (nincknameInput.value === userInfo.nickname) {
+            editedUser.nickname = inputsValues[0];
+            editedUser.name = inputsValues[1];
+            editedUser.surname = inputsValues[2];
+            editedUser.birthDate = inputsValues[3];
+            editedUser.profileInfo = inputsValues[4];
+            this.model.editUser(userInfo.id, editedUser);
+            editButton.textContent = 'Edit';
+          } else {
+            this.model.isNicknameInDb(nincknameInput.value).then(response => {
+              if (!response.ok) {
+                this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+              }
+              return response.json();
+            }).then(data => {
+              if (data.length) {
+                //...
+                console.log('Nickname is alredy used');
+              } else {
+                editedUser.nickname = inputsValues[0];
+                editedUser.name = inputsValues[1];
+                editedUser.surname = inputsValues[2];
+                editedUser.birthDate = inputsValues[3];
+                editedUser.profileInfo = inputsValues[4];
+                this.model.editUser(userInfo.id, editedUser);
+                editButton.textContent = 'Edit';
+              }
+            });
+          }
         }
       });
     }).catch(error => {
