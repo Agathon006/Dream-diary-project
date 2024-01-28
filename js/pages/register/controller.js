@@ -42,6 +42,11 @@ export default class Controller {
             const formData = new FormData(form);
             const formInfo = Object.fromEntries(formData);
             formInfo.role = 'user';
+            formInfo.name = '';
+            formInfo.surname = '';
+            formInfo.birthDate = '';
+            formInfo.profileInfo = '';
+            formInfo.avatar = '';
 
             if (!this._isFormValidationOkay()) {
                 return;
@@ -166,8 +171,6 @@ export default class Controller {
                     } else {
                         if (this._isVerificationCodeCorrect(numberInputs, verificationCode, form)) {
 
-                            this.model.createJwt(formInfo);
-
                             this.model.registerNewUser(JSON.stringify(formInfo))
                                 .then((response) => {
                                     if (!response.ok) {
@@ -176,6 +179,7 @@ export default class Controller {
                                     return true;
                                 })
                                 .then((response) => {
+                                    this.model.createJwt(formInfo);
                                     window.location.href = "./registered_home.html";
                                 })
                                 .catch((error) => {

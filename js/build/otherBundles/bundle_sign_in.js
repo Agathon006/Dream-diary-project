@@ -5437,8 +5437,9 @@ class Controller {
         if (data.some(user => user.email === formInfo.email && user.password === formInfo.password)) {
           this.model.createJwt(formInfo);
           window.location.href = "./registered_home.html";
+        } else {
+          this.view.createWrongSpanElement(SubmitButton, `Incorrect email or password`);
         }
-        this.view.createWrongSpanElement(SubmitButton, `Incorrect email or password`);
       }).catch(error => {
         this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
       });
