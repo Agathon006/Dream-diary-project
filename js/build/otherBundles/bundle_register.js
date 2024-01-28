@@ -5445,6 +5445,11 @@ class Controller {
       const formData = new FormData(form);
       const formInfo = Object.fromEntries(formData);
       formInfo.role = 'user';
+      formInfo.name = '';
+      formInfo.surname = '';
+      formInfo.birthDate = '';
+      formInfo.profileInfo = '';
+      formInfo.avatar = '';
       if (!this._isFormValidationOkay()) {
         return;
       }
@@ -5541,13 +5546,13 @@ class Controller {
             numberInputs[index + 1].focus();
           } else {
             if (this._isVerificationCodeCorrect(numberInputs, verificationCode, form)) {
-              this.model.createJwt(formInfo);
               this.model.registerNewUser(JSON.stringify(formInfo)).then(response => {
                 if (!response.ok) {
                   this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
                 }
                 return true;
               }).then(response => {
+                this.model.createJwt(formInfo);
                 window.location.href = "./registered_home.html";
               }).catch(error => {
                 this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
