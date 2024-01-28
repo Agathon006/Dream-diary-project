@@ -5,11 +5,11 @@
     <script src="../js/build/otherBundles/bundle_authorization.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Player</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="icon" href="../icons/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/music.css">
-    <script src="../js/build/otherBundles/bundle_music.js" defer></script>
+    <link rel="stylesheet" href="../css/user.css">
+    <script src="../js/build/otherBundles/bundle_user.js" defer></script>
 </head>
 
 <body>
@@ -33,12 +33,12 @@
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link underlined" href="#">Music player</a>
+                        <a class="header__navigation-list-element-link" href="./music.html">Music player</a>
                     </li>
                 </ul>
                 <div class="header__navigation-end">
                     <div class="header__navigation-end-account" id="header-navigation-end-account">
-                        <a class="header__navigation-end-account-link" href="./user.html">Profile</a>
+                        <a class="header__navigation-end-account-link underlined" href="#">Profile</a>
                         <div class="header__navigation-end-account-separator"></div>
                         <a class="header__navigation-end-account-link" href="./sign_in.html">Sign out</a>
                     </div>
@@ -63,9 +63,24 @@
     </header>
     <main class="main">
         <div class="container">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi sapiente dolorum debitis corporis labore
-                quo reprehenderit facilis unde hic saepe non mollitia pariatur quam, commodi tempore nam maxime ex? Ad.
-            </p>
+            <div class="profile-wrapper">
+                <div class="profile-main">
+                    <div class="profile-main__avatar">
+                        <img src="../img/default-user-avatar.svg" class="profile-main__avatar-wrapper" id="profile-main-avatar"></img>
+                    </div>
+                    <div class="profile-main__plot">
+                        <input type="text" placeholder="Nickname" class="profile-input locked-input" id="nickname-input">
+                        <input type="text" placeholder="Mail" class="profile-input locked-input" id="email-input">
+                    </div>
+                </div>
+                <div class="profile-secondary">
+                    <input type="text" placeholder="Name" class="profile-input locked-input" id="name-input">
+                    <input type="text" placeholder="Surname" class="profile-input locked-input" id="surname-input">
+                    <input type="text" placeholder="Birth date" class="profile-input locked-input" id="birth-date-input">
+                    <textarea rows="4" placeholder="About me" class="profile-input locked-input" id="about-input"></textarea>
+                </div>
+                <button class="profile-edit-button" id="profile-edit-button">Edit</button>
+            </div>
         </div>
     </main>
     <footer class="footer">

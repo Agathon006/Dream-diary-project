@@ -20,3 +20,10 @@
     color: red;
     font-size: 14px;
 }
+
+.locked-input {
+    background: transparent !important;
+    border: none  !important;
+    cursor: default;
+    pointer-events: none;
+}

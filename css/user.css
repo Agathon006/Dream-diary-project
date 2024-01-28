@@ -307,4 +307,51 @@ button {
 }
 .footer .container .footer__social .footer__social-link .footer__social-link-image {
   width: 48px;
-}/*# sourceMappingURL=music.css.map */
+}
+
+.main .container .profile-wrapper {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+}
+.main .container .profile-wrapper .profile-main {
+  display: flex;
+}
+.main .container .profile-wrapper .profile-main .profile-main__avatar .profile-main__avatar-wrapper {
+  width: 200px;
+  height: 200px;
+  display: block;
+  background-color: white;
+  background-size: cover;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 200px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.main .container .profile-wrapper .profile-main .profile-main__plot {
+  display: flex;
+  flex-direction: column;
+}
+.main .container .profile-wrapper .profile-secondary {
+  display: flex;
+  flex-direction: column;
+}
+.main .container .profile-wrapper .profile-edit-button {
+  width: 200px;
+  height: 50px;
+  border-radius: 20px;
+}
+.main .container .profile-wrapper .profile-edit-button:hover {
+  color: #dedede;
+  text-decoration: underline;
+}
+.main .container .profile-wrapper .profile-input {
+  color: black;
+  font-size: 36px;
+  margin: 20px;
+  width: 500px;
+  background: gray;
+  border: 1px solid black;
+}/*# sourceMappingURL=user.css.map */

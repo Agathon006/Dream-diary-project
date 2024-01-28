@@ -1,22 +1,16 @@
 {
   "users": [
     {
-      "id": "8873",
+      "id": "372d",
       "nickname": "Agathon006",
       "email": "agaton615@gmail.com",
       "password": "2051868Dd",
-      "role": "user"
-    },
-    {
-      "id": "b1c9",
-      "nickname": "Agasthon006",
-      "email": "agaton61s5@gmail.com",
-      "password": "ASDdsadas",
       "role": "user",
       "name": "",
       "surname": "",
       "birthDate": "",
-      "profileInfo": ""
+      "profileInfo": "",
+      "avatar": ""
     }
   ]
 }

@@ -76,6 +76,13 @@ button {
   font-size: 14px;
 }
 
+.locked-input {
+  background: transparent !important;
+  border: none !important;
+  cursor: default;
+  pointer-events: none;
+}
+
 .footer, .header, a, button {
   background-color: #232e2f;
   color: #9f9f9f;
@@ -115,6 +122,13 @@ button {
 .wrong-span {
   color: red;
   font-size: 14px;
+}
+
+.locked-input {
+  background: transparent !important;
+  border: none !important;
+  cursor: default;
+  pointer-events: none;
 }
 
 .header .container .header__navigation {
@@ -268,6 +282,13 @@ button {
 .wrong-span {
   color: red;
   font-size: 14px;
+}
+
+.locked-input {
+  background: transparent !important;
+  border: none !important;
+  cursor: default;
+  pointer-events: none;
 }
 
 .footer .container {

@@ -76,6 +76,13 @@ button {
   font-size: 14px;
 }
 
+.locked-input {
+  background: transparent !important;
+  border: none !important;
+  cursor: default;
+  pointer-events: none;
+}
+
 .footer, .header, a, button {
   background-color: #232e2f;
   color: #9f9f9f;
@@ -117,6 +124,13 @@ button {
   font-size: 14px;
 }
 
+.locked-input {
+  background: transparent !important;
+  border: none !important;
+  cursor: default;
+  pointer-events: none;
+}
+
 .header .container .header__navigation {
   display: flex;
   justify-content: space-between;
@@ -136,34 +150,9 @@ button {
 }
 .header .container .header__navigation .header__navigation-list .header__navigation-list-element {
   text-align: center;
-  position: relative;
 }
-.header .container .header__navigation .header__navigation-list .header__navigation-list-element .header__navigation-list-element-link:not(:first-child) {
-  color: #585858;
-  opacity: 0.7;
-}
-.header .container .header__navigation .header__navigation-list .header__navigation-list-element .underlined:hover {
+.header .container .header__navigation .header__navigation-list .header__navigation-list-element .header__navigation-list-element-link:hover {
   color: #dedede;
-}
-.header .container .header__navigation .header__navigation-list .header__navigation-list-element .locked-page {
-  opacity: 0;
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1.5);
-  z-index: 1;
-  transition: 0.5s;
-}
-.header .container .header__navigation .header__navigation-list .header__navigation-list-element .locked-page:hover {
-  opacity: 1;
-}
-.header .container .header__navigation .header__navigation-list .locked-page {
-  cursor: pointer;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
 }
 .header .container .header__navigation .header__navigation-list .header__navigation-list-separator {
   width: 1px;
@@ -293,6 +282,13 @@ button {
 .wrong-span {
   color: red;
   font-size: 14px;
+}
+
+.locked-input {
+  background: transparent !important;
+  border: none !important;
+  cursor: default;
+  pointer-events: none;
 }
 
 .footer .container {

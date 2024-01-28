@@ -1,0 +1,72 @@
+@import '../../base';
+@import '../../variables/variables';
+@import '../../templates/templates';
+@import '../../js_classes';
+
+@import '../registered_header';
+@import '../footer';
+
+.main {
+    @extend %secondary_style;
+
+    .container {
+
+        .profile-wrapper {
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+
+            .profile-main {
+                display: flex;
+
+                .profile-main__avatar {
+
+                    .profile-main__avatar-wrapper {
+
+                        width: 200px;
+                        height: 200px;
+                        display: block;
+                        background-color: white;
+                        background-size: cover;
+                        border-radius: 100%;
+                        text-align: center;
+                        line-height: 200px;
+                        color: white;
+                        font-weight: bold;
+                        cursor: pointer;
+                    }
+                }
+
+                .profile-main__plot {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+
+            .profile-secondary {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .profile-edit-button {
+                width: 200px;
+                height: 50px;
+                border-radius: 20px;
+
+                &:hover{
+                    color: #dedede;
+                    text-decoration: underline;
+                }
+            }
+
+            .profile-input {
+                color: black;
+                font-size: 36px;
+                margin: 20px;
+                width: 500px;
+                background: gray;
+                border: 1px solid black;
+            }
+        }
+    }
+}
