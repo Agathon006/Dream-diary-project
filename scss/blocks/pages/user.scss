@@ -18,6 +18,7 @@
 
             .profile-main {
                 display: flex;
+                align-items: center;
 
                 .profile-main__avatar {
 
@@ -27,17 +28,15 @@
                         height: 200px;
                         display: block;
                         background-color: white;
+                        background-image: url(../img/default-user-avatar.svg);
                         background-size: cover;
                         border-radius: 100%;
                         text-align: center;
-                        line-height: 200px;
-                        color: white;
-                        font-weight: bold;
-                        cursor: pointer;
                     }
                 }
 
                 .profile-main__plot {
+                    margin-left: 20px;
                     display: flex;
                     flex-direction: column;
                 }
@@ -66,6 +65,11 @@
                 margin: 20px;
                 background: gray;
                 border: 1px solid black;
+                cursor: pointer;
+            }
+
+            .profile-span {
+                margin: 20px 0 0 10px;
             }
         }
     }

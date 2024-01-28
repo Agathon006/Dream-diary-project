@@ -1,16 +1,28 @@
 {
   "users": [
     {
-      "id": "372d",
-      "nickname": "Agathon006",
+      "id": "a403",
+      "nickname": "Agathon008",
       "email": "agaton615@gmail.com",
       "password": "2051868Dd",
       "role": "user",
-      "name": "Dima",
-      "surname": "Zhuk",
-      "birthDate": "03 04 2001",
-      "profileInfo": "Bla bla bla",
-      "avatar": "https://sun9-71.userapi.com/impf/PLNhFY9CH0O9rm7OoMjCoL50jw4IULybfa_Kbg/EAjkkOyw03Q.jpg?size=617x375&quality=96&sign=4111d12fbf16b7f476ae9237982ee16f&c_uniq_tag=VVACjoAJwAH_Fq3PRa6nJ9crgqx1UqFC8b2el_sQRRg&type=album"
+      "name": "a",
+      "surname": "a",
+      "birthDate": "a",
+      "profileInfo": "a",
+      "avatar": "https://alpha2.ipipe.ru/info/wp-content/uploads/img/chto-takoe-url-i-kakim-on-dolzhen-byt/url-primer.png"
+    },
+    {
+      "id": "b65d",
+      "nickname": "Agathon007",
+      "email": "agaton215@gmail.com",
+      "password": "2051868Dd",
+      "role": "user",
+      "name": "",
+      "surname": "",
+      "birthDate": "",
+      "profileInfo": "sss",
+      "avatar": "https://res.cloudinary.com/practicaldev/image/fetch/s--FwNQvLwm--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://cdn.urlencoder.org/assets/images/url-fb.png"
     }
   ]
 }

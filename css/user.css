@@ -316,21 +316,20 @@ button {
 }
 .main .container .profile-wrapper .profile-main {
   display: flex;
+  align-items: center;
 }
 .main .container .profile-wrapper .profile-main .profile-main__avatar .profile-main__avatar-wrapper {
   width: 200px;
   height: 200px;
   display: block;
   background-color: white;
+  background-image: url(../img/default-user-avatar.svg);
   background-size: cover;
   border-radius: 100%;
   text-align: center;
-  line-height: 200px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
 }
 .main .container .profile-wrapper .profile-main .profile-main__plot {
+  margin-left: 20px;
   display: flex;
   flex-direction: column;
 }
@@ -354,4 +353,8 @@ button {
   margin: 20px;
   background: gray;
   border: 1px solid black;
+  cursor: pointer;
+}
+.main .container .profile-wrapper .profile-span {
+  margin: 20px 0 0 10px;
 }/*# sourceMappingURL=user.css.map */

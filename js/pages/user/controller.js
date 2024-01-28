@@ -9,20 +9,22 @@ export default class Controller {
     }
 
     _userProfileListener() {
-        const nincknameInput = document.querySelector('#nickname-input'),
-            emailInput = document.querySelector('#email-input'),
-            urlInput = document.querySelector('#avatar-url-input'),
-            nameInput = document.querySelector('#name-input'),
-            surnameInput = document.querySelector('#surname-input'),
-            birthDateInput = document.querySelector('#birth-date-input'),
-            aboutInput = document.querySelector('#about-input'),
-            profileMainAvatar = document.querySelector('#profile-main-avatar');
+        const nincknameInput = this.view.getRrofileNicknameElement(),
+            emailInput = this.view.getRrofileEmailElement(),
+            urlInput = this.view.getRrofileImageUrlElement(),
+            nameInput = this.view.getRrofileNameElement(),
+            surnameInput = this.view.getRrofileSurnameElement(),
+            birthDateInput = this.view.getRrofileBirthDateElement(),
+            aboutInput = this.view.getRrofileAboutMeElement(),
+            profileMainAvatar = this.view.getRrofileAvatarElement();
+
         const jwt = require('jsonwebtoken');
         const decodedJwt = jwt.verify(localStorage.getItem('token'), localStorage.getItem('secretKey'));
-        this.model.getUserDataByEmail(decodedJwt.email)
+
+        this.model.getPromiseGetUserDataByEmail(decodedJwt.email)
             .then(userInfo => {
-                console.log(userInfo);
-                profileMainAvatar.setAttribute('src', userInfo.avatar);
+                // console.log(userInfo);
+                this.view.updateImageSrc(profileMainAvatar, userInfo.avatar);
                 nincknameInput.value = userInfo.nickname;
                 emailInput.value = userInfo.email;
                 urlInput.value = userInfo.avatar;
@@ -31,67 +33,86 @@ export default class Controller {
                 birthDateInput.value = userInfo.birthDate;
                 aboutInput.value = userInfo.profileInfo;
 
-                const editButton = document.querySelector('#profile-edit-button');
-                editButton.addEventListener('click', () => {
-                    profileMainAvatar.setAttribute('src', urlInput.value);
-                    const inputs = document.querySelectorAll('.profile-input');
-
-                    if (editButton.textContent === 'Edit') {
-                        inputs.forEach((input, index) => {
-                            if (index === 1) {
-                                return
-                            };
-                            input.classList.toggle('locked-input');
-                        });
-                        editButton.textContent = 'Save';
-                    } else {
-                        const inputsValues = [];
-                        inputs.forEach((input, index) => {
-                            if (index === 1) {
-                                return
-                            };
-                            inputsValues.push(input.value);
-                            input.classList.toggle('locked-input');
-                        });
-                        const editedUser = {};
-                        if (nincknameInput.value === userInfo.nickname) {
-                            editedUser.nickname = inputsValues[0];
-                            editedUser.avatar = inputsValues[1];
-                            editedUser.name = inputsValues[2];
-                            editedUser.surname = inputsValues[3];
-                            editedUser.birthDate = inputsValues[4];
-                            editedUser.profileInfo = inputsValues[5];
-                            this.model.editUser(userInfo.id, editedUser);
-                            editButton.textContent = 'Edit';
-                        } else {
-                            this.model.isNicknameInDb(nincknameInput.value)
-                                .then(response => {
-                                    if (!response.ok) {
-                                        this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
-                                    }
-                                    return response.json();
-                                })
-                                .then(data => {
-                                    if (data.length) {
-                                        //...
-                                        console.log('Nickname is alredy used');
-                                    }
-                                    else {
-                                        editedUser.nickname = inputsValues[0];
-                                        editedUser.name = inputsValues[1];
-                                        editedUser.surname = inputsValues[2];
-                                        editedUser.birthDate = inputsValues[3];
-                                        editedUser.profileInfo = inputsValues[4];
-                                        this.model.editUser(userInfo.id, editedUser);
-                                        editButton.textContent = 'Edit';
-                                    }
-                                })
-                        }
-                    }
-                })
+                this._editButtonListener(userInfo, profileMainAvatar);
             })
             .catch(error => {
-                console.log('error...')
+                console.error('Error getting user info from DB:', error);
+            });
+    }
+
+    _editButtonListener(userInfo, profileMainAvatar) {
+        const editButton = this.view.getRrofileEditButton();
+
+        editButton.addEventListener('click', () => {
+            const inputs = this.view.getRrofileInputs();
+
+            if (editButton.textContent === 'Edit') {
+                this.view.toggleInputs(inputs);
+                editButton.textContent = 'Save';
+            } else {
+                const inputsValues = this.view.toggleInputs(inputs);
+                editButton.textContent = 'Edit';
+
+                if (this._isProfileChanged(inputsValues, userInfo)) {
+                    this._editUserProfile(inputsValues, profileMainAvatar, userInfo, inputs, editButton);
+                };
+            }
+        })
+    }
+
+    _isProfileChanged(inputsValues, userInfo) {
+        return userInfo.nickname !== inputsValues[0] || userInfo.avatar !== inputsValues[1] || userInfo.name !== inputsValues[2] || userInfo.surname !== inputsValues[3] || userInfo.birthDate !== inputsValues[4] || userInfo.profileInfo !== inputsValues[5];
+    }
+
+    _editUserProfile(inputsValues, profileMainAvatar, userInfo, inputs, editButton) {
+
+        const editedUser = {
+            nickname: inputsValues[0],
+            avatar: inputsValues[1],
+            name: inputsValues[2],
+            surname: inputsValues[3],
+            birthDate: inputsValues[4],
+            profileInfo: inputsValues[5],
+        };
+
+        if (editedUser.nickname === userInfo.nickname) {
+            this._updateProfileInDb(userInfo.id, editedUser, profileMainAvatar);
+        } else {
+            this.model.getPromiseIsNicknameInDb(editedUser.nickname)
+                .then(response => {
+                    if (!response.ok) {
+                        console.log('Error...');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.length) {
+                        console.log('Nickname is alredy used');
+                        this.view.toggleInputs(inputs);
+                        editButton.textContent = 'Save';
+                    }
+                    else {
+                        this._updateProfileInDb(userInfo.id, editedUser, profileMainAvatar);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking nickname copy in DB:', error);
+                });
+        }
+    }
+
+    _updateProfileInDb(userId, editedUser, profileMainAvatar) {
+        this.model.getPromiseEditUser(userId, editedUser)
+            .then(response => {
+                if (response.ok) {
+                    console.log('User information updated successfully');
+                    this.view.updateImageSrc(profileMainAvatar, editedUser.avatar);
+                } else {
+                    console.error('Failed to update user information');
+                }
+            })
+            .catch(error => {
+                console.error('Error updating user information:', error);
             });
     }
 }

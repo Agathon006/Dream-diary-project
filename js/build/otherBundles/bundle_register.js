@@ -5449,7 +5449,7 @@ class Controller {
       formInfo.surname = '';
       formInfo.birthDate = '';
       formInfo.profileInfo = '';
-      formInfo.avatar = '../img/default-user-avatar.svg';
+      formInfo.avatar = '';
       if (!this._isFormValidationOkay()) {
         return;
       }
