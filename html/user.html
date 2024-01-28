@@ -69,15 +69,16 @@
                         <img src="../img/default-user-avatar.svg" class="profile-main__avatar-wrapper" id="profile-main-avatar"></img>
                     </div>
                     <div class="profile-main__plot">
-                        <input type="text" placeholder="Nickname" class="profile-input locked-input" id="nickname-input">
+                        <input type="text" placeholder="Nickname" maxlength="15" class="profile-input locked-input" id="nickname-input">
                         <input type="text" placeholder="Mail" class="profile-input locked-input" id="email-input">
                     </div>
                 </div>
+                <input type="text" placeholder="avatar url..." class="profile-input locked-input" id="avatar-url-input">
                 <div class="profile-secondary">
-                    <input type="text" placeholder="Name" class="profile-input locked-input" id="name-input">
-                    <input type="text" placeholder="Surname" class="profile-input locked-input" id="surname-input">
+                    <input type="text" placeholder="Name" maxlength="20" class="profile-input locked-input" id="name-input">
+                    <input type="text" placeholder="Surname" maxlength="20" class="profile-input locked-input" id="surname-input">
                     <input type="text" placeholder="Birth date" class="profile-input locked-input" id="birth-date-input">
-                    <textarea rows="4" placeholder="About me" class="profile-input locked-input" id="about-input"></textarea>
+                    <textarea rows="4" placeholder="About me" maxlength="300" class="profile-input locked-input" id="about-input"></textarea>
                 </div>
                 <button class="profile-edit-button" id="profile-edit-button">Edit</button>
             </div>

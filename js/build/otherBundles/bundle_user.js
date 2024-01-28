@@ -5419,22 +5419,27 @@ class Controller {
   _userProfileListener() {
     const nincknameInput = document.querySelector('#nickname-input'),
       emailInput = document.querySelector('#email-input'),
+      urlInput = document.querySelector('#avatar-url-input'),
       nameInput = document.querySelector('#name-input'),
       surnameInput = document.querySelector('#surname-input'),
       birthDateInput = document.querySelector('#birth-date-input'),
-      aboutInput = document.querySelector('#about-input');
+      aboutInput = document.querySelector('#about-input'),
+      profileMainAvatar = document.querySelector('#profile-main-avatar');
     const jwt = __webpack_require__(/*! jsonwebtoken */ "./node_modules/jsonwebtoken/index.js");
     const decodedJwt = jwt.verify(localStorage.getItem('token'), localStorage.getItem('secretKey'));
     this.model.getUserDataByEmail(decodedJwt.email).then(userInfo => {
       console.log(userInfo);
+      profileMainAvatar.setAttribute('src', userInfo.avatar);
       nincknameInput.value = userInfo.nickname;
       emailInput.value = userInfo.email;
+      urlInput.value = userInfo.avatar;
       nameInput.value = userInfo.name;
       surnameInput.value = userInfo.surname;
       birthDateInput.value = userInfo.birthDate;
       aboutInput.value = userInfo.profileInfo;
       const editButton = document.querySelector('#profile-edit-button');
       editButton.addEventListener('click', () => {
+        profileMainAvatar.setAttribute('src', urlInput.value);
         const inputs = document.querySelectorAll('.profile-input');
         if (editButton.textContent === 'Edit') {
           inputs.forEach((input, index) => {
@@ -5458,10 +5463,11 @@ class Controller {
           const editedUser = {};
           if (nincknameInput.value === userInfo.nickname) {
             editedUser.nickname = inputsValues[0];
-            editedUser.name = inputsValues[1];
-            editedUser.surname = inputsValues[2];
-            editedUser.birthDate = inputsValues[3];
-            editedUser.profileInfo = inputsValues[4];
+            editedUser.avatar = inputsValues[1];
+            editedUser.name = inputsValues[2];
+            editedUser.surname = inputsValues[3];
+            editedUser.birthDate = inputsValues[4];
+            editedUser.profileInfo = inputsValues[5];
             this.model.editUser(userInfo.id, editedUser);
             editButton.textContent = 'Edit';
           } else {
