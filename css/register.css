@@ -64,11 +64,11 @@ button {
 }
 
 .wrong-input {
-  border: 2px red solid;
+  border: 2px red solid !important;
 }
 
 .right-input {
-  border: 2px rgb(0, 255, 0) solid;
+  border: 2px rgb(0, 255, 0) solid !important;
 }
 
 .wrong-span {
@@ -112,11 +112,11 @@ button {
 }
 
 .wrong-input {
-  border: 2px red solid;
+  border: 2px red solid !important;
 }
 
 .right-input {
-  border: 2px rgb(0, 255, 0) solid;
+  border: 2px rgb(0, 255, 0) solid !important;
 }
 
 .wrong-span {
@@ -297,11 +297,11 @@ button {
 }
 
 .wrong-input {
-  border: 2px red solid;
+  border: 2px red solid !important;
 }
 
 .right-input {
-  border: 2px rgb(0, 255, 0) solid;
+  border: 2px rgb(0, 255, 0) solid !important;
 }
 
 .wrong-span {

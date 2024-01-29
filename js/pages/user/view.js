@@ -17,6 +17,8 @@ export default class View {
     static JS_CLASSES = {
         PROFILE: {
             ALL_INPUTS: 'profile-input',
+            WRONG_INPUT: 'wrong-input',
+            WRONG_SPAN: 'wrong-span',
         },
     }
 
@@ -64,15 +66,35 @@ export default class View {
         image.setAttribute('src', src);
     }
 
+    addClassWrongInput(element) {
+        element.classList.add(View.JS_CLASSES.PROFILE.WRONG_INPUT);
+    }
+
+    createWrongSpanElement(element, message) {
+        let warningSpan = document.createElement('span');
+        warningSpan.innerText = message;
+        warningSpan.classList.add(View.JS_CLASSES.PROFILE.WRONG_SPAN);
+        element.parentNode.insertBefore(warningSpan, element.nextSibling);
+    }
+
+    clearClassWrongInputFromElements() {
+        document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.WRONG_INPUT}`).forEach(item => {
+            item.classList.remove(View.JS_CLASSES.PROFILE.WRONG_INPUT);
+        });
+    }
+
+    clearClassWrongSpanFromElements() {
+        document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.WRONG_SPAN}`).forEach(item => {
+            item.remove();
+        });
+    }
+
     toggleInputs(inputs) {
-        const array = [];
         inputs.forEach((input, index) => {
             if (index === 1) {
                 return
             };
-            array.push(input.value);
             input.classList.toggle('locked-input');
         });
-        return array;
     }
 }

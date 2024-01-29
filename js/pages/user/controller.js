@@ -44,35 +44,48 @@ export default class Controller {
         const editButton = this.view.getRrofileEditButton();
 
         editButton.addEventListener('click', () => {
+
+            this.view.clearClassWrongInputFromElements();
+            this.view.clearClassWrongSpanFromElements();
+
             const inputs = this.view.getRrofileInputs();
 
             if (editButton.textContent === 'Edit') {
                 this.view.toggleInputs(inputs);
                 editButton.textContent = 'Save';
             } else {
-                const inputsValues = this.view.toggleInputs(inputs);
-                editButton.textContent = 'Edit';
-
-                if (this._isProfileChanged(inputsValues, userInfo)) {
-                    this._editUserProfile(inputsValues, profileMainAvatar, userInfo, inputs, editButton);
-                };
+                if (this._isProfileChanged(inputs, userInfo)) {
+                    if (this._isNicknameOkay(inputs[0].value)) {
+                        this._editUserProfile(profileMainAvatar, userInfo, inputs, editButton);
+                    } else {
+                        this.view.addClassWrongInput(inputs[0]);
+                        this.view.createWrongSpanElement(inputs[0], "Nickname must consist of 5-15 numbers/letters and can't start with a number");
+                    }
+                } else {
+                    this.view.toggleInputs(inputs);
+                    editButton.textContent = 'Edit';
+                }
             }
         })
     }
 
-    _isProfileChanged(inputsValues, userInfo) {
-        return userInfo.nickname !== inputsValues[0] || userInfo.avatar !== inputsValues[1] || userInfo.name !== inputsValues[2] || userInfo.surname !== inputsValues[3] || userInfo.birthDate !== inputsValues[4] || userInfo.profileInfo !== inputsValues[5];
+    _isProfileChanged(inputs, userInfo) {
+        return userInfo.nickname !== inputs[0].value || userInfo.avatar !== inputs[2].value || userInfo.name !== inputs[3].value || userInfo.surname !== inputs[4].value || userInfo.birthDate !== inputs[5].value || userInfo.profileInfo !== inputs[6].value;
     }
 
-    _editUserProfile(inputsValues, profileMainAvatar, userInfo, inputs, editButton) {
+    _isNicknameOkay(nicknameInput) {
+        return nicknameInput.match(/^[a-zA-Z][a-zA-Z0-9_]{4,14}$/);
+    }
+
+    _editUserProfile(profileMainAvatar, userInfo, inputs, editButton) {
 
         const editedUser = {
-            nickname: inputsValues[0],
-            avatar: inputsValues[1],
-            name: inputsValues[2],
-            surname: inputsValues[3],
-            birthDate: inputsValues[4],
-            profileInfo: inputsValues[5],
+            nickname: inputs[0].value,
+            avatar: inputs[2].value,
+            name: inputs[3].value,
+            surname: inputs[4].value,
+            birthDate: inputs[5].value,
+            profileInfo: inputs[6].value,
         };
 
         if (editedUser.nickname === userInfo.nickname) {
@@ -87,12 +100,11 @@ export default class Controller {
                 })
                 .then(data => {
                     if (data.length) {
-                        console.log('Nickname is alredy used');
-                        this.view.toggleInputs(inputs);
-                        editButton.textContent = 'Save';
+                        this.view.addClassWrongInput(inputs[0]);
+                        this.view.createWrongSpanElement(inputs[0], 'Nickname is already used');
                     }
                     else {
-                        this._updateProfileInDb(userInfo.id, editedUser, profileMainAvatar);
+                        this._updateProfileInDb(userInfo.id, editedUser, profileMainAvatar, inputs, editButton);
                     }
                 })
                 .catch(error => {
@@ -101,11 +113,13 @@ export default class Controller {
         }
     }
 
-    _updateProfileInDb(userId, editedUser, profileMainAvatar) {
+    _updateProfileInDb(userId, editedUser, profileMainAvatar, inputs, editButton) {
         this.model.getPromiseEditUser(userId, editedUser)
             .then(response => {
                 if (response.ok) {
                     console.log('User information updated successfully');
+                    this.view.toggleInputs(inputs);
+                    editButton.textContent = 'Edit';
                     this.view.updateImageSrc(profileMainAvatar, editedUser.avatar);
                 } else {
                     console.error('Failed to update user information');
