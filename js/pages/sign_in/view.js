@@ -5,6 +5,7 @@ export default class View {
             FORM: 'register-form',
             EMAIL_INPUT: 'email-input',
             PASSWORD_INPUT: 'password-input',
+            PASSWORD_CHECKBOX_INPUT: 'password-check-box',
             SUBMIT_INPUT: 'register-form-submit',
         },
     }
@@ -19,12 +20,19 @@ export default class View {
     getRegistrerFormElement() {
         return document.querySelector(`#${View.ID.REGISTER_FORM.FORM}`);
     }
+
     getEmailInputElement() {
         return document.querySelector(`#${View.ID.REGISTER_FORM.EMAIL_INPUT}`);
     }
+
     getPasswordInputElement() {
         return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_INPUT}`);
     }
+
+    getPassworCheckBoxInputElement() {
+        return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_CHECKBOX_INPUT}`);
+    }
+    
     getSubmitInputElement() {
         return document.querySelector(`#${View.ID.REGISTER_FORM.SUBMIT_INPUT}`);
     }

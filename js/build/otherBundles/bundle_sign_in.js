@@ -5415,6 +5415,7 @@ class Controller {
   }
   init() {
     this._initFormListener();
+    this._passwordCheckBoxListener();
   }
   _initFormListener() {
     const form = this.view.getRegistrerFormElement(),
@@ -5463,6 +5464,17 @@ class Controller {
       isValidationOkay = false;
     }
     return isValidationOkay;
+  }
+  _passwordCheckBoxListener() {
+    const passwordCheckBox = this.view.getPassworCheckBoxInputElement();
+    passwordCheckBox.addEventListener('change', () => {
+      var passwordInput = this.view.getPasswordInputElement();
+      if (passwordCheckBox.checked) {
+        passwordInput.type = 'text';
+      } else {
+        passwordInput.type = 'password';
+      }
+    });
   }
 }
 
@@ -5520,6 +5532,7 @@ class View {
       FORM: 'register-form',
       EMAIL_INPUT: 'email-input',
       PASSWORD_INPUT: 'password-input',
+      PASSWORD_CHECKBOX_INPUT: 'password-check-box',
       SUBMIT_INPUT: 'register-form-submit'
     }
   };
@@ -5537,6 +5550,9 @@ class View {
   }
   getPasswordInputElement() {
     return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_INPUT}`);
+  }
+  getPassworCheckBoxInputElement() {
+    return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_CHECKBOX_INPUT}`);
   }
   getSubmitInputElement() {
     return document.querySelector(`#${View.ID.REGISTER_FORM.SUBMIT_INPUT}`);
