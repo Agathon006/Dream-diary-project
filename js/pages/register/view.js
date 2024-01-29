@@ -6,6 +6,7 @@ export default class View {
             NICKNAME_INPUT: 'nickname-input',
             EMAIL_INPUT: 'email-input',
             PASSWORD_INPUT: 'password-input',
+            PASSWORD_CHECKBOX_INPUT: 'password-check-box',
             SUBMIT_INPUT: 'register-form-submit',
         },
         CODE_FORM: {
@@ -46,6 +47,10 @@ export default class View {
 
     getPasswordInputElement() {
         return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_INPUT}`);
+    }
+
+    getPassworCheckBoxInputElement() {
+        return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_CHECKBOX_INPUT}`);
     }
 
     getSubmitInputElement() {
