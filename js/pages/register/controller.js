@@ -6,6 +6,7 @@ export default class Controller {
 
     init() {
         this._googleSignInListener();
+        this._passwordCheckBoxListener();
         this._initFormListener();
     }
 
@@ -23,9 +24,21 @@ export default class Controller {
             // console.log('Family Name: ' + responsePayload.family_name);
             // console.log("Image URL: " + responsePayload.picture);
             // console.log("Email: " + responsePayload.email);
-            
+
             alert('Sign in by services is under development, you need to register by basic way instead.');
         }
+    }
+
+    _passwordCheckBoxListener() {
+        const passwordCheckBox = this.view.getPassworCheckBoxInputElement();
+        passwordCheckBox.addEventListener('change', () => {
+            var passwordInput = this.view.getPasswordInputElement();
+            if (passwordCheckBox.checked) {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        });
     }
 
     _initFormListener() {

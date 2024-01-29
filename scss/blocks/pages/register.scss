@@ -74,6 +74,14 @@
                 }
             }
 
+            .register-form__checkbox-part {
+
+                input,
+                label {
+                    cursor: pointer;
+                }
+            }
+
             .register-form__bottom {
                 margin-top: 10px;
 

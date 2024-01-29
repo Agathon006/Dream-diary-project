@@ -393,6 +393,10 @@ button {
 .main .form-wrapper .register-form .register-form__submit:hover {
   background-color: #9f9f9f;
 }
+.main .form-wrapper .register-form .register-form__checkbox-part input,
+.main .form-wrapper .register-form .register-form__checkbox-part label {
+  cursor: pointer;
+}
 .main .form-wrapper .register-form .register-form__bottom {
   margin-top: 10px;
 }
