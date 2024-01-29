@@ -32,6 +32,10 @@ module.exports = {
       import: "./js/pages/sign_in/",
       filename: "otherBundles/bundle_[name].js",
     },
+    user: {
+      import: "./js/pages/user/",
+      filename: "otherBundles/bundle_[name].js",
+    },
     authorization: {
       import: "./js/authorization.js",
       filename: "otherBundles/bundle_[name].js",

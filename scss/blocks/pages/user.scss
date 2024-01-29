@@ -1,0 +1,83 @@
+@import '../../base';
+@import '../../variables/variables';
+@import '../../templates/templates';
+@import '../../js_classes';
+
+@import '../registered_header';
+@import '../footer';
+
+.main {
+    @extend %secondary_style;
+
+    .container {
+
+        .profile-wrapper {
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+
+            .wrong-span {
+                text-shadow: 0px 0px 5px white;
+                font-size: 20px;
+                font-weight: 900;
+                margin-left: 20px;
+            }
+
+            .profile-main {
+                display: flex;
+                align-items: center;
+
+                .profile-main__avatar {
+
+                    .profile-main__avatar-wrapper {
+
+                        width: 200px;
+                        height: 200px;
+                        display: block;
+                        background-color: white;
+                        background-image: url(../img/default-user-avatar.svg);
+                        background-size: cover;
+                        border-radius: 100%;
+                        text-align: center;
+                    }
+                }
+
+                .profile-main__plot {
+                    margin-left: 20px;
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+
+            .profile-secondary {
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .profile-edit-button {
+                width: 200px;
+                height: 50px;
+                border-radius: 20px;
+
+                &:hover{
+                    color: #dedede;
+                    text-decoration: underline;
+                }
+            }
+
+            .profile-input {
+                color: black;
+                font-size: 36px;
+                margin: 20px;
+                background: gray;
+                border: 1px solid black;
+                cursor: pointer;
+            }
+
+            .profile-span {
+                margin: 20px 0 0 10px;
+            }
+        }
+    }
+}

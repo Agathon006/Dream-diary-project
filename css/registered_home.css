@@ -64,16 +64,23 @@ button {
 }
 
 .wrong-input {
-  border: 2px red solid;
+  border: 2px red solid !important;
 }
 
 .right-input {
-  border: 2px rgb(0, 255, 0) solid;
+  border: 2px rgb(0, 255, 0) solid !important;
 }
 
 .wrong-span {
   color: red;
   font-size: 14px;
+}
+
+.locked-input {
+  background: transparent !important;
+  border: none !important;
+  cursor: default;
+  pointer-events: none;
 }
 
 .footer, .header, a, button {
@@ -105,16 +112,23 @@ button {
 }
 
 .wrong-input {
-  border: 2px red solid;
+  border: 2px red solid !important;
 }
 
 .right-input {
-  border: 2px rgb(0, 255, 0) solid;
+  border: 2px rgb(0, 255, 0) solid !important;
 }
 
 .wrong-span {
   color: red;
   font-size: 14px;
+}
+
+.locked-input {
+  background: transparent !important;
+  border: none !important;
+  cursor: default;
+  pointer-events: none;
 }
 
 .header .container .header__navigation {
@@ -258,16 +272,23 @@ button {
 }
 
 .wrong-input {
-  border: 2px red solid;
+  border: 2px red solid !important;
 }
 
 .right-input {
-  border: 2px rgb(0, 255, 0) solid;
+  border: 2px rgb(0, 255, 0) solid !important;
 }
 
 .wrong-span {
   color: red;
   font-size: 14px;
+}
+
+.locked-input {
+  background: transparent !important;
+  border: none !important;
+  cursor: default;
+  pointer-events: none;
 }
 
 .footer .container {

@@ -5,11 +5,11 @@
     <script src="../js/build/otherBundles/bundle_authorization.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Player</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="icon" href="../icons/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/music.css">
-    <script src="../js/build/otherBundles/bundle_music.js" defer></script>
+    <link rel="stylesheet" href="../css/user.css">
+    <script src="../js/build/otherBundles/bundle_user.js" defer></script>
 </head>
 
 <body>
@@ -33,12 +33,12 @@
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link underlined" href="#">Music player</a>
+                        <a class="header__navigation-list-element-link" href="./music.html">Music player</a>
                     </li>
                 </ul>
                 <div class="header__navigation-end">
                     <div class="header__navigation-end-account" id="header-navigation-end-account">
-                        <a class="header__navigation-end-account-link" href="./user.html">Profile</a>
+                        <a class="header__navigation-end-account-link underlined" href="#">Profile</a>
                         <div class="header__navigation-end-account-separator"></div>
                         <a class="header__navigation-end-account-link" href="./sign_in.html">Sign out</a>
                     </div>
@@ -63,9 +63,37 @@
     </header>
     <main class="main">
         <div class="container">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi sapiente dolorum debitis corporis labore
-                quo reprehenderit facilis unde hic saepe non mollitia pariatur quam, commodi tempore nam maxime ex? Ad.
-            </p>
+            <div class="profile-wrapper">
+                <div class="profile-main">
+                    <div class="profile-main__avatar">
+                        <img src="../img/default-user-avatar.svg" class="profile-main__avatar-wrapper"
+                            id="profile-main-avatar"></img>
+                    </div>
+                    <div class="profile-main__plot">
+                        <span class="profile-span">Nickname</span>
+                        <input type="text" placeholder="Nickname" maxlength="15" class="profile-input locked-input"
+                            id="nickname-input">
+                        <span class="profile-span">Email</span>
+                        <input type="text" placeholder="Mail" class="profile-input locked-input" id="email-input">
+                    </div>
+                </div>
+                <input type="text" placeholder="put any image url from the internet" class="profile-input locked-input" id="avatar-url-input">
+                <div class="profile-secondary">
+                    <span class="profile-span">Name</span>
+                    <input type="text" placeholder="Name" maxlength="20" class="profile-input locked-input"
+                        id="name-input">
+                    <span class="profile-span">Surname</span>
+                    <input type="text" placeholder="Surname" maxlength="20" class="profile-input locked-input"
+                        id="surname-input">
+                    <span class="profile-span">Birth date</span>
+                    <input type="text" placeholder="When you born?" class="profile-input locked-input"
+                        id="birth-date-input">
+                    <span class="profile-span">About me</span>
+                    <textarea rows="4" placeholder="Put something about yourself" maxlength="300"
+                        class="profile-input locked-input" id="about-input"></textarea>
+                </div>
+                <button class="profile-edit-button" id="profile-edit-button">Edit</button>
+            </div>
         </div>
     </main>
     <footer class="footer">

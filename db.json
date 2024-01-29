@@ -1,22 +1,28 @@
 {
   "users": [
     {
-      "id": "8873",
-      "nickname": "Agathon006",
+      "id": "a403",
+      "nickname": "Agathon005",
       "email": "agaton615@gmail.com",
       "password": "2051868Dd",
-      "role": "user"
-    },
-    {
-      "id": "b1c9",
-      "nickname": "Agasthon006",
-      "email": "agaton61s5@gmail.com",
-      "password": "ASDdsadas",
       "role": "user",
       "name": "",
       "surname": "",
       "birthDate": "",
-      "profileInfo": ""
+      "profileInfo": "",
+      "avatar": "https://alpha2.ipipe.ru/info/wp-content/uploads/img/chto-takoe-url-i-kakim-on-dolzhen-byt/url-primer.png"
+    },
+    {
+      "id": "b65d",
+      "nickname": "Agathon007",
+      "email": "agaton215@gmail.com",
+      "password": "2051868Dd",
+      "role": "user",
+      "name": "",
+      "surname": "",
+      "birthDate": "",
+      "profileInfo": "sss",
+      "avatar": "https://res.cloudinary.com/practicaldev/image/fetch/s--FwNQvLwm--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://cdn.urlencoder.org/assets/images/url-fb.png"
     }
   ]
 }
