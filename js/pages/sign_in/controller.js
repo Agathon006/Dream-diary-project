@@ -6,6 +6,7 @@ export default class Controller {
 
     init() {
         this._initFormListener();
+        this._passwordCheckBoxListener();
     }
 
     _initFormListener() {
@@ -71,5 +72,17 @@ export default class Controller {
         }
 
         return isValidationOkay;
+    }
+
+    _passwordCheckBoxListener() {
+        const passwordCheckBox = this.view.getPassworCheckBoxInputElement();
+        passwordCheckBox.addEventListener('change', () => {
+            var passwordInput = this.view.getPasswordInputElement();
+            if (passwordCheckBox.checked) {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        });
     }
 }
