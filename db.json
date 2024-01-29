@@ -23,6 +23,19 @@
       "birthDate": "",
       "profileInfo": "sss",
       "avatar": "https://res.cloudinary.com/practicaldev/image/fetch/s--FwNQvLwm--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://cdn.urlencoder.org/assets/images/url-fb.png"
+    },
+    {
+      "id": "a0f2",
+      "nickname": "Agathon006",
+      "email": "agatosn615@gmail.com",
+      "password": "ASDASdsads",
+      "showPassword": "on",
+      "role": "user",
+      "name": "",
+      "surname": "",
+      "birthDate": "",
+      "profileInfo": "",
+      "avatar": ""
     }
   ]
 }
