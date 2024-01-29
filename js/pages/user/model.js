@@ -1,5 +1,9 @@
 export default class Model {
 
+    isPasswordOkay(passwordInput) {
+        return passwordInput.match(/^(?=.*[a-z])(?=.*[A-Z]).{6,200}$/);
+    }
+
     getPromiseGetUserDataByEmail(email) {
         return fetch(`http://localhost:3000/users?email=${email}`)
             .then(response => response.json())

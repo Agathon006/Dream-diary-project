@@ -5712,8 +5712,7 @@ class View {
       NUMBER: 'code-form__number'
     },
     COMMON: {
-      HIDDEN: 'hidden',
-      NOT_EXIST: 'not-exist'
+      HIDDEN: 'hidden'
     }
   };
   getRegistrerFormElement() {
@@ -5748,9 +5747,6 @@ class View {
   }
   removeClassHidden(element) {
     element.classList.remove(View.JS_CLASSES.COMMON.HIDDEN);
-  }
-  removeClassNotExist(element) {
-    element.classList.remove(View.JS_CLASSES.COMMON.NOT_EXIST);
   }
   addClassWrongInput(element) {
     element.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);

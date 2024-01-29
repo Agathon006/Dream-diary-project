@@ -339,6 +339,45 @@ button {
   display: flex;
   flex-direction: column;
 }
+.main .container .profile-wrapper .profile-main .profile-main__password {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+.main .container .profile-wrapper .profile-main .profile-main__password .wrong-span {
+  max-width: 440px;
+}
+.main .container .profile-wrapper .profile-main .profile-main__password .profile-password-input {
+  color: black;
+  font-size: 36px;
+  margin: 20px;
+  background: gray;
+  border: 1px solid black;
+  cursor: pointer;
+}
+.main .container .profile-wrapper .profile-main .profile-main__buttons-checkboxes {
+  align-self: flex-start;
+}
+.main .container .profile-wrapper .profile-main .profile-main__buttons-checkboxes .password-edit-button {
+  align-self: flex-start;
+  margin-top: 30px;
+  width: 200px;
+  min-height: 50px;
+  border-radius: 20px;
+}
+.main .container .profile-wrapper .profile-main .profile-main__buttons-checkboxes .password-edit-button:hover {
+  color: #dedede;
+  text-decoration: underline;
+}
+.main .container .profile-wrapper .profile-main .profile-main__buttons-checkboxes .password-edit__checkbox-part {
+  margin-top: 10px;
+}
+.main .container .profile-wrapper .profile-main .profile-main__buttons-checkboxes .password-edit__checkbox-part .password-checkbox {
+  cursor: pointer;
+}
+.main .container .profile-wrapper .profile-main .profile-main__buttons-checkboxes .password-edit__checkbox-part .checkbox-span {
+  cursor: pointer;
+}
 .main .container .profile-wrapper .profile-secondary {
   margin-top: 10px;
   display: flex;

@@ -4,6 +4,10 @@ export default class View {
         PROFILE: {
             NICKNAME: 'nickname-input',
             EMAIL: 'email-input',
+            PASSWORD_SPAN: 'password-span',
+            PASSWORD: 'password-input',
+            REPEAT_PASSWORD_SPAN: 'repeat-password-span',
+            REPEAT_PASSWORD: 'password-repeat-input',
             IMAGE_URL: 'avatar-url-input',
             NAME: 'name-input',
             SURNAME: 'surname-input',
@@ -11,14 +15,22 @@ export default class View {
             ABOUT_ME: 'about-input',
             AVATAR: 'profile-main-avatar',
             EDIT_BUTTON: 'profile-edit-button',
+            PASSWORD_EDIT_BUTTON: 'password-edit-button',
+            PASSWORD_EDIT_CHECKBOX_PART: 'password-edit-checkbox-part',
+            PASSWORD_EDIT_CHECKBOX_BOX: 'password-check-box',
         },
     }
 
     static JS_CLASSES = {
         PROFILE: {
             ALL_INPUTS: 'profile-input',
+            ALL_PASSWORD_INPUTS: 'profile-password-input',
             WRONG_INPUT: 'wrong-input',
+            RIGHT_INPUT: 'right-input',
             WRONG_SPAN: 'wrong-span',
+        },
+        COMMON: {
+            HIDDEN: 'hidden',
         },
     }
 
@@ -28,6 +40,22 @@ export default class View {
 
     getRrofileEmailElement() {
         return document.querySelector(`#${View.ID.PROFILE.EMAIL}`);
+    }
+
+    getRrofilePasswordSpanElement() {
+        return document.querySelector(`#${View.ID.PROFILE.PASSWORD_SPAN}`);
+    }
+
+    getRrofilePasswordElement() {
+        return document.querySelector(`#${View.ID.PROFILE.PASSWORD}`);
+    }
+
+    getRrofileRepeatPasswordSpanElement() {
+        return document.querySelector(`#${View.ID.PROFILE.REPEAT_PASSWORD_SPAN}`);
+    }
+
+    getRrofileRepeatPasswordElement() {
+        return document.querySelector(`#${View.ID.PROFILE.REPEAT_PASSWORD}`);
     }
 
     getRrofileImageUrlElement() {
@@ -54,6 +82,18 @@ export default class View {
         return document.querySelector(`#${View.ID.PROFILE.AVATAR}`);
     }
 
+    getPasswordEditButton() {
+        return document.querySelector(`#${View.ID.PROFILE.PASSWORD_EDIT_BUTTON}`);
+    }
+
+    getPasswordEditCheckboxPart() {
+        return document.querySelector(`#${View.ID.PROFILE.PASSWORD_EDIT_CHECKBOX_PART}`);
+    }
+
+    getPassworEditCheckBoxInputElement() {
+        return document.querySelector(`#${View.ID.PROFILE.PASSWORD_EDIT_CHECKBOX_BOX}`);
+    }
+
     getRrofileEditButton() {
         return document.querySelector(`#${View.ID.PROFILE.EDIT_BUTTON}`);
     }
@@ -62,12 +102,32 @@ export default class View {
         return document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.ALL_INPUTS}`);
     }
 
+    getRrofilePasswordInputs() {
+        return document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.ALL_PASSWORD_INPUTS}`);
+    }
+
+    toggleClassHidden(element) {
+        element.classList.toggle(View.JS_CLASSES.COMMON.HIDDEN);
+    }
+
     updateImageSrc(image, src) {
         image.setAttribute('src', src);
     }
 
     addClassWrongInput(element) {
         element.classList.add(View.JS_CLASSES.PROFILE.WRONG_INPUT);
+    }
+
+    removeClassWrongInput(element) {
+        element.classList.remove(View.JS_CLASSES.PROFILE.WRONG_INPUT);
+    }
+
+    addClassRightInput(element) {
+        element.classList.add(View.JS_CLASSES.PROFILE.RIGHT_INPUT);
+    }
+
+    removeClassRightInput(element) {
+        element.classList.remove(View.JS_CLASSES.PROFILE.RIGHT_INPUT);
     }
 
     createWrongSpanElement(element, message) {
