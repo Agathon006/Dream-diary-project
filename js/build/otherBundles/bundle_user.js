@@ -5428,7 +5428,6 @@ class Controller {
     const jwt = __webpack_require__(/*! jsonwebtoken */ "./node_modules/jsonwebtoken/index.js");
     const decodedJwt = jwt.verify(localStorage.getItem('token'), localStorage.getItem('secretKey'));
     this.model.getPromiseGetUserDataByEmail(decodedJwt.email).then(userInfo => {
-      // console.log(userInfo);
       this.view.updateImageSrc(profileMainAvatar, userInfo.avatar);
       nincknameInput.value = userInfo.nickname;
       emailInput.value = userInfo.email;
@@ -5444,6 +5443,7 @@ class Controller {
   }
   _editButtonListener(userInfo, profileMainAvatar) {
     const editButton = this.view.getRrofileEditButton();
+    var inputsBeforeEdit = [];
     editButton.addEventListener('click', () => {
       this.view.clearClassWrongInputFromElements();
       this.view.clearClassWrongSpanFromElements();
@@ -5451,13 +5451,14 @@ class Controller {
       if (editButton.textContent === 'Edit') {
         this.view.toggleInputs(inputs);
         editButton.textContent = 'Save';
+        inputsBeforeEdit = [];
+        for (let i = 0; i < 7; i++) {
+          inputsBeforeEdit.push(inputs[i].value);
+        }
       } else {
-        if (this._isProfileChanged(inputs, userInfo)) {
-          if (this._isNicknameOkay(inputs[0].value)) {
-            this._editUserProfile(profileMainAvatar, userInfo, inputs, editButton);
-          } else {
-            this.view.addClassWrongInput(inputs[0]);
-            this.view.createWrongSpanElement(inputs[0], "Nickname must consist of 5-15 numbers/letters and can't start with a number");
+        if (this._isProfileChanged(inputs, inputsBeforeEdit)) {
+          if (this._isValidationOkay(inputs)) {
+            this._editUserProfile(profileMainAvatar, userInfo, inputs, editButton, inputsBeforeEdit);
           }
         } else {
           this.view.toggleInputs(inputs);
@@ -5466,13 +5467,32 @@ class Controller {
       }
     });
   }
-  _isProfileChanged(inputs, userInfo) {
-    return userInfo.nickname !== inputs[0].value || userInfo.avatar !== inputs[2].value || userInfo.name !== inputs[3].value || userInfo.surname !== inputs[4].value || userInfo.birthDate !== inputs[5].value || userInfo.profileInfo !== inputs[6].value;
+  _isProfileChanged(inputs, inputsBeforeEdit) {
+    return inputs[0].value !== inputsBeforeEdit[0] || inputs[2].value !== inputsBeforeEdit[2] || inputs[3].value !== inputsBeforeEdit[3] || inputs[4].value !== inputsBeforeEdit[4] || inputs[5].value !== inputsBeforeEdit[5] || inputs[6].value !== inputsBeforeEdit[6];
   }
-  _isNicknameOkay(nicknameInput) {
-    return nicknameInput.match(/^[a-zA-Z][a-zA-Z0-9_]{4,14}$/);
+  _isValidationOkay(inputs) {
+    let isValidationOkay = true;
+    if (!inputs[0].value.match(/^[a-zA-Z][a-zA-Z0-9_]{4,14}$/)) {
+      this.view.addClassWrongInput(inputs[0]);
+      this.view.createWrongSpanElement(inputs[0], "Nickname must consist of 5-15 numbers/letters and can't start with a number");
+      isValidationOkay = false;
+    }
+    if (!inputs[3].value.match(/^[A-Za-z]*$/)) {
+      this.view.addClassWrongInput(inputs[3]);
+      this.view.createWrongSpanElement(inputs[3], "Name must consist of letters");
+      isValidationOkay = false;
+    }
+    if (!inputs[4].value.match(/^[A-Za-z]*$/)) {
+      this.view.addClassWrongInput(inputs[4]);
+      this.view.createWrongSpanElement(inputs[4], "Surname must consist of letters");
+      isValidationOkay = false;
+    }
+    return isValidationOkay;
   }
-  _editUserProfile(profileMainAvatar, userInfo, inputs, editButton) {
+  _isThisString(input) {
+    return input.match(/^[A-Za-z]+$/);
+  }
+  _editUserProfile(profileMainAvatar, userInfo, inputs, editButton, inputsBeforeEdit) {
     const editedUser = {
       nickname: inputs[0].value,
       avatar: inputs[2].value,
@@ -5481,8 +5501,8 @@ class Controller {
       birthDate: inputs[5].value,
       profileInfo: inputs[6].value
     };
-    if (editedUser.nickname === userInfo.nickname) {
-      this._updateProfileInDb(userInfo.id, editedUser, profileMainAvatar);
+    if (editedUser.nickname === inputsBeforeEdit[0].value) {
+      this._updateProfileInDb(userInfo.id, editedUser, profileMainAvatar, inputs, editButton);
     } else {
       this.model.getPromiseIsNicknameInDb(editedUser.nickname).then(response => {
         if (!response.ok) {
