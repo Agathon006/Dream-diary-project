@@ -49,7 +49,7 @@ export default class Controller {
 
             e.preventDefault();
 
-            this.view.clearClassWrongInputFromElements();
+            this.view.clearClassWrongAndRightInputFromElements();
             this.view.clearClassWrongSpanFromElements();
 
             const formData = new FormData(form);
@@ -62,6 +62,7 @@ export default class Controller {
             formInfo.avatar = '';
 
             if (!this._isFormValidationOkay()) {
+                this.view.addClassRightToNotWrongElements();
                 return;
             }
 
@@ -71,6 +72,7 @@ export default class Controller {
 
             Promise.all([isNicknameInDb, isEmailInDb])
                 .then(data => {
+                    this.view.addClassRightToNotWrongElements();
                     if (!(data[0] || data[1])) {
                         this._initCodeFormListener(formInfo, SubmitButton);
                     }
@@ -206,13 +208,13 @@ export default class Controller {
     }
 
     _isVerificationCodeCorrect(numberInputs, verificationCode, form) {
-        this.view.clearClassWrongInputFromElements();
-        this.view.clearClassWrongSpanFromElements();
         numberInputs.forEach((input, index) => {
+            this.view.removeClassWrongInput(form);
             if (input.value !== verificationCode[index]) {
                 this.view.addClassWrongInput(form);
                 return;
             }
+            this.view.removeClassRightInput(form);
         });
         if (form.classList.contains('wrong-input')) {
             return false;

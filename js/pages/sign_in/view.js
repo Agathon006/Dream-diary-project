@@ -13,7 +13,9 @@ export default class View {
     static JS_CLASSES = {
         REGISTER_FORM: {
             WRONG_INPUT: 'wrong-input',
+            RIGHT_INPUT: 'right-input',
             WRONG_SPAN: 'wrong-span',
+            INPUT: 'register-form__input',
         },
     }
 
@@ -48,9 +50,19 @@ export default class View {
         element.parentNode.insertBefore(warningSpan, element.nextSibling);
     }
 
-    clearClassWrongInputFromElements() {
-        document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT}`).forEach(item => {
+    addClassRightToNotWrongElements() {
+        document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(element => {
+            if (!element.classList.contains(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT)) {
+                console.log('yes');
+                element.classList.add(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
+            }
+        });
+    }
+
+    clearClassWrongAndRightInputFromElements() {
+        document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(item => {
             item.classList.remove(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
+            item.classList.remove(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
         });
     }
 

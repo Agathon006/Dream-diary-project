@@ -5421,12 +5421,15 @@ class Controller {
     const form = this.view.getRegistrerFormElement(),
       SubmitButton = this.view.getSubmitInputElement();
     form.addEventListener('submit', e => {
+      const emailInput = this.view.getEmailInputElement(),
+        passwordInput = this.view.getPasswordInputElement();
       e.preventDefault();
-      this.view.clearClassWrongInputFromElements();
+      this.view.clearClassWrongAndRightInputFromElements();
       this.view.clearClassWrongSpanFromElements();
       const formData = new FormData(form);
       const formInfo = Object.fromEntries(formData);
       if (!this._isFormValidationOkay()) {
+        this.view.addClassRightToNotWrongElements();
         return;
       }
       this.model.getPromiseDbUsers().then(response => {
@@ -5436,9 +5439,12 @@ class Controller {
         return response.json();
       }).then(data => {
         if (data.some(user => user.email === formInfo.email && user.password === formInfo.password)) {
+          this.view.addClassRightToNotWrongElements();
           this.model.createJwt(formInfo);
           window.location.href = "./registered_home.html";
         } else {
+          this.view.addClassWrongInput(emailInput);
+          this.view.addClassWrongInput(passwordInput);
           this.view.createWrongSpanElement(SubmitButton, `Incorrect email or password`);
         }
       }).catch(error => {
@@ -5539,7 +5545,9 @@ class View {
   static JS_CLASSES = {
     REGISTER_FORM: {
       WRONG_INPUT: 'wrong-input',
-      WRONG_SPAN: 'wrong-span'
+      RIGHT_INPUT: 'right-input',
+      WRONG_SPAN: 'wrong-span',
+      INPUT: 'register-form__input'
     }
   };
   getRegistrerFormElement() {
@@ -5566,9 +5574,18 @@ class View {
     warningSpan.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_SPAN);
     element.parentNode.insertBefore(warningSpan, element.nextSibling);
   }
-  clearClassWrongInputFromElements() {
-    document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT}`).forEach(item => {
+  addClassRightToNotWrongElements() {
+    document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(element => {
+      if (!element.classList.contains(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT)) {
+        console.log('yes');
+        element.classList.add(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
+      }
+    });
+  }
+  clearClassWrongAndRightInputFromElements() {
+    document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(item => {
       item.classList.remove(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
+      item.classList.remove(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
     });
   }
   clearClassWrongSpanFromElements() {

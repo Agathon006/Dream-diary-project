@@ -5452,7 +5452,7 @@ class Controller {
       SubmitButton = this.view.getSubmitInputElement();
     form.addEventListener('submit', e => {
       e.preventDefault();
-      this.view.clearClassWrongInputFromElements();
+      this.view.clearClassWrongAndRightInputFromElements();
       this.view.clearClassWrongSpanFromElements();
       const formData = new FormData(form);
       const formInfo = Object.fromEntries(formData);
@@ -5463,11 +5463,13 @@ class Controller {
       formInfo.profileInfo = '';
       formInfo.avatar = '';
       if (!this._isFormValidationOkay()) {
+        this.view.addClassRightToNotWrongElements();
         return;
       }
       const isNicknameInDb = this._getPromiseIsNicknameExist();
       const isEmailInDb = this._getPromiseIsEmailExist();
       Promise.all([isNicknameInDb, isEmailInDb]).then(data => {
+        this.view.addClassRightToNotWrongElements();
         if (!(data[0] || data[1])) {
           this._initCodeFormListener(formInfo, SubmitButton);
         }
@@ -5577,13 +5579,13 @@ class Controller {
     });
   }
   _isVerificationCodeCorrect(numberInputs, verificationCode, form) {
-    this.view.clearClassWrongInputFromElements();
-    this.view.clearClassWrongSpanFromElements();
     numberInputs.forEach((input, index) => {
+      this.view.removeClassWrongInput(form);
       if (input.value !== verificationCode[index]) {
         this.view.addClassWrongInput(form);
         return;
       }
+      this.view.removeClassRightInput(form);
     });
     if (form.classList.contains('wrong-input')) {
       return false;
@@ -5703,7 +5705,8 @@ class View {
     REGISTER_FORM: {
       WRONG_INPUT: 'wrong-input',
       RIGHT_INPUT: 'right-input',
-      WRONG_SPAN: 'wrong-span'
+      WRONG_SPAN: 'wrong-span',
+      INPUT: 'register-form__input'
     },
     CODE_FORM: {
       NUMBER: 'code-form__number'
@@ -5755,15 +5758,29 @@ class View {
   addClassRightInput(element) {
     element.classList.add(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
   }
+  removeClassWrongInput(element) {
+    element.classList.remove(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
+  }
+  removeClassRightInput(element) {
+    element.classList.remove(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
+  }
   createWrongSpanElement(element, message) {
     let warningSpan = document.createElement('span');
     warningSpan.innerText = message;
     warningSpan.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_SPAN);
     element.parentNode.insertBefore(warningSpan, element.nextSibling);
   }
-  clearClassWrongInputFromElements() {
-    document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT}`).forEach(item => {
+  addClassRightToNotWrongElements() {
+    document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(element => {
+      if (!element.classList.contains(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT)) {
+        element.classList.add(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
+      }
+    });
+  }
+  clearClassWrongAndRightInputFromElements() {
+    document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(item => {
       item.classList.remove(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
+      item.classList.remove(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
     });
   }
   clearClassWrongSpanFromElements() {

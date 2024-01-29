@@ -14,16 +14,19 @@ export default class Controller {
             SubmitButton = this.view.getSubmitInputElement();
 
         form.addEventListener('submit', (e) => {
+            const emailInput = this.view.getEmailInputElement(),
+                passwordInput = this.view.getPasswordInputElement();
 
             e.preventDefault();
 
-            this.view.clearClassWrongInputFromElements();
+            this.view.clearClassWrongAndRightInputFromElements();
             this.view.clearClassWrongSpanFromElements();
 
             const formData = new FormData(form);
             const formInfo = Object.fromEntries(formData);
 
             if (!this._isFormValidationOkay()) {
+                this.view.addClassRightToNotWrongElements();
                 return;
             }
 
@@ -36,9 +39,12 @@ export default class Controller {
                 })
                 .then(data => {
                     if (data.some(user => user.email === formInfo.email && user.password === formInfo.password)) {
+                        this.view.addClassRightToNotWrongElements();
                         this.model.createJwt(formInfo);
                         window.location.href = "./registered_home.html";
                     } else {
+                        this.view.addClassWrongInput(emailInput);
+                        this.view.addClassWrongInput(passwordInput);
                         this.view.createWrongSpanElement(SubmitButton, `Incorrect email or password`);
                     }
                 })
