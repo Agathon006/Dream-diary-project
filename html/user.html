@@ -76,8 +76,23 @@
                         <span class="profile-span">Email</span>
                         <input type="text" placeholder="Mail" class="profile-input locked-input" id="email-input">
                     </div>
+                    <div class="profile-main__password">
+                        <span class="profile-span" id="password-span">Password</span>
+                        <input type="password" class="profile-password-input locked-input" id="password-input" disabled>
+                        <span class="profile-span hidden" id="repeat-password-span">Repeat old password</span>
+                        <input type="password" class="profile-password-input hidden" id="password-repeat-input">
+                    </div>
+                    <div class="profile-main__buttons-checkboxes">
+                        <button class="password-edit-button" id="password-edit-button">Change password</button>
+                        <div class="password-edit__checkbox-part hidden" id="password-edit-checkbox-part">
+                            <input type="checkbox" name="showPassword" class="password-checkbox"
+                                id="password-check-box">
+                            <label for="password-check-box" class="checkbox-span">Show password</label>
+                        </div>
+                    </div>
                 </div>
-                <input type="text" placeholder="put any image url from the internet" class="profile-input locked-input" id="avatar-url-input">
+                <input type="text" placeholder="put any image url from the internet" class="profile-input locked-input"
+                    id="avatar-url-input">
                 <div class="profile-secondary">
                     <span class="profile-span">Name</span>
                     <input type="text" placeholder="Name" maxlength="20" class="profile-input locked-input"

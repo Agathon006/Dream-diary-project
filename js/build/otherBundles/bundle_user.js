@@ -5412,13 +5412,18 @@ class Controller {
   constructor(view, model) {
     this.view = view;
     this.model = model;
+    this.oldPasswordMode = true;
   }
   init() {
     this._userProfileListener();
+    this._passwordRepeatInputListener();
+    this._passwordInputListener();
+    this._passwordCheckBoxListener();
   }
   _userProfileListener() {
     const nincknameInput = this.view.getRrofileNicknameElement(),
       emailInput = this.view.getRrofileEmailElement(),
+      passwordInput = this.view.getRrofilePasswordElement(),
       urlInput = this.view.getRrofileImageUrlElement(),
       nameInput = this.view.getRrofileNameElement(),
       surnameInput = this.view.getRrofileSurnameElement(),
@@ -5431,14 +5436,142 @@ class Controller {
       this.view.updateImageSrc(profileMainAvatar, userInfo.avatar);
       nincknameInput.value = userInfo.nickname;
       emailInput.value = userInfo.email;
+      passwordInput.value = userInfo.password;
       urlInput.value = userInfo.avatar;
       nameInput.value = userInfo.name;
       surnameInput.value = userInfo.surname;
       birthDateInput.value = userInfo.birthDate;
       aboutInput.value = userInfo.profileInfo;
+      this._passwordEditButtonListener(userInfo);
       this._editButtonListener(userInfo, profileMainAvatar);
     }).catch(error => {
       console.error('Error getting user info from DB:', error);
+    });
+  }
+  _passwordEditButtonListener(userInfo) {
+    const passwordEditButton = this.view.getPasswordEditButton(),
+      passwordInput = this.view.getRrofilePasswordElement(),
+      repeatPasswordSpan = this.view.getRrofileRepeatPasswordSpanElement(),
+      repeatPasswordInput = this.view.getRrofileRepeatPasswordElement(),
+      inputs = this.view.getRrofilePasswordInputs(),
+      passwordEditCheckboxPart = this.view.getPasswordEditCheckboxPart(),
+      passwordCheckBox = this.view.getPassworEditCheckBoxInputElement();
+    var oldPassword = passwordInput.value;
+    passwordEditButton.addEventListener('click', () => {
+      if (passwordEditButton.textContent === 'Change password') {
+        this.view.toggleInputs(inputs);
+        this.view.toggleClassHidden(repeatPasswordSpan);
+        this.view.toggleClassHidden(repeatPasswordInput);
+        passwordEditButton.textContent = 'Cancel';
+      } else if (passwordEditButton.textContent === 'Cancel') {
+        this.view.clearClassWrongInputFromElements();
+        repeatPasswordInput.value = '';
+        this.view.toggleInputs(inputs);
+        this.view.toggleClassHidden(repeatPasswordSpan);
+        this.view.toggleClassHidden(repeatPasswordInput);
+        passwordEditButton.textContent = 'Change password';
+      } else {
+        if (!this.model.isPasswordOkay(passwordInput.value)) {
+          this.view.clearClassWrongInputFromElements();
+          this.view.clearClassWrongSpanFromElements();
+          this.view.addClassWrongInput(passwordInput);
+          this.view.createWrongSpanElement(passwordInput, "Password must have 6-200 symbols with at least 1 uppercase and 1 lowercase letter");
+        } else if (passwordInput.value === oldPassword) {
+          this.view.clearClassWrongInputFromElements();
+          this.view.clearClassWrongSpanFromElements();
+          this.view.addClassWrongInput(passwordInput);
+          this.view.createWrongSpanElement(passwordInput, "It's old password");
+        } else {
+          this.view.clearClassWrongInputFromElements();
+          this.view.clearClassWrongSpanFromElements();
+          this.view.addClassRightInput(passwordInput);
+          if (this._arePasswordsMatches(passwordInput, repeatPasswordInput)) {
+            const editedUser = {
+              password: passwordInput.value
+            };
+            this.model.getPromiseEditUser(userInfo.id, editedUser).then(response => {
+              if (response.ok) {
+                console.log('User password updated successfully');
+                this.view.removeClassRightInput(passwordInput);
+                this.view.removeClassRightInput(repeatPasswordInput);
+                oldPassword = passwordInput.value;
+                repeatPasswordInput.value = '';
+                passwordCheckBox.checked = false;
+                passwordInput.type = 'password';
+                repeatPasswordInput.type = 'password';
+                this.view.toggleInputs(inputs);
+                this.view.toggleClassHidden(repeatPasswordSpan);
+                this.view.toggleClassHidden(repeatPasswordInput);
+                this.view.toggleClassHidden(passwordEditCheckboxPart);
+                passwordEditButton.textContent = 'Change password';
+                this.oldPasswordMode = true;
+              } else {
+                console.error('Failed to update user password');
+              }
+            }).catch(error => {
+              console.error('Error updating user password:', error);
+            });
+          }
+        }
+      }
+    });
+  }
+  _passwordRepeatInputListener() {
+    const passwordEditButton = this.view.getPasswordEditButton(),
+      passwordSpan = this.view.getRrofilePasswordSpanElement(),
+      passwordInput = this.view.getRrofilePasswordElement(),
+      repeatPasswordSpan = this.view.getRrofileRepeatPasswordSpanElement(),
+      repeatPasswordInput = this.view.getRrofileRepeatPasswordElement();
+    repeatPasswordInput.addEventListener('input', () => {
+      console.log(passwordInput.value);
+      console.log(repeatPasswordInput.value);
+      if (this._arePasswordsMatches(passwordInput, repeatPasswordInput)) {
+        if (this.oldPasswordMode) {
+          const passwordEditCheckboxPart = this.view.getPasswordEditCheckboxPart();
+          this.view.toggleClassHidden(passwordEditCheckboxPart);
+          passwordSpan.innerText = 'New password';
+          passwordInput.disabled = false;
+          passwordInput.value = '';
+          repeatPasswordInput.value = '';
+          repeatPasswordSpan.innerText = 'Repeat new password';
+          this.view.removeClassRightInput(repeatPasswordInput);
+          passwordEditButton.textContent = 'Save';
+          this.oldPasswordMode = false;
+        }
+      }
+    });
+  }
+  _arePasswordsMatches(passwordInput, repeatPasswordInput) {
+    if (passwordInput.value === repeatPasswordInput.value) {
+      this.view.clearClassWrongInputFromElements();
+      this.view.addClassRightInput(repeatPasswordInput);
+      return true;
+    } else {
+      this.view.removeClassRightInput(repeatPasswordInput);
+      this.view.addClassWrongInput(repeatPasswordInput);
+      return false;
+    }
+  }
+  _passwordInputListener() {
+    const passwordInput = this.view.getRrofilePasswordElement(),
+      repeatPasswordInput = this.view.getRrofileRepeatPasswordElement();
+    passwordInput.addEventListener('input', () => {
+      this.view.removeClassWrongInput(repeatPasswordInput);
+      this.view.removeClassRightInput(repeatPasswordInput);
+    });
+  }
+  _passwordCheckBoxListener() {
+    const passwordCheckBox = this.view.getPassworEditCheckBoxInputElement();
+    passwordCheckBox.addEventListener('change', () => {
+      var passwordInput = this.view.getRrofilePasswordElement(),
+        repeatPasswordInput = this.view.getRrofileRepeatPasswordElement();
+      if (passwordCheckBox.checked) {
+        passwordInput.type = 'text';
+        repeatPasswordInput.type = 'text';
+      } else {
+        passwordInput.type = 'password';
+        repeatPasswordInput.type = 'password';
+      }
     });
   }
   _editButtonListener(userInfo, profileMainAvatar) {
@@ -5551,6 +5684,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
 class Model {
+  isPasswordOkay(passwordInput) {
+    return passwordInput.match(/^(?=.*[a-z])(?=.*[A-Z]).{6,200}$/);
+  }
   getPromiseGetUserDataByEmail(email) {
     return fetch(`http://localhost:3000/users?email=${email}`).then(response => response.json()).then(data => {
       if (data.length) {
@@ -5594,20 +5730,32 @@ class View {
     PROFILE: {
       NICKNAME: 'nickname-input',
       EMAIL: 'email-input',
+      PASSWORD_SPAN: 'password-span',
+      PASSWORD: 'password-input',
+      REPEAT_PASSWORD_SPAN: 'repeat-password-span',
+      REPEAT_PASSWORD: 'password-repeat-input',
       IMAGE_URL: 'avatar-url-input',
       NAME: 'name-input',
       SURNAME: 'surname-input',
       BIRTH_DATE: 'birth-date-input',
       ABOUT_ME: 'about-input',
       AVATAR: 'profile-main-avatar',
-      EDIT_BUTTON: 'profile-edit-button'
+      EDIT_BUTTON: 'profile-edit-button',
+      PASSWORD_EDIT_BUTTON: 'password-edit-button',
+      PASSWORD_EDIT_CHECKBOX_PART: 'password-edit-checkbox-part',
+      PASSWORD_EDIT_CHECKBOX_BOX: 'password-check-box'
     }
   };
   static JS_CLASSES = {
     PROFILE: {
       ALL_INPUTS: 'profile-input',
+      ALL_PASSWORD_INPUTS: 'profile-password-input',
       WRONG_INPUT: 'wrong-input',
+      RIGHT_INPUT: 'right-input',
       WRONG_SPAN: 'wrong-span'
+    },
+    COMMON: {
+      HIDDEN: 'hidden'
     }
   };
   getRrofileNicknameElement() {
@@ -5615,6 +5763,18 @@ class View {
   }
   getRrofileEmailElement() {
     return document.querySelector(`#${View.ID.PROFILE.EMAIL}`);
+  }
+  getRrofilePasswordSpanElement() {
+    return document.querySelector(`#${View.ID.PROFILE.PASSWORD_SPAN}`);
+  }
+  getRrofilePasswordElement() {
+    return document.querySelector(`#${View.ID.PROFILE.PASSWORD}`);
+  }
+  getRrofileRepeatPasswordSpanElement() {
+    return document.querySelector(`#${View.ID.PROFILE.REPEAT_PASSWORD_SPAN}`);
+  }
+  getRrofileRepeatPasswordElement() {
+    return document.querySelector(`#${View.ID.PROFILE.REPEAT_PASSWORD}`);
   }
   getRrofileImageUrlElement() {
     return document.querySelector(`#${View.ID.PROFILE.IMAGE_URL}`);
@@ -5634,17 +5794,41 @@ class View {
   getRrofileAvatarElement() {
     return document.querySelector(`#${View.ID.PROFILE.AVATAR}`);
   }
+  getPasswordEditButton() {
+    return document.querySelector(`#${View.ID.PROFILE.PASSWORD_EDIT_BUTTON}`);
+  }
+  getPasswordEditCheckboxPart() {
+    return document.querySelector(`#${View.ID.PROFILE.PASSWORD_EDIT_CHECKBOX_PART}`);
+  }
+  getPassworEditCheckBoxInputElement() {
+    return document.querySelector(`#${View.ID.PROFILE.PASSWORD_EDIT_CHECKBOX_BOX}`);
+  }
   getRrofileEditButton() {
     return document.querySelector(`#${View.ID.PROFILE.EDIT_BUTTON}`);
   }
   getRrofileInputs() {
     return document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.ALL_INPUTS}`);
   }
+  getRrofilePasswordInputs() {
+    return document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.ALL_PASSWORD_INPUTS}`);
+  }
+  toggleClassHidden(element) {
+    element.classList.toggle(View.JS_CLASSES.COMMON.HIDDEN);
+  }
   updateImageSrc(image, src) {
     image.setAttribute('src', src);
   }
   addClassWrongInput(element) {
     element.classList.add(View.JS_CLASSES.PROFILE.WRONG_INPUT);
+  }
+  removeClassWrongInput(element) {
+    element.classList.remove(View.JS_CLASSES.PROFILE.WRONG_INPUT);
+  }
+  addClassRightInput(element) {
+    element.classList.add(View.JS_CLASSES.PROFILE.RIGHT_INPUT);
+  }
+  removeClassRightInput(element) {
+    element.classList.remove(View.JS_CLASSES.PROFILE.RIGHT_INPUT);
   }
   createWrongSpanElement(element, message) {
     let warningSpan = document.createElement('span');

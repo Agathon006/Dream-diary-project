@@ -47,6 +47,54 @@
                     display: flex;
                     flex-direction: column;
                 }
+
+                .profile-main__password {
+                    align-self: flex-start;
+                    display: flex;
+                    flex-direction: column;
+
+                    .wrong-span {
+                        max-width: 440px;
+                    }
+
+                    .profile-password-input {
+                        color: black;
+                        font-size: 36px;
+                        margin: 20px;
+                        background: gray;
+                        border: 1px solid black;
+                        cursor: pointer;
+                    }
+                }
+
+                .profile-main__buttons-checkboxes {
+                    align-self: flex-start;
+
+                    .password-edit-button {
+                        align-self: flex-start;
+                        margin-top: 30px;
+                        width: 200px;
+                        min-height: 50px;
+                        border-radius: 20px;
+
+                        &:hover {
+                            color: #dedede;
+                            text-decoration: underline;
+                        }
+                    }
+
+                    .password-edit__checkbox-part {
+                        margin-top: 10px;
+
+                        .password-checkbox {
+                            cursor: pointer;
+                        }
+
+                        .checkbox-span {
+                            cursor: pointer;
+                        }
+                    }
+                }
             }
 
             .profile-secondary {
@@ -60,7 +108,7 @@
                 height: 50px;
                 border-radius: 20px;
 
-                &:hover{
+                &:hover {
                     color: #dedede;
                     text-decoration: underline;
                 }
