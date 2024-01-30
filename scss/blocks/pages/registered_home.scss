@@ -8,4 +8,56 @@
 
 .main {
     @extend %secondary_style;
+
+    .container {
+
+        .main-wrapper {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+
+            .main__plot {
+                width: 70%;
+            }
+
+            .main__filter {
+                width: 25%;
+
+                .main__filter-block {
+                    display: flex;
+                    flex-direction: column;
+                    @extend %primary_style;
+                    margin-bottom: 20px;
+                    padding: 20px;
+                    background-color: $background_color_primary;
+                    border-radius: 20px;
+
+                    .main__filter-block-span {
+                        margin-bottom: 10px;
+                    }
+
+                    .main__filter-block-input {
+                        height: 30px;
+                        border-radius: 20px;
+                        width: 100%;
+                    }
+
+                    .main__filter-block-search {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                }
+
+                .main__filter-add-button {
+                    font-size: 40px;
+                    padding: 5px 20px;
+                    border-radius: 50px;
+
+                    &:hover {
+                        color: #dedede;
+                    }
+                }
+            }
+        }
+    }
 }

@@ -5425,7 +5425,8 @@ class Controller {
   _getRandomUrlButtonListener() {
     const accessKey = 'LbQIwO2aXDXY-0LkU8nHbgbJvw8n6LB_16Og8cHjOeE',
       profileGetRandomUrlButton = this.view.getRrofileGetRandomUrlButtonElement(),
-      profileImageUrl = this.view.getRrofileImageUrlElement();
+      profileImageUrl = this.view.getRrofileImageUrlElement(),
+      profileMainAvatar = this.view.getRrofileAvatarElement();
     profileGetRandomUrlButton.addEventListener('click', () => {
       this.model.getPromiseGetRandomImageUrl(accessKey).then(response => {
         if (!response.ok) {
@@ -5434,6 +5435,7 @@ class Controller {
         return response.json();
       }).then(url => {
         profileImageUrl.value = url.urls.full;
+        this.view.updateImageSrc(profileMainAvatar, profileImageUrl.value);
       }).catch(error => {
         console.error('Error fetching random image URL', error);
       });
