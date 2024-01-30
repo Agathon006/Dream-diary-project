@@ -408,6 +408,7 @@ button {
   background: gray;
   border: 1px solid black;
   cursor: pointer;
+  text-overflow: ellipsis;
 }
 .main .container .profile-wrapper .profile-span {
   margin: 20px 0 0 10px;
