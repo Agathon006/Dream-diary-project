@@ -353,6 +353,7 @@ button {
   margin: 20px;
   background: gray;
   border: 1px solid black;
+  border-radius: 10px;
   cursor: pointer;
 }
 .main .container .profile-wrapper .profile-main .profile-main__buttons-checkboxes {
@@ -407,6 +408,7 @@ button {
   margin: 20px;
   background: gray;
   border: 1px solid black;
+  border-radius: 10px;
   cursor: pointer;
   text-overflow: ellipsis;
 }

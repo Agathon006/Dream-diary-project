@@ -5645,6 +5645,11 @@ class Controller {
       this.view.createWrongSpanElement(inputs[4], "Surname must consist of letters");
       isValidationOkay = false;
     }
+    if (!inputs[5].value.match(/\/(19[0-9][0-9]|200[0-2]|202[0-3])$/)) {
+      this.view.addClassWrongInput(inputs[5]);
+      this.view.createWrongSpanElement(inputs[5], "Put correct date");
+      isValidationOkay = false;
+    }
     return isValidationOkay;
   }
   _isThisString(input) {
