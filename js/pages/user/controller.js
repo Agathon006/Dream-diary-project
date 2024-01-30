@@ -11,6 +11,7 @@ export default class Controller {
         this._passwordRepeatInputListener();
         this._passwordInputListener();
         this._passwordCheckBoxListener();
+        $('#datepicker').datepicker();
     }
 
     _userProfileListener() {
@@ -257,7 +258,7 @@ export default class Controller {
             profileInfo: inputs[6].value,
         };
 
-        if (editedUser.nickname === inputsBeforeEdit[0].value) {
+        if (editedUser.nickname === inputsBeforeEdit[0]) {
             this._updateProfileInDb(userInfo.id, editedUser, profileMainAvatar, inputs, editButton);
         } else {
             this.model.getPromiseIsNicknameInDb(editedUser.nickname)

@@ -11,7 +11,7 @@ export default class View {
             IMAGE_URL: 'avatar-url-input',
             NAME: 'name-input',
             SURNAME: 'surname-input',
-            BIRTH_DATE: 'birth-date-input',
+            BIRTH_DATE: 'datepicker',
             ABOUT_ME: 'about-input',
             AVATAR: 'profile-main-avatar',
             EDIT_BUTTON: 'profile-edit-button',

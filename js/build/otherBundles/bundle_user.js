@@ -5419,6 +5419,7 @@ class Controller {
     this._passwordRepeatInputListener();
     this._passwordInputListener();
     this._passwordCheckBoxListener();
+    $('#datepicker').datepicker();
   }
   _userProfileListener() {
     const nincknameInput = this.view.getRrofileNicknameElement(),
@@ -5634,7 +5635,7 @@ class Controller {
       birthDate: inputs[5].value,
       profileInfo: inputs[6].value
     };
-    if (editedUser.nickname === inputsBeforeEdit[0].value) {
+    if (editedUser.nickname === inputsBeforeEdit[0]) {
       this._updateProfileInDb(userInfo.id, editedUser, profileMainAvatar, inputs, editButton);
     } else {
       this.model.getPromiseIsNicknameInDb(editedUser.nickname).then(response => {
@@ -5737,7 +5738,7 @@ class View {
       IMAGE_URL: 'avatar-url-input',
       NAME: 'name-input',
       SURNAME: 'surname-input',
-      BIRTH_DATE: 'birth-date-input',
+      BIRTH_DATE: 'datepicker',
       ABOUT_ME: 'about-input',
       AVATAR: 'profile-main-avatar',
       EDIT_BUTTON: 'profile-edit-button',
