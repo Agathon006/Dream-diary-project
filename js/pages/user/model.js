@@ -1,5 +1,9 @@
 export default class Model {
 
+    getPromiseGetRandomImageUrl(accessKey) {
+        return fetch(`https://api.unsplash.com/photos/random?client_id=${accessKey}`)
+    }
+
     isPasswordOkay(passwordInput) {
         return passwordInput.match(/^(?=.*[a-z])(?=.*[A-Z]).{6,200}$/);
     }

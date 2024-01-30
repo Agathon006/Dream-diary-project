@@ -63,6 +63,7 @@
                         margin: 20px;
                         background: gray;
                         border: 1px solid black;
+                        border-radius: 10px;
                         cursor: pointer;
                     }
                 }
@@ -97,6 +98,20 @@
                 }
             }
 
+            .profile-avatar-url {
+
+                .get-random-url-button {
+                    padding: 0 10px;
+                    border-radius: 20px;
+                    transition: none;
+
+                    &:hover {
+                        color: #dedede;
+                        text-decoration: underline;
+                    }
+                }
+            }
+
             .profile-secondary {
                 margin-top: 10px;
                 display: flex;
@@ -120,7 +135,9 @@
                 margin: 20px;
                 background: gray;
                 border: 1px solid black;
+                border-radius: 10px;
                 cursor: pointer;
+                text-overflow: ellipsis;
             }
 
             .profile-span {

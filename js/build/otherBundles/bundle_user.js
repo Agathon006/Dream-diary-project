@@ -5415,10 +5415,32 @@ class Controller {
     this.oldPasswordMode = true;
   }
   init() {
+    this._getRandomUrlButtonListener();
+    this._datepickerListener();
     this._userProfileListener();
     this._passwordRepeatInputListener();
     this._passwordInputListener();
     this._passwordCheckBoxListener();
+  }
+  _getRandomUrlButtonListener() {
+    const accessKey = 'LbQIwO2aXDXY-0LkU8nHbgbJvw8n6LB_16Og8cHjOeE',
+      profileGetRandomUrlButton = this.view.getRrofileGetRandomUrlButtonElement(),
+      profileImageUrl = this.view.getRrofileImageUrlElement();
+    profileGetRandomUrlButton.addEventListener('click', () => {
+      this.model.getPromiseGetRandomImageUrl(accessKey).then(response => {
+        if (!response.ok) {
+          console.log('Error...');
+        }
+        return response.json();
+      }).then(url => {
+        profileImageUrl.value = url.urls.full;
+      }).catch(error => {
+        console.error('Error fetching random image URL', error);
+      });
+    });
+  }
+  _datepickerListener() {
+    $('#datepicker').datepicker();
   }
   _userProfileListener() {
     const nincknameInput = this.view.getRrofileNicknameElement(),
@@ -5575,7 +5597,8 @@ class Controller {
     });
   }
   _editButtonListener(userInfo, profileMainAvatar) {
-    const editButton = this.view.getRrofileEditButton();
+    const editButton = this.view.getRrofileEditButton(),
+      getRandomUrlButton = this.view.getRrofileGetRandomUrlButtonElement();
     var inputsBeforeEdit = [];
     editButton.addEventListener('click', () => {
       this.view.clearClassWrongInputFromElements();
@@ -5583,6 +5606,7 @@ class Controller {
       const inputs = this.view.getRrofileInputs();
       if (editButton.textContent === 'Edit') {
         this.view.toggleInputs(inputs);
+        this.view.toggleClassHidden(getRandomUrlButton);
         editButton.textContent = 'Save';
         inputsBeforeEdit = [];
         for (let i = 0; i < 7; i++) {
@@ -5591,10 +5615,11 @@ class Controller {
       } else {
         if (this._isProfileChanged(inputs, inputsBeforeEdit)) {
           if (this._isValidationOkay(inputs)) {
-            this._editUserProfile(profileMainAvatar, userInfo, inputs, editButton, inputsBeforeEdit);
+            this._editUserProfile(profileMainAvatar, userInfo, inputs, getRandomUrlButton, editButton, inputsBeforeEdit);
           }
         } else {
           this.view.toggleInputs(inputs);
+          this.view.toggleClassHidden(getRandomUrlButton);
           editButton.textContent = 'Edit';
         }
       }
@@ -5620,12 +5645,17 @@ class Controller {
       this.view.createWrongSpanElement(inputs[4], "Surname must consist of letters");
       isValidationOkay = false;
     }
+    if (!inputs[5].value.match(/\/(19[0-9][0-9]|200[0-2]|202[0-3])$/)) {
+      this.view.addClassWrongInput(inputs[5]);
+      this.view.createWrongSpanElement(inputs[5], "Put correct date");
+      isValidationOkay = false;
+    }
     return isValidationOkay;
   }
   _isThisString(input) {
     return input.match(/^[A-Za-z]+$/);
   }
-  _editUserProfile(profileMainAvatar, userInfo, inputs, editButton, inputsBeforeEdit) {
+  _editUserProfile(profileMainAvatar, userInfo, inputs, getRandomUrlButton, editButton, inputsBeforeEdit) {
     const editedUser = {
       nickname: inputs[0].value,
       avatar: inputs[2].value,
@@ -5634,8 +5664,8 @@ class Controller {
       birthDate: inputs[5].value,
       profileInfo: inputs[6].value
     };
-    if (editedUser.nickname === inputsBeforeEdit[0].value) {
-      this._updateProfileInDb(userInfo.id, editedUser, profileMainAvatar, inputs, editButton);
+    if (editedUser.nickname === inputsBeforeEdit[0]) {
+      this._updateProfileInDb(userInfo.id, editedUser, profileMainAvatar, inputs, getRandomUrlButton, editButton);
     } else {
       this.model.getPromiseIsNicknameInDb(editedUser.nickname).then(response => {
         if (!response.ok) {
@@ -5654,11 +5684,12 @@ class Controller {
       });
     }
   }
-  _updateProfileInDb(userId, editedUser, profileMainAvatar, inputs, editButton) {
+  _updateProfileInDb(userId, editedUser, profileMainAvatar, inputs, getRandomUrlButton, editButton) {
     this.model.getPromiseEditUser(userId, editedUser).then(response => {
       if (response.ok) {
         console.log('User information updated successfully');
         this.view.toggleInputs(inputs);
+        this.view.toggleClassHidden(getRandomUrlButton);
         editButton.textContent = 'Edit';
         this.view.updateImageSrc(profileMainAvatar, editedUser.avatar);
       } else {
@@ -5684,6 +5715,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
 class Model {
+  getPromiseGetRandomImageUrl(accessKey) {
+    return fetch(`https://api.unsplash.com/photos/random?client_id=${accessKey}`);
+  }
   isPasswordOkay(passwordInput) {
     return passwordInput.match(/^(?=.*[a-z])(?=.*[A-Z]).{6,200}$/);
   }
@@ -5735,9 +5769,10 @@ class View {
       REPEAT_PASSWORD_SPAN: 'repeat-password-span',
       REPEAT_PASSWORD: 'password-repeat-input',
       IMAGE_URL: 'avatar-url-input',
+      GET_RANDOM_URL_BUTTON: 'get-random-url-button',
       NAME: 'name-input',
       SURNAME: 'surname-input',
-      BIRTH_DATE: 'birth-date-input',
+      BIRTH_DATE: 'datepicker',
       ABOUT_ME: 'about-input',
       AVATAR: 'profile-main-avatar',
       EDIT_BUTTON: 'profile-edit-button',
@@ -5778,6 +5813,9 @@ class View {
   }
   getRrofileImageUrlElement() {
     return document.querySelector(`#${View.ID.PROFILE.IMAGE_URL}`);
+  }
+  getRrofileGetRandomUrlButtonElement() {
+    return document.querySelector(`#${View.ID.PROFILE.GET_RANDOM_URL_BUTTON}`);
   }
   getRrofileNameElement() {
     return document.querySelector(`#${View.ID.PROFILE.NAME}`);

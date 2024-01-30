@@ -9,9 +9,10 @@ export default class View {
             REPEAT_PASSWORD_SPAN: 'repeat-password-span',
             REPEAT_PASSWORD: 'password-repeat-input',
             IMAGE_URL: 'avatar-url-input',
+            GET_RANDOM_URL_BUTTON: 'get-random-url-button',
             NAME: 'name-input',
             SURNAME: 'surname-input',
-            BIRTH_DATE: 'birth-date-input',
+            BIRTH_DATE: 'datepicker',
             ABOUT_ME: 'about-input',
             AVATAR: 'profile-main-avatar',
             EDIT_BUTTON: 'profile-edit-button',
@@ -60,6 +61,10 @@ export default class View {
 
     getRrofileImageUrlElement() {
         return document.querySelector(`#${View.ID.PROFILE.IMAGE_URL}`);
+    }
+
+    getRrofileGetRandomUrlButtonElement() {
+        return document.querySelector(`#${View.ID.PROFILE.GET_RANDOM_URL_BUTTON}`);
     }
 
     getRrofileNameElement() {
