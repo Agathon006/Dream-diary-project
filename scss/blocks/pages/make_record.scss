@@ -10,6 +10,73 @@
     @extend %secondary_style;
 
     .container {
-        
+
+        .record-form {
+            padding: 50px 0;
+            display: flex;
+            justify-content: space-between;
+
+
+            .record-form__left-part {
+                min-width: 25%;
+                margin-right: 5%;
+                display: flex;
+                flex-direction: column;
+
+                .record-form__left-part-image {}
+            }
+
+            .record-form__right-part {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .record-form__span {
+                margin: 5px 20px;
+            }
+
+            .record-form__input {
+                margin: 5px 20px 40px;
+                padding: 5px 10px;
+                max-width: 300px;
+                color: black;
+                font-size: 36px;
+                background: transparent;
+                border: 1px solid black;
+                cursor: pointer;
+                text-overflow: ellipsis;
+                border-left: none;
+                border-top: none;
+                border-right: none;
+            }
+
+            .record-form__input-plot {
+                margin: 5px 20px;
+                padding: 5px 10px;
+                color: black;
+                font-size: 36px;
+                background: transparent;
+                border: 1px solid black;
+                cursor: pointer;
+                text-overflow: ellipsis;
+                border: none;
+            }
+
+            .record-form__submit {
+                margin: 20px;
+                max-width: 300px;
+                border-radius: 20px;
+                padding: 10px 0;
+                cursor: pointer;
+                transition: .5s;
+                font-size: 26px;
+                font-weight: 600;
+
+                &:hover {
+                    background-color: $text_color_primary;
+                }
+            }
+        }
     }
 }
