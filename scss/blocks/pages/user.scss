@@ -97,6 +97,20 @@
                 }
             }
 
+            .profile-avatar-url {
+
+                .get-random-url-button {
+                    padding: 0 10px;
+                    border-radius: 20px;
+                    transition: none;
+
+                    &:hover {
+                        color: #dedede;
+                        text-decoration: underline;
+                    }
+                }
+            }
+
             .profile-secondary {
                 margin-top: 10px;
                 display: flex;

@@ -378,6 +378,15 @@ button {
 .main .container .profile-wrapper .profile-main .profile-main__buttons-checkboxes .password-edit__checkbox-part .checkbox-span {
   cursor: pointer;
 }
+.main .container .profile-wrapper .profile-avatar-url .get-random-url-button {
+  padding: 0 10px;
+  border-radius: 20px;
+  transition: none;
+}
+.main .container .profile-wrapper .profile-avatar-url .get-random-url-button:hover {
+  color: #dedede;
+  text-decoration: underline;
+}
 .main .container .profile-wrapper .profile-secondary {
   margin-top: 10px;
   display: flex;
