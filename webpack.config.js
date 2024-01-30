@@ -12,6 +12,10 @@ module.exports = {
       import: "./js/pages/registered_home/",
       filename: "otherBundles/bundle_[name].js",
     },
+    make_record: {
+      import: "./js/pages/make_record/",
+      filename: "otherBundles/bundle_[name].js",
+    },
     time: {
       import: "./js/pages/time/",
       filename: "otherBundles/bundle_[name].js",

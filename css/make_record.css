@@ -1,4 +1,4 @@
-.main .container .main-wrapper .main__filter .main__filter-block, .footer, .header, button, a {
+.footer, .header, button, a {
   background-color: #232e2f;
   color: #9f9f9f;
   font-family: "Courier New", Courier, monospace;
@@ -35,7 +35,7 @@ button {
   cursor: pointer;
 }
 
-.main .container .main-wrapper .main__filter .main__filter-block, .footer, .header, a, button {
+.footer, .header, a, button {
   background-color: #232e2f;
   color: #9f9f9f;
   font-family: "Courier New", Courier, monospace;
@@ -83,7 +83,7 @@ button {
   pointer-events: none;
 }
 
-.main .container .main-wrapper .main__filter .main__filter-block, .footer, .header, a, button {
+.footer, .header, a, button {
   background-color: #232e2f;
   color: #9f9f9f;
   font-family: "Courier New", Courier, monospace;
@@ -243,7 +243,7 @@ button {
 .header .container .header__navigation .header__navigation-end .header__navigation-end-settings .language-container .language-button:hover {
   color: #dedede;
 }
-.main .container .main-wrapper .main__filter .main__filter-block, .footer, a, button, .header {
+.footer, a, button, .header {
   background-color: #232e2f;
   color: #9f9f9f;
   font-family: "Courier New", Courier, monospace;
@@ -307,44 +307,4 @@ button {
 }
 .footer .container .footer__social .footer__social-link .footer__social-link-image {
   width: 48px;
-}
-
-.main .container .main-wrapper {
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-.main .container .main-wrapper .main__plot {
-  width: 70%;
-}
-.main .container .main-wrapper .main__filter {
-  width: 25%;
-}
-.main .container .main-wrapper .main__filter .main__filter-block {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-  padding: 20px;
-  background-color: #232e2f;
-  border-radius: 20px;
-}
-.main .container .main-wrapper .main__filter .main__filter-block .main__filter-block-span {
-  margin-bottom: 10px;
-}
-.main .container .main-wrapper .main__filter .main__filter-block .main__filter-block-input {
-  height: 30px;
-  border-radius: 20px;
-  width: 100%;
-}
-.main .container .main-wrapper .main__filter .main__filter-block .main__filter-block-search {
-  display: flex;
-  justify-content: space-between;
-}
-.main .container .main-wrapper .main__filter .main__filter-add-link {
-  font-size: 40px;
-  padding: 5px 20px;
-  border-radius: 50px;
-}
-.main .container .main-wrapper .main__filter .main__filter-add-link:hover {
-  color: #dedede;
-}/*# sourceMappingURL=registered_home.css.map */
+}/*# sourceMappingURL=make_record.css.map */
