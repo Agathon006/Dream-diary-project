@@ -16,6 +16,13 @@
             display: flex;
             justify-content: space-between;
 
+            .wrong-span {
+                text-shadow: 0px 0px 5px white;
+                font-size: 20px;
+                font-weight: 900;
+                margin-left: 20px;
+            }
+
             .record-form__left-part {
                 min-width: 25%;
                 margin-right: 5%;
@@ -32,7 +39,7 @@
             }
 
             .record-form__span {
-                margin: 5px 20px;
+                margin: 20px 20px 5px;
             }
 
             .record-form__input {

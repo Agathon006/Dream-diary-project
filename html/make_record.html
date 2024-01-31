@@ -63,19 +63,20 @@
     </header>
     <main class="main">
         <div class="container">
-            <form action="#" class="record-form">
+            <form action="#" class="record-form" id="record-form">
                 <div class="record-form__left-part">
                     <img src="../img/default-dream-image.svg" alt="dream image" class="record-form__left-part-image">
-                    <input type="text" placeholder="put dream image url..." class="record-form__input">
+                    <input name="dreamImageUrl" type="text" placeholder="put dream image url..."
+                        class="record-form__input">
                 </div>
                 <div class="record-form__right-part">
                     <div>
                         <span class="record-form__span">Dream title</span>
-                        <input type="text" class="record-form__input">
+                        <input name="dreamTitle" type="text" class="record-form__input" id="record-form-title">
                     </div>
                     <div>
                         <span class="record-form__span">Choose dream category</span>
-                        <select name="Dream category" class="record-form__input" id="">
+                        <select name="dreamCategory" class="record-form__input" id="">
                             <option value="" hidden>Category</option>
                             <option value="Usual" selected>Usual</option>
                             <option value="Just talking">Just talking</option>
@@ -87,22 +88,23 @@
                     </div>
                     <div>
                         <span class="record-form__span">Choose dream mood</span>
-                        <select name="Dream mood" class="record-form__input" id="">
+                        <select name="dreamMood" class="record-form__input" id="">
                             <option value="" hidden>Mood</option>
                             <option value="Typical dream" selected>Typical dream</option>
-                            <option value="Fun dream" >Fun dream</option>
+                            <option value="Fun dream">Fun dream</option>
                             <option value="Sad dream">Sad dream</option>
                             <option value="Terrible">Terrible</option>
                             <option value="Made me think">Made me think</option>
                         </select>
                     </div>
                     <span class="record-form__span">Dream plot</span>
-                    <textarea rows="10" placeholder="Tell about your dream" maxlength="500"
-                        class="record-form__input-plot" id=""></textarea>
+                    <textarea name="dreamPlot" rows="10" placeholder="Tell about your dream" maxlength="500"
+                        class="record-form__input-plot" id="record-form-plot"></textarea>
                     <span class="record-form__span">Add tags(optional)</span>
-                    <textarea rows="5" placeholder="love milk, bread, my cheese" maxlength="250"
+                    <textarea name="dreamTags" rows="5" placeholder="love milk, bread, my cheese" maxlength="250"
                         class="record-form__input-plot" id=""></textarea>
-                    <input type="submit" name="make record" value="Share" class="record-form__submit" id="">
+                    <input type="submit" name="make record" value="Share" class="record-form__submit"
+                        id="record-form-submit">
                 </div>
             </form>
 

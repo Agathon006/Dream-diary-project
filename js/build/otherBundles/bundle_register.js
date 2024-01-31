@@ -5449,13 +5449,14 @@ class Controller {
   }
   _initFormListener() {
     const form = this.view.getRegistrerFormElement(),
-      SubmitButton = this.view.getSubmitInputElement();
+      submitButton = this.view.getSubmitInputElement();
     form.addEventListener('submit', e => {
       e.preventDefault();
       this.view.clearClassWrongAndRightInputFromElements();
       this.view.clearClassWrongSpanFromElements();
       const formData = new FormData(form);
       const formInfo = Object.fromEntries(formData);
+      delete formInfo.showPassword;
       formInfo.role = 'user';
       formInfo.name = '';
       formInfo.surname = '';
@@ -5471,10 +5472,10 @@ class Controller {
       Promise.all([isNicknameInDb, isEmailInDb]).then(data => {
         this.view.addClassRightToNotWrongElements();
         if (!(data[0] || data[1])) {
-          this._initCodeFormListener(formInfo, SubmitButton);
+          this._initCodeFormListener(formInfo, submitButton);
         }
       }).catch(error => {
-        this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
+        this.view.createWrongSpanElement(submitButton, `Something go wrong... ${error}`);
       });
     });
   }
@@ -5510,7 +5511,7 @@ class Controller {
     const formInfo = Object.fromEntries(formData);
     return this.model.isNicknameInDb(formInfo.nickname).then(response => {
       if (!response.ok) {
-        this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+        this.view.createWrongSpanElement(submitButton, "Network response was not ok");
       }
       return response.json();
     }).then(data => {
@@ -5529,7 +5530,7 @@ class Controller {
     const formInfo = Object.fromEntries(formData);
     return this.model.isEmailInDb(formInfo.email).then(response => {
       if (!response.ok) {
-        this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+        this.view.createWrongSpanElement(submitButton, "Network response was not ok");
       }
       return response.json();
     }).then(data => {
@@ -5541,7 +5542,7 @@ class Controller {
       return false;
     });
   }
-  _initCodeFormListener(formInfo, SubmitButton) {
+  _initCodeFormListener(formInfo, submitButton) {
     const form = this.view.getCodeFormElement(),
       numberInputs = this.view.getCodeFormNumberInputs(),
       devMessage = this.view.getDevMessageElement(),
@@ -5562,14 +5563,14 @@ class Controller {
             if (this._isVerificationCodeCorrect(numberInputs, verificationCode, form)) {
               this.model.registerNewUser(JSON.stringify(formInfo)).then(response => {
                 if (!response.ok) {
-                  this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+                  this.view.createWrongSpanElement(submitButton, "Network response was not ok");
                 }
                 return true;
               }).then(response => {
                 this.model.createJwt(formInfo);
                 window.location.href = "./registered_home.html";
               }).catch(error => {
-                this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
+                this.view.createWrongSpanElement(submitButton, `Something go wrong... ${error}`);
               });
             }
             ;

@@ -1,41 +1,35 @@
 {
   "users": [
     {
-      "id": "a403",
-      "nickname": "Agathon005",
+      "id": "d4d5",
+      "nickname": "Agathon006",
       "email": "agaton615@gmail.com",
       "password": "2051868Dd",
-      "role": "user",
-      "name": "",
-      "surname": "",
-      "birthDate": "04/03/2001",
-      "profileInfo": "asaa",
-      "avatar": "https://images.unsplash.com/photo-1705684989920-2ae5e583c0e7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1NjA0Nzh8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDY2MTIyMDd8&ixlib=rb-4.0.3&q=85"
-    },
-    {
-      "id": "b65d",
-      "nickname": "Agathon007",
-      "email": "agaton215@gmail.com",
-      "password": "2051868Dd",
-      "role": "user",
-      "name": "",
-      "surname": "",
-      "birthDate": "",
-      "profileInfo": "sss",
-      "avatar": "https://res.cloudinary.com/practicaldev/image/fetch/s--FwNQvLwm--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://cdn.urlencoder.org/assets/images/url-fb.png"
-    },
-    {
-      "id": "a0f2",
-      "nickname": "Agathon006",
-      "email": "agatosn615@gmail.com",
-      "password": "ASDASdsads",
-      "showPassword": "on",
       "role": "user",
       "name": "",
       "surname": "",
       "birthDate": "",
       "profileInfo": "",
       "avatar": ""
+    }
+  ],
+  "records": [
+    {
+      "id": "d9f8",
+      "dreamImageUrl": "",
+      "dreamTitle": "a",
+      "dreamCategory": "Usual",
+      "dreamMood": "Typical dream",
+      "dreamPlot": "asdasdasdasd",
+      "dreamTags": "",
+      "email": "agaton615@gmail.com",
+      "date": {
+        "dayNumber": 31,
+        "monthNumber": 0,
+        "year": 2024,
+        "weekNumber": 3
+      },
+      "views": 0
     }
   ]
 }
