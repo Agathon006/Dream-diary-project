@@ -77,7 +77,7 @@ export default class Controller {
             })
             .then((response) => {
                 console.log('Success')
-                // window.location.href = "./registered_home.html";
+                window.location.href = "./registered_home.html";
             })
             .catch((error) => {
                 this.view.createWrongSpanElement(submitButton, `Something go wrong... ${error}`);
