@@ -15,40 +15,6 @@
   ],
   "records": [
     {
-      "id": "d9f8",
-      "dreamImageUrl": "",
-      "dreamTitle": "a",
-      "dreamCategory": "Usual",
-      "dreamMood": "Typical dream",
-      "dreamPlot": "asdasdasdasd",
-      "dreamTags": "",
-      "email": "agaton615@gmail.com",
-      "date": {
-        "dayNumber": 31,
-        "monthNumber": 0,
-        "year": 2024,
-        "weekNumber": 3
-      },
-      "views": 0
-    },
-    {
-      "id": "a93f",
-      "dreamImageUrl": "",
-      "dreamTitle": "asdas",
-      "dreamCategory": "Usual",
-      "dreamMood": "Typical dream",
-      "dreamPlot": "sadasdasdasdas",
-      "dreamTags": "",
-      "email": "agaton615@gmail.com",
-      "date": {
-        "dayNumber": 31,
-        "monthNumber": 0,
-        "year": 2024,
-        "weekNumber": 3
-      },
-      "views": 0
-    },
-    {
       "id": "8417",
       "dreamImageUrl": "",
       "dreamTitle": "sadk[asdsa",
@@ -72,6 +38,23 @@
       "dreamCategory": "Just talking",
       "dreamMood": "Fun dream",
       "dreamPlot": "asdasdasdas",
+      "dreamTags": "",
+      "email": "agaton615@gmail.com",
+      "date": {
+        "dayNumber": 1,
+        "monthNumber": 1,
+        "year": 2024,
+        "weekNumber": 4
+      },
+      "views": 0
+    },
+    {
+      "id": "2b67",
+      "dreamImageUrl": "https://w.forfun.com/fetch/a8/a88c709d1c6c613541eb97dd07b40012.jpeg",
+      "dreamTitle": "Apple dream",
+      "dreamCategory": "Just talking",
+      "dreamMood": "Fun dream",
+      "dreamPlot": "Bla bla bla",
       "dreamTags": "",
       "email": "agaton615@gmail.com",
       "date": {

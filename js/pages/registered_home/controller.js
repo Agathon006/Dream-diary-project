@@ -20,51 +20,30 @@ export default class Controller {
             })
             .then(records => {
                 records.forEach((record, index) => {
-                    console.log(record, index);
-                    mainPlot.innerHTML += `<div class="dream-record">
-                    <div class="dream-record__visual">
-                        <img src="${this.model.replaceWithDefaultIfNotExist(record.dreamImageUrl)}" alt="dream image"
-                            class="dream-record__visual-primary">
-                        <div class="dream-record__visual-secondary">
-                    <img src=${this.model.whichDreamCategoryIcon(record.dreamCategory)} alt="dream category"
-                                class="dream-record__visual-secondary-icon">
-                        <img src=${this.model.whichDreamMoodIcon(record.dreamMood)} alt="dream mood"
-                                class="dream-record__visual-secondary-icon">
-                        </div>
-                    </div>
-                    <div class="dream-record__main">
-                        <div class="dream-record__main-top">
-                            <div class="dream-record__main-top-left">
-                                <h2 class="dream-record__main-top-left-title">${record.dreamTitle}</h2>
-                                <h3 class="dream-record__main-top-left-date">
-                                ${record.date.dayNumber} 
-                                ${this.model.whichMonthNameByNumber(record.date.monthNumber)} 
-                                ${record.date.year} 
-                                (${this.model.whichWeekDayNameByNumber(record.date.weekNumber)})
-                                </h3>
-                            </div>
-                            <div class="dream-record__main-top-right">
-                                <span class="dream-record__main-top-right-views">${record.views} views</span>
-                            </div>
-                        </div>
-                        <div class="dream-record__main-middle">
-                            <div class="dream-record__main-middle-tags">
-                                <button class="dream-record__main-middle-tags-button">Tag1</button>
-                                <button class="dream-record__main-middle-tags-button">Tag2</button>
-                                <button class="dream-record__main-middle-tags-button">Tag3</button>
-                            </div>
-                            <p class="dream-record__main-middle-plot">${record.dreamPlot}{</p>
-                        </div>
-                        <div class="dream-record__main-bottom">
-                            <button class="dream-record__main-bottom-user">Some user</button>
-                            <a href="#" class="dream-record__main-bottom-look-link">Look</a>
-                        </div>
-                    </div>
-                </div>`
+                    this._putDreamRecord(mainPlot, record);
                 });
             })
             .catch(error => {
                 console.error('Error during getting records', error);
+            });
+    }
+
+    _putDreamRecord(mainPlot, record) {
+        this.model.getPromiseGetUserByEmail(record.email)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length) {
+                    const dreamCategoryIcon = this.model.whichDreamCategoryIcon(record.dreamCategory),
+                        dreamMoodIcon = this.model.whichDreamMoodIcon(record.dreamMood),
+                        monthName = this.model.whichMonthNameByNumber(record.date.monthNumber),
+                        weekDay = this.model.whichWeekDayNameByNumber(record.date.weekNumber);
+                    this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamMoodIcon, monthName, weekDay, data[0].nickname);
+                } else {
+                    console.log('User not found');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
             });
     }
 }

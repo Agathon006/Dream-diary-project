@@ -29,50 +29,25 @@ class Controller {
       return response.json();
     }).then(records => {
       records.forEach((record, index) => {
-        console.log(record, index);
-        mainPlot.innerHTML += `<div class="dream-record">
-                    <div class="dream-record__visual">
-                        <img src="${this.model.replaceWithDefaultIfNotExist(record.dreamImageUrl)}" alt="dream image"
-                            class="dream-record__visual-primary">
-                        <div class="dream-record__visual-secondary">
-                    <img src=${this.model.whichDreamCategoryIcon(record.dreamCategory)} alt="dream category"
-                                class="dream-record__visual-secondary-icon">
-                        <img src=${this.model.whichDreamMoodIcon(record.dreamMood)} alt="dream mood"
-                                class="dream-record__visual-secondary-icon">
-                        </div>
-                    </div>
-                    <div class="dream-record__main">
-                        <div class="dream-record__main-top">
-                            <div class="dream-record__main-top-left">
-                                <h2 class="dream-record__main-top-left-title">${record.dreamTitle}</h2>
-                                <h3 class="dream-record__main-top-left-date">
-                                ${record.date.dayNumber} 
-                                ${this.model.whichMonthNameByNumber(record.date.monthNumber)} 
-                                ${record.date.year} 
-                                (${this.model.whichWeekDayNameByNumber(record.date.weekNumber)})
-                                </h3>
-                            </div>
-                            <div class="dream-record__main-top-right">
-                                <span class="dream-record__main-top-right-views">${record.views} views</span>
-                            </div>
-                        </div>
-                        <div class="dream-record__main-middle">
-                            <div class="dream-record__main-middle-tags">
-                                <button class="dream-record__main-middle-tags-button">Tag1</button>
-                                <button class="dream-record__main-middle-tags-button">Tag2</button>
-                                <button class="dream-record__main-middle-tags-button">Tag3</button>
-                            </div>
-                            <p class="dream-record__main-middle-plot">${record.dreamPlot}{</p>
-                        </div>
-                        <div class="dream-record__main-bottom">
-                            <button class="dream-record__main-bottom-user">Some user</button>
-                            <a href="#" class="dream-record__main-bottom-look-link">Look</a>
-                        </div>
-                    </div>
-                </div>`;
+        this._putDreamRecord(mainPlot, record);
       });
     }).catch(error => {
       console.error('Error during getting records', error);
+    });
+  }
+  _putDreamRecord(mainPlot, record) {
+    this.model.getPromiseGetUserByEmail(record.email).then(response => response.json()).then(data => {
+      if (data.length) {
+        const dreamCategoryIcon = this.model.whichDreamCategoryIcon(record.dreamCategory),
+          dreamMoodIcon = this.model.whichDreamMoodIcon(record.dreamMood),
+          monthName = this.model.whichMonthNameByNumber(record.date.monthNumber),
+          weekDay = this.model.whichWeekDayNameByNumber(record.date.weekNumber);
+        this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamMoodIcon, monthName, weekDay, data[0].nickname);
+      } else {
+        console.log('User not found');
+      }
+    }).catch(error => {
+      console.error('Error:', error);
     });
   }
 }
@@ -93,13 +68,8 @@ class Model {
   getPromiseGetDreamRecords() {
     return fetch('http://localhost:3000/records');
   }
-  replaceWithDefaultIfNotExist(imageUrl) {
-    const axios = __webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'axios'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-    axios.head(imageUrl).then(response => {
-      return imageUrl;
-    }).catch(error => {
-      return '../img/default-dream-image.svg';
-    });
+  getPromiseGetUserByEmail(email) {
+    return fetch(`http://localhost:3000/users?email=${email}`);
   }
   whichDreamCategoryIcon(categoryName) {
     switch (categoryName) {
@@ -214,6 +184,48 @@ class View {
 
   getMainPlotElement() {
     return document.querySelector(`#${View.ID.MAIN.MAIN_PLOT}`);
+  }
+  displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamMoodIcon, monthName, weekDay, nickname) {
+    mainPlot.innerHTML += `<div class="dream-record">
+        <div class="dream-record__visual">
+            <img src="${record.dreamImageUrl}" alt=""
+                class="dream-record__visual-primary">
+            <div class="dream-record__visual-secondary">
+        <img src=${dreamCategoryIcon} alt="dream category" help="xui"
+                    class="dream-record__visual-secondary-icon">
+            <img src=${dreamMoodIcon} alt="dream mood"
+                    class="dream-record__visual-secondary-icon">
+            </div>
+        </div>
+        <div class="dream-record__main">
+            <div class="dream-record__main-top">
+                <div class="dream-record__main-top-left">
+                    <h2 class="dream-record__main-top-left-title">${record.dreamTitle}</h2>
+                    <h3 class="dream-record__main-top-left-date">
+                    ${record.date.dayNumber} 
+                    ${monthName} 
+                    ${record.date.year} 
+                    (${weekDay})
+                    </h3>
+                </div>
+                <div class="dream-record__main-top-right">
+                    <span class="dream-record__main-top-right-views">${record.views} views</span>
+                </div>
+            </div>
+            <div class="dream-record__main-middle">
+                <div class="dream-record__main-middle-tags">
+                    <button class="dream-record__main-middle-tags-button">Tag1</button>
+                    <button class="dream-record__main-middle-tags-button">Tag2</button>
+                    <button class="dream-record__main-middle-tags-button">Tag3</button>
+                </div>
+                <p class="dream-record__main-middle-plot">${record.dreamPlot}{</p>
+            </div>
+            <div class="dream-record__main-bottom">
+                <button class="dream-record__main-bottom-user">${nickname}</button>
+                <a href="#" class="dream-record__main-bottom-look-link">Look</a>
+            </div>
+        </div>
+    </div>`;
   }
 }
 

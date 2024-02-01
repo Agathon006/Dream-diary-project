@@ -331,6 +331,10 @@ button {
 }
 .main .container .main-wrapper .main__plot .dream-record .dream-record__visual .dream-record__visual-primary {
   width: 148px;
+  height: 148px;
+  border-radius: 100%;
+  background-image: url(./../img/default-dream-image.svg);
+  background-size: cover;
 }
 .main .container .main-wrapper .main__plot .dream-record .dream-record__visual .dream-record__visual-secondary {
   display: flex;
@@ -352,6 +356,7 @@ button {
   font-size: 40px;
 }
 .main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-top .dream-record__main-top-left .dream-record__main-top-left-date {
+  margin-top: 10px;
   font-size: 16px;
 }
 .main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-top .dream-record__main-top-right .dream-record__main-top-right-views {

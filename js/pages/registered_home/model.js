@@ -4,16 +4,8 @@ export default class Model {
         return fetch('http://localhost:3000/records')
     }
 
-    replaceWithDefaultIfNotExist(imageUrl) {
-        const axios = require('axios');
-
-        axios.head(imageUrl)
-            .then(response => {
-                return imageUrl;
-            })
-            .catch(error => {
-                return '../img/default-dream-image.svg';
-            });
+    getPromiseGetUserByEmail(email) {
+        return fetch(`http://localhost:3000/users?email=${email}`)
     }
 
     whichDreamCategoryIcon(categoryName) {
