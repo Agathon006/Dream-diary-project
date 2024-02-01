@@ -331,6 +331,16 @@ button {
   display: flex;
   flex-direction: column;
 }
+.main .container .record-form .dream-category-wrapper {
+  display: flex;
+}
+.main .container .record-form .dream-category-wrapper .dream-category-wrapper__select-wrapper {
+  display: flex;
+}
+.main .container .record-form .dream-category-wrapper .dream-category-wrapper__select-wrapper .dream-category-icon {
+  width: 64px;
+  height: 64px;
+}
 .main .container .record-form .record-form__span {
   margin: 20px 20px 5px;
 }

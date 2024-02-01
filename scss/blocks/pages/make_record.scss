@@ -38,6 +38,18 @@
                 flex-direction: column;
             }
 
+            .dream-category-wrapper {
+                display: flex;
+
+                .dream-category-wrapper__select-wrapper {
+                    display: flex;
+                    .dream-category-icon {
+                        width: 64px;
+                        height: 64px;
+                    }
+                }
+            }
+
             .record-form__span {
                 margin: 20px 20px 5px;
             }

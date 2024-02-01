@@ -18,6 +18,107 @@
 
             .main__plot {
                 width: 70%;
+
+                .dream-record {
+                    margin: 20px 0;
+                    padding: 20px;
+                    display: flex;
+                    background-color: $background_color_primary;
+                    color: $text_color_primary;
+                    border-radius: 30px;
+                    filter: drop-shadow(5px 5px 10px #000000);
+
+                    .dream-record__visual {
+                        margin-right: 10px;
+
+                        .dream-record__visual-primary {
+                            width: 148px;
+                        }
+
+                        .dream-record__visual-secondary {
+                            display: flex;
+                            justify-content: space-around;
+
+                            .dream-record__visual-secondary-icon {}
+                        }
+                    }
+
+                    .dream-record__main {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        width: 100%;
+
+                        .dream-record__main-top {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: flex-end;
+                            margin-bottom: 10px;
+
+                            .dream-record__main-top-left {
+
+                                .dream-record__main-top-left-title {
+                                    font-size: 40px;
+                                }
+
+                                .dream-record__main-top-left-date {
+                                    font-size: 16px;
+                                }
+                            }
+
+                            .dream-record__main-top-right {
+
+                                .dream-record__main-top-right-views {
+                                    font-size: 16px;
+                                }
+                            }
+                        }
+
+                        .dream-record__main-middle {
+                            margin: 10px 0;
+
+                            .dream-record__main-middle-tags {
+                                margin-bottom: 5px;
+
+                                .dream-record__main-middle-tags-button {}
+                            }
+
+                            .dream-record__main-middle-plot {}
+                        }
+
+                        .dream-record__main-bottom {
+                            margin-top: 10px;
+                            display: flex;
+                            justify-content: space-between;
+
+                            .dream-record__main-bottom-user {
+                                font-size: 40px;
+                                padding: 0 20px;
+                                border-radius: 50px;
+                                background-color: $text_color_primary;
+                                color: $background_color_primary;
+
+                                &:hover {
+                                    color: black;
+                                    filter: drop-shadow(0 0 5px $background_color_secondary);
+                                }
+                            }
+
+                            .dream-record__main-bottom-look-link {
+                                font-size: 40px;
+                                padding: 0 20px;
+                                border-radius: 50px;
+                                background-color: $text_color_primary;
+                                color: $background_color_primary;
+
+                                &:hover {
+                                    color: black;
+                                    filter: drop-shadow(0 0 5px $background_color_secondary);
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             .main__filter {
@@ -55,6 +156,7 @@
 
                     &:hover {
                         color: #dedede;
+                        filter: drop-shadow(0 0 5px $background_color_primary);
                     }
                 }
             }

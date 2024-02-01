@@ -317,6 +317,79 @@ button {
 .main .container .main-wrapper .main__plot {
   width: 70%;
 }
+.main .container .main-wrapper .main__plot .dream-record {
+  margin: 20px 0;
+  padding: 20px;
+  display: flex;
+  background-color: #232e2f;
+  color: #9f9f9f;
+  border-radius: 30px;
+  filter: drop-shadow(5px 5px 10px #000000);
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__visual {
+  margin-right: 10px;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__visual .dream-record__visual-primary {
+  width: 148px;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__visual .dream-record__visual-secondary {
+  display: flex;
+  justify-content: space-around;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-top .dream-record__main-top-left .dream-record__main-top-left-title {
+  font-size: 40px;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-top .dream-record__main-top-left .dream-record__main-top-left-date {
+  font-size: 16px;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-top .dream-record__main-top-right .dream-record__main-top-right-views {
+  font-size: 16px;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-middle {
+  margin: 10px 0;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-middle .dream-record__main-middle-tags {
+  margin-bottom: 5px;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-bottom {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-bottom .dream-record__main-bottom-user {
+  font-size: 40px;
+  padding: 0 20px;
+  border-radius: 50px;
+  background-color: #9f9f9f;
+  color: #232e2f;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-bottom .dream-record__main-bottom-user:hover {
+  color: black;
+  filter: drop-shadow(0 0 5px #9f9f9f);
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-bottom .dream-record__main-bottom-look-link {
+  font-size: 40px;
+  padding: 0 20px;
+  border-radius: 50px;
+  background-color: #9f9f9f;
+  color: #232e2f;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-bottom .dream-record__main-bottom-look-link:hover {
+  color: black;
+  filter: drop-shadow(0 0 5px #9f9f9f);
+}
 .main .container .main-wrapper .main__filter {
   width: 25%;
 }
@@ -347,4 +420,5 @@ button {
 }
 .main .container .main-wrapper .main__filter .main__filter-add-link:hover {
   color: #dedede;
+  filter: drop-shadow(0 0 5px #232e2f);
 }/*# sourceMappingURL=registered_home.css.map */
