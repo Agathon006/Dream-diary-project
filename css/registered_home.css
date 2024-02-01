@@ -340,6 +340,26 @@ button {
   display: flex;
   justify-content: space-around;
 }
+.main .container .main-wrapper .main__plot .dream-record .dream-record__visual .dream-record__visual-secondary .image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__visual .dream-record__visual-secondary .description-label {
+  visibility: hidden;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__visual .dream-record__visual-secondary .image-wrapper:hover .description-label {
+  visibility: visible;
+}
 .main .container .main-wrapper .main__plot .dream-record .dream-record__main {
   display: flex;
   flex-direction: column;

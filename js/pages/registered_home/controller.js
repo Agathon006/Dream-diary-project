@@ -34,10 +34,12 @@ export default class Controller {
             .then(data => {
                 if (data.length) {
                     const dreamCategoryIcon = this.model.whichDreamCategoryIcon(record.dreamCategory),
+                        dreamCategoryIconDescription = this.model.whichDreamCategoryIconDescription(record.dreamCategory),
                         dreamMoodIcon = this.model.whichDreamMoodIcon(record.dreamMood),
+                        dreamMoodIconDescription = this.model.whichDreamMoodIconDescription(record.dreamMood),
                         monthName = this.model.whichMonthNameByNumber(record.date.monthNumber),
                         weekDay = this.model.whichWeekDayNameByNumber(record.date.weekNumber);
-                    this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamMoodIcon, monthName, weekDay, data[0].nickname);
+                    this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, data[0].nickname);
                 } else {
                     console.log('User not found');
                 }

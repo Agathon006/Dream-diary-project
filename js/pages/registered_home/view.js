@@ -16,16 +16,22 @@ export default class View {
         return document.querySelector(`#${View.ID.MAIN.MAIN_PLOT}`);
     }
 
-    displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamMoodIcon, monthName, weekDay, nickname) {
+    displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, nickname) {
         mainPlot.innerHTML += `<div class="dream-record">
         <div class="dream-record__visual">
             <img src="${record.dreamImageUrl}" alt=""
                 class="dream-record__visual-primary">
-            <div class="dream-record__visual-secondary">
-        <img src=${dreamCategoryIcon} alt="dream category" help="xui"
+                 <div class="dream-record__visual-secondary">
+                <div class="image-wrapper">
+                  <img src=${dreamCategoryIcon} alt="dream category" help="xui"
                     class="dream-record__visual-secondary-icon">
-            <img src=${dreamMoodIcon} alt="dream mood"
+                    <div class="description-label">${dreamCategoryIconDescription}</div>
+                  </div>
+                  <div class="image-wrapper">
+                     <img src=${dreamMoodIcon} alt="dream mood"
                     class="dream-record__visual-secondary-icon">
+                    <div class="description-label">${dreamMoodIconDescription}</div>
+                  </div>
             </div>
         </div>
         <div class="dream-record__main">

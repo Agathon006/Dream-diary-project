@@ -43,6 +43,29 @@
                             display: flex;
                             justify-content: space-around;
 
+                            .image-wrapper {
+                                position: relative;
+                                display: inline-block;
+                            }
+
+                            .description-label {
+                                visibility: hidden;
+                                background-color: #000;
+                                color: #fff;
+                                text-align: center;
+                                border-radius: 6px;
+                                padding: 5px 10px;
+                                position: absolute;
+                                z-index: 1;
+                                bottom: 100%;
+                                left: 50%;
+                                transform: translateX(-50%);
+                            }
+
+                            .image-wrapper:hover .description-label {
+                                visibility: visible;
+                            }
+
                             .dream-record__visual-secondary-icon {}
                         }
                     }
