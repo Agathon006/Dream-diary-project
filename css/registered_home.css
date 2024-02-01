@@ -21,6 +21,7 @@
 }
 
 .container {
+  padding: 0;
   max-width: 90%;
   margin: auto;
 }
@@ -310,7 +311,7 @@ button {
 }
 
 .main .container .main-wrapper {
-  padding: 20px;
+  padding: 20px 0;
   display: flex;
   justify-content: space-between;
 }
