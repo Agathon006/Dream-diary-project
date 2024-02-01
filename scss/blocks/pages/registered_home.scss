@@ -120,15 +120,35 @@
                             justify-content: space-between;
 
                             .dream-record__main-bottom-user {
+                                padding: 0 10px 0 0;
+                                display: flex;
                                 font-size: 40px;
-                                padding: 0 20px;
-                                border-radius: 50px;
+                                border-radius: 25px;
                                 background-color: $text_color_primary;
                                 color: $background_color_primary;
 
                                 &:hover {
                                     color: black;
                                     filter: drop-shadow(0 0 5px $background_color_secondary);
+                                }
+
+                                .dream-record__main-bottom-user-avatar {
+                                    margin-right: 10px;
+                                    width: 45px;
+                                    height: 45px;
+                                    background-color: white;
+                                    border-radius: 100%;
+                                    background-image: url(./../img/default-user-avatar.svg);
+                                    background-size: cover;
+
+                                    &:before {
+                                        content: "";
+                                        display: block;
+                                        width: 100%;
+                                        height: 100%;
+                                        background-image: url(./../img/default-user-avatar.svg);
+                                        background-size: cover;
+                                    }
                                 }
                             }
 
@@ -165,10 +185,22 @@
                         margin-bottom: 10px;
                     }
 
-                    .main__filter-block-input {
-                        height: 30px;
-                        border-radius: 20px;
-                        width: 100%;
+                    .main__filter-block-main {
+                        display: flex;
+                        align-items: center;
+
+                        .main__filter-block-input {
+                            padding: 5px;
+                            font-size: 36px;
+                            border-radius: 20px;
+                            width: 100%;
+                        }
+
+                        .dream-category-icon {
+                            margin-left: 10px;
+                            width: 64px;
+                            height: 64px;
+                        }
                     }
 
                     .main__filter-block-search {

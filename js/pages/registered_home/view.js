@@ -16,7 +16,7 @@ export default class View {
         return document.querySelector(`#${View.ID.MAIN.MAIN_PLOT}`);
     }
 
-    displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, nickname) {
+    displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, avatarUrl, nickname) {
         mainPlot.innerHTML += `<div class="dream-record">
         <div class="dream-record__visual">
             <img src="${record.dreamImageUrl}" alt=""
@@ -58,7 +58,10 @@ export default class View {
                 <p class="dream-record__main-middle-plot">${record.dreamPlot}{</p>
             </div>
             <div class="dream-record__main-bottom">
-                <button class="dream-record__main-bottom-user">${nickname}</button>
+                <button class="dream-record__main-bottom-user">
+                    <img src="${avatarUrl}" alt="" class="dream-record__main-bottom-user-avatar">
+                    <span>${nickname}</span>
+                </button>
                 <a href="#" class="dream-record__main-bottom-look-link">Look</a>
             </div>
         </div>

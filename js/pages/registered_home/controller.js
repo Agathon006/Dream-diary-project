@@ -39,7 +39,7 @@ export default class Controller {
                         dreamMoodIconDescription = this.model.whichDreamMoodIconDescription(record.dreamMood),
                         monthName = this.model.whichMonthNameByNumber(record.date.monthNumber),
                         weekDay = this.model.whichWeekDayNameByNumber(record.date.weekNumber);
-                    this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, data[0].nickname);
+                    this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, data[0].avatar, data[0].nickname);
                 } else {
                     console.log('User not found');
                 }
