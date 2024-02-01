@@ -43,7 +43,7 @@ export default class Controller {
 
     _initFormListener() {
         const form = this.view.getRegistrerFormElement(),
-            SubmitButton = this.view.getSubmitInputElement();
+            submitButton = this.view.getSubmitInputElement();
 
         form.addEventListener('submit', (e) => {
 
@@ -54,6 +54,7 @@ export default class Controller {
 
             const formData = new FormData(form);
             const formInfo = Object.fromEntries(formData);
+            delete formInfo.showPassword;
             formInfo.role = 'user';
             formInfo.name = '';
             formInfo.surname = '';
@@ -74,11 +75,11 @@ export default class Controller {
                 .then(data => {
                     this.view.addClassRightToNotWrongElements();
                     if (!(data[0] || data[1])) {
-                        this._initCodeFormListener(formInfo, SubmitButton);
+                        this._initCodeFormListener(formInfo, submitButton);
                     }
                 })
                 .catch(error => {
-                    this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
+                    this.view.createWrongSpanElement(submitButton, `Something go wrong... ${error}`);
                 });
         });
     }
@@ -122,7 +123,7 @@ export default class Controller {
         return this.model.isNicknameInDb(formInfo.nickname)
             .then(response => {
                 if (!response.ok) {
-                    this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+                    this.view.createWrongSpanElement(submitButton, "Network response was not ok");
                 }
                 return response.json();
             })
@@ -146,7 +147,7 @@ export default class Controller {
         return this.model.isEmailInDb(formInfo.email)
             .then(response => {
                 if (!response.ok) {
-                    this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+                    this.view.createWrongSpanElement(submitButton, "Network response was not ok");
                 }
                 return response.json();
             })
@@ -160,7 +161,7 @@ export default class Controller {
             })
     }
 
-    _initCodeFormListener(formInfo, SubmitButton) {
+    _initCodeFormListener(formInfo, submitButton) {
         const form = this.view.getCodeFormElement(),
             numberInputs = this.view.getCodeFormNumberInputs(),
             devMessage = this.view.getDevMessageElement(),
@@ -189,7 +190,7 @@ export default class Controller {
                             this.model.registerNewUser(JSON.stringify(formInfo))
                                 .then((response) => {
                                     if (!response.ok) {
-                                        this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+                                        this.view.createWrongSpanElement(submitButton, "Network response was not ok");
                                     }
                                     return true;
                                 })
@@ -198,7 +199,7 @@ export default class Controller {
                                     window.location.href = "./registered_home.html";
                                 })
                                 .catch((error) => {
-                                    this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
+                                    this.view.createWrongSpanElement(submitButton, `Something go wrong... ${error}`);
                                 });
                         };
                     }

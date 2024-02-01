@@ -5397,10 +5397,10 @@ PEMEncoder.prototype.encode = function encode(data, options) {
 
 /***/ }),
 
-/***/ "./js/pages/register/controller.js":
-/*!*****************************************!*\
-  !*** ./js/pages/register/controller.js ***!
-  \*****************************************/
+/***/ "./js/pages/make_record/controller.js":
+/*!********************************************!*\
+  !*** ./js/pages/make_record/controller.js ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -5414,195 +5414,71 @@ class Controller {
     this.model = model;
   }
   init() {
-    this._googleSignInListener();
-    this._passwordCheckBoxListener();
     this._initFormListener();
   }
-  _googleSignInListener() {
-    window.handleCredentialResponse = response => {
-      // Under development (needed node js)
-
-      // // decodeJwtResponse() is a custom function defined by you
-      // // to decode the credential response.
-      // responsePayload = decodeJwtResponse(response.credential);
-
-      // console.log("ID: " + responsePayload.sub);
-      // console.log('Full Name: ' + responsePayload.name);
-      // console.log('Given Name: ' + responsePayload.given_name);
-      // console.log('Family Name: ' + responsePayload.family_name);
-      // console.log("Image URL: " + responsePayload.picture);
-      // console.log("Email: " + responsePayload.email);
-
-      alert('Sign in by services is under development, you need to register by basic way instead.');
-    };
-  }
-  _passwordCheckBoxListener() {
-    const passwordCheckBox = this.view.getPassworCheckBoxInputElement();
-    passwordCheckBox.addEventListener('change', () => {
-      var passwordInput = this.view.getPasswordInputElement();
-      if (passwordCheckBox.checked) {
-        passwordInput.type = 'text';
-      } else {
-        passwordInput.type = 'password';
-      }
-    });
-  }
   _initFormListener() {
-    const form = this.view.getRegistrerFormElement(),
-      submitButton = this.view.getSubmitInputElement();
+    const form = this.view.getRecordFormElement();
     form.addEventListener('submit', e => {
       e.preventDefault();
-      this.view.clearClassWrongAndRightInputFromElements();
+      this.view.clearClassWrongInputFromElements();
       this.view.clearClassWrongSpanFromElements();
       const formData = new FormData(form);
       const formInfo = Object.fromEntries(formData);
-      delete formInfo.showPassword;
-      formInfo.role = 'user';
-      formInfo.name = '';
-      formInfo.surname = '';
-      formInfo.birthDate = '';
-      formInfo.profileInfo = '';
-      formInfo.avatar = '';
-      if (!this._isFormValidationOkay()) {
-        this.view.addClassRightToNotWrongElements();
+      if (!this._isFormValidationOkay(formInfo)) {
         return;
       }
-      const isNicknameInDb = this._getPromiseIsNicknameExist();
-      const isEmailInDb = this._getPromiseIsEmailExist();
-      Promise.all([isNicknameInDb, isEmailInDb]).then(data => {
-        this.view.addClassRightToNotWrongElements();
-        if (!(data[0] || data[1])) {
-          this._initCodeFormListener(formInfo, submitButton);
-        }
-      }).catch(error => {
-        this.view.createWrongSpanElement(submitButton, `Something go wrong... ${error}`);
-      });
+      const jwt = __webpack_require__(/*! jsonwebtoken */ "./node_modules/jsonwebtoken/index.js");
+      const decoedJwt = jwt.verify(localStorage.getItem('token'), localStorage.getItem('secretKey'));
+      formInfo.email = decoedJwt.email;
+      const currentDate = new Date();
+      formInfo.date = {};
+      formInfo.date.dayNumber = currentDate.getDate();
+      formInfo.date.monthNumber = currentDate.getMonth();
+      formInfo.date.year = currentDate.getFullYear();
+      formInfo.date.weekNumber = currentDate.getDay();
+      formInfo.views = 0;
+      console.log(formInfo);
+      this._publishDreamRecord(formInfo);
     });
   }
-  _isFormValidationOkay() {
-    const form = this.view.getRegistrerFormElement(),
-      nicknameInput = this.view.getNicknameInputElement(),
-      emailInput = this.view.getEmailInputElement(),
-      passwordInput = this.view.getPasswordInputElement();
-    const formData = new FormData(form);
-    const formInfo = Object.fromEntries(formData);
+  _isFormValidationOkay(formInfo) {
+    const recordTitle = this.view.getRecordTitleInputElement(),
+      recordPlot = this.view.getRecordPlotInputElement();
     let isValidationOkay = true;
-    if (!this.model.isNicknameOkay(formInfo.nickname)) {
-      this.view.addClassWrongInput(nicknameInput);
-      this.view.createWrongSpanElement(nicknameInput, "Nickname must consist of 5-15 numbers/letters and can't start with a number");
+    if (!this.model.isTitleOkay(formInfo.dreamTitle)) {
+      this.view.addClassWrongInput(recordTitle);
+      this.view.createWrongSpanElement(recordTitle, "Dream title can't be empty");
       isValidationOkay = false;
     }
-    if (!this.model.isEmailOkay(formInfo.email)) {
-      this.view.addClassWrongInput(emailInput);
-      this.view.createWrongSpanElement(emailInput, "Incorrect email");
-      isValidationOkay = false;
-    }
-    if (!this.model.isPasswordOkay(formInfo.password)) {
-      this.view.addClassWrongInput(passwordInput);
-      this.view.createWrongSpanElement(passwordInput, "Password must have 6-200 symbols with at least 1 uppercase and 1 lowercase letter");
+    if (!this.model.isPlotOkay(formInfo.dreamPlot)) {
+      this.view.addClassWrongInput(recordPlot);
+      this.view.createWrongSpanElement(recordPlot, "Dream description must have at least 10 symbols");
       isValidationOkay = false;
     }
     return isValidationOkay;
   }
-  _getPromiseIsNicknameExist() {
-    const form = this.view.getRegistrerFormElement(),
-      nicknameInput = this.view.getNicknameInputElement();
-    const formData = new FormData(form);
-    const formInfo = Object.fromEntries(formData);
-    return this.model.isNicknameInDb(formInfo.nickname).then(response => {
+  _publishDreamRecord(formInfo) {
+    const submitButton = this.view.getSubmitInputElement();
+    this.model.registerNewRecord(JSON.stringify(formInfo)).then(response => {
       if (!response.ok) {
         this.view.createWrongSpanElement(submitButton, "Network response was not ok");
       }
-      return response.json();
-    }).then(data => {
-      if (data.length) {
-        this.view.addClassWrongInput(nicknameInput);
-        this.view.createWrongSpanElement(nicknameInput, "That nickname is already used");
-        return true;
-      }
-      return false;
-    });
-  }
-  _getPromiseIsEmailExist() {
-    const form = this.view.getRegistrerFormElement(),
-      emailInput = this.view.getEmailInputElement();
-    const formData = new FormData(form);
-    const formInfo = Object.fromEntries(formData);
-    return this.model.isEmailInDb(formInfo.email).then(response => {
-      if (!response.ok) {
-        this.view.createWrongSpanElement(submitButton, "Network response was not ok");
-      }
-      return response.json();
-    }).then(data => {
-      if (data.length) {
-        this.view.addClassWrongInput(emailInput);
-        this.view.createWrongSpanElement(emailInput, "That email is already used");
-        return true;
-      }
-      return false;
-    });
-  }
-  _initCodeFormListener(formInfo, submitButton) {
-    const form = this.view.getCodeFormElement(),
-      numberInputs = this.view.getCodeFormNumberInputs(),
-      devMessage = this.view.getDevMessageElement(),
-      devMessageCode = this.view.getDevMessageCodeElement(),
-      verificationCode = this.model.generateRandomCode(6);
-    this.view.removeClassHidden(form);
-    form.addEventListener('mouseover', () => {
-      this.view.removeClassHidden(devMessage);
-    });
-    devMessageCode.innerText = verificationCode;
-    numberInputs.forEach((input, index) => {
-      input.addEventListener('input', () => {
-        this.model.passIfNumber(input);
-        if (input.value.length === 1) {
-          if (index < numberInputs.length - 1) {
-            numberInputs[index + 1].focus();
-          } else {
-            if (this._isVerificationCodeCorrect(numberInputs, verificationCode, form)) {
-              this.model.registerNewUser(JSON.stringify(formInfo)).then(response => {
-                if (!response.ok) {
-                  this.view.createWrongSpanElement(submitButton, "Network response was not ok");
-                }
-                return true;
-              }).then(response => {
-                this.model.createJwt(formInfo);
-                window.location.href = "./registered_home.html";
-              }).catch(error => {
-                this.view.createWrongSpanElement(submitButton, `Something go wrong... ${error}`);
-              });
-            }
-            ;
-          }
-        }
-      });
-    });
-  }
-  _isVerificationCodeCorrect(numberInputs, verificationCode, form) {
-    numberInputs.forEach((input, index) => {
-      this.view.removeClassWrongInput(form);
-      if (input.value !== verificationCode[index]) {
-        this.view.addClassWrongInput(form);
-        return;
-      }
-      this.view.removeClassRightInput(form);
-    });
-    if (form.classList.contains('wrong-input')) {
-      return false;
-    } else {
-      this.view.addClassRightInput(form);
       return true;
-    }
+    }).then(response => {
+      console.log('Success');
+      window.location.href = "./registered_home.html";
+    }).catch(error => {
+      this.view.createWrongSpanElement(submitButton, `Something go wrong... ${error}`);
+    });
   }
 }
 
 /***/ }),
 
-/***/ "./js/pages/register/model.js":
-/*!************************************!*\
-  !*** ./js/pages/register/model.js ***!
-  \************************************/
+/***/ "./js/pages/make_record/model.js":
+/*!***************************************!*\
+  !*** ./js/pages/make_record/model.js ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -5611,47 +5487,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
 class Model {
-  isNicknameOkay(nicknameInput) {
-    return nicknameInput.match(/^[a-zA-Z][a-zA-Z0-9_]{4,14}$/);
-  }
-  isEmailOkay(emailInput) {
-    return emailInput.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/);
-  }
-  isPasswordOkay(passwordInput) {
-    return passwordInput.match(/^(?=.*[a-z])(?=.*[A-Z]).{6,200}$/);
-  }
-  isNicknameInDb(nickname) {
-    return fetch(`http://localhost:3000/users?nickname=${nickname}`);
-  }
-  isEmailInDb(email) {
-    return fetch(`http://localhost:3000/users?email=${email}`);
-  }
-  generateRandomCode(length) {
-    let result = '';
-    const characters = '0123456789';
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
-  passIfNumber(input) {
-    if (input.value.length === 1) {
-      if (!input.value.match(/^[0-9]$/)) {
-        input.value = input.value.slice(1);
-      }
-    } else if (input.value.length === 2) {
-      if (!input.value.match(/^[0-9][0-9]$/)) {
-        input.value = input.value.slice(0, -1);
-      } else {
-        input.value = input.value.slice(1);
-      }
+  isTitleOkay(title) {
+    if (title) {
+      return true;
     } else {
-      input.value = '';
+      return false;
     }
   }
-  registerNewUser(data) {
-    return fetch('http://localhost:3000/users', {
+  isPlotOkay(plot) {
+    if (plot.length > 9) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  registerNewRecord(data) {
+    return fetch(`http://localhost:3000/records`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -5659,24 +5510,14 @@ class Model {
       body: data
     });
   }
-  createJwt(userData) {
-    const jwt = __webpack_require__(/*! jsonwebtoken */ "./node_modules/jsonwebtoken/index.js");
-    const payload = userData;
-    const secretKey = '8dshsdf8s3hfsdh8fshf8dhfs3hhfhfsh38fh';
-    const token = jwt.sign(payload, secretKey, {
-      expiresIn: '24h'
-    });
-    localStorage.token = token;
-    localStorage.secretKey = secretKey;
-  }
 }
 
 /***/ }),
 
-/***/ "./js/pages/register/view.js":
-/*!***********************************!*\
-  !*** ./js/pages/register/view.js ***!
-  \***********************************/
+/***/ "./js/pages/make_record/view.js":
+/*!**************************************!*\
+  !*** ./js/pages/make_record/view.js ***!
+  \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -5686,80 +5527,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 class View {
   static ID = {
-    REGISTER_FORM: {
-      FORM: 'register-form',
-      NICKNAME_INPUT: 'nickname-input',
-      EMAIL_INPUT: 'email-input',
-      PASSWORD_INPUT: 'password-input',
-      PASSWORD_CHECKBOX_INPUT: 'password-check-box',
-      SUBMIT_INPUT: 'register-form-submit'
-    },
-    CODE_FORM: {
-      FORM: 'code-form'
-    },
-    DEV_MESSAGE: {
-      FORM: 'dev-message',
-      CODE: 'dev-message-code'
+    RECORD_FORM: {
+      FORM: 'record-form',
+      RECORD_TITLE: 'record-form-title',
+      RECORD_PLOT: 'record-form-plot',
+      SUBMIT_INPUT: 'record-form-submit'
     }
   };
   static JS_CLASSES = {
     REGISTER_FORM: {
       WRONG_INPUT: 'wrong-input',
-      RIGHT_INPUT: 'right-input',
-      WRONG_SPAN: 'wrong-span',
-      INPUT: 'register-form__input'
-    },
-    CODE_FORM: {
-      NUMBER: 'code-form__number'
-    },
-    COMMON: {
-      HIDDEN: 'hidden'
+      WRONG_SPAN: 'wrong-span'
     }
   };
-  getRegistrerFormElement() {
-    return document.querySelector(`#${View.ID.REGISTER_FORM.FORM}`);
+  getRecordFormElement() {
+    return document.querySelector(`#${View.ID.RECORD_FORM.FORM}`);
   }
-  getNicknameInputElement() {
-    return document.querySelector(`#${View.ID.REGISTER_FORM.NICKNAME_INPUT}`);
+  getRecordTitleInputElement() {
+    return document.querySelector(`#${View.ID.RECORD_FORM.RECORD_TITLE}`);
   }
-  getEmailInputElement() {
-    return document.querySelector(`#${View.ID.REGISTER_FORM.EMAIL_INPUT}`);
-  }
-  getPasswordInputElement() {
-    return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_INPUT}`);
-  }
-  getPassworCheckBoxInputElement() {
-    return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_CHECKBOX_INPUT}`);
+  getRecordPlotInputElement() {
+    return document.querySelector(`#${View.ID.RECORD_FORM.RECORD_PLOT}`);
   }
   getSubmitInputElement() {
-    return document.querySelector(`#${View.ID.REGISTER_FORM.SUBMIT_INPUT}`);
-  }
-  getCodeFormElement() {
-    return document.querySelector(`#${View.ID.CODE_FORM.FORM}`);
-  }
-  getCodeFormNumberInputs() {
-    return document.querySelectorAll(`.${View.JS_CLASSES.CODE_FORM.NUMBER}`);
-  }
-  getDevMessageElement() {
-    return document.querySelector(`#${View.ID.DEV_MESSAGE.FORM}`);
-  }
-  getDevMessageCodeElement() {
-    return document.querySelector(`#${View.ID.DEV_MESSAGE.CODE}`);
-  }
-  removeClassHidden(element) {
-    element.classList.remove(View.JS_CLASSES.COMMON.HIDDEN);
+    return document.querySelector(`#${View.ID.RECORD_FORM.SUBMIT_INPUT}`);
   }
   addClassWrongInput(element) {
     element.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
-  }
-  addClassRightInput(element) {
-    element.classList.add(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
-  }
-  removeClassWrongInput(element) {
-    element.classList.remove(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
-  }
-  removeClassRightInput(element) {
-    element.classList.remove(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
   }
   createWrongSpanElement(element, message) {
     let warningSpan = document.createElement('span');
@@ -5767,17 +5561,9 @@ class View {
     warningSpan.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_SPAN);
     element.parentNode.insertBefore(warningSpan, element.nextSibling);
   }
-  addClassRightToNotWrongElements() {
-    document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(element => {
-      if (!element.classList.contains(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT)) {
-        element.classList.add(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
-      }
-    });
-  }
-  clearClassWrongAndRightInputFromElements() {
-    document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(item => {
+  clearClassWrongInputFromElements() {
+    document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT}`).forEach(item => {
       item.classList.remove(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
-      item.classList.remove(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
     });
   }
   clearClassWrongSpanFromElements() {
@@ -52698,13 +52484,13 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!************************************!*\
-  !*** ./js/pages/register/index.js ***!
-  \************************************/
+/*!***************************************!*\
+  !*** ./js/pages/make_record/index.js ***!
+  \***************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _model_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./model.js */ "./js/pages/register/model.js");
-/* harmony import */ var _view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./view.js */ "./js/pages/register/view.js");
-/* harmony import */ var _controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controller.js */ "./js/pages/register/controller.js");
+/* harmony import */ var _model_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./model.js */ "./js/pages/make_record/model.js");
+/* harmony import */ var _view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./view.js */ "./js/pages/make_record/view.js");
+/* harmony import */ var _controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controller.js */ "./js/pages/make_record/controller.js");
 
 
 
@@ -52717,4 +52503,4 @@ window.addEventListener('DOMContentLoaded', () => {
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle_register.js.map
+//# sourceMappingURL=bundle_make_record.js.map

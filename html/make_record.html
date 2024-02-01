@@ -8,8 +8,8 @@
     <title>Home</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="icon" href="../icons/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/registered_home.css">
-    <script src="../js/build/otherBundles/bundle_registered_home.js" defer></script>
+    <link rel="stylesheet" href="../css/make_record.css">
+    <script src="../js/build/otherBundles/bundle_make_record.js" defer></script>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
                 </a>
                 <ul class="header__navigation-list">
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link underlined" href="#">Home</a>
+                        <a class="header__navigation-list-element-link" href="./registered_home.html">Home</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
@@ -63,27 +63,55 @@
     </header>
     <main class="main">
         <div class="container">
-            <div class="main-wrapper">
-                <div class="main__plot"></div>
-                <div class="main__filter">
-                    <div class="main__filter-block">
-                        <span class="main__filter-block-span">Dreams search</span>
-                        <div class="main__filter-block-search">
-                            <input type="text" class="main__filter-block-input">
-                            <button>Search</button>
-                        </div>
-                    </div>
-                    <div class="main__filter-block">
-                        <span class="main__filter-block-span">Dream category</span>
-                        <input type="text" class="main__filter-block-input">
-                    </div>
-                    <div class="main__filter-block">
-                        <span class="main__filter-block-span">Dream mood</span>
-                        <input type="text" class="main__filter-block-input">
-                    </div>
-                    <a href="./make_record.html" class="main__filter-add-link">Share a dream</a>
+            <form action="#" class="record-form" id="record-form">
+                <div class="record-form__left-part">
+                    <img src="../img/default-dream-image.svg" alt="dream image" class="record-form__left-part-image">
+                    <input name="dreamImageUrl" type="text" placeholder="put dream image url..."
+                        class="record-form__input">
                 </div>
-            </div>
+                <div class="record-form__right-part">
+                    <div>
+                        <span class="record-form__span">Dream title</span>
+                        <input name="dreamTitle" type="text" class="record-form__input" id="record-form-title">
+                    </div>
+                    <div>
+                        <span class="record-form__span">Choose dream category</span>
+                        <select name="dreamCategory" class="record-form__input" id="">
+                            <option value="" hidden>Category</option>
+                            <option value="Usual" selected>Usual</option>
+                            <option value="Just talking">Just talking</option>
+                            <option value="Nightmare">Nightmare</option>
+                            <option value="Action">Action</option>
+                            <option value="Trash">Trash</option>
+                            <option value="Conscious dream">Conscious dream</option>
+                        </select>
+                    </div>
+                    <div>
+                        <span class="record-form__span">Choose dream mood</span>
+                        <select name="dreamMood" class="record-form__input" id="">
+                            <option value="" hidden>Mood</option>
+                            <option value="Typical dream" selected>Typical dream</option>
+                            <option value="Fun dream">Fun dream</option>
+                            <option value="Sad dream">Sad dream</option>
+                            <option value="Terrible">Terrible</option>
+                            <option value="Made me think">Made me think</option>
+                        </select>
+                    </div>
+                    <span class="record-form__span">Dream plot</span>
+                    <textarea name="dreamPlot" rows="10" placeholder="Tell about your dream" maxlength="500"
+                        class="record-form__input-plot" id="record-form-plot"></textarea>
+                    <span class="record-form__span">Add tags(optional)</span>
+                    <textarea name="dreamTags" rows="5" placeholder="love milk, bread, my cheese" maxlength="250"
+                        class="record-form__input-plot" id=""></textarea>
+                    <input type="submit" name="make record" value="Share" class="record-form__submit"
+                        id="record-form-submit">
+                </div>
+            </form>
+
+            <!-- Когда (26 июля 2021 (Понедельник)) -->
+            <!-- Какого юзера -->
+
+            <!-- Кол-во просмотров записи -->
         </div>
     </main>
     <footer class="footer">
