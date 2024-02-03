@@ -19,6 +19,76 @@
             .main__plot {
                 width: 70%;
 
+                .pagination-switcher {
+                    margin: 20px 0;
+                    padding: 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    background-color: $background_color_primary;
+                    color: $text_color_primary;
+                    border-radius: 30px;
+                    filter: drop-shadow(5px 5px 10px #000000);
+
+                    .pagination-switcher__button {
+                        width: 50px;
+                        height: 50px;
+                        background-color: $text_color_primary;
+                        color: $background_color_primary;
+
+                        &:hover {
+                            color: black;
+                            filter: drop-shadow(0 0 5px $background_color_secondary);
+                        }
+                    }
+
+                    .pagination-switcher__plot {
+                        text-align: center;
+
+                        .pagination-switcher__plot-top {}
+
+                        .pagination-switcher__plot-bottom {
+                            margin-top: 10px;
+                        }
+
+                        .pagination-switcher__plot-text {}
+
+                        .pagination-switcher__plot-key {
+                            font-size: 24px;
+                            font-weight: 900;
+                            color: #dedede;
+                        }
+                    }
+                }
+
+                .empty-message {
+                    margin: 20px 0;
+                    padding: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    background-color: $background_color_primary;
+                    color: $text_color_primary;
+                    border-radius: 30px;
+                    filter: drop-shadow(5px 5px 10px #000000);
+
+                    .empty-message__span {}
+
+                    .empty-message__button {
+                        margin-top: 20px;
+                        font-size: 40px;
+                        padding: 0 20px;
+                        border-radius: 50px;
+                        background-color: $text_color_primary;
+                        color: $background_color_primary;
+
+                        &:hover {
+                            color: black;
+                            filter: drop-shadow(0 0 5px $background_color_secondary);
+                        }
+                    }
+                }
+
                 .dream-record {
                     margin: 20px 0;
                     padding: 20px;

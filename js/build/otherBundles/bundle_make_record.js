@@ -5495,7 +5495,6 @@ class Controller {
       formInfo.date.year = currentDate.getFullYear();
       formInfo.date.weekNumber = currentDate.getDay();
       formInfo.views = 0;
-      console.log(formInfo);
       this._publishDreamRecord(formInfo);
     });
   }

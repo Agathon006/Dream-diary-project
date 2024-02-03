@@ -99,8 +99,6 @@ export default class Controller {
             formInfo.date.weekNumber = currentDate.getDay();
             formInfo.views = 0;
 
-            console.log(formInfo)
-
             this._publishDreamRecord(formInfo);
 
         });

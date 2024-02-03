@@ -1,7 +1,7 @@
 export default class Model {
 
-    getPromiseGetDreamRecords() {
-        return fetch('http://localhost:3000/records')
+    getPromiseGetDreamRecords(page) {
+        return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5`)
     }
 
     getPromiseGetUserByEmail(email) {

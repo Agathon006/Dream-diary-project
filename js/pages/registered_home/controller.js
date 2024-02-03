@@ -1,3 +1,5 @@
+import { data } from "jquery";
+
 export default class Controller {
     constructor(view, model) {
         this.view = view;
@@ -5,13 +7,31 @@ export default class Controller {
     }
 
     init() {
+        this._initMainPlotListener();
         this._initDreamRecords();
     }
 
-    _initDreamRecords() {
+    _initMainPlotListener() {
+        const mainPlot = this.view.getMainPlotElement();
+        mainPlot.addEventListener('click', (event) => {
+            console.log(event.target);
+            const currentPage = this.view.getCurrentPageNumber();
+            console.log(currentPage.innerText);
+            if (event.target.id === 'pagination-switcher-button-next') {
+                this.view.clearMainPlotHtml();
+                this._initDreamRecords((+currentPage.innerText) + 1);
+            };
+            if (event.target.id === 'pagination-switcher-button-prev') {
+                this.view.clearMainPlotHtml();
+                this._initDreamRecords((+currentPage.innerText) - 1);
+            };
+        });
+    }
+
+    _initDreamRecords(currentPageNumber = 1) {
         const mainPlot = this.view.getMainPlotElement();
 
-        this.model.getPromiseGetDreamRecords()
+        this.model.getPromiseGetDreamRecords(currentPageNumber)
             .then(response => {
                 if (!response.ok) {
                     console.log('Error...');
@@ -19,9 +39,28 @@ export default class Controller {
                 return response.json();
             })
             .then(records => {
-                records.forEach((record, index) => {
-                    this._putDreamRecord(mainPlot, record);
-                });
+                console.log(records);
+                if (!records.pages) {
+                    this.view.displayNoRecordsMessage(mainPlot);
+                } else {
+                    if (records.pages === 1) {
+                        this.view.displaySimplePagination(mainPlot, records.items);
+                    } else {
+                        this.view.displayPagination(mainPlot, records.items, currentPageNumber, records.pages);
+                        if (currentPageNumber > 1) {
+                            const prevButton = this.view.getPrevButton();
+                            this.view.removeClassHidden(prevButton);
+                        };
+                        if (currentPageNumber === records.pages) {
+                            const nextButton = this.view.getNextButton();
+                            this.view.addClassHidden(nextButton);
+                        }
+                    }
+
+                    records.data.forEach((record, index) => {
+                        this._putDreamRecord(mainPlot, record);
+                    });
+                }
             })
             .catch(error => {
                 console.error('Error during getting records', error);
