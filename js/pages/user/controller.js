@@ -5,7 +5,6 @@ export default class Controller {
 
         this.oldPasswordMode = true;
     }
-
     init() {
         this._getRandomUrlButtonListener();
         this._datepickerListener();

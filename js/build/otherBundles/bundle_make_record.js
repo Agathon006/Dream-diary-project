@@ -5417,9 +5417,29 @@ class Controller {
     this.model = model;
   }
   init() {
+    this._initTagsInputListener();
     this._initDreamCategoryListener();
     this._initDreamMoodListener();
     this._initFormListener();
+  }
+  _initTagsInputListener() {
+    $('#record-form-tags-input').on('keyup', function (event) {
+      if (event.key === 'Enter' || event.key === ',') {
+        var tag = $(this).val().trim().replace(/,+$/, '');
+        if (tag) {
+          $('#record-form-tags-container').append('<span class="badge badge-primary mr-1">' + tag + ' <button class="close" type="button" aria-label="Close"><span aria-hidden="true">&times;</span></button></span>');
+        }
+        $(this).val('');
+        console.log(document.querySelectorAll('.badge').length);
+        if (document.querySelectorAll('.badge').length > 9) {
+          $('#record-form-tags-input').prop('disabled', true);
+        }
+      }
+    });
+    $('#record-form-tags-container').on('click', '.badge', function () {
+      $(this).remove();
+      $('#record-form-tags-input').prop('disabled', false);
+    });
   }
   _initDreamCategoryListener() {
     const dreamCategorySelect = this.view.getDreamCategorySelectElement(),
@@ -5482,6 +5502,10 @@ class Controller {
       this.view.clearClassWrongSpanFromElements();
       const formData = new FormData(form);
       const formInfo = Object.fromEntries(formData);
+      formInfo.dreamTags = [];
+      document.querySelectorAll('.badge').forEach(tagSpan => {
+        formInfo.dreamTags.push(tagSpan.innerText.replace(" ×", ""));
+      });
       if (!this._isFormValidationOkay(formInfo)) {
         return;
       }
