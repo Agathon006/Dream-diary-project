@@ -5431,7 +5431,7 @@ class Controller {
         }
         $(this).val('');
         console.log(document.querySelectorAll('.badge').length);
-        if (document.querySelectorAll('.badge').length > 9) {
+        if (document.querySelectorAll('.badge').length > 4) {
           $('#record-form-tags-input').prop('disabled', true);
         }
       }

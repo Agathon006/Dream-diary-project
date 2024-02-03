@@ -325,6 +325,10 @@ class View {
             </div>`;
   }
   displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, avatarUrl, nickname) {
+    var dynamicContent = "";
+    record.dreamTags.forEach(tagName => {
+      dynamicContent += `<button class="dream-record__main-middle-tags-button">${tagName}</button>`;
+    });
     mainPlot.innerHTML += `<div class="dream-record">
         <div class="dream-record__visual">
             <img src="${record.dreamImageUrl}" alt=""
@@ -358,11 +362,7 @@ class View {
                 </div>
             </div>
             <div class="dream-record__main-middle">
-                <div class="dream-record__main-middle-tags">
-                    <button class="dream-record__main-middle-tags-button">Tag1</button>
-                    <button class="dream-record__main-middle-tags-button">Tag2</button>
-                    <button class="dream-record__main-middle-tags-button">Tag3</button>
-                </div>
+                <div class="dream-record__main-middle-tags">${dynamicContent}</div>
                 <p class="dream-record__main-middle-plot">${record.dreamPlot}</p>
             </div>
             <div class="dream-record__main-bottom">
