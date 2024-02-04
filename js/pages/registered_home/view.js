@@ -79,6 +79,8 @@ export default class View {
     }
 
     displaySimplePagination(mainPlot, dreamsNumber) {
+        let dynamicContent = '';
+        dreamsNumber === 1 ? dynamicContent = 'dream' :dynamicContent = 'dreams';
         mainPlot.innerHTML +=
             `<div class="pagination-switcher">
             <button class="pagination-switcher__button hidden"><</button>
@@ -86,7 +88,7 @@ export default class View {
                     <div class="pagination-switcher__plot-top">
                         <span class="pagination-switcher__plot-text">Found: </span>
                         <span class="pagination-switcher__plot-key">${dreamsNumber}</span>
-                        <span class="pagination-switcher__plot-text"> dreams</span>
+                        <span class="pagination-switcher__plot-text"> ${dynamicContent}</span>
                     </div>
                 </div>
                 <button class="pagination-switcher__button hidden"><</button>
@@ -94,6 +96,8 @@ export default class View {
     }
 
     displayPagination(mainPlot, dreamsNumber, currentPageNumber, pagesNumber) {
+        let dynamicContent = '';
+        dreamsNumber === 1 ? dynamicContent = 'dream' :dynamicContent = 'dreams';
         mainPlot.innerHTML +=
             `<div class="pagination-switcher">
                 <button class="pagination-switcher__button hidden" id="pagination-switcher-button-prev"><</button>
@@ -101,7 +105,7 @@ export default class View {
                     <div class="pagination-switcher__plot-top">
                         <span class="pagination-switcher__plot-text">Found: </span>
                         <span class="pagination-switcher__plot-key">${dreamsNumber}</span>
-                        <span class="pagination-switcher__plot-text"> dreams</span>
+                        <span class="pagination-switcher__plot-text"> ${dynamicContent}</span>
                     </div>
                     <div class="pagination-switcher__plot-bottom">
                         <span class="pagination-switcher__plot-text">Page </span>
