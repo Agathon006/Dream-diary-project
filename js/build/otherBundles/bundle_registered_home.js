@@ -21,15 +21,68 @@ class Controller {
     this.model = model;
   }
   init() {
+    this._initDreamCategoryListener();
+    this._initDreamMoodListener();
     this._initMainPlotListener();
     this._initDreamRecords();
+  }
+  _initDreamCategoryListener() {
+    const dreamCategorySelect = this.view.getDreamCategorySelectElement(),
+      dreamCategoryIcon = this.view.getDreamCategoryIconElement();
+    dreamCategorySelect.addEventListener("change", event => {
+      switch (event.target.value) {
+        case 'Usual':
+          dreamCategoryIcon.src = '../icons/make_record/dream_category/usual.svg';
+          break;
+        case 'Just talking':
+          dreamCategoryIcon.src = '../icons/make_record/dream_category/just_talking.svg';
+          break;
+        case 'Nightmare':
+          dreamCategoryIcon.src = '../icons/make_record/dream_category/nightmare.svg';
+          break;
+        case 'Action':
+          dreamCategoryIcon.src = '../icons/make_record/dream_category/action.svg';
+          break;
+        case 'Trash':
+          dreamCategoryIcon.src = '../icons/make_record/dream_category/trash.svg';
+          break;
+        case 'Conscious dream':
+          dreamCategoryIcon.src = '../icons/make_record/dream_category/conscious_dream.svg';
+          break;
+        default:
+          console.log('No such option in select dream category');
+      }
+    });
+  }
+  _initDreamMoodListener() {
+    const dreamMoodSelect = this.view.getDreamMoodSelectElement(),
+      dreamMoodIcon = this.view.getDreamMoodIconElement();
+    dreamMoodSelect.addEventListener("change", event => {
+      switch (event.target.value) {
+        case 'Typical dream':
+          dreamMoodIcon.src = '../icons/make_record/dream_mood/typical_dream.svg';
+          break;
+        case 'Fun dream':
+          dreamMoodIcon.src = '../icons/make_record/dream_mood/fun_dream.svg';
+          break;
+        case 'Sad dream':
+          dreamMoodIcon.src = '../icons/make_record/dream_mood/sad_dream.svg';
+          break;
+        case 'Terrible':
+          dreamMoodIcon.src = '../icons/make_record/dream_mood/terrible.svg';
+          break;
+        case 'Made me think':
+          dreamMoodIcon.src = '../icons/make_record/dream_mood/made_me_think.svg';
+          break;
+        default:
+          console.log('No such option in select dream category');
+      }
+    });
   }
   _initMainPlotListener() {
     const mainPlot = this.view.getMainPlotElement();
     mainPlot.addEventListener('click', event => {
-      console.log(event.target);
       const currentPage = this.view.getCurrentPageNumber();
-      console.log(currentPage.innerText);
       if (event.target.id === 'pagination-switcher-button-next') {
         this.view.clearMainPlotHtml();
         this._initDreamRecords(+currentPage.innerText + 1);
@@ -255,6 +308,12 @@ class View {
       NEXT_BUTTON: 'pagination-switcher-button-next',
       CURRENT_PAGE_NUMBER: 'current-page-number',
       MAIN_PLOT: 'main-plot'
+    },
+    FILTER: {
+      DREAM_CATEGORY_SELECT: 'dream-category-select',
+      DREAM_CATEGORY_ICON: 'dream-category-icon',
+      DREAM_MOOD_SELECT: 'dream-mood-select',
+      DREAM_MOOD_ICON: 'dream-mood-icon'
     }
   };
 
@@ -264,6 +323,18 @@ class View {
   //     },
   // }
 
+  getDreamCategorySelectElement() {
+    return document.querySelector(`#${View.ID.FILTER.DREAM_CATEGORY_SELECT}`);
+  }
+  getDreamCategoryIconElement() {
+    return document.querySelector(`#${View.ID.FILTER.DREAM_CATEGORY_ICON}`);
+  }
+  getDreamMoodSelectElement() {
+    return document.querySelector(`#${View.ID.FILTER.DREAM_MOOD_SELECT}`);
+  }
+  getDreamMoodIconElement() {
+    return document.querySelector(`#${View.ID.FILTER.DREAM_MOOD_ICON}`);
+  }
   getCurrentPageNumber() {
     return document.querySelector(`#${View.ID.MAIN.CURRENT_PAGE_NUMBER}`);
   }

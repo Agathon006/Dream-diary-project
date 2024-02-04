@@ -7,6 +7,12 @@ export default class View {
             CURRENT_PAGE_NUMBER: 'current-page-number',
             MAIN_PLOT: 'main-plot',
         },
+        FILTER: {
+            DREAM_CATEGORY_SELECT: 'dream-category-select',
+            DREAM_CATEGORY_ICON: 'dream-category-icon',
+            DREAM_MOOD_SELECT: 'dream-mood-select',
+            DREAM_MOOD_ICON: 'dream-mood-icon',
+        },
     }
 
     // static JS_CLASSES = {
@@ -14,6 +20,22 @@ export default class View {
     //         HIDDEN: 'hidden',
     //     },
     // }
+
+    getDreamCategorySelectElement() {
+        return document.querySelector(`#${View.ID.FILTER.DREAM_CATEGORY_SELECT}`);
+    }
+
+    getDreamCategoryIconElement() {
+        return document.querySelector(`#${View.ID.FILTER.DREAM_CATEGORY_ICON}`);
+    }
+
+    getDreamMoodSelectElement() {
+        return document.querySelector(`#${View.ID.FILTER.DREAM_MOOD_SELECT}`);
+    }
+
+    getDreamMoodIconElement() {
+        return document.querySelector(`#${View.ID.FILTER.DREAM_MOOD_ICON}`);
+    }
 
     getCurrentPageNumber() {
         return document.querySelector(`#${View.ID.MAIN.CURRENT_PAGE_NUMBER}`);
