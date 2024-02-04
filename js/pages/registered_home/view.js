@@ -37,7 +37,7 @@ export default class View {
         return document.querySelector(`#${View.ID.FILTER.DREAM_MOOD_ICON}`);
     }
 
-    getCurrentPageNumber() {
+    getCurrentPageNumberElement() {
         return document.querySelector(`#${View.ID.MAIN.CURRENT_PAGE_NUMBER}`);
     }
 

@@ -1,6 +1,15 @@
 export default class Model {
 
-    getPromiseGetDreamRecords(page) {
+    getPromiseGetDreamRecords(page, category, mood) {
+        if (category !== 'All categories' && mood !== 'All moods') {
+            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&dreamMood=${mood}`)
+        }
+        if (category !== 'All categories') {
+            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}`)
+        }
+        if (mood !== 'All moods') {
+            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamMood=${mood}`)
+        }
         return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5`)
     }
 
@@ -11,6 +20,8 @@ export default class Model {
     whichDreamCategoryIcon(categoryName) {
 
         switch (categoryName) {
+            case 'Category':
+                return '../icons/make_record/dream_category/select.svg'
             case 'Usual':
                 return '../icons/make_record/dream_category/usual.svg'
             case 'Just talking':
@@ -119,6 +130,8 @@ export default class Model {
     whichWeekDayNameByNumber(weekNumber) {
 
         switch (weekNumber) {
+            case 0:
+                return 'Sunday'
             case 1:
                 return 'Monday'
             case 2:
@@ -131,8 +144,6 @@ export default class Model {
                 return 'Friday'
             case 6:
                 return 'Saturday'
-            case 7:
-                return 'Sunday'
             default:
                 console.log('No such week day')
         }

@@ -31,6 +31,9 @@ class Controller {
       dreamCategoryIcon = this.view.getDreamCategoryIconElement();
     dreamCategorySelect.addEventListener("change", event => {
       switch (event.target.value) {
+        case 'Category':
+          dreamCategoryIcon.src = '../icons/make_record/dream_mood/select.svg';
+          break;
         case 'Usual':
           dreamCategoryIcon.src = '../icons/make_record/dream_category/usual.svg';
           break;
@@ -52,6 +55,9 @@ class Controller {
         default:
           console.log('No such option in select dream category');
       }
+      this.view.clearMainPlotHtml();
+      const moodSelect = this.view.getDreamMoodSelectElement();
+      this._initDreamRecords(1, event.target.value, moodSelect.options[moodSelect.selectedIndex].value);
     });
   }
   _initDreamMoodListener() {
@@ -59,6 +65,9 @@ class Controller {
       dreamMoodIcon = this.view.getDreamMoodIconElement();
     dreamMoodSelect.addEventListener("change", event => {
       switch (event.target.value) {
+        case 'Mood':
+          dreamMoodIcon.src = '../icons/make_record/dream_mood/select.svg';
+          break;
         case 'Typical dream':
           dreamMoodIcon.src = '../icons/make_record/dream_mood/typical_dream.svg';
           break;
@@ -77,12 +86,15 @@ class Controller {
         default:
           console.log('No such option in select dream category');
       }
+      this.view.clearMainPlotHtml();
+      const categorySelect = this.view.getDreamCategorySelectElement();
+      this._initDreamRecords(1, categorySelect.options[categorySelect.selectedIndex].value, event.target.value);
     });
   }
   _initMainPlotListener() {
     const mainPlot = this.view.getMainPlotElement();
     mainPlot.addEventListener('click', event => {
-      const currentPage = this.view.getCurrentPageNumber();
+      const currentPage = this.view.getCurrentPageNumberElement();
       if (event.target.id === 'pagination-switcher-button-next') {
         this.view.clearMainPlotHtml();
         this._initDreamRecords(+currentPage.innerText + 1);
@@ -95,9 +107,9 @@ class Controller {
       ;
     });
   }
-  _initDreamRecords(currentPageNumber = 1) {
+  _initDreamRecords(currentPageNumber = 1, dreamCategory = 'All categories', dreamMood = 'All moods') {
     const mainPlot = this.view.getMainPlotElement();
-    this.model.getPromiseGetDreamRecords(currentPageNumber).then(response => {
+    this.model.getPromiseGetDreamRecords(currentPageNumber, dreamCategory, dreamMood).then(response => {
       if (!response.ok) {
         console.log('Error...');
       }
@@ -162,7 +174,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
 class Model {
-  getPromiseGetDreamRecords(page) {
+  getPromiseGetDreamRecords(page, category, mood) {
+    if (category !== 'All categories' && mood !== 'All moods') {
+      return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&dreamMood=${mood}`);
+    }
+    if (category !== 'All categories') {
+      return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}`);
+    }
+    if (mood !== 'All moods') {
+      return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamMood=${mood}`);
+    }
     return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5`);
   }
   getPromiseGetUserByEmail(email) {
@@ -170,6 +191,8 @@ class Model {
   }
   whichDreamCategoryIcon(categoryName) {
     switch (categoryName) {
+      case 'Category':
+        return '../icons/make_record/dream_category/select.svg';
       case 'Usual':
         return '../icons/make_record/dream_category/usual.svg';
       case 'Just talking':
@@ -268,6 +291,8 @@ class Model {
   }
   whichWeekDayNameByNumber(weekNumber) {
     switch (weekNumber) {
+      case 0:
+        return 'Sunday';
       case 1:
         return 'Monday';
       case 2:
@@ -280,8 +305,6 @@ class Model {
         return 'Friday';
       case 6:
         return 'Saturday';
-      case 7:
-        return 'Sunday';
       default:
         console.log('No such week day');
     }
@@ -335,7 +358,7 @@ class View {
   getDreamMoodIconElement() {
     return document.querySelector(`#${View.ID.FILTER.DREAM_MOOD_ICON}`);
   }
-  getCurrentPageNumber() {
+  getCurrentPageNumberElement() {
     return document.querySelector(`#${View.ID.MAIN.CURRENT_PAGE_NUMBER}`);
   }
   getPrevButton() {

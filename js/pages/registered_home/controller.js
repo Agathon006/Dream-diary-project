@@ -19,6 +19,9 @@ export default class Controller {
 
         dreamCategorySelect.addEventListener("change", (event) => {
             switch (event.target.value) {
+                case 'Category':
+                    dreamCategoryIcon.src = '../icons/make_record/dream_mood/select.svg'
+                    break;
                 case 'Usual':
                     dreamCategoryIcon.src = '../icons/make_record/dream_category/usual.svg'
                     break;
@@ -40,6 +43,11 @@ export default class Controller {
                 default:
                     console.log('No such option in select dream category')
             }
+
+            this.view.clearMainPlotHtml();
+
+            const moodSelect = this.view.getDreamMoodSelectElement();
+            this._initDreamRecords(1, event.target.value, moodSelect.options[moodSelect.selectedIndex].value);
         });
     }
 
@@ -49,6 +57,9 @@ export default class Controller {
 
         dreamMoodSelect.addEventListener("change", (event) => {
             switch (event.target.value) {
+                case 'Mood':
+                    dreamMoodIcon.src = '../icons/make_record/dream_mood/select.svg'
+                    break;
                 case 'Typical dream':
                     dreamMoodIcon.src = '../icons/make_record/dream_mood/typical_dream.svg'
                     break;
@@ -67,13 +78,18 @@ export default class Controller {
                 default:
                     console.log('No such option in select dream category')
             }
+
+            this.view.clearMainPlotHtml();
+
+            const categorySelect = this.view.getDreamCategorySelectElement();
+            this._initDreamRecords(1, categorySelect.options[categorySelect.selectedIndex].value, event.target.value);
         });
     }
 
     _initMainPlotListener() {
         const mainPlot = this.view.getMainPlotElement();
         mainPlot.addEventListener('click', (event) => {
-            const currentPage = this.view.getCurrentPageNumber();
+            const currentPage = this.view.getCurrentPageNumberElement();
             if (event.target.id === 'pagination-switcher-button-next') {
                 this.view.clearMainPlotHtml();
                 this._initDreamRecords((+currentPage.innerText) + 1);
@@ -85,10 +101,10 @@ export default class Controller {
         });
     }
 
-    _initDreamRecords(currentPageNumber = 1) {
+    _initDreamRecords(currentPageNumber = 1, dreamCategory = 'All categories', dreamMood = 'All moods') {
         const mainPlot = this.view.getMainPlotElement();
 
-        this.model.getPromiseGetDreamRecords(currentPageNumber)
+        this.model.getPromiseGetDreamRecords(currentPageNumber, dreamCategory, dreamMood)
             .then(response => {
                 if (!response.ok) {
                     console.log('Error...');
