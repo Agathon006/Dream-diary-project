@@ -1,5 +1,3 @@
-import { data } from "jquery";
-
 export default class Controller {
     constructor(view, model) {
         this.view = view;
@@ -102,7 +100,7 @@ export default class Controller {
 
             const dreamSearchInput = this.view.getDreamSearchInputElement(),
                 categorySelect = this.view.getDreamCategorySelectElement();
-            this._initDreamRecords(1, dreamSearchInput, categorySelect.options[categorySelect.selectedIndex].value, event.target.value);
+            this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, event.target.value);
         });
     }
 
