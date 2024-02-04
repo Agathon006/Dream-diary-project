@@ -7,19 +7,39 @@ export default class Controller {
     }
 
     init() {
+        this._initDreamSearchListener();
         this._initDreamCategoryListener();
         this._initDreamMoodListener();
         this._initMainPlotListener();
         this._initDreamRecords();
     }
 
+    _initDreamSearchListener() {
+        const dreamSearchInput = this.view.getDreamSearchInputElement(),
+            dreamSearchButton = this.view.getDreamSearchButtonElement();
+
+        dreamSearchButton.addEventListener('click', () => {
+
+            dreamSearchInput.value = '';
+
+            console.log(dreamSearchInput.value);
+
+            // this.view.clearMainPlotHtml();
+
+            // const categorySelect = this.view.getDreamCategorySelectElement();
+            // const moodSelect = this.view.getDreamMoodSelectElement();
+            // this._initDreamRecords(1, categorySelect.options[moodSelect.selectedIndex].value,
+            //     moodSelect.options[moodSelect.selectedIndex].value);
+        });
+    }
+
     _initDreamCategoryListener() {
         const dreamCategorySelect = this.view.getDreamCategorySelectElement(),
             dreamCategoryIcon = this.view.getDreamCategoryIconElement();
 
-        dreamCategorySelect.addEventListener("change", (event) => {
+        dreamCategorySelect.addEventListener('change', (event) => {
             switch (event.target.value) {
-                case 'Category':
+                case 'All categories':
                     dreamCategoryIcon.src = '../icons/make_record/dream_mood/select.svg'
                     break;
                 case 'Usual':
@@ -57,7 +77,7 @@ export default class Controller {
 
         dreamMoodSelect.addEventListener("change", (event) => {
             switch (event.target.value) {
-                case 'Mood':
+                case 'All moods':
                     dreamMoodIcon.src = '../icons/make_record/dream_mood/select.svg'
                     break;
                 case 'Typical dream':

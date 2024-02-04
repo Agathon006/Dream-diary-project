@@ -377,6 +377,7 @@ button {
   margin: 20px 0;
   padding: 20px;
   display: flex;
+  justify-content: space-between;
   background-color: #232e2f;
   color: #9f9f9f;
   border-radius: 30px;
@@ -420,7 +421,7 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
+  width: 85%;
 }
 .main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-top {
   display: flex;
@@ -443,6 +444,11 @@ button {
 }
 .main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-middle .dream-record__main-middle-tags {
   margin-bottom: 5px;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-middle .dream-record__main-middle-plot {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-bottom {
   margin-top: 10px;

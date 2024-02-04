@@ -21,17 +21,33 @@ class Controller {
     this.model = model;
   }
   init() {
+    this._initDreamSearchListener();
     this._initDreamCategoryListener();
     this._initDreamMoodListener();
     this._initMainPlotListener();
     this._initDreamRecords();
   }
+  _initDreamSearchListener() {
+    const dreamSearchInput = this.view.getDreamSearchInputElement(),
+      dreamSearchButton = this.view.getDreamSearchButtonElement();
+    dreamSearchButton.addEventListener('click', () => {
+      dreamSearchInput.value = '';
+      console.log(dreamSearchInput.value);
+
+      // this.view.clearMainPlotHtml();
+
+      // const categorySelect = this.view.getDreamCategorySelectElement();
+      // const moodSelect = this.view.getDreamMoodSelectElement();
+      // this._initDreamRecords(1, categorySelect.options[moodSelect.selectedIndex].value,
+      //     moodSelect.options[moodSelect.selectedIndex].value);
+    });
+  }
   _initDreamCategoryListener() {
     const dreamCategorySelect = this.view.getDreamCategorySelectElement(),
       dreamCategoryIcon = this.view.getDreamCategoryIconElement();
-    dreamCategorySelect.addEventListener("change", event => {
+    dreamCategorySelect.addEventListener('change', event => {
       switch (event.target.value) {
-        case 'Category':
+        case 'All categories':
           dreamCategoryIcon.src = '../icons/make_record/dream_mood/select.svg';
           break;
         case 'Usual':
@@ -65,7 +81,7 @@ class Controller {
       dreamMoodIcon = this.view.getDreamMoodIconElement();
     dreamMoodSelect.addEventListener("change", event => {
       switch (event.target.value) {
-        case 'Mood':
+        case 'All moods':
           dreamMoodIcon.src = '../icons/make_record/dream_mood/select.svg';
           break;
         case 'Typical dream':
@@ -333,19 +349,20 @@ class View {
       MAIN_PLOT: 'main-plot'
     },
     FILTER: {
+      DREAM_SEARCH_INPUT: 'dream-search-input',
+      DREAM_SEARCH_BUTTON: 'dream-search-button',
       DREAM_CATEGORY_SELECT: 'dream-category-select',
       DREAM_CATEGORY_ICON: 'dream-category-icon',
       DREAM_MOOD_SELECT: 'dream-mood-select',
       DREAM_MOOD_ICON: 'dream-mood-icon'
     }
   };
-
-  // static JS_CLASSES = {
-  //     COMMON: {
-  //         HIDDEN: 'hidden',
-  //     },
-  // }
-
+  getDreamSearchInputElement() {
+    return document.querySelector(`#${View.ID.FILTER.DREAM_SEARCH_INPUT}`);
+  }
+  getDreamSearchButtonElement() {
+    return document.querySelector(`#${View.ID.FILTER.DREAM_SEARCH_BUTTON}`);
+  }
   getDreamCategorySelectElement() {
     return document.querySelector(`#${View.ID.FILTER.DREAM_CATEGORY_SELECT}`);
   }

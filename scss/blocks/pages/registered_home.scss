@@ -93,6 +93,7 @@
                     margin: 20px 0;
                     padding: 20px;
                     display: flex;
+                    justify-content: space-between;
                     background-color: $background_color_primary;
                     color: $text_color_primary;
                     border-radius: 30px;
@@ -144,7 +145,7 @@
                         display: flex;
                         flex-direction: column;
                         justify-content: space-between;
-                        width: 100%;
+                        width: 85%;
 
                         .dream-record__main-top {
                             display: flex;
@@ -181,7 +182,11 @@
                                 .dream-record__main-middle-tags-button {}
                             }
 
-                            .dream-record__main-middle-plot {}
+                            .dream-record__main-middle-plot {
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            }
                         }
 
                         .dream-record__main-bottom {
