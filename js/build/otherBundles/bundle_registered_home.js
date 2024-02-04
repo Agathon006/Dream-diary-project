@@ -31,15 +31,10 @@ class Controller {
     const dreamSearchInput = this.view.getDreamSearchInputElement(),
       dreamSearchButton = this.view.getDreamSearchButtonElement();
     dreamSearchButton.addEventListener('click', () => {
-      dreamSearchInput.value = '';
-      console.log(dreamSearchInput.value);
-
-      // this.view.clearMainPlotHtml();
-
-      // const categorySelect = this.view.getDreamCategorySelectElement();
-      // const moodSelect = this.view.getDreamMoodSelectElement();
-      // this._initDreamRecords(1, categorySelect.options[moodSelect.selectedIndex].value,
-      //     moodSelect.options[moodSelect.selectedIndex].value);
+      this.view.clearMainPlotHtml();
+      const categorySelect = this.view.getDreamCategorySelectElement(),
+        moodSelect = this.view.getDreamMoodSelectElement();
+      this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[moodSelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value);
     });
   }
   _initDreamCategoryListener() {
@@ -72,8 +67,9 @@ class Controller {
           console.log('No such option in select dream category');
       }
       this.view.clearMainPlotHtml();
-      const moodSelect = this.view.getDreamMoodSelectElement();
-      this._initDreamRecords(1, event.target.value, moodSelect.options[moodSelect.selectedIndex].value);
+      const dreamSearchInput = this.view.getDreamSearchInputElement(),
+        moodSelect = this.view.getDreamMoodSelectElement();
+      this._initDreamRecords(1, dreamSearchInput.value, event.target.value, moodSelect.options[moodSelect.selectedIndex].value);
     });
   }
   _initDreamMoodListener() {
@@ -103,8 +99,9 @@ class Controller {
           console.log('No such option in select dream category');
       }
       this.view.clearMainPlotHtml();
-      const categorySelect = this.view.getDreamCategorySelectElement();
-      this._initDreamRecords(1, categorySelect.options[categorySelect.selectedIndex].value, event.target.value);
+      const dreamSearchInput = this.view.getDreamSearchInputElement(),
+        categorySelect = this.view.getDreamCategorySelectElement();
+      this._initDreamRecords(1, dreamSearchInput, categorySelect.options[categorySelect.selectedIndex].value, event.target.value);
     });
   }
   _initMainPlotListener() {
@@ -123,9 +120,9 @@ class Controller {
       ;
     });
   }
-  _initDreamRecords(currentPageNumber = 1, dreamCategory = 'All categories', dreamMood = 'All moods') {
+  _initDreamRecords(currentPageNumber = 1, searchInput = '', dreamCategory = 'All categories', dreamMood = 'All moods') {
     const mainPlot = this.view.getMainPlotElement();
-    this.model.getPromiseGetDreamRecords(currentPageNumber, dreamCategory, dreamMood).then(response => {
+    this.model.getPromiseGetDreamRecords(currentPageNumber, searchInput, dreamCategory, dreamMood).then(response => {
       if (!response.ok) {
         console.log('Error...');
       }
@@ -190,9 +187,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
 class Model {
-  getPromiseGetDreamRecords(page, category, mood) {
+  getPromiseGetDreamRecords(page, searchInput, category, mood) {
+    if (searchInput != '' && category !== 'All categories' && mood !== 'All moods') {
+      return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}
+            &dreamCategory=${category}&dreamMood=${mood}`);
+    }
+    if (searchInput != '' && category !== 'All categories') {
+      return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}`);
+    }
+    if (searchInput != '' && mood !== 'All moods') {
+      return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamMood=${mood}`);
+    }
     if (category !== 'All categories' && mood !== 'All moods') {
       return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&dreamMood=${mood}`);
+    }
+    if (searchInput != '') {
+      return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}`);
     }
     if (category !== 'All categories') {
       return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}`);

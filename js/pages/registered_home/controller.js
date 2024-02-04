@@ -20,16 +20,12 @@ export default class Controller {
 
         dreamSearchButton.addEventListener('click', () => {
 
-            dreamSearchInput.value = '';
+            this.view.clearMainPlotHtml();
 
-            console.log(dreamSearchInput.value);
-
-            // this.view.clearMainPlotHtml();
-
-            // const categorySelect = this.view.getDreamCategorySelectElement();
-            // const moodSelect = this.view.getDreamMoodSelectElement();
-            // this._initDreamRecords(1, categorySelect.options[moodSelect.selectedIndex].value,
-            //     moodSelect.options[moodSelect.selectedIndex].value);
+            const categorySelect = this.view.getDreamCategorySelectElement(),
+                moodSelect = this.view.getDreamMoodSelectElement();
+            this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[moodSelect.selectedIndex].value,
+                moodSelect.options[moodSelect.selectedIndex].value);
         });
     }
 
@@ -66,8 +62,10 @@ export default class Controller {
 
             this.view.clearMainPlotHtml();
 
-            const moodSelect = this.view.getDreamMoodSelectElement();
-            this._initDreamRecords(1, event.target.value, moodSelect.options[moodSelect.selectedIndex].value);
+
+            const dreamSearchInput = this.view.getDreamSearchInputElement(),
+                moodSelect = this.view.getDreamMoodSelectElement();
+            this._initDreamRecords(1, dreamSearchInput.value, event.target.value, moodSelect.options[moodSelect.selectedIndex].value);
         });
     }
 
@@ -101,8 +99,10 @@ export default class Controller {
 
             this.view.clearMainPlotHtml();
 
-            const categorySelect = this.view.getDreamCategorySelectElement();
-            this._initDreamRecords(1, categorySelect.options[categorySelect.selectedIndex].value, event.target.value);
+
+            const dreamSearchInput = this.view.getDreamSearchInputElement(),
+                categorySelect = this.view.getDreamCategorySelectElement();
+            this._initDreamRecords(1, dreamSearchInput, categorySelect.options[categorySelect.selectedIndex].value, event.target.value);
         });
     }
 
@@ -121,10 +121,10 @@ export default class Controller {
         });
     }
 
-    _initDreamRecords(currentPageNumber = 1, dreamCategory = 'All categories', dreamMood = 'All moods') {
+    _initDreamRecords(currentPageNumber = 1, searchInput = '', dreamCategory = 'All categories', dreamMood = 'All moods') {
         const mainPlot = this.view.getMainPlotElement();
 
-        this.model.getPromiseGetDreamRecords(currentPageNumber, dreamCategory, dreamMood)
+        this.model.getPromiseGetDreamRecords(currentPageNumber, searchInput, dreamCategory, dreamMood)
             .then(response => {
                 if (!response.ok) {
                     console.log('Error...');
