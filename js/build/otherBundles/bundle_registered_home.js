@@ -115,6 +115,21 @@ class Controller {
         this._initDreamRecords(+currentPage.innerText - 1);
       }
       ;
+      if (event.target.id === 'empty-message-button') {
+        this.view.clearMainPlotHtml();
+        const dreamSearchInput = this.view.getDreamSearchInputElement(),
+          dreamCategorySelect = this.view.getDreamCategorySelectElement(),
+          dreamCategoryIcon = this.view.getDreamCategoryIconElement(),
+          dreamMoodSelect = this.view.getDreamMoodSelectElement(),
+          dreamMoodIcon = this.view.getDreamMoodIconElement();
+        dreamSearchInput.value = '';
+        dreamCategorySelect.value = 'All categories';
+        dreamCategoryIcon.src = '../icons/make_record/dream_mood/select.svg';
+        dreamMoodSelect.value = 'All moods';
+        dreamMoodIcon.src = '../icons/make_record/dream_mood/select.svg';
+        this._initDreamRecords();
+      }
+      ;
     });
   }
   _initDreamRecords(currentPageNumber = 1, searchInput = '', dreamCategory = 'All categories', dreamMood = 'All moods') {
@@ -404,7 +419,7 @@ class View {
   displayNoRecordsMessage(mainPlot) {
     mainPlot.innerHTML += `<div class="empty-message">
                 <span class="empty-message__span">There are no such records. Try to change the filters or the search query.</span>
-                <button class="empty-message__button">CLEAR SEARCH</button>
+                <button class="empty-message__button" id="empty-message-button">CLEAR SEARCH</button>
             </div>`;
   }
   displaySimplePagination(mainPlot, dreamsNumber) {

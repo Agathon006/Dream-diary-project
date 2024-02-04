@@ -34,28 +34,28 @@ export default class Controller {
         dreamCategorySelect.addEventListener('change', (event) => {
             switch (event.target.value) {
                 case 'All categories':
-                    dreamCategoryIcon.src = '../icons/make_record/dream_mood/select.svg'
+                    dreamCategoryIcon.src = '../icons/make_record/dream_mood/select.svg';
                     break;
                 case 'Usual':
-                    dreamCategoryIcon.src = '../icons/make_record/dream_category/usual.svg'
+                    dreamCategoryIcon.src = '../icons/make_record/dream_category/usual.svg';
                     break;
                 case 'Just talking':
-                    dreamCategoryIcon.src = '../icons/make_record/dream_category/just_talking.svg'
+                    dreamCategoryIcon.src = '../icons/make_record/dream_category/just_talking.svg';
                     break;
                 case 'Nightmare':
-                    dreamCategoryIcon.src = '../icons/make_record/dream_category/nightmare.svg'
+                    dreamCategoryIcon.src = '../icons/make_record/dream_category/nightmare.svg';
                     break;
                 case 'Action':
-                    dreamCategoryIcon.src = '../icons/make_record/dream_category/action.svg'
+                    dreamCategoryIcon.src = '../icons/make_record/dream_category/action.svg';
                     break;
                 case 'Trash':
-                    dreamCategoryIcon.src = '../icons/make_record/dream_category/trash.svg'
+                    dreamCategoryIcon.src = '../icons/make_record/dream_category/trash.svg';
                     break;
                 case 'Conscious dream':
-                    dreamCategoryIcon.src = '../icons/make_record/dream_category/conscious_dream.svg'
+                    dreamCategoryIcon.src = '../icons/make_record/dream_category/conscious_dream.svg';
                     break;
                 default:
-                    console.log('No such option in select dream category')
+                    console.log('No such option in select dream category');
             }
 
             this.view.clearMainPlotHtml();
@@ -74,25 +74,25 @@ export default class Controller {
         dreamMoodSelect.addEventListener("change", (event) => {
             switch (event.target.value) {
                 case 'All moods':
-                    dreamMoodIcon.src = '../icons/make_record/dream_mood/select.svg'
+                    dreamMoodIcon.src = '../icons/make_record/dream_mood/select.svg';
                     break;
                 case 'Typical dream':
-                    dreamMoodIcon.src = '../icons/make_record/dream_mood/typical_dream.svg'
+                    dreamMoodIcon.src = '../icons/make_record/dream_mood/typical_dream.svg';
                     break;
                 case 'Fun dream':
-                    dreamMoodIcon.src = '../icons/make_record/dream_mood/fun_dream.svg'
+                    dreamMoodIcon.src = '../icons/make_record/dream_mood/fun_dream.svg';
                     break;
                 case 'Sad dream':
-                    dreamMoodIcon.src = '../icons/make_record/dream_mood/sad_dream.svg'
+                    dreamMoodIcon.src = '../icons/make_record/dream_mood/sad_dream.svg';
                     break;
                 case 'Terrible':
-                    dreamMoodIcon.src = '../icons/make_record/dream_mood/terrible.svg'
+                    dreamMoodIcon.src = '../icons/make_record/dream_mood/terrible.svg';
                     break;
                 case 'Made me think':
-                    dreamMoodIcon.src = '../icons/make_record/dream_mood/made_me_think.svg'
+                    dreamMoodIcon.src = '../icons/make_record/dream_mood/made_me_think.svg';
                     break;
                 default:
-                    console.log('No such option in select dream category')
+                    console.log('No such option in select dream category');
             }
 
             this.view.clearMainPlotHtml();
@@ -115,6 +115,24 @@ export default class Controller {
             if (event.target.id === 'pagination-switcher-button-prev') {
                 this.view.clearMainPlotHtml();
                 this._initDreamRecords((+currentPage.innerText) - 1);
+            };
+            if (event.target.id === 'empty-message-button') {
+                this.view.clearMainPlotHtml();
+                const dreamSearchInput = this.view.getDreamSearchInputElement(),
+                    dreamCategorySelect = this.view.getDreamCategorySelectElement(),
+                    dreamCategoryIcon = this.view.getDreamCategoryIconElement(),
+                    dreamMoodSelect = this.view.getDreamMoodSelectElement(),
+                    dreamMoodIcon = this.view.getDreamMoodIconElement();
+
+                dreamSearchInput.value = '';
+
+                dreamCategorySelect.value = 'All categories';
+                dreamCategoryIcon.src = '../icons/make_record/dream_mood/select.svg';
+
+                dreamMoodSelect.value = 'All moods';
+                dreamMoodIcon.src = '../icons/make_record/dream_mood/select.svg';
+                
+                this._initDreamRecords();
             };
         });
     }

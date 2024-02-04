@@ -74,7 +74,7 @@ export default class View {
         mainPlot.innerHTML +=
             `<div class="empty-message">
                 <span class="empty-message__span">There are no such records. Try to change the filters or the search query.</span>
-                <button class="empty-message__button">CLEAR SEARCH</button>
+                <button class="empty-message__button" id="empty-message-button">CLEAR SEARCH</button>
             </div>`;
     }
 
