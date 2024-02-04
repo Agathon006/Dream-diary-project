@@ -2,8 +2,7 @@ export default class Model {
 
     getPromiseGetDreamRecords(page, searchInput, category, mood) {
         if (searchInput != '' && category !== 'All categories' && mood !== 'All moods') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}
-            &dreamCategory=${category}&dreamMood=${mood}`)
+            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&dreamMood=${mood}`)
         }
         if (searchInput != '' && category !== 'All categories') {
             return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}`)
