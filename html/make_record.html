@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="icon" href="../icons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/make_record.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="../js/build/otherBundles/bundle_make_record.js" defer></script>
 </head>
 
@@ -74,35 +75,45 @@
                         <span class="record-form__span">Dream title</span>
                         <input name="dreamTitle" type="text" class="record-form__input" id="record-form-title">
                     </div>
-                    <div>
+                    <div class="dream-category-wrapper">
                         <span class="record-form__span">Choose dream category</span>
-                        <select name="dreamCategory" class="record-form__input" id="">
-                            <option value="" hidden>Category</option>
-                            <option value="Usual" selected>Usual</option>
-                            <option value="Just talking">Just talking</option>
-                            <option value="Nightmare">Nightmare</option>
-                            <option value="Action">Action</option>
-                            <option value="Trash">Trash</option>
-                            <option value="Conscious dream">Conscious dream</option>
-                        </select>
+                        <div class="dream-category-wrapper__select-wrapper">
+                            <select name="dreamCategory" class="record-form__input category-select"
+                                id="dream-category-select">
+                                <option value="" hidden>Category</option>
+                                <option value="Usual" selected>Usual</option>
+                                <option value="Just talking">Just talking</option>
+                                <option value="Nightmare">Nightmare</option>
+                                <option value="Action">Action</option>
+                                <option value="Trash">Trash</option>
+                                <option value="Conscious dream">Conscious dream</option>
+                            </select>
+                            <img src="../icons/make_record/dream_category/usual.svg" alt="dream category"
+                                class="dream-category-icon" id="dream-category-icon">
+                        </div>
                     </div>
-                    <div>
+                    <div class="dream-category-wrapper">
                         <span class="record-form__span">Choose dream mood</span>
-                        <select name="dreamMood" class="record-form__input" id="">
-                            <option value="" hidden>Mood</option>
-                            <option value="Typical dream" selected>Typical dream</option>
-                            <option value="Fun dream">Fun dream</option>
-                            <option value="Sad dream">Sad dream</option>
-                            <option value="Terrible">Terrible</option>
-                            <option value="Made me think">Made me think</option>
-                        </select>
+                        <div class="dream-category-wrapper__select-wrapper">
+                            <select name="dreamMood" class="record-form__input mood-select" id="dream-mood-select">
+                                <option value="" hidden>Mood</option>
+                                <option value="Typical dream" selected>Typical dream</option>
+                                <option value="Fun dream">Fun dream</option>
+                                <option value="Sad dream">Sad dream</option>
+                                <option value="Terrible">Terrible</option>
+                                <option value="Made me think">Made me think</option>
+                            </select>
+                            <img src="../icons/make_record/dream_mood/typical_dream.svg" alt="dream category"
+                                class="dream-category-icon" id="dream-mood-icon">
+                        </div>
                     </div>
                     <span class="record-form__span">Dream plot</span>
                     <textarea name="dreamPlot" rows="10" placeholder="Tell about your dream" maxlength="500"
                         class="record-form__input-plot" id="record-form-plot"></textarea>
-                    <span class="record-form__span">Add tags(optional)</span>
-                    <textarea name="dreamTags" rows="5" placeholder="love milk, bread, my cheese" maxlength="250"
-                        class="record-form__input-plot" id=""></textarea>
+                    <span class="record-form__span">Add 1-5 tags(optional)</span>
+                    <textarea name="dreamTags" rows="2" placeholder="love milk, bread, my cheese" maxlength="250"
+                        class="record-form__input-plot" id="record-form-tags-input"></textarea>
+                    <div class="record-form__input-plot tags-container" id="record-form-tags-container"></div>
                     <input type="submit" name="make record" value="Share" class="record-form__submit"
                         id="record-form-submit">
                 </div>

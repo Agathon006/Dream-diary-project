@@ -3,6 +3,10 @@ export default class View {
     static ID = {
         RECORD_FORM: {
             FORM: 'record-form',
+            DREAM_CATEGORY_SELECT: 'dream-category-select',
+            DREAM_CATEGORY_ICON: 'dream-category-icon',
+            DREAM_MOOD_SELECT: 'dream-mood-select',
+            DREAM_MOOD_ICON: 'dream-mood-icon',
             RECORD_TITLE: 'record-form-title',
             RECORD_PLOT: 'record-form-plot',
             SUBMIT_INPUT: 'record-form-submit',
@@ -14,6 +18,22 @@ export default class View {
             WRONG_INPUT: 'wrong-input',
             WRONG_SPAN: 'wrong-span',
         },
+    }
+
+    getDreamCategorySelectElement() {
+        return document.querySelector(`#${View.ID.RECORD_FORM.DREAM_CATEGORY_SELECT}`);
+    }
+
+    getDreamCategoryIconElement() {
+        return document.querySelector(`#${View.ID.RECORD_FORM.DREAM_CATEGORY_ICON}`);
+    }
+
+    getDreamMoodSelectElement() {
+        return document.querySelector(`#${View.ID.RECORD_FORM.DREAM_MOOD_SELECT}`);
+    }
+
+    getDreamMoodIconElement() {
+        return document.querySelector(`#${View.ID.RECORD_FORM.DREAM_MOOD_ICON}`);
     }
 
     getRecordFormElement() {

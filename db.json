@@ -10,41 +10,168 @@
       "surname": "",
       "birthDate": "",
       "profileInfo": "",
+      "avatar": "https://android-obzor.com/wp-content/uploads/2022/03/man-silhouette.jpg"
+    },
+    {
+      "id": "598b",
+      "nickname": "Agathon002",
+      "email": "agaton215@gmail.com",
+      "password": "2051868Dd",
+      "role": "user",
+      "name": "",
+      "surname": "",
+      "birthDate": "",
+      "profileInfo": "",
       "avatar": ""
     }
   ],
   "records": [
     {
-      "id": "d9f8",
+      "id": "d21a",
       "dreamImageUrl": "",
-      "dreamTitle": "a",
+      "dreamTitle": "Dream 1",
       "dreamCategory": "Usual",
       "dreamMood": "Typical dream",
-      "dreamPlot": "asdasdasdasd",
-      "dreamTags": "",
+      "dreamPlot": "Bla bla bla",
+      "dreamTags": [
+        "apple",
+        "bread",
+        "milk"
+      ],
       "email": "agaton615@gmail.com",
       "date": {
-        "dayNumber": 31,
-        "monthNumber": 0,
+        "dayNumber": 3,
+        "monthNumber": 1,
         "year": 2024,
-        "weekNumber": 3
+        "weekNumber": 6
       },
       "views": 0
     },
     {
-      "id": "a93f",
+      "id": "b52b",
       "dreamImageUrl": "",
-      "dreamTitle": "asdas",
+      "dreamTitle": "Dream 2",
       "dreamCategory": "Usual",
       "dreamMood": "Typical dream",
-      "dreamPlot": "sadasdasdasdas",
-      "dreamTags": "",
+      "dreamPlot": "Bla bla bla",
+      "dreamTags": [
+        "tag 1",
+        "tag 2"
+      ],
       "email": "agaton615@gmail.com",
       "date": {
-        "dayNumber": 31,
-        "monthNumber": 0,
+        "dayNumber": 4,
+        "monthNumber": 1,
         "year": 2024,
-        "weekNumber": 3
+        "weekNumber": 0
+      },
+      "views": 0
+    },
+    {
+      "id": "a1c1",
+      "dreamImageUrl": "",
+      "dreamTitle": "Dream 3",
+      "dreamCategory": "Just talking",
+      "dreamMood": "Fun dream",
+      "dreamPlot": "Bla bla bla",
+      "dreamTags": [
+        "milk"
+      ],
+      "email": "agaton615@gmail.com",
+      "date": {
+        "dayNumber": 4,
+        "monthNumber": 1,
+        "year": 2024,
+        "weekNumber": 0
+      },
+      "views": 0
+    },
+    {
+      "id": "2660",
+      "dreamImageUrl": "",
+      "dreamTitle": "Dream 4",
+      "dreamCategory": "Nightmare",
+      "dreamMood": "Terrible",
+      "dreamPlot": "Bla bla bla",
+      "dreamTags": [],
+      "email": "agaton615@gmail.com",
+      "date": {
+        "dayNumber": 4,
+        "monthNumber": 1,
+        "year": 2024,
+        "weekNumber": 0
+      },
+      "views": 0
+    },
+    {
+      "id": "1dc8",
+      "dreamImageUrl": "",
+      "dreamTitle": "Dream 5",
+      "dreamCategory": "Action",
+      "dreamMood": "Sad dream",
+      "dreamPlot": "Bla bla bla",
+      "dreamTags": [],
+      "email": "agaton615@gmail.com",
+      "date": {
+        "dayNumber": 4,
+        "monthNumber": 1,
+        "year": 2024,
+        "weekNumber": 0
+      },
+      "views": 0
+    },
+    {
+      "id": "bbb5",
+      "dreamImageUrl": "",
+      "dreamTitle": "Dream 6",
+      "dreamCategory": "Trash",
+      "dreamMood": "Made me think",
+      "dreamPlot": "Bla bla bla",
+      "dreamTags": [],
+      "email": "agaton615@gmail.com",
+      "date": {
+        "dayNumber": 4,
+        "monthNumber": 1,
+        "year": 2024,
+        "weekNumber": 0
+      },
+      "views": 0
+    },
+    {
+      "id": "1f8a",
+      "dreamImageUrl": "",
+      "dreamTitle": "Dream aaa",
+      "dreamCategory": "Action",
+      "dreamMood": "Fun dream",
+      "dreamPlot": "Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "dreamTags": [],
+      "email": "agaton615@gmail.com",
+      "date": {
+        "dayNumber": 4,
+        "monthNumber": 1,
+        "year": 2024,
+        "weekNumber": 0
+      },
+      "views": 0
+    },
+    {
+      "id": "ed53",
+      "dreamImageUrl": "",
+      "dreamTitle": "Dream 002",
+      "dreamCategory": "Just talking",
+      "dreamMood": "Terrible",
+      "dreamPlot": "Bla bla bla",
+      "dreamTags": [
+        "milk",
+        "bread",
+        "honey"
+      ],
+      "email": "agaton215@gmail.com",
+      "date": {
+        "dayNumber": 5,
+        "monthNumber": 1,
+        "year": 2024,
+        "weekNumber": 1
       },
       "views": 0
     }

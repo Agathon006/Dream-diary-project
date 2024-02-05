@@ -16,6 +16,10 @@
             display: flex;
             justify-content: space-between;
 
+            .badge {
+                margin: 0 10px;
+            }
+
             .wrong-span {
                 text-shadow: 0px 0px 5px white;
                 font-size: 20px;
@@ -36,6 +40,18 @@
                 width: 100%;
                 display: flex;
                 flex-direction: column;
+            }
+
+            .dream-category-wrapper {
+                display: flex;
+
+                .dream-category-wrapper__select-wrapper {
+                    display: flex;
+                    .dream-category-icon {
+                        width: 64px;
+                        height: 64px;
+                    }
+                }
             }
 
             .record-form__span {
