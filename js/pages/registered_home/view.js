@@ -123,7 +123,7 @@ export default class View {
             </div>`
     }
 
-    displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, avatarUrl, nickname) {
+    displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, avatarUrl, nickname, id) {
         var dynamicContent = "";
 
         record.dreamTags.forEach(tagName => {
@@ -171,7 +171,7 @@ export default class View {
                     <img src="${avatarUrl}" alt="" class="dream-record__main-bottom-user-avatar">
                     <span>${nickname}</span>
                 </button>
-                <a href="#" class="dream-record__main-bottom-look-link">Look</a>
+                <a href="#" data-id=${id} class="dream-record__main-bottom-look-link" id="dream-record-main-bottom-look-link">Look</a>
             </div>
         </div>
     </div>`

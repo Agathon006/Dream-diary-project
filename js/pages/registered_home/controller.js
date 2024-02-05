@@ -301,6 +301,11 @@ export default class Controller {
                         console.error('Error:', error);
                     });
             };
+            if (event.target.id === 'dream-record-main-bottom-look-link') {
+                const recordId = event.target.getAttribute('data-id');
+                localStorage.dreamRecordID = recordId;
+                window.location.href = "./view_record.html";
+            }
         });
     }
 
@@ -370,7 +375,7 @@ export default class Controller {
                         dreamMoodIconDescription = this.model.whichDreamMoodIconDescription(record.dreamMood),
                         monthName = this.model.whichMonthNameByNumber(record.date.monthNumber),
                         weekDay = this.model.whichWeekDayNameByNumber(record.date.weekNumber);
-                    this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, data[0].avatar, data[0].nickname);
+                    this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, data[0].avatar, data[0].nickname, record.id);
                 } else {
                     console.log('User not found');
                 }

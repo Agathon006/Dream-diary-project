@@ -254,6 +254,11 @@ class Controller {
         });
       }
       ;
+      if (event.target.id === 'dream-record-main-bottom-look-link') {
+        const recordId = event.target.getAttribute('data-id');
+        localStorage.dreamRecordID = recordId;
+        window.location.href = "./view_record.html";
+      }
     });
   }
   _initUserSearchListener() {
@@ -312,7 +317,7 @@ class Controller {
           dreamMoodIconDescription = this.model.whichDreamMoodIconDescription(record.dreamMood),
           monthName = this.model.whichMonthNameByNumber(record.date.monthNumber),
           weekDay = this.model.whichWeekDayNameByNumber(record.date.weekNumber);
-        this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, data[0].avatar, data[0].nickname);
+        this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, data[0].avatar, data[0].nickname, record.id);
       } else {
         console.log('User not found');
       }
@@ -626,7 +631,7 @@ class View {
                 <button class="pagination-switcher__button" id="pagination-switcher-button-next">></button>
             </div>`;
   }
-  displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, avatarUrl, nickname) {
+  displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, avatarUrl, nickname, id) {
     var dynamicContent = "";
     record.dreamTags.forEach(tagName => {
       dynamicContent += `<button class="dream-record__main-middle-tags-button">${tagName}</button>`;
@@ -672,7 +677,7 @@ class View {
                     <img src="${avatarUrl}" alt="" class="dream-record__main-bottom-user-avatar">
                     <span>${nickname}</span>
                 </button>
-                <a href="#" class="dream-record__main-bottom-look-link">Look</a>
+                <a href="#" data-id=${id} class="dream-record__main-bottom-look-link" id="dream-record-main-bottom-look-link">Look</a>
             </div>
         </div>
     </div>`;
