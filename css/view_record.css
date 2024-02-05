@@ -407,6 +407,25 @@ button {
 .main .container .dream-record-main {
   padding: 20px 0;
 }
-.main .container .dream-record-main .dream-record-main__plot {
+.main .container .dream-record-main .dream-record-main-wrapper {
+  display: flex;
+}
+.main .container .dream-record-main .dream-record-main-wrapper .dream-record-main__img {
+  min-width: 400px;
+  min-height: 400px;
+  background-color: white;
+  background-image: url(./../img/default-dream-image.svg);
+  background-size: cover;
+}
+.main .container .dream-record-main .dream-record-main-wrapper .dream-record-main__img:before {
+  content: "";
+  display: block;
+  min-width: 100%;
+  min-height: 100%;
+  background-image: url(./../img/default-dream-image.svg);
+  background-size: cover;
+}
+.main .container .dream-record-main .dream-record-main-wrapper .dream-record-main__plot {
+  margin-left: 20px;
   font-size: 36px;
 }/*# sourceMappingURL=view_record.css.map */

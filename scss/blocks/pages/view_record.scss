@@ -131,8 +131,30 @@
         .dream-record-main {
             padding: 20px 0;
 
-            .dream-record-main__plot {
-                font-size: 36px;
+            .dream-record-main-wrapper {
+                display: flex;
+
+                .dream-record-main__img {
+                    min-width: 400px;
+                    min-height: 400px;
+                    background-color: white;
+                    background-image: url(./../img/default-dream-image.svg);
+                    background-size: cover;
+
+                    &:before {
+                        content: "";
+                        display: block;
+                        min-width: 100%;
+                        min-height: 100%;
+                        background-image: url(./../img/default-dream-image.svg);
+                        background-size: cover;
+                    }
+                }
+
+                .dream-record-main__plot {
+                    margin-left: 20px;
+                    font-size: 36px;
+                }
             }
         }
     }
