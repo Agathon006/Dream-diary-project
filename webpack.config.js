@@ -16,6 +16,10 @@ module.exports = {
       import: "./js/pages/make_record/",
       filename: "otherBundles/bundle_[name].js",
     },
+    view_record: {
+      import: "./js/pages/view_record/",
+      filename: "otherBundles/bundle_[name].js",
+    },
     time: {
       import: "./js/pages/time/",
       filename: "otherBundles/bundle_[name].js",
