@@ -18,12 +18,38 @@ class Controller {
     this.model = model;
   }
   init() {
+    this._initDreamSearchInputElement();
     this._initDreamSearchListener();
     this._initDreamCategoryListener();
     this._initDreamMoodListener();
     this._initMainPlotListener();
     this._initUserSearchListener();
     this._initDreamRecords();
+  }
+  _initDreamSearchInputElement() {
+    const dreamSearchInput = this.view.getDreamSearchInputElement();
+    dreamSearchInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        this.view.clearMainPlotHtml();
+        const categorySelect = this.view.getDreamCategorySelectElement(),
+          moodSelect = this.view.getDreamMoodSelectElement();
+        const userSearchDiv = this.view.getUserSearchDivElement();
+        try {
+          const userNickname = userSearchDiv.children[0].children[1].children[0].children[1].innerText;
+          this.model.getPromiseGetUserByNickname(userNickname).then(response => response.json()).then(data => {
+            if (data.length) {
+              this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[moodSelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, data[0].email);
+            } else {
+              console.log('User not found');
+            }
+          }).catch(error => {
+            console.error('Error:', error);
+          });
+        } catch {
+          this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[moodSelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value);
+        }
+      }
+    });
   }
   _initDreamSearchListener() {
     const dreamSearchInput = this.view.getDreamSearchInputElement(),
