@@ -14,6 +14,7 @@ export default class View {
             DREAM_CATEGORY_ICON: 'dream-category-icon',
             DREAM_MOOD_SELECT: 'dream-mood-select',
             DREAM_MOOD_ICON: 'dream-mood-icon',
+            USER_SEARCH_DIV: 'user-search-div',
         },
     }
 
@@ -56,6 +57,10 @@ export default class View {
     getMainPlotElement() {
         return document.querySelector(`#${View.ID.MAIN.MAIN_PLOT}`);
     }
+    
+    getUserSearchDivElement() {
+        return document.querySelector(`#${View.ID.FILTER.USER_SEARCH_DIV}`);
+    }
 
     clearMainPlotHtml() {
         const mainPlot = this.getMainPlotElement();
@@ -80,7 +85,7 @@ export default class View {
 
     displaySimplePagination(mainPlot, dreamsNumber) {
         let dynamicContent = '';
-        dreamsNumber === 1 ? dynamicContent = 'dream' :dynamicContent = 'dreams';
+        dreamsNumber === 1 ? dynamicContent = 'dream' : dynamicContent = 'dreams';
         mainPlot.innerHTML +=
             `<div class="pagination-switcher">
             <button class="pagination-switcher__button hidden"><</button>
@@ -97,7 +102,7 @@ export default class View {
 
     displayPagination(mainPlot, dreamsNumber, currentPageNumber, pagesNumber) {
         let dynamicContent = '';
-        dreamsNumber === 1 ? dynamicContent = 'dream' :dynamicContent = 'dreams';
+        dreamsNumber === 1 ? dynamicContent = 'dream' : dynamicContent = 'dreams';
         mainPlot.innerHTML +=
             `<div class="pagination-switcher">
                 <button class="pagination-switcher__button hidden" id="pagination-switcher-button-prev"><</button>
@@ -170,5 +175,21 @@ export default class View {
             </div>
         </div>
     </div>`
+    }
+
+    displayUserFilter(userAvatarUrl, userNickname) {
+        const userSearchDiv = this.getUserSearchDivElement();
+        userSearchDiv.innerHTML =
+            `<div class="main__filter-block user-search">
+                <span class="user-search__title">Сны пользователя</span>
+                <div class="user-search__main">
+                    <div class="user-search__main-left">
+                        <img src=${userAvatarUrl} alt="user avatar"
+                            class="user-search__main-left-avatar">
+                            <span class="user-search__main-left-nickname">${userNickname}</span>
+                    </div>
+                    <button class="user-search__main-button" id="user-search-main-button">x</button>
+                </div>
+            </div>`
     }
 }

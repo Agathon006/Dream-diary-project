@@ -22,6 +22,7 @@ class Controller {
     this._initDreamCategoryListener();
     this._initDreamMoodListener();
     this._initMainPlotListener();
+    this._initUserSearchListener();
     this._initDreamRecords();
   }
   _initDreamSearchListener() {
@@ -31,7 +32,21 @@ class Controller {
       this.view.clearMainPlotHtml();
       const categorySelect = this.view.getDreamCategorySelectElement(),
         moodSelect = this.view.getDreamMoodSelectElement();
-      this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[moodSelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value);
+      const userSearchDiv = this.view.getUserSearchDivElement();
+      try {
+        const userNickname = userSearchDiv.children[0].children[1].children[0].children[1].innerText;
+        this.model.getPromiseGetUserByNickname(userNickname).then(response => response.json()).then(data => {
+          if (data.length) {
+            this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[moodSelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, data[0].email);
+          } else {
+            console.log('User not found');
+          }
+        }).catch(error => {
+          console.error('Error:', error);
+        });
+      } catch {
+        this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[moodSelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value);
+      }
     });
   }
   _initDreamCategoryListener() {
@@ -39,7 +54,7 @@ class Controller {
       dreamCategoryIcon = this.view.getDreamCategoryIconElement();
     dreamCategorySelect.addEventListener('change', event => {
       switch (event.target.value) {
-        case 'All categories':
+        case 'All':
           dreamCategoryIcon.src = '../icons/make_record/dream_mood/select.svg';
           break;
         case 'Usual':
@@ -66,7 +81,21 @@ class Controller {
       this.view.clearMainPlotHtml();
       const dreamSearchInput = this.view.getDreamSearchInputElement(),
         moodSelect = this.view.getDreamMoodSelectElement();
-      this._initDreamRecords(1, dreamSearchInput.value, event.target.value, moodSelect.options[moodSelect.selectedIndex].value);
+      const userSearchDiv = this.view.getUserSearchDivElement();
+      try {
+        const userNickname = userSearchDiv.children[0].children[1].children[0].children[1].innerText;
+        this.model.getPromiseGetUserByNickname(userNickname).then(response => response.json()).then(data => {
+          if (data.length) {
+            this._initDreamRecords(1, dreamSearchInput.value, event.target.value, moodSelect.options[moodSelect.selectedIndex].value, data[0].email);
+          } else {
+            console.log('User not found');
+          }
+        }).catch(error => {
+          console.error('Error:', error);
+        });
+      } catch {
+        this._initDreamRecords(1, dreamSearchInput.value, event.target.value, moodSelect.options[moodSelect.selectedIndex].value);
+      }
     });
   }
   _initDreamMoodListener() {
@@ -74,7 +103,7 @@ class Controller {
       dreamMoodIcon = this.view.getDreamMoodIconElement();
     dreamMoodSelect.addEventListener("change", event => {
       switch (event.target.value) {
-        case 'All moods':
+        case 'All':
           dreamMoodIcon.src = '../icons/make_record/dream_mood/select.svg';
           break;
         case 'Typical dream':
@@ -98,7 +127,21 @@ class Controller {
       this.view.clearMainPlotHtml();
       const dreamSearchInput = this.view.getDreamSearchInputElement(),
         categorySelect = this.view.getDreamCategorySelectElement();
-      this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, event.target.value);
+      const userSearchDiv = this.view.getUserSearchDivElement();
+      try {
+        const userNickname = userSearchDiv.children[0].children[1].children[0].children[1].innerText;
+        this.model.getPromiseGetUserByNickname(userNickname).then(response => response.json()).then(data => {
+          if (data.length) {
+            this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, event.target.value, data[0].email);
+          } else {
+            console.log('User not found');
+          }
+        }).catch(error => {
+          console.error('Error:', error);
+        });
+      } catch {
+        this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, event.target.value);
+      }
     });
   }
   _initMainPlotListener() {
@@ -107,12 +150,46 @@ class Controller {
       const currentPage = this.view.getCurrentPageNumberElement();
       if (event.target.id === 'pagination-switcher-button-next') {
         this.view.clearMainPlotHtml();
-        this._initDreamRecords(+currentPage.innerText + 1);
+        const dreamSearchInput = this.view.getDreamSearchInputElement(),
+          categorySelect = this.view.getDreamCategorySelectElement(),
+          moodSelect = this.view.getDreamMoodSelectElement();
+        const userSearchDiv = this.view.getUserSearchDivElement();
+        try {
+          const userNickname = userSearchDiv.children[0].children[1].children[0].children[1].innerText;
+          this.model.getPromiseGetUserByNickname(userNickname).then(response => response.json()).then(data => {
+            if (data.length) {
+              this._initDreamRecords(+currentPage.innerText + 1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, data[0].email);
+            } else {
+              console.log('User not found');
+            }
+          }).catch(error => {
+            console.error('Error:', error);
+          });
+        } catch {
+          this._initDreamRecords(+currentPage.innerText + 1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value);
+        }
       }
       ;
       if (event.target.id === 'pagination-switcher-button-prev') {
         this.view.clearMainPlotHtml();
-        this._initDreamRecords(+currentPage.innerText - 1);
+        const dreamSearchInput = this.view.getDreamSearchInputElement(),
+          categorySelect = this.view.getDreamCategorySelectElement(),
+          moodSelect = this.view.getDreamMoodSelectElement();
+        const userSearchDiv = this.view.getUserSearchDivElement();
+        try {
+          const userNickname = userSearchDiv.children[0].children[1].children[0].children[1].innerText;
+          this.model.getPromiseGetUserByNickname(userNickname).then(response => response.json()).then(data => {
+            if (data.length) {
+              this._initDreamRecords(+currentPage.innerText - 1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, data[0].email);
+            } else {
+              console.log('User not found');
+            }
+          }).catch(error => {
+            console.error('Error:', error);
+          });
+        } catch {
+          this._initDreamRecords(+currentPage.innerText - 1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value);
+        }
       }
       ;
       if (event.target.id === 'empty-message-button') {
@@ -121,20 +198,54 @@ class Controller {
           dreamCategorySelect = this.view.getDreamCategorySelectElement(),
           dreamCategoryIcon = this.view.getDreamCategoryIconElement(),
           dreamMoodSelect = this.view.getDreamMoodSelectElement(),
-          dreamMoodIcon = this.view.getDreamMoodIconElement();
+          dreamMoodIcon = this.view.getDreamMoodIconElement(),
+          userSearchDiv = this.view.getUserSearchDivElement();
         dreamSearchInput.value = '';
-        dreamCategorySelect.value = 'All categories';
+        dreamCategorySelect.value = 'All';
         dreamCategoryIcon.src = '../icons/make_record/dream_mood/select.svg';
-        dreamMoodSelect.value = 'All moods';
+        dreamMoodSelect.value = 'All';
         dreamMoodIcon.src = '../icons/make_record/dream_mood/select.svg';
+        userSearchDiv.innerHTML = '';
         this._initDreamRecords();
+      }
+      ;
+      if (event.target.parentElement.classList.contains('dream-record__main-bottom-user')) {
+        const userUrl = event.target.parentElement.children[0].src;
+        const userNickname = event.target.parentElement.children[1].innerText;
+        this.view.displayUserFilter(userUrl, userNickname);
+        this.model.getPromiseGetUserByNickname(userNickname).then(response => response.json()).then(data => {
+          if (data.length) {
+            this.view.clearMainPlotHtml();
+            const dreamSearchInput = this.view.getDreamSearchInputElement(),
+              categorySelect = this.view.getDreamCategorySelectElement(),
+              moodSelect = this.view.getDreamMoodSelectElement();
+            this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, data[0].email);
+          } else {
+            console.log('User not found');
+          }
+        }).catch(error => {
+          console.error('Error:', error);
+        });
       }
       ;
     });
   }
-  _initDreamRecords(currentPageNumber = 1, searchInput = '', dreamCategory = 'All categories', dreamMood = 'All moods') {
+  _initUserSearchListener() {
+    const userSearchDiv = this.view.getUserSearchDivElement();
+    userSearchDiv.addEventListener('click', event => {
+      if (event.target.id === 'user-search-main-button') {
+        userSearchDiv.innerHTML = '';
+        this.view.clearMainPlotHtml();
+        const dreamSearchInput = this.view.getDreamSearchInputElement(),
+          categorySelect = this.view.getDreamCategorySelectElement(),
+          moodSelect = this.view.getDreamMoodSelectElement();
+        this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value);
+      }
+    });
+  }
+  _initDreamRecords(currentPageNumber = 1, searchInput = '', dreamCategory = 'All', dreamMood = 'All', userEmail = 'All') {
     const mainPlot = this.view.getMainPlotElement();
-    this.model.getPromiseGetDreamRecords(currentPageNumber, searchInput, dreamCategory, dreamMood).then(response => {
+    this.model.getPromiseGetDreamRecords(currentPageNumber, searchInput, dreamCategory, dreamMood, userEmail).then(response => {
       if (!response.ok) {
         console.log('Error...');
       }
@@ -198,32 +309,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
 class Model {
-  getPromiseGetDreamRecords(page, searchInput, category, mood) {
-    if (searchInput != '' && category !== 'All categories' && mood !== 'All moods') {
+  getPromiseGetDreamRecords(page, searchInput, category, mood, email) {
+    if (searchInput != '' && category !== 'All' && mood !== 'All' && email !== 'All') {
+      return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&dreamMood=${mood}&email=${email}`);
+    }
+    if (searchInput != '' && category !== 'All' && mood !== 'All') {
       return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&dreamMood=${mood}`);
     }
-    if (searchInput != '' && category !== 'All categories') {
+    if (searchInput != '' && category !== 'All' && email !== 'All') {
+      return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&email=${email}`);
+    }
+    if (searchInput != '' && mood !== 'All' && email !== 'All') {
+      return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamMood=${mood}&email=${email}`);
+    }
+    if (category !== 'All' && mood !== 'All' && email !== 'All') {
+      return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&dreamMood=${mood}&email=${email}`);
+    }
+    if (searchInput != '' && category !== 'All') {
       return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}`);
     }
-    if (searchInput != '' && mood !== 'All moods') {
+    if (searchInput != '' && mood !== 'All') {
       return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamMood=${mood}`);
     }
-    if (category !== 'All categories' && mood !== 'All moods') {
+    if (searchInput != '' && email !== 'All') {
+      return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&email=${email}`);
+    }
+    if (category !== 'All' && mood !== 'All') {
       return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&dreamMood=${mood}`);
+    }
+    if (category !== 'All' && email !== 'All') {
+      return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&email=${email}`);
+    }
+    if (mood !== 'All' && email !== 'All') {
+      return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamMood=${mood}&email=${email}`);
     }
     if (searchInput != '') {
       return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}`);
     }
-    if (category !== 'All categories') {
+    if (category !== 'All') {
       return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}`);
     }
-    if (mood !== 'All moods') {
+    if (mood !== 'All') {
       return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamMood=${mood}`);
+    }
+    if (email !== 'All') {
+      return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&email=${email}`);
     }
     return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5`);
   }
   getPromiseGetUserByEmail(email) {
     return fetch(`http://localhost:3000/users?email=${email}`);
+  }
+  getPromiseGetUserByNickname(nickanme) {
+    return fetch(`http://localhost:3000/users?nickname=${nickanme}`);
   }
   whichDreamCategoryIcon(categoryName) {
     switch (categoryName) {
@@ -373,7 +511,8 @@ class View {
       DREAM_CATEGORY_SELECT: 'dream-category-select',
       DREAM_CATEGORY_ICON: 'dream-category-icon',
       DREAM_MOOD_SELECT: 'dream-mood-select',
-      DREAM_MOOD_ICON: 'dream-mood-icon'
+      DREAM_MOOD_ICON: 'dream-mood-icon',
+      USER_SEARCH_DIV: 'user-search-div'
     }
   };
   getDreamSearchInputElement() {
@@ -405,6 +544,9 @@ class View {
   }
   getMainPlotElement() {
     return document.querySelector(`#${View.ID.MAIN.MAIN_PLOT}`);
+  }
+  getUserSearchDivElement() {
+    return document.querySelector(`#${View.ID.FILTER.USER_SEARCH_DIV}`);
   }
   clearMainPlotHtml() {
     const mainPlot = this.getMainPlotElement();
@@ -508,6 +650,20 @@ class View {
             </div>
         </div>
     </div>`;
+  }
+  displayUserFilter(userAvatarUrl, userNickname) {
+    const userSearchDiv = this.getUserSearchDivElement();
+    userSearchDiv.innerHTML = `<div class="main__filter-block user-search">
+                <span class="user-search__title">Сны пользователя</span>
+                <div class="user-search__main">
+                    <div class="user-search__main-left">
+                        <img src=${userAvatarUrl} alt="user avatar"
+                            class="user-search__main-left-avatar">
+                            <span class="user-search__main-left-nickname">${userNickname}</span>
+                    </div>
+                    <button class="user-search__main-button" id="user-search-main-button">x</button>
+                </div>
+            </div>`;
   }
 }
 

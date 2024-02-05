@@ -313,6 +313,57 @@
                     }
                 }
 
+                .user-search {
+                    .user-search__title {}
+
+                    .user-search__main {
+                        margin-top: 10px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .user-search__main-left {
+                            display: flex;
+                            align-items: center;
+
+                            .user-search__main-left-avatar {
+                                width: 64px;
+                                height: 64px;
+                                border-radius: 100%;
+                                background-color: white;
+                                background-image: url(./../img/default-user-avatar.svg);
+                                background-size: cover;
+
+                                &:before {
+                                    content: "";
+                                    display: block;
+                                    width: 100%;
+                                    height: 100%;
+                                    background-image: url(./../img/default-user-avatar.svg);
+                                    background-size: cover;
+                                }
+                            }
+
+                            .user-search__main-left-nickname {
+                                margin-left: 10px;
+                            }
+                        }
+
+                        .user-search__main-button {
+                            font-size: 36px;
+                            width: 64px;
+                            height: 64px;
+                            background-color: $background_color_secondary;
+                            color: $background_color_primary;
+
+                            &:hover {
+                                color: black;
+                                filter: drop-shadow(0 0 5px $background_color_secondary);
+                            }
+                        }
+                    }
+                }
+
                 .main__filter-add-link {
                     font-size: 40px;
                     padding: 5px 20px;

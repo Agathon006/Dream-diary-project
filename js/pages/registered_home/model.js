@@ -1,32 +1,63 @@
 export default class Model {
 
-    getPromiseGetDreamRecords(page, searchInput, category, mood) {
-        if (searchInput != '' && category !== 'All categories' && mood !== 'All moods') {
+    getPromiseGetDreamRecords(page, searchInput, category, mood, email) {
+        if (searchInput != '' && category !== 'All' && mood !== 'All' && email !== 'All') {
+            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&dreamMood=${mood}&email=${email}`)
+        }
+
+        if (searchInput != '' && category !== 'All' && mood !== 'All') {
             return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&dreamMood=${mood}`)
         }
-        if (searchInput != '' && category !== 'All categories') {
+        if (searchInput != '' && category !== 'All' && email !== 'All') {
+            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&email=${email}`)
+        }
+        if (searchInput != '' && mood !== 'All' && email !== 'All') {
+            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamMood=${mood}&email=${email}`)
+        }
+        if (category !== 'All' && mood !== 'All' && email !== 'All') {
+            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&dreamMood=${mood}&email=${email}`)
+        }
+
+        if (searchInput != '' && category !== 'All') {
             return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}`)
         }
-        if (searchInput != '' && mood !== 'All moods') {
+        if (searchInput != '' && mood !== 'All') {
             return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamMood=${mood}`)
         }
-        if (category !== 'All categories' && mood !== 'All moods') {
+        if (searchInput != '' && email !== 'All') {
+            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&email=${email}`)
+        }
+        if (category !== 'All' && mood !== 'All') {
             return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&dreamMood=${mood}`)
         }
+        if (category !== 'All' && email !== 'All') {
+            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&email=${email}`)
+        }
+        if (mood !== 'All' && email !== 'All') {
+            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamMood=${mood}&email=${email}`)
+        }
+
         if (searchInput != '') {
             return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}`)
         }
-        if (category !== 'All categories') {
+        if (category !== 'All') {
             return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}`)
         }
-        if (mood !== 'All moods') {
+        if (mood !== 'All') {
             return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamMood=${mood}`)
+        }
+        if (email !== 'All') {
+            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&email=${email}`)
         }
         return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5`)
     }
 
     getPromiseGetUserByEmail(email) {
         return fetch(`http://localhost:3000/users?email=${email}`)
+    }
+
+    getPromiseGetUserByNickname(nickanme) {
+        return fetch(`http://localhost:3000/users?nickname=${nickanme}`)
     }
 
     whichDreamCategoryIcon(categoryName) {

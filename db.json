@@ -11,6 +11,18 @@
       "birthDate": "",
       "profileInfo": "",
       "avatar": "https://android-obzor.com/wp-content/uploads/2022/03/man-silhouette.jpg"
+    },
+    {
+      "id": "598b",
+      "nickname": "Agathon002",
+      "email": "agaton215@gmail.com",
+      "password": "2051868Dd",
+      "role": "user",
+      "name": "",
+      "surname": "",
+      "birthDate": "",
+      "profileInfo": "",
+      "avatar": ""
     }
   ],
   "records": [
@@ -139,6 +151,27 @@
         "monthNumber": 1,
         "year": 2024,
         "weekNumber": 0
+      },
+      "views": 0
+    },
+    {
+      "id": "ed53",
+      "dreamImageUrl": "",
+      "dreamTitle": "Dream 002",
+      "dreamCategory": "Just talking",
+      "dreamMood": "Terrible",
+      "dreamPlot": "Bla bla bla",
+      "dreamTags": [
+        "milk",
+        "bread",
+        "honey"
+      ],
+      "email": "agaton215@gmail.com",
+      "date": {
+        "dayNumber": 5,
+        "monthNumber": 1,
+        "year": 2024,
+        "weekNumber": 1
       },
       "views": 0
     }
