@@ -282,7 +282,6 @@ class Controller {
       }
       return response.json();
     }).then(records => {
-      console.log(records);
       if (!records.pages) {
         this.view.displayNoRecordsMessage(mainPlot);
       } else {

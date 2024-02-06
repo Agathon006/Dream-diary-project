@@ -64,69 +64,7 @@
     <main class="main">
         <div class="container">
             <div class="main-wrapper" id="main-wrapper">
-                <div class="main__plot" id="main-plot">
-
-                    <!-- <div class="empty-message">
-                        <span class="empty-message__span">There are no such records. Try to change the filters or the search query.</span>
-                        <button class="empty-message__button">CLEAR SEARCH</button>
-                    </div> -->
-
-                    <!-- <div class="pagination-switcher">
-                        <button class="pagination-switcher__button"><</button>
-                        <div class="pagination-switcher__plot">
-                            <div class="pagination-switcher__plot-top">
-                                <span class="pagination-switcher__plot-text">Found: </span>
-                                <span class="pagination-switcher__plot-key">some</span>
-                                <span class="pagination-switcher__plot-text"> dreams</span>
-                            </div>
-                            <div class="pagination-switcher__plot-bottom">
-                                <span class="pagination-switcher__plot-text">Page </span>
-                                <span class="pagination-switcher__plot-key">1</span>
-                                <span class="pagination-switcher__plot-text"> of </span>
-                                <span class="pagination-switcher__plot-key">1</span>
-                            </div>
-                        </div>
-                        <button class="pagination-switcher__button">></button>
-                    </div> -->
-
-                    <!-- <div class="dream-record">
-                        <div class="dream-record__visual">
-                            <img src="../img/default-dream-image.svg" alt="dream image"
-                                class="dream-record__visual-primary">
-                            <div class="dream-record__visual-secondary">
-                                <img src="../icons/header/dark-theme.svg" alt="dream category"
-                                    class="dream-record__visual-secondary-icon">
-                                <img src="../icons/header/dark-theme.svg" alt="dream mood"
-                                    class="dream-record__visual-secondary-icon">
-                            </div>
-                        </div>
-                        <div class="dream-record__main">
-                            <div class="dream-record__main-top">
-                                <div class="dream-record__main-top-left">
-                                    <h2 class="dream-record__main-top-left-title">Some dream</h2>
-                                    <h3 class="dream-record__main-top-left-date">26 June 2021 (Monday)</h3>
-                                </div>
-                                <div class="dream-record__main-top-right">
-                                    <span class="dream-record__main-top-right-views">12141 views</span>
-                                </div>
-                            </div>
-                            <div class="dream-record__main-middle">
-                                <div class="dream-record__main-middle-tags">
-                                    <button class="dream-record__main-middle-tags-button">Tag1</button>
-                                    <button class="dream-record__main-middle-tags-button">Tag2</button>
-                                    <button class="dream-record__main-middle-tags-button">Tag3</button>
-                                </div>
-                                <p class="dream-record__main-middle-plot">Lorem ipsum dolor sit, amet consectetur
-                                    adipisicing elit. Sit quaerat at exercitationem minima praesentium eligendi error
-                                    adipisci ipsum hic nulla?</p>
-                            </div>
-                            <div class="dream-record__main-bottom">
-                                <button class="dream-record__main-bottom-user">Some user</button>
-                                <a href="#" class="dream-record__main-bottom-look-link">Look</a>
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
+                <div class="main__plot" id="main-plot"></div>
                 <div class="main__filter">
                     <div class="main__filter-block">
                         <span class="main__filter-block-span">Dreams search by title</span>
@@ -147,7 +85,7 @@
                                 <option value="Trash">Trash</option>
                                 <option value="Conscious dream">Conscious dream</option>
                             </select>
-                            <img src="../icons/make_record/dream_category/select.svg" alt="dream category"
+                            <img src="../icons/make_record/dream_category/select.svg" alt="choose"
                                 class="dream-category-icon" id="dream-category-icon">
                         </div>
                     </div>
@@ -162,23 +100,23 @@
                                 <option value="Terrible">Terrible</option>
                                 <option value="Made me think">Made me think</option>
                             </select>
-                            <img src="../icons/make_record/dream_mood/select.svg" alt="dream category"
+                            <img src="../icons/make_record/dream_mood/select.svg" alt="choose"
                                 class="dream-category-icon" id="dream-mood-icon">
                         </div>
                     </div>
-                    <div id="user-search-div">
-                        <!-- <div class="main__filter-block user-search">
-                            <span class="user-search__title">Сны пользователя</span>
-                            <div class="user-search__main">
-                                <div class="user-search__main-left">
-                                    <img src="https://xakep.ru/wp-content/uploads/2019/02/208072/url.jpg" alt="user avatar"
-                                        class="user-search__main-left-avatar">
-                                    <span class="user-search__main-left-nickname">Agathon006</span>
-                                </div>
-                                <button class="user-search__main-button">x</button>
-                            </div>
-                        </div> -->
+                    <div class="main__filter-block">
+                        <span class="main__filter-block-span">Sort by</span>
+                        <div class="main__filter-block-main">
+                            <select name="sort" class="main__filter-block-input" id="sort-select">
+                                <option value="Default">Default</option>
+                                <option value="Likes">Likes</option>
+                                <option value="Views">Views</option>
+                            </select>
+                            <img src="../icons/make_record/dream_mood/select.svg" alt="choose"
+                                class="dream-category-icon" id="sort-icon">
+                        </div>
                     </div>
+                    <div id="user-search-div"></div>
                     <a href="./make_record.html" class="main__filter-add-link">Share a dream</a>
                 </div>
             </div>
