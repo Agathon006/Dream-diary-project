@@ -598,10 +598,12 @@ class View {
             </div>`;
   }
   displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, avatarUrl, nickname, id) {
-    var dynamicContent = "";
+    var dynamicTagContent = '',
+      likesSpan = '';
     record.dreamTags.forEach(tagName => {
-      dynamicContent += `<button class="dream-record__main-middle-tags-button">${tagName}</button>`;
+      dynamicTagContent += `<button class="dream-record__main-middle-tags-button">${tagName}</button>`;
     });
+    record.likes === 1 ? likesSpan = 'like' : likesSpan = 'likes';
     mainPlot.innerHTML += `<div class="dream-record">
         <div class="dream-record__visual">
             <img src="${record.dreamImageUrl}" alt=""
@@ -631,11 +633,12 @@ class View {
                     </h3>
                 </div>
                 <div class="dream-record__main-top-right">
+                    <span class="dream-record__main-top-right-likes">${record.likes} ${likesSpan}</span>
                     <span class="dream-record__main-top-right-views">${record.views} views</span>
                 </div>
             </div>
             <div class="dream-record__main-middle">
-                <div class="dream-record__main-middle-tags">${dynamicContent}</div>
+                <div class="dream-record__main-middle-tags">${dynamicTagContent}</div>
                 <p class="dream-record__main-middle-plot">${record.dreamPlot}</p>
             </div>
             <div class="dream-record__main-bottom">
