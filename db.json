@@ -45,7 +45,11 @@
         "year": 2024,
         "weekNumber": 6
       },
-      "views": 0
+      "views": 76,
+      "likes": 1,
+      "likesUsersEmails": [
+        "agaton615@gmail.com"
+      ]
     },
     {
       "id": "b52b",
@@ -65,7 +69,9 @@
         "year": 2024,
         "weekNumber": 0
       },
-      "views": 0
+      "views": 2,
+      "likes": 0,
+      "likesUsersEmails": []
     },
     {
       "id": "a1c1",
@@ -84,7 +90,9 @@
         "year": 2024,
         "weekNumber": 0
       },
-      "views": 0
+      "views": 1,
+      "likes": 0,
+      "likesUsersEmails": []
     },
     {
       "id": "2660",
@@ -101,7 +109,9 @@
         "year": 2024,
         "weekNumber": 0
       },
-      "views": 0
+      "views": 0,
+      "likes": 0,
+      "likesUsersEmails": []
     },
     {
       "id": "1dc8",
@@ -118,7 +128,9 @@
         "year": 2024,
         "weekNumber": 0
       },
-      "views": 0
+      "views": 0,
+      "likes": 0,
+      "likesUsersEmails": []
     },
     {
       "id": "bbb5",
@@ -135,7 +147,9 @@
         "year": 2024,
         "weekNumber": 0
       },
-      "views": 0
+      "views": 0,
+      "likes": 0,
+      "likesUsersEmails": []
     },
     {
       "id": "1f8a",
@@ -152,7 +166,9 @@
         "year": 2024,
         "weekNumber": 0
       },
-      "views": 0
+      "views": 0,
+      "likes": 0,
+      "likesUsersEmails": []
     },
     {
       "id": "ed53",
@@ -173,7 +189,9 @@
         "year": 2024,
         "weekNumber": 1
       },
-      "views": 0
+      "views": 0,
+      "likes": 0,
+      "likesUsersEmails": []
     }
   ]
 }

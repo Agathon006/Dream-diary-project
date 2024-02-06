@@ -57,7 +57,7 @@ export default class View {
     getMainPlotElement() {
         return document.querySelector(`#${View.ID.MAIN.MAIN_PLOT}`);
     }
-    
+
     getUserSearchDivElement() {
         return document.querySelector(`#${View.ID.FILTER.USER_SEARCH_DIV}`);
     }
@@ -123,12 +123,15 @@ export default class View {
             </div>`
     }
 
-    displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, avatarUrl, nickname) {
-        var dynamicContent = "";
+    displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, avatarUrl, nickname, id) {
+        var dynamicTagContent = '',
+            likesSpan = '';
 
         record.dreamTags.forEach(tagName => {
-            dynamicContent += `<button class="dream-record__main-middle-tags-button">${tagName}</button>`;
+            dynamicTagContent += `<button class="dream-record__main-middle-tags-button">${tagName}</button>`;
         });
+
+        record.likes === 1 ? likesSpan = 'like' : likesSpan = 'likes';
 
         mainPlot.innerHTML += `<div class="dream-record">
         <div class="dream-record__visual">
@@ -159,11 +162,12 @@ export default class View {
                     </h3>
                 </div>
                 <div class="dream-record__main-top-right">
+                    <span class="dream-record__main-top-right-likes">${record.likes} ${likesSpan}</span>
                     <span class="dream-record__main-top-right-views">${record.views} views</span>
                 </div>
             </div>
             <div class="dream-record__main-middle">
-                <div class="dream-record__main-middle-tags">${dynamicContent}</div>
+                <div class="dream-record__main-middle-tags">${dynamicTagContent}</div>
                 <p class="dream-record__main-middle-plot">${record.dreamPlot}</p>
             </div>
             <div class="dream-record__main-bottom">
@@ -171,7 +175,7 @@ export default class View {
                     <img src="${avatarUrl}" alt="" class="dream-record__main-bottom-user-avatar">
                     <span>${nickname}</span>
                 </button>
-                <a href="#" class="dream-record__main-bottom-look-link">Look</a>
+                <a href="#" data-id=${id} class="dream-record__main-bottom-look-link" id="dream-record-main-bottom-look-link">Look</a>
             </div>
         </div>
     </div>`

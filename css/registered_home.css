@@ -436,7 +436,17 @@ button {
   margin-top: 10px;
   font-size: 16px;
 }
+.main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-top .dream-record__main-top-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 100%;
+}
+.main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-top .dream-record__main-top-right .dream-record__main-top-right-likes {
+  font-size: 36px;
+}
 .main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-top .dream-record__main-top-right .dream-record__main-top-right-views {
+  margin-top: 10px;
   font-size: 16px;
 }
 .main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-middle {
@@ -497,7 +507,8 @@ button {
 }
 .main .container .main-wrapper .main__filter {
   width: 25%;
-  height: 550px;
+  height: -moz-fit-content;
+  height: fit-content;
   position: sticky;
   top: 20px;
   margin: 20px 0;

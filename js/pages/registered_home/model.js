@@ -82,26 +82,6 @@ export default class Model {
         }
     }
 
-    whichDreamCategoryIconDescription(categoryName) {
-
-        switch (categoryName) {
-            case 'Usual':
-                return 'Usual'
-            case 'Just talking':
-                return 'Just talking'
-            case 'Nightmare':
-                return 'Nightmare'
-            case 'Action':
-                return 'Action'
-            case 'Trash':
-                return 'Trash'
-            case 'Conscious dream':
-                return 'Conscious dream'
-            default:
-                console.log('No such option in select dream category')
-        }
-    }
-
     whichDreamMoodIcon(moodName) {
 
         switch (moodName) {
@@ -115,24 +95,6 @@ export default class Model {
                 return '../icons/make_record/dream_mood/terrible.svg'
             case 'Made me think':
                 return '../icons/make_record/dream_mood/made_me_think.svg'
-            default:
-                console.log('No such option in select dream category')
-        }
-    }
-
-    whichDreamMoodIconDescription(moodName) {
-
-        switch (moodName) {
-            case 'Typical dream':
-                return 'Typical dream'
-            case 'Fun dream':
-                return 'Fun dream'
-            case 'Sad dream':
-                return 'Sad dream'
-            case 'Terrible':
-                return 'Terrible dream'
-            case 'Made me think':
-                return 'Made me think'
             default:
                 console.log('No such option in select dream category')
         }

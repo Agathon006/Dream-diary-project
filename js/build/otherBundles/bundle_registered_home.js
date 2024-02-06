@@ -18,12 +18,38 @@ class Controller {
     this.model = model;
   }
   init() {
+    this._initDreamSearchInputElement();
     this._initDreamSearchListener();
     this._initDreamCategoryListener();
     this._initDreamMoodListener();
     this._initMainPlotListener();
     this._initUserSearchListener();
     this._initDreamRecords();
+  }
+  _initDreamSearchInputElement() {
+    const dreamSearchInput = this.view.getDreamSearchInputElement();
+    dreamSearchInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        this.view.clearMainPlotHtml();
+        const categorySelect = this.view.getDreamCategorySelectElement(),
+          moodSelect = this.view.getDreamMoodSelectElement();
+        const userSearchDiv = this.view.getUserSearchDivElement();
+        try {
+          const userNickname = userSearchDiv.children[0].children[1].children[0].children[1].innerText;
+          this.model.getPromiseGetUserByNickname(userNickname).then(response => response.json()).then(data => {
+            if (data.length) {
+              this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[moodSelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, data[0].email);
+            } else {
+              console.log('User not found');
+            }
+          }).catch(error => {
+            console.error('Error:', error);
+          });
+        } catch {
+          this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[moodSelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value);
+        }
+      }
+    });
   }
   _initDreamSearchListener() {
     const dreamSearchInput = this.view.getDreamSearchInputElement(),
@@ -228,6 +254,11 @@ class Controller {
         });
       }
       ;
+      if (event.target.id === 'dream-record-main-bottom-look-link') {
+        const recordId = event.target.getAttribute('data-id');
+        localStorage.dreamRecordID = recordId;
+        window.location.href = "./view_record.html";
+      }
     });
   }
   _initUserSearchListener() {
@@ -251,7 +282,6 @@ class Controller {
       }
       return response.json();
     }).then(records => {
-      console.log(records);
       if (!records.pages) {
         this.view.displayNoRecordsMessage(mainPlot);
       } else {
@@ -281,12 +311,12 @@ class Controller {
     this.model.getPromiseGetUserByEmail(record.email).then(response => response.json()).then(data => {
       if (data.length) {
         const dreamCategoryIcon = this.model.whichDreamCategoryIcon(record.dreamCategory),
-          dreamCategoryIconDescription = this.model.whichDreamCategoryIconDescription(record.dreamCategory),
+          dreamCategoryIconDescription = record.dreamCategory,
           dreamMoodIcon = this.model.whichDreamMoodIcon(record.dreamMood),
-          dreamMoodIconDescription = this.model.whichDreamMoodIconDescription(record.dreamMood),
+          dreamMoodIconDescription = record.dreamMood,
           monthName = this.model.whichMonthNameByNumber(record.date.monthNumber),
           weekDay = this.model.whichWeekDayNameByNumber(record.date.weekNumber);
-        this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, data[0].avatar, data[0].nickname);
+        this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, data[0].avatar, data[0].nickname, record.id);
       } else {
         console.log('User not found');
       }
@@ -383,24 +413,6 @@ class Model {
         console.log('No such option in select dream category');
     }
   }
-  whichDreamCategoryIconDescription(categoryName) {
-    switch (categoryName) {
-      case 'Usual':
-        return 'Usual';
-      case 'Just talking':
-        return 'Just talking';
-      case 'Nightmare':
-        return 'Nightmare';
-      case 'Action':
-        return 'Action';
-      case 'Trash':
-        return 'Trash';
-      case 'Conscious dream':
-        return 'Conscious dream';
-      default:
-        console.log('No such option in select dream category');
-    }
-  }
   whichDreamMoodIcon(moodName) {
     switch (moodName) {
       case 'Typical dream':
@@ -413,22 +425,6 @@ class Model {
         return '../icons/make_record/dream_mood/terrible.svg';
       case 'Made me think':
         return '../icons/make_record/dream_mood/made_me_think.svg';
-      default:
-        console.log('No such option in select dream category');
-    }
-  }
-  whichDreamMoodIconDescription(moodName) {
-    switch (moodName) {
-      case 'Typical dream':
-        return 'Typical dream';
-      case 'Fun dream':
-        return 'Fun dream';
-      case 'Sad dream':
-        return 'Sad dream';
-      case 'Terrible':
-        return 'Terrible dream';
-      case 'Made me think':
-        return 'Made me think';
       default:
         console.log('No such option in select dream category');
     }
@@ -600,11 +596,13 @@ class View {
                 <button class="pagination-switcher__button" id="pagination-switcher-button-next">></button>
             </div>`;
   }
-  displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, avatarUrl, nickname) {
-    var dynamicContent = "";
+  displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, avatarUrl, nickname, id) {
+    var dynamicTagContent = '',
+      likesSpan = '';
     record.dreamTags.forEach(tagName => {
-      dynamicContent += `<button class="dream-record__main-middle-tags-button">${tagName}</button>`;
+      dynamicTagContent += `<button class="dream-record__main-middle-tags-button">${tagName}</button>`;
     });
+    record.likes === 1 ? likesSpan = 'like' : likesSpan = 'likes';
     mainPlot.innerHTML += `<div class="dream-record">
         <div class="dream-record__visual">
             <img src="${record.dreamImageUrl}" alt=""
@@ -634,11 +632,12 @@ class View {
                     </h3>
                 </div>
                 <div class="dream-record__main-top-right">
+                    <span class="dream-record__main-top-right-likes">${record.likes} ${likesSpan}</span>
                     <span class="dream-record__main-top-right-views">${record.views} views</span>
                 </div>
             </div>
             <div class="dream-record__main-middle">
-                <div class="dream-record__main-middle-tags">${dynamicContent}</div>
+                <div class="dream-record__main-middle-tags">${dynamicTagContent}</div>
                 <p class="dream-record__main-middle-plot">${record.dreamPlot}</p>
             </div>
             <div class="dream-record__main-bottom">
@@ -646,7 +645,7 @@ class View {
                     <img src="${avatarUrl}" alt="" class="dream-record__main-bottom-user-avatar">
                     <span>${nickname}</span>
                 </button>
-                <a href="#" class="dream-record__main-bottom-look-link">Look</a>
+                <a href="#" data-id=${id} class="dream-record__main-bottom-look-link" id="dream-record-main-bottom-look-link">Look</a>
             </div>
         </div>
     </div>`;
