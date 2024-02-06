@@ -5,6 +5,9 @@ export default class View {
             TITLE: 'dream-title',
             DATE: 'dream-date',
             VIEWS: 'dream-views',
+            LIKES_BUTTON: 'likes-button',
+            LIKES_NUMBER: 'dream-likes-number',
+            LIKE_ICON: 'dream-like-icon',
             CATEGORY: 'dream-category',
             CATEGORY_SPAN: 'dream-category-span',
             MOOD: 'dream-mood',
@@ -26,6 +29,18 @@ export default class View {
 
     getDreamViewsElement() {
         return document.querySelector(`#${View.ID.DREAM_RECORD.VIEWS}`);
+    }
+
+    getDreamLikesButtonElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.LIKES_BUTTON}`);
+    }
+
+    getDreamLikesNumberElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.LIKES_NUMBER}`);
+    }
+
+    getDreamLikeIconElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.LIKE_ICON}`);
     }
 
     getDreamCategoryElement() {
@@ -59,5 +74,19 @@ export default class View {
     getDreamPlotElement() {
         return document.querySelector(`#${View.ID.DREAM_RECORD.PLOT}`);
     }
-    
+
+    toggleLikesIcon(icon) {
+        if (icon.src.match(/_inactive.svg$/)) {
+            icon.src = '../icons/like_active.svg';
+
+            icon.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                icon.style.transform = 'scale(1)';
+            }, 300);
+            
+        } else {
+            icon.src = '../icons/like_inactive.svg';
+        };
+    }
+
 }

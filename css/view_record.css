@@ -354,12 +354,20 @@ button {
 }
 .main .container .dream-record-head .dream-record-head__top .dream-record-head__top-right .dream-record-head__top-right-like-button {
   font-size: 40px;
-  padding: 5px 20px;
+  padding: 10px;
   border-radius: 50px;
+  display: flex;
+  align-items: center;
 }
 .main .container .dream-record-head .dream-record-head__top .dream-record-head__top-right .dream-record-head__top-right-like-button:hover {
   color: #dedede;
   filter: drop-shadow(0 0 5px #232e2f);
+}
+.main .container .dream-record-head .dream-record-head__top .dream-record-head__top-right .dream-record-head__top-right-like-button .dream-record-head__top-right-like-button-number {
+  margin-right: 10px;
+}
+.main .container .dream-record-head .dream-record-head__top .dream-record-head__top-right .dream-record-head__top-right-like-button .dream-record-head__top-right-like-button-icon {
+  transition: 0.5s;
 }
 .main .container .dream-record-head .dream-record-head__bottom {
   padding: 10px;

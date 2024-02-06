@@ -63,12 +63,22 @@
 
                     .dream-record-head__top-right-like-button {
                         font-size: 40px;
-                        padding: 5px 20px;
+                        padding: 10px;
                         border-radius: 50px;
+                        display: flex;
+                        align-items: center;
 
                         &:hover {
                             color: #dedede;
                             filter: drop-shadow(0 0 5px $background_color_primary);
+                        }
+
+                        .dream-record-head__top-right-like-button-number {
+                            margin-right: 10px;
+                        }
+
+                        .dream-record-head__top-right-like-button-icon {
+                            transition: .5s;
                         }
                     }
                 }

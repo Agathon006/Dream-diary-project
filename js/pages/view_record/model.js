@@ -2,19 +2,31 @@ export default class Model {
 
     getPromiseChangeRecordViews(id, newNumber) {
         return fetch(`http://localhost:3000/records/${id}`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            views: newNumber,
-          }),
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                views: newNumber,
+            }),
         })
-        
+    }
+
+    getPromiseChangeRecordLikesAndLikesUsers(id, newNumber, newUsersEmails) {
+        return fetch(`http://localhost:3000/records/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                likes: newNumber,
+                likesUsersEmails: newUsersEmails,
+            }),
+        })
     }
 
     getPromiseGetDreamRecords(id) {
-            return fetch(`http://localhost:3000/records/${id}`)
+        return fetch(`http://localhost:3000/records/${id}`)
     }
 
     getPromiseGetUserByEmail(email) {

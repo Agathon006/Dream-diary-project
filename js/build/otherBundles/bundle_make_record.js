@@ -5519,6 +5519,8 @@ class Controller {
       formInfo.date.year = currentDate.getFullYear();
       formInfo.date.weekNumber = currentDate.getDay();
       formInfo.views = 0;
+      formInfo.likes = 0;
+      formInfo.likesUsersEmails = [];
       this._publishDreamRecord(formInfo);
     });
   }
