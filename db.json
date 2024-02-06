@@ -45,7 +45,7 @@
         "year": 2024,
         "weekNumber": 6
       },
-      "views": 76,
+      "views": 79,
       "likes": 1,
       "likesUsersEmails": [
         "agaton615@gmail.com"
@@ -69,9 +69,11 @@
         "year": 2024,
         "weekNumber": 0
       },
-      "views": 2,
-      "likes": 0,
-      "likesUsersEmails": []
+      "views": 3,
+      "likes": 1,
+      "likesUsersEmails": [
+        "agaton615@gmail.com"
+      ]
     },
     {
       "id": "a1c1",
@@ -109,7 +111,7 @@
         "year": 2024,
         "weekNumber": 0
       },
-      "views": 0,
+      "views": 1,
       "likes": 0,
       "likesUsersEmails": []
     },

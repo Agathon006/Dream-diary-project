@@ -9,6 +9,7 @@ export default class Controller {
         this._initDreamSearchListener();
         this._initDreamCategoryListener();
         this._initDreamMoodListener();
+        this._initSortListener();
         this._initMainPlotListener();
         this._initUserSearchListener();
         this._initDreamRecords();
@@ -58,7 +59,8 @@ export default class Controller {
             this.view.clearMainPlotHtml();
 
             const categorySelect = this.view.getDreamCategorySelectElement(),
-                moodSelect = this.view.getDreamMoodSelectElement();
+                moodSelect = this.view.getDreamMoodSelectElement(),
+                dreamSortSelect = this.view.getDreamSortSelectElement();
 
             const userSearchDiv = this.view.getUserSearchDivElement();
             try {
@@ -68,7 +70,8 @@ export default class Controller {
                     .then(data => {
                         if (data.length) {
                             this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[moodSelect.selectedIndex].value,
-                                moodSelect.options[moodSelect.selectedIndex].value, data[0].email);
+                                moodSelect.options[moodSelect.selectedIndex].value, data[0].email,
+                                dreamSortSelect.options[dreamSortSelect.selectedIndex].value, data[0].email);
                         } else {
                             console.log('User not found');
                         }
@@ -79,7 +82,8 @@ export default class Controller {
             }
             catch {
                 this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[moodSelect.selectedIndex].value,
-                    moodSelect.options[moodSelect.selectedIndex].value);
+                    moodSelect.options[moodSelect.selectedIndex].value,
+                    dreamSortSelect.options[dreamSortSelect.selectedIndex].value);
             }
         });
     }
@@ -119,7 +123,8 @@ export default class Controller {
 
 
             const dreamSearchInput = this.view.getDreamSearchInputElement(),
-                moodSelect = this.view.getDreamMoodSelectElement();
+                moodSelect = this.view.getDreamMoodSelectElement(),
+                dreamSortSelect = this.view.getDreamSortSelectElement();
 
             const userSearchDiv = this.view.getUserSearchDivElement();
             try {
@@ -128,7 +133,7 @@ export default class Controller {
                     .then(response => response.json())
                     .then(data => {
                         if (data.length) {
-                            this._initDreamRecords(1, dreamSearchInput.value, event.target.value, moodSelect.options[moodSelect.selectedIndex].value, data[0].email);
+                            this._initDreamRecords(1, dreamSearchInput.value, event.target.value, moodSelect.options[moodSelect.selectedIndex].value, dreamSortSelect.options[dreamSortSelect.selectedIndex].value, data[0].email);
                         } else {
                             console.log('User not found');
                         }
@@ -138,7 +143,7 @@ export default class Controller {
                     });
             }
             catch {
-                this._initDreamRecords(1, dreamSearchInput.value, event.target.value, moodSelect.options[moodSelect.selectedIndex].value);
+                this._initDreamRecords(1, dreamSearchInput.value, event.target.value, moodSelect.options[moodSelect.selectedIndex].value, dreamSortSelect.options[dreamSortSelect.selectedIndex].value);
             }
         });
     }
@@ -174,7 +179,8 @@ export default class Controller {
             this.view.clearMainPlotHtml();
 
             const dreamSearchInput = this.view.getDreamSearchInputElement(),
-                categorySelect = this.view.getDreamCategorySelectElement();
+                categorySelect = this.view.getDreamCategorySelectElement(),
+                dreamSortSelect = this.view.getDreamSortSelectElement();
 
             const userSearchDiv = this.view.getUserSearchDivElement();
             try {
@@ -183,7 +189,7 @@ export default class Controller {
                     .then(response => response.json())
                     .then(data => {
                         if (data.length) {
-                            this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, event.target.value, data[0].email);
+                            this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, event.target.value, dreamSortSelect.options[dreamSortSelect.selectedIndex].value, data[0].email);
                         } else {
                             console.log('User not found');
                         }
@@ -193,10 +199,58 @@ export default class Controller {
                     });
             }
             catch {
-                this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, event.target.value);
+                this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, event.target.value, dreamSortSelect.options[dreamSortSelect.selectedIndex].value);
             }
         });
     }
+
+    _initSortListener() {
+        const dreamSortSelect = this.view.getDreamSortSelectElement(),
+            dreamSortIcon = this.view.getDreamSortIconElement();
+
+        dreamSortSelect.addEventListener("change", (event) => {
+            switch (event.target.value) {
+                case 'Default':
+                    dreamSortIcon.src = '../icons/make_record/dream_mood/select.svg';
+                    break;
+                case 'likes':
+                    dreamSortIcon.src = '../icons/like_active.svg';
+                    break;
+                case 'views':
+                    dreamSortIcon.src = '../icons/view.svg';
+                    break;
+                default:
+                    console.log('No such option in select sort');
+            }
+
+            this.view.clearMainPlotHtml();
+
+            const dreamSearchInput = this.view.getDreamSearchInputElement(),
+                categorySelect = this.view.getDreamCategorySelectElement(),
+                moodSelect = this.view.getDreamMoodSelectElement();
+
+            const userSearchDiv = this.view.getUserSearchDivElement();
+            try {
+                const userNickname = userSearchDiv.children[0].children[1].children[0].children[1].innerText;
+                this.model.getPromiseGetUserByNickname(userNickname)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length) {
+                            this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, event.target.value, data[0].email);
+                        } else {
+                            console.log('User not found');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+            catch {
+                this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, event.target.value);
+            }
+        });
+    }
+
 
     _initMainPlotListener() {
         const mainPlot = this.view.getMainPlotElement();
@@ -207,7 +261,8 @@ export default class Controller {
 
                 const dreamSearchInput = this.view.getDreamSearchInputElement(),
                     categorySelect = this.view.getDreamCategorySelectElement(),
-                    moodSelect = this.view.getDreamMoodSelectElement();
+                    moodSelect = this.view.getDreamMoodSelectElement(),
+                    dreamSortSelect = this.view.getDreamSortSelectElement();
 
                 const userSearchDiv = this.view.getUserSearchDivElement();
                 try {
@@ -216,7 +271,7 @@ export default class Controller {
                         .then(response => response.json())
                         .then(data => {
                             if (data.length) {
-                                this._initDreamRecords((+currentPage.innerText) + 1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, data[0].email);
+                                this._initDreamRecords((+currentPage.innerText) + 1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, dreamSortSelect.options[dreamSortSelect.selectedIndex].value, data[0].email);
                             } else {
                                 console.log('User not found');
                             }
@@ -226,7 +281,7 @@ export default class Controller {
                         });
                 }
                 catch {
-                    this._initDreamRecords((+currentPage.innerText) + 1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value);
+                    this._initDreamRecords((+currentPage.innerText) + 1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, dreamSortSelect.options[dreamSortSelect.selectedIndex].value);
                 }
             };
             if (event.target.id === 'pagination-switcher-button-prev') {
@@ -234,7 +289,8 @@ export default class Controller {
 
                 const dreamSearchInput = this.view.getDreamSearchInputElement(),
                     categorySelect = this.view.getDreamCategorySelectElement(),
-                    moodSelect = this.view.getDreamMoodSelectElement();
+                    moodSelect = this.view.getDreamMoodSelectElement(),
+                    dreamSortSelect = this.view.getDreamSortSelectElement();
 
                 const userSearchDiv = this.view.getUserSearchDivElement();
                 try {
@@ -243,7 +299,7 @@ export default class Controller {
                         .then(response => response.json())
                         .then(data => {
                             if (data.length) {
-                                this._initDreamRecords((+currentPage.innerText) - 1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, data[0].email);
+                                this._initDreamRecords((+currentPage.innerText) - 1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, dreamSortSelect.options[dreamSortSelect.selectedIndex].value, data[0].email);
                             } else {
                                 console.log('User not found');
                             }
@@ -253,7 +309,7 @@ export default class Controller {
                         });
                 }
                 catch {
-                    this._initDreamRecords((+currentPage.innerText) - 1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value);
+                    this._initDreamRecords((+currentPage.innerText) - 1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, dreamSortSelect.options[dreamSortSelect.selectedIndex].value);
                 }
             };
             if (event.target.id === 'empty-message-button') {
@@ -263,6 +319,8 @@ export default class Controller {
                     dreamCategoryIcon = this.view.getDreamCategoryIconElement(),
                     dreamMoodSelect = this.view.getDreamMoodSelectElement(),
                     dreamMoodIcon = this.view.getDreamMoodIconElement(),
+                    dreamSortSelect = this.view.getDreamSortSelectElement(),
+                    dreamSortIcon = this.view.getDreamSortIconElement(),
                     userSearchDiv = this.view.getUserSearchDivElement();
 
                 dreamSearchInput.value = '';
@@ -272,6 +330,9 @@ export default class Controller {
 
                 dreamMoodSelect.value = 'All';
                 dreamMoodIcon.src = '../icons/make_record/dream_mood/select.svg';
+
+                dreamSortSelect.value = 'Default';
+                dreamSortIcon.src = '../icons/make_record/dream_mood/select.svg';
 
                 userSearchDiv.innerHTML = '';
 
@@ -325,10 +386,10 @@ export default class Controller {
         });
     }
 
-    _initDreamRecords(currentPageNumber = 1, searchInput = '', dreamCategory = 'All', dreamMood = 'All', userEmail = 'All') {
+    _initDreamRecords(currentPageNumber = 1, searchInput = '', dreamCategory = 'All', dreamMood = 'All', sort = 'Default', userEmail = 'All') {
         const mainPlot = this.view.getMainPlotElement();
 
-        this.model.getPromiseGetDreamRecords(currentPageNumber, searchInput, dreamCategory, dreamMood, userEmail)
+        this.model.getPromiseGetDreamRecords(currentPageNumber, searchInput, dreamCategory, dreamMood, sort, userEmail)
             .then(response => {
                 if (!response.ok) {
                     console.log('Error...');
