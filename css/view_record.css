@@ -371,18 +371,26 @@ button {
   display: flex;
   flex-direction: column;
 }
-.main .container .dream-record-head .dream-record-head__bottom .dream-record-head__bottom-left .dream-record-head__bottom-left-img {
+.main .container .dream-record-head .dream-record-head__bottom .dream-record-head__bottom-left .dream-record-head__bottom-left-block {
+  display: flex;
+  align-items: center;
+}
+.main .container .dream-record-head .dream-record-head__bottom .dream-record-head__bottom-left .dream-record-head__bottom-left-block .dream-record-head__bottom-left-img {
   margin-top: 10px;
   width: 64px;
   height: 64px;
+}
+.main .container .dream-record-head .dream-record-head__bottom .dream-record-head__bottom-left .dream-record-head__bottom-left-block .dream-record-head__bottom-left-span {
+  margin-left: 10px;
+  font-size: 36px;
 }
 .main .container .dream-record-head .dream-record-head__bottom .dream-record-head__bottom-right {
   display: flex;
   align-items: center;
 }
 .main .container .dream-record-head .dream-record-head__bottom .dream-record-head__bottom-right .dream-record-head__bottom-right-avatar {
-  width: 45px;
-  height: 45px;
+  width: 100px;
+  height: 100px;
   background-color: white;
   border-radius: 100%;
   background-image: url(./../img/default-user-avatar.svg);
@@ -403,6 +411,11 @@ button {
 }
 .main .container .dream-record-head .dream-record-head__bottom .dream-record-head__bottom-right .dream-record-head__bottom-right-texts .dream-record-head__bottom-right-texts-title {
   margin-bottom: 10px;
+  font-size: 36px;
+}
+.main .container .dream-record-head .dream-record-head__bottom .dream-record-head__bottom-right .dream-record-head__bottom-right-texts .dream-record-head__bottom-right-texts-user-nickname {
+  font-size: 36px;
+  font-weight: 900;
 }
 .main .container .dream-record-main {
   padding: 20px 0;
@@ -428,4 +441,6 @@ button {
 .main .container .dream-record-main .dream-record-main-wrapper .dream-record-main__plot {
   margin-left: 20px;
   font-size: 36px;
+  width: 75%;
+  word-wrap: break-word;
 }/*# sourceMappingURL=view_record.css.map */

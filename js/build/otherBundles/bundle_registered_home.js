@@ -312,9 +312,9 @@ class Controller {
     this.model.getPromiseGetUserByEmail(record.email).then(response => response.json()).then(data => {
       if (data.length) {
         const dreamCategoryIcon = this.model.whichDreamCategoryIcon(record.dreamCategory),
-          dreamCategoryIconDescription = this.model.whichDreamCategoryIconDescription(record.dreamCategory),
+          dreamCategoryIconDescription = record.dreamCategory,
           dreamMoodIcon = this.model.whichDreamMoodIcon(record.dreamMood),
-          dreamMoodIconDescription = this.model.whichDreamMoodIconDescription(record.dreamMood),
+          dreamMoodIconDescription = record.dreamMood,
           monthName = this.model.whichMonthNameByNumber(record.date.monthNumber),
           weekDay = this.model.whichWeekDayNameByNumber(record.date.weekNumber);
         this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, data[0].avatar, data[0].nickname, record.id);
@@ -414,24 +414,6 @@ class Model {
         console.log('No such option in select dream category');
     }
   }
-  whichDreamCategoryIconDescription(categoryName) {
-    switch (categoryName) {
-      case 'Usual':
-        return 'Usual';
-      case 'Just talking':
-        return 'Just talking';
-      case 'Nightmare':
-        return 'Nightmare';
-      case 'Action':
-        return 'Action';
-      case 'Trash':
-        return 'Trash';
-      case 'Conscious dream':
-        return 'Conscious dream';
-      default:
-        console.log('No such option in select dream category');
-    }
-  }
   whichDreamMoodIcon(moodName) {
     switch (moodName) {
       case 'Typical dream':
@@ -444,22 +426,6 @@ class Model {
         return '../icons/make_record/dream_mood/terrible.svg';
       case 'Made me think':
         return '../icons/make_record/dream_mood/made_me_think.svg';
-      default:
-        console.log('No such option in select dream category');
-    }
-  }
-  whichDreamMoodIconDescription(moodName) {
-    switch (moodName) {
-      case 'Typical dream':
-        return 'Typical dream';
-      case 'Fun dream':
-        return 'Fun dream';
-      case 'Sad dream':
-        return 'Sad dream';
-      case 'Terrible':
-        return 'Terrible dream';
-      case 'Made me think':
-        return 'Made me think';
       default:
         console.log('No such option in select dream category');
     }

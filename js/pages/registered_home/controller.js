@@ -370,9 +370,9 @@ export default class Controller {
             .then(data => {
                 if (data.length) {
                     const dreamCategoryIcon = this.model.whichDreamCategoryIcon(record.dreamCategory),
-                        dreamCategoryIconDescription = this.model.whichDreamCategoryIconDescription(record.dreamCategory),
+                        dreamCategoryIconDescription = record.dreamCategory,
                         dreamMoodIcon = this.model.whichDreamMoodIcon(record.dreamMood),
-                        dreamMoodIconDescription = this.model.whichDreamMoodIconDescription(record.dreamMood),
+                        dreamMoodIconDescription = record.dreamMood,
                         monthName = this.model.whichMonthNameByNumber(record.date.monthNumber),
                         weekDay = this.model.whichWeekDayNameByNumber(record.date.weekNumber);
                     this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, data[0].avatar, data[0].nickname, record.id);

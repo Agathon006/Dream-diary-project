@@ -84,10 +84,20 @@
                     display: flex;
                     flex-direction: column;
 
-                    .dream-record-head__bottom-left-img {
-                        margin-top: 10px;
-                        width: 64px;
-                        height: 64px;
+                    .dream-record-head__bottom-left-block {
+                        display: flex;
+                        align-items: center;
+
+                        .dream-record-head__bottom-left-img {
+                            margin-top: 10px;
+                            width: 64px;
+                            height: 64px;
+                        }
+
+                        .dream-record-head__bottom-left-span {
+                            margin-left: 10px;
+                            font-size: 36px;
+                        }
                     }
                 }
 
@@ -96,8 +106,8 @@
                     align-items: center;
 
                     .dream-record-head__bottom-right-avatar {
-                        width: 45px;
-                        height: 45px;
+                        width: 100px;
+                        height: 100px;
                         background-color: white;
                         border-radius: 100%;
                         background-image: url(./../img/default-user-avatar.svg);
@@ -120,9 +130,13 @@
 
                         .dream-record-head__bottom-right-texts-title {
                             margin-bottom: 10px;
+                            font-size: 36px;
                         }
 
-                        .dream-record-head__bottom-right-texts-user-nickname {}
+                        .dream-record-head__bottom-right-texts-user-nickname {
+                            font-size: 36px;
+                            font-weight: 900;
+                        }
                     }
                 }
             }
@@ -154,6 +168,8 @@
                 .dream-record-main__plot {
                     margin-left: 20px;
                     font-size: 36px;
+                    width: 75%;
+                    word-wrap: break-word;
                 }
             }
         }
