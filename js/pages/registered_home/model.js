@@ -1,55 +1,107 @@
 export default class Model {
 
-    getPromiseGetDreamRecords(page, searchInput, category, mood, email) {
-        if (searchInput != '' && category !== 'All' && mood !== 'All' && email !== 'All') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&dreamMood=${mood}&email=${email}`)
-        }
+    getPromiseGetDreamRecords(page, searchInput, category, mood, sort, email) {
+        if (sort !== 'Default') {
+            if (searchInput != '' && category !== 'All' && mood !== 'All' && email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&dreamMood=${mood}&email=${email}&_sort=-${sort}`)
+            }
 
-        if (searchInput != '' && category !== 'All' && mood !== 'All') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&dreamMood=${mood}`)
-        }
-        if (searchInput != '' && category !== 'All' && email !== 'All') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&email=${email}`)
-        }
-        if (searchInput != '' && mood !== 'All' && email !== 'All') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamMood=${mood}&email=${email}`)
-        }
-        if (category !== 'All' && mood !== 'All' && email !== 'All') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&dreamMood=${mood}&email=${email}`)
-        }
+            if (searchInput != '' && category !== 'All' && mood !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&dreamMood=${mood}&_sort=-${sort}`)
+            }
+            if (searchInput != '' && category !== 'All' && email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&email=${email}&_sort=-${sort}`)
+            }
+            if (searchInput != '' && mood !== 'All' && email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamMood=${mood}&email=${email}&_sort=-${sort}`)
+            }
+            if (category !== 'All' && mood !== 'All' && email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&dreamMood=${mood}&email=${email}&_sort=-${sort}`)
+            }
 
-        if (searchInput != '' && category !== 'All') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}`)
-        }
-        if (searchInput != '' && mood !== 'All') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamMood=${mood}`)
-        }
-        if (searchInput != '' && email !== 'All') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&email=${email}`)
-        }
-        if (category !== 'All' && mood !== 'All') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&dreamMood=${mood}`)
-        }
-        if (category !== 'All' && email !== 'All') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&email=${email}`)
-        }
-        if (mood !== 'All' && email !== 'All') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamMood=${mood}&email=${email}`)
-        }
+            if (searchInput != '' && category !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&_sort=-${sort}`)
+            }
+            if (searchInput != '' && mood !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamMood=${mood}&_sort=-${sort}`)
+            }
+            if (searchInput != '' && email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&email=${email}&_sort=-${sort}`)
+            }
+            if (category !== 'All' && mood !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&dreamMood=${mood}&_sort=-${sort}`)
+            }
+            if (category !== 'All' && email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&email=${email}&_sort=-${sort}`)
+            }
+            if (mood !== 'All' && email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamMood=${mood}&email=${email}&_sort=-${sort}`)
+            }
 
-        if (searchInput != '') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}`)
+            if (searchInput != '') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&_sort=-${sort}`)
+            }
+            if (category !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&_sort=-${sort}`)
+            }
+            if (mood !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamMood=${mood}&_sort=-${sort}`)
+            }
+            if (email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&email=${email}&_sort=-${sort}`)
+            }
+            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&_sort=-${sort}`)
+        } else {
+            if (searchInput != '' && category !== 'All' && mood !== 'All' && email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&dreamMood=${mood}&email=${email}`)
+            }
+
+            if (searchInput != '' && category !== 'All' && mood !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&dreamMood=${mood}`)
+            }
+            if (searchInput != '' && category !== 'All' && email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}&email=${email}`)
+            }
+            if (searchInput != '' && mood !== 'All' && email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamMood=${mood}&email=${email}`)
+            }
+            if (category !== 'All' && mood !== 'All' && email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&dreamMood=${mood}&email=${email}`)
+            }
+
+            if (searchInput != '' && category !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamCategory=${category}`)
+            }
+            if (searchInput != '' && mood !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&dreamMood=${mood}`)
+            }
+            if (searchInput != '' && email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}&email=${email}`)
+            }
+            if (category !== 'All' && mood !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&dreamMood=${mood}`)
+            }
+            if (category !== 'All' && email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}&email=${email}`)
+            }
+            if (mood !== 'All' && email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamMood=${mood}&email=${email}`)
+            }
+
+            if (searchInput != '') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamTitle=${searchInput}`)
+            }
+            if (category !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}`)
+            }
+            if (mood !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamMood=${mood}`)
+            }
+            if (email !== 'All') {
+                return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&email=${email}`)
+            }
+            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5`)
         }
-        if (category !== 'All') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamCategory=${category}`)
-        }
-        if (mood !== 'All') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&dreamMood=${mood}`)
-        }
-        if (email !== 'All') {
-            return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5&email=${email}`)
-        }
-        return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5`)
     }
 
     getPromiseGetUserByEmail(email) {

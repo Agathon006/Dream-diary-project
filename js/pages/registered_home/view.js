@@ -14,6 +14,8 @@ export default class View {
             DREAM_CATEGORY_ICON: 'dream-category-icon',
             DREAM_MOOD_SELECT: 'dream-mood-select',
             DREAM_MOOD_ICON: 'dream-mood-icon',
+            DREAM_SORT_SELECT: 'dream-sort-select',
+            DREAM_SORT_ICON: 'dream-sort-icon',
             USER_SEARCH_DIV: 'user-search-div',
         },
     }
@@ -40,6 +42,14 @@ export default class View {
 
     getDreamMoodIconElement() {
         return document.querySelector(`#${View.ID.FILTER.DREAM_MOOD_ICON}`);
+    }
+
+    getDreamSortSelectElement() {
+        return document.querySelector(`#${View.ID.FILTER.DREAM_SORT_SELECT}`);
+    }
+
+    getDreamSortIconElement() {
+        return document.querySelector(`#${View.ID.FILTER.DREAM_SORT_ICON}`);
     }
 
     getCurrentPageNumberElement() {
