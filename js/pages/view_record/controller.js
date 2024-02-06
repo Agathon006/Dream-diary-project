@@ -30,28 +30,40 @@ export default class Controller {
                 return response.json();
             })
             .then(record => {
-                console.log(record);
-                dreamTitle.innerText = record.dreamTitle;
-                dreamDate.innerText = `Dreamed ${record.date.dayNumber} ${this.model.whichMonthNameByNumber(record.date.monthNumber)} ${record.date.year}`;
-                dreamViews.innerText = `${record.views} views`;
-                dreamCategory.src = this.model.whichDreamCategoryIcon(record.dreamCategory);
-                dreamCategorySpan.innerText = record.dreamCategory;
-                dreamMood.src = this.model.whichDreamMoodIcon(record.dreamMood);
-                dreamMoodSpan.innerText = record.dreamMood;
-                dreamImage.src = record.dreamImageUrl;
-                dreamPlot.innerText = record.dreamPlot;
-                this.model.getPromiseGetUserByEmail(record.email)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.length) {
-                            dreamUserAvatar.src = data[0].avatar;
-                            dreamUserNickname.innerText = data[0].nickname;
-                        } else {
-                            console.log('User not found');
+                const newViewsNumber = record.views + 1;
+                this.model.getPromiseChangeRecordViews(recordId, newViewsNumber)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to update views on dream');
                         }
+                        return response.json();
+                    })
+                    .then(record => {
+                        dreamTitle.innerText = record.dreamTitle;
+                        dreamDate.innerText = `Dreamed ${record.date.dayNumber} ${this.model.whichMonthNameByNumber(record.date.monthNumber)} ${record.date.year}`;
+                        dreamViews.innerText = `${record.views} views`;
+                        dreamCategory.src = this.model.whichDreamCategoryIcon(record.dreamCategory);
+                        dreamCategorySpan.innerText = record.dreamCategory;
+                        dreamMood.src = this.model.whichDreamMoodIcon(record.dreamMood);
+                        dreamMoodSpan.innerText = record.dreamMood;
+                        dreamImage.src = record.dreamImageUrl;
+                        dreamPlot.innerText = record.dreamPlot;
+                        this.model.getPromiseGetUserByEmail(record.email)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.length) {
+                                    dreamUserAvatar.src = data[0].avatar;
+                                    dreamUserNickname.innerText = data[0].nickname;
+                                } else {
+                                    console.log('User not found');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
                     })
                     .catch(error => {
-                        console.error('Error:', error);
+                        console.error('Error updating views on dream:', error);
                     });
             })
             .catch(error => {

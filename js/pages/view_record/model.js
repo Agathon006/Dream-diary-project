@@ -1,5 +1,18 @@
 export default class Model {
 
+    getPromiseChangeRecordViews(id, newNumber) {
+        return fetch(`http://localhost:3000/records/${id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            views: newNumber,
+          }),
+        })
+        
+    }
+
     getPromiseGetDreamRecords(id) {
             return fetch(`http://localhost:3000/records/${id}`)
     }
