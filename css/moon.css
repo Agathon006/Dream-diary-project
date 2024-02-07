@@ -311,11 +311,78 @@ button {
 }
 
 .main .container .wrapper {
-  padding-top: 20px;
+  padding: 40px 0;
 }
 .main .container .wrapper .title {
   font-size: 36px;
+  margin: 40px 0 20px;
+}
+.main .container .wrapper .title:first-child {
+  margin: 0 0 20px;
+}
+.main .container .wrapper .forecast-place {
+  display: flex;
+}
+.main .container .wrapper .forecast-place .forecast-place-title {
+  font-size: 28px;
+}
+.main .container .wrapper .forecast-place .forecast-place-button {
+  height: -moz-fit-content;
+  height: fit-content;
+  font-size: 20px;
+  margin-left: 20px;
+  padding: 5px 20px;
+  border-radius: 50px;
+}
+.main .container .wrapper .forecast-place .forecast-place-button:hover {
+  color: #dedede;
+  filter: drop-shadow(0 0 5px #232e2f);
 }
 .main .container .wrapper .plot {
   margin: 10px 0;
+}
+.main .container .wrapper .forecast-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+.main .container .wrapper .forecast-container .forecast-day {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 15%;
+  border: 1px black solid;
+}
+.main .container .wrapper .forecast-container .forecast-day .forecast-day__icon {
+  width: 128px;
+}
+.main .container .wrapper .forecast-container .forecast-day .forecast-day__span {
+  margin-bottom: 10px;
+}
+.main .container .wrapper .forecast-container .forecast-day .forecast-day__span-result {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 26px;
+  font-weight: 900;
+  margin-top: 10px;
+}
+.main .container .wrapper .moon-phases-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+.main .container .wrapper .moon-phases-container .moon-phase {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  border: 1px black solid;
+}
+.main .container .wrapper .moon-phases-container .moon-phase .moon-phase__icon {
+  margin-bottom: 10px;
+  width: 128px;
+}
+.main .container .wrapper .moon-phases-container .moon-phase .moon-phase__span {
+  margin-top: 5px;
 }/*# sourceMappingURL=moon.css.map */

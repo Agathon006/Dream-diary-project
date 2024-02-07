@@ -12,14 +12,94 @@
     .container {
 
         .wrapper {
-            padding-top: 20px;
+            padding: 40px 0;
 
             .title {
                 font-size: 36px;
+                margin: 40px 0 20px;
+
+                &:first-child{
+                    margin: 0 0 20px;
+                }
+            }
+
+            .forecast-place {
+                display: flex;
+
+                .forecast-place-title {
+                    font-size: 28px;
+                }
+
+                .forecast-place-button {
+                    height: fit-content;
+                    font-size: 20px;
+                    margin-left: 20px;
+                    padding: 5px 20px;
+                    border-radius: 50px;
+
+                    &:hover {
+                        color: #dedede;
+                        filter: drop-shadow(0 0 5px $background_color_primary);
+                    }
+                }
             }
 
             .plot {
                 margin: 10px 0;
+            }
+
+            .forecast-container {
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-around;
+
+                .forecast-day {
+                    padding: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 15%;
+                    border: 1px black solid;
+
+                    .forecast-day__icon {
+                        width: 128px;
+                    }
+
+                    .forecast-day__span {
+                        margin-bottom: 10px;
+                    }
+
+                    .forecast-day__span-result {
+                        font-family: 'Courier New', Courier, monospace;
+                        font-size: 26px;
+                        font-weight: 900;
+                        margin-top: 10px;
+                    }
+                }
+            }
+
+            .moon-phases-container {
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-around;
+
+                .moon-phase {
+                    padding: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 20%;
+                    border: 1px black solid;
+
+                    .moon-phase__icon {
+                        margin-bottom: 10px;
+                        width: 128px;
+                    }
+
+                    .moon-phase__span {
+                        margin-top: 5px;
+                    }
+                }
             }
         }
 
