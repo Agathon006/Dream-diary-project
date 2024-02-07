@@ -12,11 +12,15 @@
     .container {
 
         .wrapper {
-            padding: 20px 0;
+            padding: 40px 0;
 
             .title {
                 font-size: 36px;
-                margin: 20px 0;
+                margin: 40px 0 20px;
+
+                &:first-child{
+                    margin: 0 0 20px;
+                }
             }
 
             .forecast-place {
@@ -32,7 +36,6 @@
                     margin-left: 20px;
                     padding: 5px 20px;
                     border-radius: 50px;
-                    transition: none;
 
                     &:hover {
                         color: #dedede;
@@ -71,6 +74,30 @@
                         font-size: 26px;
                         font-weight: 900;
                         margin-top: 10px;
+                    }
+                }
+            }
+
+            .moon-phases-container {
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-around;
+
+                .moon-phase {
+                    padding: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 20%;
+                    border: 1px black solid;
+
+                    .moon-phase__icon {
+                        margin-bottom: 10px;
+                        width: 128px;
+                    }
+
+                    .moon-phase__span {
+                        margin-top: 5px;
                     }
                 }
             }

@@ -311,11 +311,14 @@ button {
 }
 
 .main .container .wrapper {
-  padding: 20px 0;
+  padding: 40px 0;
 }
 .main .container .wrapper .title {
   font-size: 36px;
-  margin: 20px 0;
+  margin: 40px 0 20px;
+}
+.main .container .wrapper .title:first-child {
+  margin: 0 0 20px;
 }
 .main .container .wrapper .forecast-place {
   display: flex;
@@ -330,7 +333,6 @@ button {
   margin-left: 20px;
   padding: 5px 20px;
   border-radius: 50px;
-  transition: none;
 }
 .main .container .wrapper .forecast-place .forecast-place-button:hover {
   color: #dedede;
@@ -363,4 +365,24 @@ button {
   font-size: 26px;
   font-weight: 900;
   margin-top: 10px;
+}
+.main .container .wrapper .moon-phases-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+.main .container .wrapper .moon-phases-container .moon-phase {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  border: 1px black solid;
+}
+.main .container .wrapper .moon-phases-container .moon-phase .moon-phase__icon {
+  margin-bottom: 10px;
+  width: 128px;
+}
+.main .container .wrapper .moon-phases-container .moon-phase .moon-phase__span {
+  margin-top: 5px;
 }/*# sourceMappingURL=moon.css.map */
