@@ -12,14 +12,51 @@
     .container {
 
         .wrapper {
-            padding-top: 20px;
+            padding: 20px 0;
 
             .title {
                 font-size: 36px;
+                margin: 20px 0;
+            }
+
+            .subtitle {
+                font-size: 28px;
+                margin: 20px 0;
             }
 
             .plot {
                 margin: 10px 0;
+            }
+
+            .forecast-container {
+                // background-color: red;
+                display: flex;
+                justify-content: space-around;
+
+                .forecast-day {
+                    // background-color: green;
+                    padding: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 15%;
+                    border: 1px black solid;
+
+                    .forecast-day__icon {
+                        width: 128px;
+                    }
+
+                    .forecast-day__span {
+                        margin-bottom: 10px;
+                    }
+
+                    .forecast-day__span-result {
+                        font-family: 'Courier New', Courier, monospace;
+                        font-size: 26px;
+                        font-weight: 900;
+                        margin-top: 10px;
+                    }
+                }
             }
         }
 

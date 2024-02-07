@@ -311,11 +311,40 @@ button {
 }
 
 .main .container .wrapper {
-  padding-top: 20px;
+  padding: 20px 0;
 }
 .main .container .wrapper .title {
   font-size: 36px;
+  margin: 20px 0;
+}
+.main .container .wrapper .subtitle {
+  font-size: 28px;
+  margin: 20px 0;
 }
 .main .container .wrapper .plot {
   margin: 10px 0;
+}
+.main .container .wrapper .forecast-container {
+  display: flex;
+  justify-content: space-around;
+}
+.main .container .wrapper .forecast-container .forecast-day {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 15%;
+  border: 1px black solid;
+}
+.main .container .wrapper .forecast-container .forecast-day .forecast-day__icon {
+  width: 128px;
+}
+.main .container .wrapper .forecast-container .forecast-day .forecast-day__span {
+  margin-bottom: 10px;
+}
+.main .container .wrapper .forecast-container .forecast-day .forecast-day__span-result {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 26px;
+  font-weight: 900;
+  margin-top: 10px;
 }/*# sourceMappingURL=moon.css.map */
