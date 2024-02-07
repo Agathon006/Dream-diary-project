@@ -3,12 +3,23 @@ export default class View {
     static ID = {
         FORECAST: {
             PLACE: 'forecast-place',
+            MY_PLACE_BUTTON: 'forecast-place-button',
             CONTAINER: 'forecast-container',
+        },
+    }
+
+    static JS_CLASSES = {
+        COMMON: {
+            HIDDEN: 'hidden',
         },
     }
 
     getForecastPlaceElement() {
         return document.querySelector(`#${View.ID.FORECAST.PLACE}`);
+    }
+
+    getMyPlaceButtonElement() {
+        return document.querySelector(`#${View.ID.FORECAST.MY_PLACE_BUTTON}`);
     }
 
     getForecastContainerElement() {
@@ -29,6 +40,10 @@ export default class View {
             resultElement.style.color = 'green';
             resultElement.innerText = 'Most likely';
         }
+    }
+
+    toggleClassHidden(element) {
+        element.classList.toggle(View.JS_CLASSES.COMMON.HIDDEN);
     }
 
 }

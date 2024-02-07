@@ -317,14 +317,30 @@ button {
   font-size: 36px;
   margin: 20px 0;
 }
-.main .container .wrapper .subtitle {
+.main .container .wrapper .forecast-place {
+  display: flex;
+}
+.main .container .wrapper .forecast-place .forecast-place-title {
   font-size: 28px;
-  margin: 20px 0;
+}
+.main .container .wrapper .forecast-place .forecast-place-button {
+  height: -moz-fit-content;
+  height: fit-content;
+  font-size: 20px;
+  margin-left: 20px;
+  padding: 5px 20px;
+  border-radius: 50px;
+  transition: none;
+}
+.main .container .wrapper .forecast-place .forecast-place-button:hover {
+  color: #dedede;
+  filter: drop-shadow(0 0 5px #232e2f);
 }
 .main .container .wrapper .plot {
   margin: 10px 0;
 }
 .main .container .wrapper .forecast-container {
+  margin-top: 20px;
   display: flex;
   justify-content: space-around;
 }

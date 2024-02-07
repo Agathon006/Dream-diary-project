@@ -19,9 +19,26 @@
                 margin: 20px 0;
             }
 
-            .subtitle {
-                font-size: 28px;
-                margin: 20px 0;
+            .forecast-place {
+                display: flex;
+
+                .forecast-place-title {
+                    font-size: 28px;
+                }
+
+                .forecast-place-button {
+                    height: fit-content;
+                    font-size: 20px;
+                    margin-left: 20px;
+                    padding: 5px 20px;
+                    border-radius: 50px;
+                    transition: none;
+
+                    &:hover {
+                        color: #dedede;
+                        filter: drop-shadow(0 0 5px $background_color_primary);
+                    }
+                }
             }
 
             .plot {
@@ -29,12 +46,11 @@
             }
 
             .forecast-container {
-                // background-color: red;
+                margin-top: 20px;
                 display: flex;
                 justify-content: space-around;
 
                 .forecast-day {
-                    // background-color: green;
                     padding: 10px;
                     display: flex;
                     flex-direction: column;
