@@ -133,7 +133,7 @@ export default class View {
             </div>`
     }
 
-    displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, avatarUrl, nickname, id) {
+    displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, avatarUrl, nickname, id, likedThis) {
         var dynamicTagContent = '',
             likesSpan = '';
 
@@ -173,6 +173,7 @@ export default class View {
                 </div>
                 <div class="dream-record__main-top-right">
                     <span class="dream-record__main-top-right-likes">${record.likes} ${likesSpan}</span>
+                    ${likedThis}
                     <span class="dream-record__main-top-right-views">${record.views} views</span>
                 </div>
             </div>

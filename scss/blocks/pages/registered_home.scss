@@ -150,7 +150,6 @@
                         .dream-record__main-top {
                             display: flex;
                             justify-content: space-between;
-                            align-items: flex-end;
                             margin-bottom: 10px;
 
                             .dream-record__main-top-left {
@@ -173,6 +172,13 @@
 
                                 .dream-record__main-top-right-likes {
                                     font-size: 36px
+                                }
+
+                                .dream-record__main-top-right-liked-this {
+                                    color: rgb(255, 0, 217);
+                                    font-size: 20px;
+                                    font-weight: 900;
+                                    filter: drop-shadow(0px 0px 1px #000000);
                                 }
 
                                 .dream-record__main-top-right-views {

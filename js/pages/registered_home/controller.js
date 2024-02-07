@@ -435,7 +435,11 @@ export default class Controller {
                         dreamMoodIconDescription = record.dreamMood,
                         monthName = this.model.whichMonthNameByNumber(record.date.monthNumber),
                         weekDay = this.model.whichWeekDayNameByNumber(record.date.weekNumber);
-                    this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, data[0].avatar, data[0].nickname, record.id);
+                    let likedThis = '';
+                    if (record.likesUsersEmails.includes(record.email)) {
+                        likedThis = '<span class="dream-record__main-top-right-liked-this">You liked this</span>';
+                    };
+                    this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, data[0].avatar, data[0].nickname, record.id, likedThis);
                 } else {
                     console.log('User not found');
                 }
