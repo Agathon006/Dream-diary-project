@@ -1,9 +1,8 @@
 'use strict';
 
+import View from './view.js'
+import Controller from './controller.js'
+
 window.addEventListener('DOMContentLoaded', () => {
-    // const jwt = require('jsonwebtoken');
-    // console.log(localStorage.getItem('token'), localStorage.getItem('secretKey'));
-    // if (jwt.verify(localStorage.getItem('token'), localStorage.getItem('secretKey'))) {
-    // } else {
-    // }
+    new Controller(new View()).init();
 });
