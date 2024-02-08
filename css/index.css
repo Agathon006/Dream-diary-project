@@ -26,6 +26,10 @@
   margin: auto;
 }
 
+.bold-text {
+  font-weight: bold;
+}
+
 a {
   text-decoration: none;
 }
@@ -333,4 +337,81 @@ button {
 }
 .footer .container .footer__social .footer__social-link .footer__social-link-image {
   width: 48px;
+}
+
+.main .container {
+  padding: 50px 0;
+}
+.main .container .main-title {
+  font-size: 82px;
+}
+.main .container .title {
+  margin-bottom: 10px;
+  font-size: 42px;
+}
+.main .container .subtitle {
+  margin-bottom: 10px;
+  font-size: 36px;
+}
+.main .container .plot {
+  margin-bottom: 30px;
+  letter-spacing: 0.8px;
+}
+.main .container .plot-title {
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+.main .container .home-button {
+  font-size: 40px;
+  padding: 5px 20px;
+  border-radius: 50px;
+}
+.main .container .home-button:hover {
+  color: #dedede;
+  filter: drop-shadow(0 0 5px #232e2f);
+}
+.main .container .reasons-block {
+  margin: 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.main .container .reasons-block .reasons-block__sections {
+  display: flex;
+  justify-content: space-between;
+}
+.main .container .reasons-block .reasons-block__sections .reasons-block__sections-section {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.main .container .reasons-block .reasons-block__sections .reasons-block__sections-section .reasons-block__sections-section-img {
+  width: 128px;
+  margin-bottom: 20px;
+}
+.main .container .do-not-have-dreams-block {
+  margin: 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main .container .do-not-have-dreams-block .do-not-have-dreams-block-wrapper {
+  margin-top: 20px;
+  display: flex;
+}
+.main .container .do-not-have-dreams-block .do-not-have-dreams-block-wrapper .do-not-have-dreams-block__sections {
+  width: 60%;
+  margin-right: 30px;
+}
+.main .container .do-not-have-dreams-block .do-not-have-dreams-block-wrapper .do-not-have-dreams-block__image {
+  width: 35%;
+}
+.main .container .start-using-block {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }/*# sourceMappingURL=index.css.map */
