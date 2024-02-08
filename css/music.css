@@ -308,4 +308,48 @@ button {
 }
 .footer .container .footer__social .footer__social-link .footer__social-link-image {
   width: 48px;
+}
+
+.main .music-player {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main .music-player .music-player__title {
+  font-size: 46px;
+  margin-bottom: 20px;
+}
+.main .music-player .music-player__track-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.main .music-player .music-player__track-wrapper .music-player__track-span {
+  text-align: end;
+  width: 14%;
+  margin-right: 10px;
+  font-size: 26px;
+}
+.main .music-player .music-player__track-wrapper .music-player__track {
+  margin: 10px 0;
+  width: 80%;
+}
+.main .music-player .music-player__track-wrapper audio::-webkit-media-controls-panel {
+  background-color: #3f676b;
+}
+.main .music-player .music-player__track-wrapper audio::-webkit-media-controls-current-time-display {
+  color: #00ff00;
+}
+.main .music-player .music-player__track-wrapper audio::-webkit-media-controls-time-remaining-display,
+.main .music-player .music-player__track-wrapper audio::-webkit-media-controls-play-button,
+.main .music-player .music-player__track-wrapper audio::-webkit-media-controls-mute-button,
+.main .music-player .music-player__track-wrapper audio::-webkit-media-controls-rewind-button,
+.main .music-player .music-player__track-wrapper audio::-webkit-media-controls-seek-back-button,
+.main .music-player .music-player__track-wrapper audio::-webkit-media-controls-seek-forward-button,
+.main .music-player .music-player__track-wrapper audio::-webkit-media-controls-volume-slider,
+.main .music-player .music-player__track-wrapper audio::-webkit-media-controls-timeline,
+.main .music-player .music-player__track-wrapper audio::-webkit-media-controls-fullscreen-button {
+  color: #ffffff;
 }/*# sourceMappingURL=music.css.map */
