@@ -5438,15 +5438,23 @@ class Controller {
         }
         return response.json();
       }).then(data => {
-        if (data.some(user => user.email === formInfo.email && user.password === formInfo.password)) {
-          this.view.addClassRightToNotWrongElements();
-          this.model.createJwt(formInfo);
-          window.location.href = "./registered_home.html";
-        } else {
-          this.view.addClassWrongInput(emailInput);
-          this.view.addClassWrongInput(passwordInput);
-          this.view.createWrongSpanElement(SubmitButton, `Incorrect email or password`);
+        for (let item of data) {
+          if (item.email === formInfo.email && item.password === formInfo.password) {
+            this.view.addClassRightToNotWrongElements();
+            formInfo.role = item.role;
+            this.model.createJwt(formInfo);
+            if (item.role === 'user') {
+              window.location.href = "./registered_home.html";
+              return;
+            } else if (item.role === 'admin') {
+              window.location.href = "./admin.html";
+              return;
+            }
+          }
         }
+        this.view.addClassWrongInput(emailInput);
+        this.view.addClassWrongInput(passwordInput);
+        this.view.createWrongSpanElement(SubmitButton, `Incorrect email or password`);
       }).catch(error => {
         this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
       });
@@ -5577,7 +5585,6 @@ class View {
   addClassRightToNotWrongElements() {
     document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(element => {
       if (!element.classList.contains(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT)) {
-        console.log('yes');
         element.classList.add(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
       }
     });

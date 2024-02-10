@@ -53,7 +53,6 @@ export default class View {
     addClassRightToNotWrongElements() {
         document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(element => {
             if (!element.classList.contains(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT)) {
-                console.log('yes');
                 element.classList.add(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
             }
         });

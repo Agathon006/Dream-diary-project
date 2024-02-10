@@ -1,0 +1,73 @@
+button, a {
+  background-color: #232e2f;
+  color: #9f9f9f;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  transition: 0.5s;
+}
+
+.main {
+  min-height: 80vh;
+}
+
+.container {
+  padding: 0;
+  max-width: 90%;
+  margin: auto;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+a, button {
+  background-color: #232e2f;
+  color: #9f9f9f;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  transition: 0.5s;
+}
+
+.underlined {
+  text-decoration: underline;
+  color: #dedede;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.wrong-input {
+  border: 2px red solid !important;
+}
+
+.right-input {
+  border: 2px rgb(0, 255, 0) solid !important;
+}
+
+.wrong-span {
+  color: red;
+  font-size: 14px;
+}
+
+.locked-input {
+  background: transparent !important;
+  border: none !important;
+  cursor: default;
+  pointer-events: none;
+}/*# sourceMappingURL=admin.css.map */

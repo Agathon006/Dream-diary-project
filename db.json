@@ -1,6 +1,18 @@
 {
   "users": [
     {
+      "id": "d1d1",
+      "nickname": "Admin",
+      "email": "dreamDiaryAdmin@gmail.com",
+      "password": "hdsa73gdg732dgDGdD3GDdg337dg3D3G",
+      "role": "admin",
+      "name": "",
+      "surname": "",
+      "birthDate": "",
+      "profileInfo": "",
+      "avatar": ""
+    },
+    {
       "id": "d4d5",
       "nickname": "Agathon006",
       "email": "agaton615@gmail.com",
