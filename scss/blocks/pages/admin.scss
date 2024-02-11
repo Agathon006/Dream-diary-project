@@ -2,3 +2,180 @@
 @import '../../variables/variables';
 @import '../../templates/templates';
 @import '../../js_classes';
+
+.header {
+    background-color: rgb(127, 246, 255);
+
+    .container {
+        padding: 20px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .header__title {
+            font-size: 36px;
+        }
+
+        .header__exit-link {
+            background-color: transparent;
+            color: black;
+        }
+    }
+}
+
+.main {
+    min-height: 90vh;
+    background-color: whitesmoke;
+
+    .container {
+        padding: 50px 0;
+        display: flex;
+        justify-content: space-between;
+
+        .navigation-panel {
+            width: 20%;
+            height: fit-content;
+            background-color: white;
+            border-radius: 5px;
+            filter: drop-shadow(1px 1px 2px black);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            .navigation-panel__option {
+                padding: 5px 10px;
+                background-color: transparent;
+                color: black;
+            }
+
+            .navigation-separator {
+                align-self: center;
+                height: 1px;
+                width: 95%;
+                background-color: black;
+            }
+        }
+
+        .section {
+            padding: 10px 20px;
+            width: 75%;
+            background-color: white;
+            border-radius: 5px;
+            filter: drop-shadow(1px 1px 2px black);
+            display: flex;
+            flex-direction: column;
+
+            .table {
+                width: 100%;
+                text-align: center;
+
+                .table-head {
+
+                    .table-tr {
+
+                        .table-th {
+                            border: 1px solid black;
+                        }
+                    }
+                }
+
+                .table-td {
+                    border: 1px solid black;
+                }
+
+                .admin-button {
+                    margin: 5px 0;
+                    background-color: transparent;
+                    color: black;
+                    border: 1px solid black;
+                    border-radius: 0;
+
+                    &:hover {
+                        background-color: rgb(227, 227, 227);
+                    }
+                }
+            }
+
+            .profile-input {
+                margin-bottom: 20px;
+            }
+
+            .admin-button {
+                margin: 5px 0;
+                background-color: transparent;
+                color: black;
+                border: 1px solid black;
+                border-radius: 0;
+
+                &:hover {
+                    background-color: rgb(227, 227, 227);
+                }
+            }
+
+            .button-block {
+                display: flex;
+                justify-content: space-between;
+
+                .delete-button {
+                    margin: 5px 0;
+                    background-color: transparent;
+                    color: black;
+                    background-color: rgb(255, 196, 196);
+                    border: 1px solid black;
+                    border-radius: 0;
+
+                    &:hover {
+                        background-color: rgb(255, 109, 109);
+                    }
+                }
+            }
+
+            .profile-input {
+                width: 100%;
+                font-weight: 900;
+            }
+
+            .user-avatar {
+                width: 200px;
+                height: 200px;
+                display: block;
+                background-color: white;
+                background-image: url(../img/default-user-avatar.svg);
+                background-size: cover;
+                border-radius: 100%;
+                text-align: center;
+                border: 1px solid black;
+
+                &:before {
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    background-image: url(./../img/default-user-avatar.svg);
+                    background-size: cover;
+                }
+            }
+
+            .record-image {
+                width: 200px;
+                height: 200px;
+                display: block;
+                background-color: white;
+                background-image: url(../img/default-dream-image.svg);
+                background-size: cover;
+                border-radius: 100%;
+                text-align: center;
+                border: 1px solid black;
+
+                &:before {
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    background-image: url(./../img/default-dream-image.svg);
+                    background-size: cover;
+                }
+            }
+        }
+    }
+}

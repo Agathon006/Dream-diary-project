@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <script src="../js/build/otherBundles/bundle_authorization.js"></script>
     <meta charset="UTF-8">
@@ -10,9 +11,25 @@
     <link rel="stylesheet" href="../css/admin.css">
     <script src="../js/build/otherBundles/bundle_admin.js" defer></script>
 </head>
+
 <body>
-    <header></header>
-    <main></main>
-    <footer></footer>
+    <header class="header">
+        <div class="container">
+            <span class="header__title">Admin page</span>
+            <a href="./sign_in.html" class="header__exit-link">Exit</a>
+        </div>
+    </header>
+    <main class="main">
+        <div class="container">
+            <nav class="navigation-panel">
+                <button class="navigation-panel__option" id="users-button">Users</button>
+                <div class="navigation-separator"></div>
+                <button class="navigation-panel__option" id="records-button">Dream records</button>
+            </nav>
+            <section class="section" id="section">
+            </section>
+        </div>
+    </main>
 </body>
+
 </html>

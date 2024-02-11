@@ -27,3 +27,8 @@
     cursor: default;
     pointer-events: none;
 }
+
+.selected {
+    color: rgba(0, 0, 0, 0.5) !important;
+    cursor: default !important;
+}
