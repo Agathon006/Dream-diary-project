@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": "d1d1",
+      "id": "d1d2",
       "nickname": "Admin",
       "email": "dreamDiaryAdmin@gmail.com",
       "password": "n322dnsandk321dkn3dnas8d3",
@@ -20,8 +20,8 @@
       "role": "user",
       "name": "",
       "surname": "",
-      "birthDate": "",
-      "profileInfo": "",
+      "birthDate": "10/01/2023",
+      "profileInfo": "123",
       "avatar": "https://android-obzor.com/wp-content/uploads/2022/03/man-silhouette.jpg"
     },
     {

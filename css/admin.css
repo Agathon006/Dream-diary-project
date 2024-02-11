@@ -205,8 +205,13 @@ a, button {
 .main .container .section .table .admin-button:hover {
   background-color: rgb(227, 227, 227);
 }
+.main .container .section .profile-span {
+  margin-top: 20px;
+}
 .main .container .section .profile-input {
-  margin-bottom: 20px;
+  margin-top: 5px;
+  width: 100%;
+  font-weight: 900;
 }
 .main .container .section .admin-button {
   margin: 5px 0;
@@ -222,6 +227,17 @@ a, button {
   display: flex;
   justify-content: space-between;
 }
+.main .container .section .button-block .edit-button {
+  margin: 5px 0;
+  background-color: transparent;
+  color: black;
+  background-color: rgb(169, 248, 255);
+  border: 1px solid black;
+  border-radius: 0;
+}
+.main .container .section .button-block .edit-button:hover {
+  background-color: rgb(55, 238, 255);
+}
 .main .container .section .button-block .delete-button {
   margin: 5px 0;
   background-color: transparent;
@@ -232,10 +248,6 @@ a, button {
 }
 .main .container .section .button-block .delete-button:hover {
   background-color: rgb(255, 109, 109);
-}
-.main .container .section .profile-input {
-  width: 100%;
-  font-weight: 900;
 }
 .main .container .section .user-avatar {
   width: 200px;

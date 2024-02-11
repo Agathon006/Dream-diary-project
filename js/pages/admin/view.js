@@ -14,8 +14,14 @@ export default class View {
     }
 
     static JS_CLASSES = {
-        REGISTER_FORM: {
-            // WRONG_INPUT: 'wrong-input',
+        PROFILE: {
+            WRONG_INPUT: 'wrong-input',
+            WRONG_SPAN: 'wrong-span',
+        },
+        COMMON: {
+            HIDDEN: 'hidden',
+            SELECTED: 'selected',
+            LOCKED_INPUT: 'locked-input',
         },
     }
 
@@ -36,17 +42,49 @@ export default class View {
     }
 
     toggleClassHidden(element) {
-        element.classList.toggle('hidden');
+        element.classList.toggle(`${View.JS_CLASSES.COMMON.HIDDEN}`);
     }
 
     toggleClassSelected(element) {
-        if (element.classList.contains('selected')) {
+        if (element.classList.contains(`${View.JS_CLASSES.COMMON.SELECTED}`)) {
             element.disabled = false;
-            element.classList.remove('selected');
+            element.classList.remove(`${View.JS_CLASSES.COMMON.SELECTED}`);
         } else {
             element.disabled = true;
-            element.classList.add('selected');
+            element.classList.add(`${View.JS_CLASSES.COMMON.SELECTED}`);
         }
+    }
+
+    toggleInputs(inputs) {
+        inputs.forEach((input, index) => {
+            if (index === 3 || index === 1) {
+                return;
+            }
+            input.classList.toggle(`${View.JS_CLASSES.COMMON.LOCKED_INPUT}`);
+        });
+    }
+
+    addClassWrongInput(element) {
+        element.classList.add(View.JS_CLASSES.PROFILE.WRONG_INPUT);
+    }
+
+    createWrongSpanElement(element, message) {
+        let warningSpan = document.createElement('span');
+        warningSpan.innerText = message;
+        warningSpan.classList.add(View.JS_CLASSES.PROFILE.WRONG_SPAN);
+        element.parentNode.insertBefore(warningSpan, element.nextSibling);
+    }
+
+    clearClassWrongInputFromElements() {
+        document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.WRONG_INPUT}`).forEach(item => {
+            item.classList.remove(View.JS_CLASSES.PROFILE.WRONG_INPUT);
+        });
+    }
+
+    clearClassWrongSpanFromElements() {
+        document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.WRONG_SPAN}`).forEach(item => {
+            item.remove();
+        });
     }
 
     displayUsersTable(data) {
@@ -120,6 +158,19 @@ export default class View {
     }
 
     displayUser(section, user) {
+        let dunamicContentRoles = '';
+        if (user.role === 'user') {
+            dunamicContentRoles = `
+            <option value="admin">Admin</option>
+            <option value="user" selected>User</option>
+            `;
+        } else if (user.role === 'admin') {
+            dunamicContentRoles = `
+            <option value="admin" selected>Admin</option>
+            <option value="user">User</option>
+            `;
+        }
+
         section.innerHTML = `                
         <button class="admin-button" id="return-button">Return</button>
         <div class="profile-avatar">
@@ -137,7 +188,7 @@ export default class View {
         <span class="profile-span">Email</span>
         <input type="text" placeholder="empty" class="profile-input locked-input" id="email-input" value="${user.email}">
         <span class="profile-span">Role</span>
-        <input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input" id="role-input" value="${user.role}">
+        <select class="profile-input locked-input" id="role-input">${dunamicContentRoles}</select>
         <span class="profile-span">Name</span>
         <input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input" id="name-input" value="${user.name}">
         <span class="profile-span">Surname</span>
@@ -148,9 +199,9 @@ export default class View {
             class="datepicker profile-input locked-input" value="${user.birthDate}">
         <span class="profile-span">About me</span>
         <textarea rows="4" placeholder="empty" maxlength="300"
-            class="profile-input locked-input" id="about-input" value="${user.profileInfo}"></textarea>
+            class="profile-input locked-input" id="about-input">${user.profileInfo}</textarea>
         <div class="button-block">
-            <button class="admin-button">Edit</button>
+            <button class="edit-button">Edit</button>
             <button class="delete-button">Delete</button>
         </div>`;
     }
@@ -176,7 +227,7 @@ export default class View {
                 id="record-image"></img> 
         </div>
         <input type="text" placeholder="no image url" class="profile-input locked-input"
-        id="avatar-url-input" value="${record.dreamImageUrl}">
+        id="record-url-input" value="${record.dreamImageUrl}">
         <span class="profile-span">ID</span>
         <input type="text" placeholder="empty" maxlength="15" class="profile-input locked-input"
             id="id-input" value="${record.id}">
@@ -208,7 +259,7 @@ export default class View {
         <input type="text" placeholder="empty" id="datepicker"
             class="datepicker profile-input locked-input" value="${likesUsersEmails}">
         <div class="button-block">
-            <button class="admin-button">Edit</button>
+            <button class="edit-button">Edit</button>
             <button class="delete-button">Delete</button>
         </div>`;
     }

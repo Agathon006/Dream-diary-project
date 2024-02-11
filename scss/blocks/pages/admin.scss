@@ -157,8 +157,14 @@
                 }
             }
 
+            .profile-span {
+                margin-top: 20px;
+            }
+
             .profile-input {
-                margin-bottom: 20px;
+                margin-top: 5px;
+                width: 100%;
+                font-weight: 900;
             }
 
             .admin-button {
@@ -177,6 +183,19 @@
                 display: flex;
                 justify-content: space-between;
 
+                .edit-button {
+                    margin: 5px 0;
+                    background-color: transparent;
+                    color: black;
+                    background-color: rgb(169, 248, 255);
+                    border: 1px solid black;
+                    border-radius: 0;
+
+                    &:hover {
+                        background-color: rgb(55, 238, 255);
+                    }
+                }
+
                 .delete-button {
                     margin: 5px 0;
                     background-color: transparent;
@@ -189,11 +208,6 @@
                         background-color: rgb(255, 109, 109);
                     }
                 }
-            }
-
-            .profile-input {
-                width: 100%;
-                font-weight: 900;
             }
 
             .user-avatar {

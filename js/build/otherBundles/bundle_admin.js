@@ -72,10 +72,12 @@ class Controller {
   }
   _initSectionListener() {
     const section = this.view.getSectionElement();
+    let previousInputs = [];
     section.addEventListener('click', event => {
       if (event.target.classList.contains('edit-user-button')) {
         this.model.getPromiseGetUserById(event.target.parentNode.parentNode.children[0].innerText).then(response => response.json()).then(data => {
           this.view.displayUser(section, data);
+          $('#datepicker').datepicker();
         }).catch(error => {
           console.error('Error:', error);
         });
@@ -106,6 +108,99 @@ class Controller {
         const modalWrapper = this.view.getModalWrapperElement();
         this.view.toggleClassHidden(modalWrapper);
       }
+      if (event.target.classList.contains('edit-button') && event.target.innerText === 'Edit') {
+        const sectionInputs = [];
+        previousInputs = [];
+        for (let child of section.children) {
+          if (child.classList.contains('profile-input')) {
+            sectionInputs.push(child);
+            previousInputs.push(child.value);
+          }
+        }
+        this.view.toggleInputs(sectionInputs);
+        event.target.innerText = 'Save';
+      } else if (event.target.classList.contains('edit-button') && event.target.innerText === 'Save') {
+        const sectionInputs = [];
+        for (let child of section.children) {
+          if (child.classList.contains('profile-input')) {
+            sectionInputs.push(child);
+          }
+        }
+        if (previousInputs.every((value, index) => value === sectionInputs[index].value)) {
+          this.view.toggleInputs(sectionInputs);
+          event.target.innerText = 'Edit';
+        } else {
+          if (sectionInputs[0].id === 'avatar-url-input') {
+            if (this._isUserValidationOkay(sectionInputs)) {
+              this.view.clearClassWrongInputFromElements();
+              this.view.clearClassWrongSpanFromElements();
+              if (previousInputs[2] !== sectionInputs[2].value) {
+                this._isNewNicknameExist(sectionInputs[2], previousInputs, sectionInputs);
+              } else {
+                this._updateUserData(sectionInputs, previousInputs[1]);
+              }
+            }
+          } else if (sectionInputs[0].id === 'record-url-input') {
+            this._isRecordValidationOkay(sectionInputs);
+          }
+        }
+      }
+    });
+  }
+  _isUserValidationOkay(inputs) {
+    let isValidationOkay = true;
+    this.view.clearClassWrongInputFromElements();
+    this.view.clearClassWrongSpanFromElements();
+    if (!inputs[1].value.match(/^[a-zA-Z0-9_]{4,10}$/)) {
+      this.view.addClassWrongInput(inputs[1]);
+      this.view.createWrongSpanElement(inputs[1], "Id must consist of 4-10 numbers/letters");
+      isValidationOkay = false;
+    }
+    if (!inputs[2].value.match(/^[a-zA-Z][a-zA-Z0-9_]{4,14}$/)) {
+      this.view.addClassWrongInput(inputs[2]);
+      this.view.createWrongSpanElement(inputs[2], "Nickname must consist of 5-15 numbers/letters and can't start with a number");
+      isValidationOkay = false;
+    }
+    if (!inputs[5].value.match(/^[A-Za-z]*$/)) {
+      this.view.addClassWrongInput(inputs[5]);
+      this.view.createWrongSpanElement(inputs[5], "Name must consist of letters");
+      isValidationOkay = false;
+    }
+    if (!inputs[6].value.match(/^[A-Za-z]*$/)) {
+      this.view.addClassWrongInput(inputs[6]);
+      this.view.createWrongSpanElement(inputs[6], "Surname must consist of letters");
+      isValidationOkay = false;
+    }
+    if (!inputs[7].value.match(/\/(19[0-9][0-9]|200[0-2]|202[0-3])$/) && inputs[7].value !== '') {
+      this.view.addClassWrongInput(inputs[7]);
+      this.view.createWrongSpanElement(inputs[7], "Put correct date");
+      isValidationOkay = false;
+    }
+    return isValidationOkay;
+  }
+  _isNewNicknameExist(nicknameInput, previousInputs, sectionInputs) {
+    this.model.getPromiseGetUserByNickname(nicknameInput.value).then(response => response.json()).then(data => {
+      if (data[0]) {
+        this.view.addClassWrongInput(nicknameInput);
+        this.view.createWrongSpanElement(nicknameInput, "This nickname is already exists");
+      } else {
+        this._updateUserData(sectionInputs, previousInputs[1]);
+      }
+    }).catch(error => {
+      console.error('Error:', error);
+    });
+  }
+  _updateUserData(sectionInputs, userId) {
+    this.model.getPromiseEditUser(sectionInputs, userId).then(response => response.json()).then(data => {
+      this.model.getPromiseGetUserById(data.id).then(response => response.json()).then(data => {
+        const section = this.view.getSectionElement();
+        this.view.displayUser(section, data);
+        $('#datepicker').datepicker();
+      }).catch(error => {
+        console.error('Error:', error);
+      });
+    }).catch(error => {
+      console.error('Error:', error);
     });
   }
   _initUsersButtonListener() {
@@ -158,6 +253,9 @@ class Model {
   getPromiseGetUserById(id) {
     return fetch(`http://localhost:3000/users/${id}`);
   }
+  getPromiseGetUserByNickname(nickname) {
+    return fetch(`http://localhost:3000/users?nickname=${nickname}`);
+  }
   getPromiseGetRecordById(id) {
     return fetch(`http://localhost:3000/records/${id}`);
   }
@@ -169,6 +267,24 @@ class Model {
   getPromiseDeleteRecordById(id) {
     return fetch(`http://localhost:3000/records/${id}`, {
       method: 'DELETE'
+    });
+  }
+  getPromiseEditUser(sectionInputs, userId) {
+    const editedData = {
+      "avatar": sectionInputs[0].value,
+      "nickname": sectionInputs[2].value,
+      "role": sectionInputs[4].value,
+      "name": sectionInputs[5].value,
+      "surname": sectionInputs[6].value,
+      "birthDate": sectionInputs[7].value,
+      "profileInfo": sectionInputs[8].value
+    };
+    return fetch(`http://localhost:3000/users/${userId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(editedData)
     });
   }
 }
@@ -199,8 +315,14 @@ class View {
     }
   };
   static JS_CLASSES = {
-    REGISTER_FORM: {
-      // WRONG_INPUT: 'wrong-input',
+    PROFILE: {
+      WRONG_INPUT: 'wrong-input',
+      WRONG_SPAN: 'wrong-span'
+    },
+    COMMON: {
+      HIDDEN: 'hidden',
+      SELECTED: 'selected',
+      LOCKED_INPUT: 'locked-input'
     }
   };
   getSectionElement() {
@@ -216,16 +338,43 @@ class View {
     return document.querySelector(`#${View.ID.MODAL_WINDOW.MODAL_WRAPPER}`);
   }
   toggleClassHidden(element) {
-    element.classList.toggle('hidden');
+    element.classList.toggle(`${View.JS_CLASSES.COMMON.HIDDEN}`);
   }
   toggleClassSelected(element) {
-    if (element.classList.contains('selected')) {
+    if (element.classList.contains(`${View.JS_CLASSES.COMMON.SELECTED}`)) {
       element.disabled = false;
-      element.classList.remove('selected');
+      element.classList.remove(`${View.JS_CLASSES.COMMON.SELECTED}`);
     } else {
       element.disabled = true;
-      element.classList.add('selected');
+      element.classList.add(`${View.JS_CLASSES.COMMON.SELECTED}`);
     }
+  }
+  toggleInputs(inputs) {
+    inputs.forEach((input, index) => {
+      if (index === 3 || index === 1) {
+        return;
+      }
+      input.classList.toggle(`${View.JS_CLASSES.COMMON.LOCKED_INPUT}`);
+    });
+  }
+  addClassWrongInput(element) {
+    element.classList.add(View.JS_CLASSES.PROFILE.WRONG_INPUT);
+  }
+  createWrongSpanElement(element, message) {
+    let warningSpan = document.createElement('span');
+    warningSpan.innerText = message;
+    warningSpan.classList.add(View.JS_CLASSES.PROFILE.WRONG_SPAN);
+    element.parentNode.insertBefore(warningSpan, element.nextSibling);
+  }
+  clearClassWrongInputFromElements() {
+    document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.WRONG_INPUT}`).forEach(item => {
+      item.classList.remove(View.JS_CLASSES.PROFILE.WRONG_INPUT);
+    });
+  }
+  clearClassWrongSpanFromElements() {
+    document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.WRONG_SPAN}`).forEach(item => {
+      item.remove();
+    });
   }
   displayUsersTable(data) {
     const section = this.getSectionElement();
@@ -286,6 +435,18 @@ class View {
         </table>`;
   }
   displayUser(section, user) {
+    let dunamicContentRoles = '';
+    if (user.role === 'user') {
+      dunamicContentRoles = `
+            <option value="admin">Admin</option>
+            <option value="user" selected>User</option>
+            `;
+    } else if (user.role === 'admin') {
+      dunamicContentRoles = `
+            <option value="admin" selected>Admin</option>
+            <option value="user">User</option>
+            `;
+    }
     section.innerHTML = `                
         <button class="admin-button" id="return-button">Return</button>
         <div class="profile-avatar">
@@ -303,7 +464,7 @@ class View {
         <span class="profile-span">Email</span>
         <input type="text" placeholder="empty" class="profile-input locked-input" id="email-input" value="${user.email}">
         <span class="profile-span">Role</span>
-        <input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input" id="role-input" value="${user.role}">
+        <select class="profile-input locked-input" id="role-input">${dunamicContentRoles}</select>
         <span class="profile-span">Name</span>
         <input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input" id="name-input" value="${user.name}">
         <span class="profile-span">Surname</span>
@@ -314,9 +475,9 @@ class View {
             class="datepicker profile-input locked-input" value="${user.birthDate}">
         <span class="profile-span">About me</span>
         <textarea rows="4" placeholder="empty" maxlength="300"
-            class="profile-input locked-input" id="about-input" value="${user.profileInfo}"></textarea>
+            class="profile-input locked-input" id="about-input">${user.profileInfo}</textarea>
         <div class="button-block">
-            <button class="admin-button">Edit</button>
+            <button class="edit-button">Edit</button>
             <button class="delete-button">Delete</button>
         </div>`;
   }
@@ -338,7 +499,7 @@ class View {
                 id="record-image"></img> 
         </div>
         <input type="text" placeholder="no image url" class="profile-input locked-input"
-        id="avatar-url-input" value="${record.dreamImageUrl}">
+        id="record-url-input" value="${record.dreamImageUrl}">
         <span class="profile-span">ID</span>
         <input type="text" placeholder="empty" maxlength="15" class="profile-input locked-input"
             id="id-input" value="${record.id}">
@@ -370,7 +531,7 @@ class View {
         <input type="text" placeholder="empty" id="datepicker"
             class="datepicker profile-input locked-input" value="${likesUsersEmails}">
         <div class="button-block">
-            <button class="admin-button">Edit</button>
+            <button class="edit-button">Edit</button>
             <button class="delete-button">Delete</button>
         </div>`;
   }
