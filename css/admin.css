@@ -224,6 +224,7 @@ a, button {
   background-color: rgb(227, 227, 227);
 }
 .main .container .section .button-block {
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
 }
