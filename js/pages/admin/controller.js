@@ -6,6 +6,7 @@ export default class Controller {
 
     init() {
         this._initAdminPage();
+        this._initModalListener();
         this._initSectionListener();
         this._initUsersButtonListener();
         this._initRecordsButtonListener();
@@ -25,11 +26,61 @@ export default class Controller {
             });
     }
 
+    _initModalListener() {
+        const modalWrapper = this.view.getModalWrapperElement(),
+            section = this.view.getSectionElement();
+        modalWrapper.addEventListener('click', (event) => {
+            if (event.target.id === 'option-yes') {
+                if (section.children[1].classList.contains('profile-avatar')) {
+                    this.model.getPromiseDeleteUserById(section.children[4].value)
+                        .then(response => response.json())
+                        .then(data => {
+                            this.view.toggleClassHidden(modalWrapper);
+                            this.model.getPromiseGetAllUsers()
+                                .then(response => response.json())
+                                .then(data => {
+                                    this.view.displayUsersTable(data);
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                } else if (section.children[1].classList.contains('record-image')) {
+                    this.model.getPromiseDeleteRecordById(section.children[4].value)
+                        .then(response => response.json())
+                        .then(data => {
+                            this.view.toggleClassHidden(modalWrapper);
+                            this.model.getPromiseGetAllRecords()
+                                .then(response => response.json())
+                                .then(data => {
+                                    this.view.displayRecordsTable(data);
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                }
+            }
+            if (event.target.id === 'option-no') {
+                this.view.toggleClassHidden(modalWrapper);
+            }
+            if (event.target.classList.contains('modal-wrapper')) {
+                this.view.toggleClassHidden(modalWrapper);
+            }
+        });
+    }
+
     _initSectionListener() {
         const section = this.view.getSectionElement();
         section.addEventListener('click', (event) => {
             if (event.target.classList.contains('edit-user-button')) {
-                this.model.getPromiseGetUserByEmail(event.target.parentNode.parentNode.children[2].innerText)
+                this.model.getPromiseGetUserById(event.target.parentNode.parentNode.children[0].innerText)
                     .then(response => response.json())
                     .then(data => {
                         this.view.displayUser(section, data);
@@ -39,7 +90,7 @@ export default class Controller {
                     });
             }
             if (event.target.classList.contains('edit-record-button')) {
-                this.model.getPromiseGetRecordByEmail(event.target.parentNode.parentNode.children[2].innerText)
+                this.model.getPromiseGetRecordById(event.target.parentNode.parentNode.children[0].innerText)
                     .then(response => response.json())
                     .then(data => {
                         this.view.displayRecord(section, data);
@@ -68,6 +119,10 @@ export default class Controller {
                             console.error('Error:', error);
                         });
                 }
+            }
+            if (event.target.classList.contains('delete-button')) {
+                const modalWrapper = this.view.getModalWrapperElement();
+                this.view.toggleClassHidden(modalWrapper);
             }
         });
     }

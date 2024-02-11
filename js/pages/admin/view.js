@@ -8,6 +8,9 @@ export default class View {
             USERS_BUTTON: 'users-button',
             RECORDS_BUTTON: 'records-button',
         },
+        MODAL_WINDOW: {
+            MODAL_WRAPPER: 'modal-wrapper',
+        },
     }
 
     static JS_CLASSES = {
@@ -28,8 +31,12 @@ export default class View {
         return document.querySelector(`#${View.ID.BUTTONS.RECORDS_BUTTON}`);
     }
 
-    toggleClassSelected(element) {
-        element.classList.toggle('selected');
+    getModalWrapperElement() {
+        return document.querySelector(`#${View.ID.MODAL_WINDOW.MODAL_WRAPPER}`);
+    }
+
+    toggleClassHidden(element) {
+        element.classList.toggle('hidden');
     }
 
     toggleClassSelected(element) {
@@ -115,33 +122,33 @@ export default class View {
     displayUser(section, user) {
         section.innerHTML = `                
         <button class="admin-button" id="return-button">Return</button>
-        <div class="profile-main__avatar">
-            <img src="${user[0].avatar}" class="user-avatar"
-                id="profile-main-avatar"></img> 
+        <div class="profile-avatar">
+            <img src="${user.avatar}" class="user-avatar"
+                id="profile-avatar"></img> 
         </div>
         <input type="text" placeholder="no image url" class="profile-input locked-input"
-        id="avatar-url-input" value="${user[0].avatar}">
+        id="avatar-url-input" value="${user.avatar}">
         <span class="profile-span">ID</span>
         <input type="text" placeholder="empty" maxlength="15" class="profile-input locked-input"
-            id="id-input" value="${user[0].id}">
+            id="id-input" value="${user.id}">
         <span class="profile-span">Nickname</span>
         <input type="text" placeholder="empty" maxlength="15" class="profile-input locked-input"
-            id="nickname-input" value="${user[0].nickname}">
+            id="nickname-input" value="${user.nickname}">
         <span class="profile-span">Email</span>
-        <input type="text" placeholder="empty" class="profile-input locked-input" id="email-input" value="${user[0].email}">
+        <input type="text" placeholder="empty" class="profile-input locked-input" id="email-input" value="${user.email}">
         <span class="profile-span">Role</span>
-        <input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input" id="role-input" value="${user[0].role}">
+        <input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input" id="role-input" value="${user.role}">
         <span class="profile-span">Name</span>
-        <input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input" id="name-input" value="${user[0].name}">
+        <input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input" id="name-input" value="${user.name}">
         <span class="profile-span">Surname</span>
         <input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input"
-            id="surname-input" value="${user[0].surname}">
+            id="surname-input" value="${user.surname}">
         <span class="profile-span">Birth date</span>
         <input type="text" placeholder="empty" id="datepicker"
-            class="datepicker profile-input locked-input" value="${user[0].birthDate}">
+            class="datepicker profile-input locked-input" value="${user.birthDate}">
         <span class="profile-span">About me</span>
         <textarea rows="4" placeholder="empty" maxlength="300"
-            class="profile-input locked-input" id="about-input" value="${user[0].profileInfo}"></textarea>
+            class="profile-input locked-input" id="about-input" value="${user.profileInfo}"></textarea>
         <div class="button-block">
             <button class="admin-button">Edit</button>
             <button class="delete-button">Delete</button>
@@ -151,52 +158,52 @@ export default class View {
     displayRecord(section, record) {
 
         let tags = '';
-        for (let tag of record[0].dreamTags) {
+        for (let tag of record.dreamTags) {
             tags += `${tag}, `;
         }
         tags = tags.slice(0, -2);
 
         let likesUsersEmails = '';
-        for (let email of record[0].likesUsersEmails) {
+        for (let email of record.likesUsersEmails) {
             likesUsersEmails += `${email}, `;
         }
         likesUsersEmails = likesUsersEmails.slice(0, -2);
 
         section.innerHTML = `                
         <button class="admin-button" id="return-button">Return</button>
-        <div class="profile-main__avatar">
-            <img src="${record[0].dreamImageUrl}" class="record-image"
-                id="profile-main-avatar"></img> 
+        <div class="record-image">
+            <img src="${record.dreamImageUrl}" class="record-image"
+                id="record-image"></img> 
         </div>
         <input type="text" placeholder="no image url" class="profile-input locked-input"
-        id="avatar-url-input" value="${record[0].dreamImageUrl}">
+        id="avatar-url-input" value="${record.dreamImageUrl}">
         <span class="profile-span">ID</span>
         <input type="text" placeholder="empty" maxlength="15" class="profile-input locked-input"
-            id="id-input" value="${record[0].id}">
+            id="id-input" value="${record.id}">
         <span class="profile-span">Title</span>
         <input type="text" placeholder="empty" maxlength="15" class="profile-input locked-input"
-            id="nickname-input" value="${record[0].dreamTitle}">
+            id="nickname-input" value="${record.dreamTitle}">
         <span class="profile-span">Email</span>
-        <input type="text" placeholder="empty" class="profile-input locked-input" id="email-input" value="${record[0].email}">
+        <input type="text" placeholder="empty" class="profile-input locked-input" id="email-input" value="${record.email}">
         <span class="profile-span">Category</span>
-        <input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input" id="role-input" value="${record[0].dreamCategory}">
+        <input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input" id="role-input" value="${record.dreamCategory}">
         <span class="profile-span">Mood</span>
-        <input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input" id="name-input" value="${record[0].dreamMood}">
+        <input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input" id="name-input" value="${record.dreamMood}">
         <span class="profile-span">Tages</span>
         <input type="text" placeholder="empty" id="datepicker"
             class="datepicker profile-input locked-input" value="${tags}">
         <span class="profile-span">Plot</span>
         <textarea rows="4" placeholder="empty" maxlength="300"
-            class="profile-input locked-input" id="about-input" value="${record[0].dreamPlot}"></textarea>
+            class="profile-input locked-input" id="about-input" value="${record.dreamPlot}"></textarea>
         <span class="profile-span">Date</span>
         <input type="text" placeholder="empty" id="datepicker"
             class="datepicker profile-input locked-input" value="TODO">
         <span class="profile-span">Views</span>
         <input type="text" placeholder="empty" id="datepicker"
-            class="datepicker profile-input locked-input" value="${record[0].views}">
+            class="datepicker profile-input locked-input" value="${record.views}">
         <span class="profile-span">Likes</span>
         <input type="text" placeholder="empty" id="datepicker"
-            class="datepicker profile-input locked-input" value="${record[0].likes}">
+            class="datepicker profile-input locked-input" value="${record.likes}">
         <span class="profile-span">Like user emails</span>
         <input type="text" placeholder="empty" id="datepicker"
             class="datepicker profile-input locked-input" value="${likesUsersEmails}">

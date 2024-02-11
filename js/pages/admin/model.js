@@ -8,12 +8,24 @@ export default class Model {
         return fetch(`http://localhost:3000/records?_page=${page}&_per_page=20`)
     }
 
-    getPromiseGetUserByEmail(email) {
-        return fetch(`http://localhost:3000/users?email=${email}`)
+    getPromiseGetUserById(id) {
+        return fetch(`http://localhost:3000/users/${id}`)
     }
 
-    getPromiseGetRecordByEmail(email) {
-        return fetch(`http://localhost:3000/records?email=${email}`)
+    getPromiseGetRecordById(id) {
+        return fetch(`http://localhost:3000/records/${id}`)
+    }
+
+    getPromiseDeleteUserById(id) {
+        return fetch(`http://localhost:3000/users/${id}`, {
+            method: 'DELETE',
+        })
+    }
+
+    getPromiseDeleteRecordById(id) {
+        return fetch(`http://localhost:3000/records/${id}`, {
+            method: 'DELETE',
+        })
     }
 
 }
