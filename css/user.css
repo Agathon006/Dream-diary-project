@@ -68,6 +68,10 @@ button {
   opacity: 0;
 }
 
+.not-exist {
+  display: none !important;
+}
+
 .wrong-input {
   border: 2px red solid !important;
 }
@@ -119,6 +123,10 @@ button {
 .hidden {
   visibility: hidden;
   opacity: 0;
+}
+
+.not-exist {
+  display: none !important;
 }
 
 .wrong-input {
@@ -284,6 +292,10 @@ button {
 .hidden {
   visibility: hidden;
   opacity: 0;
+}
+
+.not-exist {
+  display: none !important;
 }
 
 .wrong-input {

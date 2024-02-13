@@ -18,8 +18,14 @@ export default class View {
             WRONG_INPUT: 'wrong-input',
             WRONG_SPAN: 'wrong-span',
         },
+        RECORD: {
+            TAGS: {
+                CLOSE_BUTTON: 'close',
+            },
+        },
         COMMON: {
             HIDDEN: 'hidden',
+            NOT_EXIST: 'not-exist',
             SELECTED: 'selected',
             LOCKED_INPUT: 'locked-input',
         },
@@ -41,8 +47,16 @@ export default class View {
         return document.querySelector(`#${View.ID.MODAL_WINDOW.MODAL_WRAPPER}`);
     }
 
+    getAllTagsCloseButtons() {
+        return document.querySelectorAll(`.${View.JS_CLASSES.RECORD.TAGS.CLOSE_BUTTON}`);
+    }
+
     toggleClassHidden(element) {
         element.classList.toggle(`${View.JS_CLASSES.COMMON.HIDDEN}`);
+    }
+
+    toggleClassNotExist(element) {
+        element.classList.toggle(`${View.JS_CLASSES.COMMON.NOT_EXIST}`);
     }
 
     toggleClassSelected(element) {
@@ -208,17 +222,124 @@ export default class View {
 
     displayRecord(section, record) {
 
-        let tags = '';
-        for (let tag of record.dreamTags) {
-            tags += `${tag}, `;
-        }
-        tags = tags.slice(0, -2);
-
         let likesUsersEmails = '';
         for (let email of record.likesUsersEmails) {
             likesUsersEmails += `${email}, `;
         }
         likesUsersEmails = likesUsersEmails.slice(0, -2);
+
+        let dunamicContentCategories = '';
+        switch (record.dreamCategory) {
+            case 'Usual':
+                dunamicContentCategories = `
+                <option value="Usual" selected>Usual</option>
+                <option value="Just talking">Just talking</option>
+                <option value="Nightmare">Nightmare</option>
+                <option value="Action">Action</option>
+                <option value="Trash">Trash</option>
+                <option value="Conscious dream">Conscious dream</option>
+                `;
+                break;
+            case 'Just talking':
+                dunamicContentCategories = `
+                <option value="Usual">Usual</option>
+                <option value="Just talking" selected>Just talking</option>
+                <option value="Nightmare">Nightmare</option>
+                <option value="Action">Action</option>
+                <option value="Trash">Trash</option>
+                <option value="Conscious dream">Conscious dream</option>
+                `;
+                break;
+            case 'Nightmare':
+                dunamicContentCategories = `
+                <option value="Usual">Usual</option>
+                <option value="Just talking">Just talking</option>
+                <option value="Nightmare" selected>Nightmare</option>
+                <option value="Action">Action</option>
+                <option value="Trash">Trash</option>
+                <option value="Conscious dream">Conscious dream</option>
+                `;
+                break;
+            case 'Action':
+                dunamicContentCategories = `
+                <option value="Usual">Usual</option>
+                <option value="Just talking">Just talking</option>
+                <option value="Nightmare">Nightmare</option>
+                <option value="Action" selected>Action</option>
+                <option value="Trash">Trash</option>
+                <option value="Conscious dream">Conscious dream</option>
+                `;
+                break;
+            case 'Trash':
+                dunamicContentCategories = `
+                <option value="Usual">Usual</option>
+                <option value="Just talking">Just talking</option>
+                <option value="Nightmare">Nightmare</option>
+                <option value="Action">Action</option>
+                <option value="Trash" selected>Trash</option>
+                <option value="Conscious dream">Conscious dream</option>
+                `;
+                break;
+            case 'Conscious dream':
+                dunamicContentCategories = `
+                <option value="Usual">Usual</option>
+                <option value="Just talking">Just talking</option>
+                <option value="Nightmare">Nightmare</option>
+                <option value="Action">Action</option>
+                <option value="Trash">Trash</option>
+                <option value="Conscious dream" selected>Conscious dream</option>
+                `;
+                break;
+        }
+
+        let dunamicContentMoods = '';
+        switch (record.dreamMood) {
+            case 'Typical dream':
+                dunamicContentMoods = `
+                <option value="Typical dream" selected>Typical dream</option>
+                <option value="Fun dream">Fun dream</option>
+                <option value="Sad dream">Sad dream</option>
+                <option value="Terrible">Terrible</option>
+                <option value="Made me think">Made me think</option>
+                `;
+                break;
+            case 'Fun dream':
+                dunamicContentMoods = `
+                <option value="Typical dream">Typical dream</option>
+                <option value="Fun dream" selected>Fun dream</option>
+                <option value="Sad dream">Sad dream</option>
+                <option value="Terrible">Terrible</option>
+                <option value="Made me think">Made me think</option>
+                `;
+                break;
+            case 'Sad dream':
+                dunamicContentMoods = `
+                <option value="Typical dream">Typical dream</option>
+                <option value="Fun dream">Fun dream</option>
+                <option value="Sad dream" selected>Sad dream</option>
+                <option value="Terrible">Terrible</option>
+                <option value="Made me think">Made me think</option>
+                `;
+                break;
+            case 'Terrible':
+                dunamicContentMoods = `
+                <option value="Typical dream">Typical dream</option>
+                <option value="Fun dream">Fun dream</option>
+                <option value="Sad dream">Sad dream</option>
+                <option value="Terrible" selected>Terrible</option>
+                <option value="Made me think">Made me think</option>
+                `;
+                break;
+            case 'Made me think':
+                dunamicContentMoods = `
+                <option value="Typical dream">Typical dream</option>
+                <option value="Fun dream">Fun dream</option>
+                <option value="Sad dream">Sad dream</option>
+                <option value="Terrible">Terrible</option>
+                <option value="Made me think" selected>Made me think</option>
+                `;
+                break;
+        }
 
         section.innerHTML = `                
         <button class="admin-button" id="return-button">Return</button>
@@ -233,34 +354,39 @@ export default class View {
             id="id-input" value="${record.id}">
         <span class="profile-span">Title</span>
         <input type="text" placeholder="empty" maxlength="15" class="profile-input locked-input"
-            id="nickname-input" value="${record.dreamTitle}">
+            id="title-input" value="${record.dreamTitle}">
         <span class="profile-span">Email</span>
         <input type="text" placeholder="empty" class="profile-input locked-input" id="email-input" value="${record.email}">
         <span class="profile-span">Category</span>
-        <input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input" id="role-input" value="${record.dreamCategory}">
+        <select class="profile-input locked-input" id="category-input">${dunamicContentCategories}</select>
         <span class="profile-span">Mood</span>
-        <input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input" id="name-input" value="${record.dreamMood}">
-        <span class="profile-span">Tages</span>
-        <input type="text" placeholder="empty" id="datepicker"
-            class="datepicker profile-input locked-input" value="${tags}">
+        <select class="profile-input locked-input" id="moods-input">${dunamicContentMoods}</select>
+        <span class="profile-span">Tags (1-5)</span>
+        <textarea name="dreamTags" rows="2" placeholder="love milk, bread, my cheese" maxlength="250"
+            class="profile-input locked-input" id="record-form-tags-input"></textarea>
+        <div class="record-form__input-plot tags-container" id="record-form-tags-container"></div>
         <span class="profile-span">Plot</span>
         <textarea rows="4" placeholder="empty" maxlength="300"
-            class="profile-input locked-input" id="about-input" value="${record.dreamPlot}"></textarea>
+            class="profile-input locked-input" id="plot-input" value="${record.dreamPlot}"></textarea>
         <span class="profile-span">Date</span>
         <input type="text" placeholder="empty" id="datepicker"
             class="datepicker profile-input locked-input" value="TODO">
         <span class="profile-span">Views</span>
-        <input type="text" placeholder="empty" id="datepicker"
+        <input type="text" placeholder="empty" id="views-input"
             class="datepicker profile-input locked-input" value="${record.views}">
         <span class="profile-span">Likes</span>
-        <input type="text" placeholder="empty" id="datepicker"
+        <input type="text" placeholder="empty" id="likes-input"
             class="datepicker profile-input locked-input" value="${record.likes}">
         <span class="profile-span">Like user emails</span>
-        <input type="text" placeholder="empty" id="datepicker"
+        <input type="text" placeholder="empty" id="likes-user-emails-input"
             class="datepicker profile-input locked-input" value="${likesUsersEmails}">
         <div class="button-block">
             <button class="edit-button">Edit</button>
             <button class="delete-button">Delete</button>
         </div>`;
+
+        for (let tag of record.dreamTags) {
+            $('#record-form-tags-container').append('<span class="badge badge-primary mr-1">' + tag + ' <button class="close" type="button" aria-label="Close"><span aria-hidden="true">&times;</span></button></span>');
+        }
     }
 }

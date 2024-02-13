@@ -52,6 +52,10 @@ a, button {
   opacity: 0;
 }
 
+.not-exist {
+  display: none !important;
+}
+
 .wrong-input {
   border: 2px red solid !important;
 }
@@ -184,6 +188,22 @@ a, button {
   filter: drop-shadow(1px 1px 2px black);
   display: flex;
   flex-direction: column;
+}
+.main .container .section .tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
+}
+.main .container .section .tags-container .badge {
+  display: flex;
+  align-items: center;
+  color: black;
+  background-color: rgb(229, 229, 229);
+}
+.main .container .section .tags-container .close {
+  background-color: transparent;
+  color: black;
 }
 .main .container .section .table {
   width: 100%;

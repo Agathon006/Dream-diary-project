@@ -78,7 +78,8 @@ export default class Controller {
 
     _initSectionListener() {
         const section = this.view.getSectionElement();
-        let previousInputs = [];
+        let previousInputs = [],
+            previousTags = [];
         section.addEventListener('click', (event) => {
             if (event.target.classList.contains('edit-user-button')) {
                 this.model.getPromiseGetUserById(event.target.parentNode.parentNode.children[0].innerText)
@@ -96,6 +97,11 @@ export default class Controller {
                     .then(response => response.json())
                     .then(data => {
                         this.view.displayRecord(section, data);
+                        const tagsCloseButtons = this.view.getAllTagsCloseButtons();
+                        for (let button of tagsCloseButtons) {
+                            this.view.toggleClassNotExist(button);
+                        };
+                        this._initTagsInputListener();
                     })
                     .catch(error => {
                         console.error('Error:', error);
@@ -128,42 +134,103 @@ export default class Controller {
             }
             if (event.target.classList.contains('edit-button') && event.target.innerText === 'Edit') {
                 const sectionInputs = [];
-                previousInputs = [];
+
+                previousInputs = [],
+                    previousTags = [];
+
                 for (let child of section.children) {
                     if (child.classList.contains('profile-input')) {
                         sectionInputs.push(child);
                         previousInputs.push(child.value);
                     }
+                    if (child.classList.contains('tags-container')) {
+                        for (let tag of child.children) {
+                            previousTags.push(tag);
+                        }
+                    }
                 }
                 this.view.toggleInputs(sectionInputs);
+
+                const tagsCloseButtons = this.view.getAllTagsCloseButtons();
+                for (let button of tagsCloseButtons) {
+                    this.view.toggleClassNotExist(button);
+                };
+
                 event.target.innerText = 'Save';
             } else if (event.target.classList.contains('edit-button') && event.target.innerText === 'Save') {
-                const sectionInputs = [];
+                const sectionInputs = [],
+                    recordTags = [];
                 for (let child of section.children) {
                     if (child.classList.contains('profile-input')) {
                         sectionInputs.push(child);
                     }
-                }
-                if (previousInputs.every((value, index) => value === sectionInputs[index].value)) {
-                    this.view.toggleInputs(sectionInputs);
-                    event.target.innerText = 'Edit';
-                } else {
-                    if (sectionInputs[0].id === 'avatar-url-input') {
-                        if (this._isUserValidationOkay(sectionInputs)) {
-                            this.view.clearClassWrongInputFromElements();
-                            this.view.clearClassWrongSpanFromElements();
-                            if (previousInputs[2] !== sectionInputs[2].value) {
-                                this._isNewNicknameExist(sectionInputs[2], previousInputs, sectionInputs)
-                            } else {
-                                this._updateUserData(sectionInputs, previousInputs[1]);
-                            }
+                    if (child.classList.contains('tags-container')) {
+                        for (let tag of child.children) {
+                            recordTags.push(tag);
                         }
-                    } else if (sectionInputs[0].id === 'record-url-input') {
-                        this._isRecordValidationOkay(sectionInputs);
                     }
                 }
+                let arraysAreEqual = true;
+                for (let i = 0; i < recordTags.length; i++) {
+                    if (previousTags[i].textContent.slice(0, -1).trim() !== recordTags[i].textContent.slice(0, -1).trim()) {
+                        arraysAreEqual = false;
+                        break;
+                    }
+                };
+                
+                if (previousInputs.every((value, index) => {
+                    if (index !== 6) {
+                        return value === sectionInputs[index].value;
+                    }
+                    return true;
+                })) {
+                    if (recordTags.length === previousTags.length && arraysAreEqual) {
+                        this.view.toggleInputs(sectionInputs);
 
+                        const tagsCloseButtons = this.view.getAllTagsCloseButtons();
+                        section.children[14].value = '';
+                        for (let button of tagsCloseButtons) {
+                            this.view.toggleClassNotExist(button);
+                        };
+
+                        event.target.innerText = 'Edit';
+                    } else {
+                        if (sectionInputs[0].id === 'avatar-url-input') {
+                            if (this._isUserValidationOkay(sectionInputs)) {
+                                this.view.clearClassWrongInputFromElements();
+                                this.view.clearClassWrongSpanFromElements();
+                                if (previousInputs[2] !== sectionInputs[2].value) {
+                                    this._isNewNicknameExist(sectionInputs[2], previousInputs, sectionInputs)
+                                } else {
+                                    this._updateUserData(sectionInputs, previousInputs[1]);
+                                }
+                            }
+                        } else if (sectionInputs[0].id === 'record-url-input') {
+                            this._isRecordValidationOkay(sectionInputs);
+                        }
+                    }
+                }
             }
+        });
+    }
+
+    _initTagsInputListener() {
+        $('#record-form-tags-input').on('keyup', function (event) {
+            if (event.key === 'Enter' || event.key === ',') {
+                var tag = $(this).val().trim().replace(/,+$/, '');
+                if (tag) {
+                    $('#record-form-tags-container').append('<span class="badge badge-primary mr-1">' + tag + ' <button class="close" type="button" aria-label="Close"><span aria-hidden="true">&times;</span></button></span>');
+                }
+                $(this).val('');
+                if (document.querySelectorAll('.badge').length > 4) {
+                    $('#record-form-tags-input').prop('disabled', true);
+                }
+            }
+        });
+
+        $(document).on('click', '.close', function () {
+            $(this).parent().remove();
+            $('#record-form-tags-input').prop('disabled', false);
         });
     }
 
@@ -233,6 +300,14 @@ export default class Controller {
             .catch(error => {
                 console.error('Error:', error);
             });
+    }
+
+    _isRecordValidationOkay(inputs) {
+        let isValidationOkay = true;
+        this.view.clearClassWrongInputFromElements();
+        this.view.clearClassWrongSpanFromElements();
+
+        return isValidationOkay;
     }
 
     _initUsersButtonListener() {
