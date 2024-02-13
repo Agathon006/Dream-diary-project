@@ -171,13 +171,6 @@ export default class Controller {
                         }
                     }
                 }
-                let arraysAreEqual = true;
-                for (let i = 0; i < recordTags.length; i++) {
-                    if (previousTags[i].textContent.slice(0, -1).trim() !== recordTags[i].textContent.slice(0, -1).trim()) {
-                        arraysAreEqual = false;
-                        break;
-                    }
-                };
 
                 if (previousInputs.every((value, index) => {
                     if (index !== 6) {
@@ -185,34 +178,58 @@ export default class Controller {
                     }
                     return true;
                 })) {
-                    if (recordTags.length === previousTags.length && arraysAreEqual) {
-                        this.view.toggleInputs(sectionInputs);
+                    if (recordTags.length === previousTags.length) {
 
-                        const tagsCloseButtons = this.view.getAllTagsCloseButtons();
-                        section.children[14].value = '';
-                        for (let button of tagsCloseButtons) {
-                            this.view.toggleClassNotExist(button);
+                        let arraysAreEqual = true;
+                        for (let i = 0; i < recordTags.length; i++) {
+                            if (previousTags[i].textContent.slice(0, -1).trim() !== recordTags[i].textContent.slice(0, -1).trim()) {
+                                arraysAreEqual = false;
+                                break;
+                            }
                         };
 
-                        event.target.innerText = 'Edit';
+                        if (arraysAreEqual) {
+                            this.view.toggleInputs(sectionInputs);
+
+                            const tagsCloseButtons = this.view.getAllTagsCloseButtons();
+                            section.children[14].value = '';
+                            for (let button of tagsCloseButtons) {
+                                this.view.toggleClassNotExist(button);
+                            };
+
+                            event.target.innerText = 'Edit';
+                        } else {
+                            this._initHandleSave(previousInputs, sectionInputs, recordTags);
+                        }
+                    } else {
+                        this._initHandleSave(previousInputs, sectionInputs, recordTags);
                     }
                 } else {
-                    if (sectionInputs[0].id === 'avatar-url-input') {
-                        if (this._isUserValidationOkay(sectionInputs)) {
-                            this.view.clearClassWrongInputFromElements();
-                            this.view.clearClassWrongSpanFromElements();
-                            if (previousInputs[2] !== sectionInputs[2].value) {
-                                this._isNewNicknameExist(sectionInputs[2], previousInputs, sectionInputs)
-                            } else {
-                                this._updateUserData(sectionInputs, previousInputs[1]);
-                            }
-                        }
-                    } else if (sectionInputs[0].id === 'record-url-input') {
-                        this._isRecordValidationOkay(sectionInputs);
-                    }
+                    this._initHandleSave(previousInputs, sectionInputs, recordTags);
                 }
             }
         });
+    }
+
+    _initHandleSave(previousInputs, sectionInputs, recordTags) {
+        if (sectionInputs[0].id === 'avatar-url-input') {
+            if (this._isUserValidationOkay(sectionInputs)) {
+                this.view.clearClassWrongInputFromElements();
+                this.view.clearClassWrongSpanFromElements();
+                if (previousInputs[2] !== sectionInputs[2].value) {
+                    this._isNewNicknameExist(sectionInputs[2], previousInputs, sectionInputs)
+                } else {
+                    this._updateUserData(sectionInputs, previousInputs[1]);
+                }
+            }
+        } else if (sectionInputs[0].id === 'record-url-input') {
+            if (this._isRecordValidationOkay(sectionInputs)) {
+                this.view.clearClassWrongInputFromElements();
+                this.view.clearClassWrongSpanFromElements();
+
+                this._updateRecordData(sectionInputs, previousInputs[1], recordTags);
+            }
+        }
     }
 
     _initTagsInputListener() {
@@ -318,8 +335,38 @@ export default class Controller {
             this.view.createWrongSpanElement(inputs[8], "Put correct date");
             isValidationOkay = false;
         }
+        if (!this.model.isViewsOkay(inputs[9].value)) {
+            this.view.addClassWrongInput(inputs[9]);
+            this.view.createWrongSpanElement(inputs[9], "Must be integer number");
+            isValidationOkay = false;
+        }
 
         return isValidationOkay;
+    }
+
+    _updateRecordData(sectionInputs, recordId, recordTags) {
+        this.model.getPromiseEditRecord(sectionInputs, recordId, recordTags)
+            .then(response => response.json())
+            .then(data => {
+                this.model.getPromiseGetRecordById(data.id)
+                    .then(response => response.json())
+                    .then(data => {
+                        const section = this.view.getSectionElement();
+                        this.view.displayRecord(section, data);
+                        $('#datepicker').datepicker();
+                        const tagsCloseButtons = this.view.getAllTagsCloseButtons();
+                        for (let button of tagsCloseButtons) {
+                            this.view.toggleClassNotExist(button);
+                        };
+                        this._initTagsInputListener();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     }
 
     _initUsersButtonListener() {

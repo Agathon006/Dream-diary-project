@@ -44,20 +44,20 @@
       "dreamTitle": "Dream 1",
       "dreamCategory": "Usual",
       "dreamMood": "Typical dream",
-      "dreamPlot": "Bla bla bla",
+      "dreamPlot": "",
       "dreamTags": [
         "apple",
         "bread",
-        "milk"
+        "as"
       ],
       "email": "agaton615@gmail.com",
       "date": {
-        "dayNumber": 3,
-        "monthNumber": 1,
-        "year": 2024,
-        "weekNumber": 6
+        "dayNumber": 21,
+        "monthNumber": 8,
+        "year": 2023,
+        "weekNumber": 4
       },
-      "views": 80,
+      "views": "80211212",
       "likes": 1,
       "likesUsersEmails": [
         "agaton615@gmail.com"

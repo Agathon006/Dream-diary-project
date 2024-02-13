@@ -223,8 +223,8 @@ export default class View {
     displayRecord(section, record) {
 
         let dynamicRecordDate = '';
-        let month = '',
-            day = '';
+        let month = record.date.monthNumber,
+            day = record.date.dayNumber;
         if (++record.date.monthNumber < 10) {
             month = `0${record.date.monthNumber}`
         }
