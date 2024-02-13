@@ -97,6 +97,7 @@ export default class Controller {
                     .then(response => response.json())
                     .then(data => {
                         this.view.displayRecord(section, data);
+                        $('#datepicker').datepicker();
                         const tagsCloseButtons = this.view.getAllTagsCloseButtons();
                         for (let button of tagsCloseButtons) {
                             this.view.toggleClassNotExist(button);

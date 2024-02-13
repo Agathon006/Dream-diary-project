@@ -86,6 +86,7 @@ class Controller {
       if (event.target.classList.contains('edit-record-button')) {
         this.model.getPromiseGetRecordById(event.target.parentNode.parentNode.children[0].innerText).then(response => response.json()).then(data => {
           this.view.displayRecord(section, data);
+          $('#datepicker').datepicker();
           const tagsCloseButtons = this.view.getAllTagsCloseButtons();
           for (let button of tagsCloseButtons) {
             this.view.toggleClassNotExist(button);
