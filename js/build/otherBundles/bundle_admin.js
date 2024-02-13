@@ -173,20 +173,20 @@ class Controller {
             }
             ;
             event.target.innerText = 'Edit';
-          } else {
-            if (sectionInputs[0].id === 'avatar-url-input') {
-              if (this._isUserValidationOkay(sectionInputs)) {
-                this.view.clearClassWrongInputFromElements();
-                this.view.clearClassWrongSpanFromElements();
-                if (previousInputs[2] !== sectionInputs[2].value) {
-                  this._isNewNicknameExist(sectionInputs[2], previousInputs, sectionInputs);
-                } else {
-                  this._updateUserData(sectionInputs, previousInputs[1]);
-                }
+          }
+        } else {
+          if (sectionInputs[0].id === 'avatar-url-input') {
+            if (this._isUserValidationOkay(sectionInputs)) {
+              this.view.clearClassWrongInputFromElements();
+              this.view.clearClassWrongSpanFromElements();
+              if (previousInputs[2] !== sectionInputs[2].value) {
+                this._isNewNicknameExist(sectionInputs[2], previousInputs, sectionInputs);
+              } else {
+                this._updateUserData(sectionInputs, previousInputs[1]);
               }
-            } else if (sectionInputs[0].id === 'record-url-input') {
-              this._isRecordValidationOkay(sectionInputs);
             }
+          } else if (sectionInputs[0].id === 'record-url-input') {
+            this._isRecordValidationOkay(sectionInputs);
           }
         }
       }
@@ -270,6 +270,16 @@ class Controller {
     let isValidationOkay = true;
     this.view.clearClassWrongInputFromElements();
     this.view.clearClassWrongSpanFromElements();
+    if (!this.model.isPlotOkay(inputs[7])) {
+      this.view.addClassWrongInput(inputs[7]);
+      this.view.createWrongSpanElement(inputs[7], "Dream description must have at least 10 symbols");
+      isValidationOkay = false;
+    }
+    if (!this.model.isDateOkay(inputs[8])) {
+      this.view.addClassWrongInput(inputs[8]);
+      this.view.createWrongSpanElement(inputs[8], "Put correct date");
+      isValidationOkay = false;
+    }
     return isValidationOkay;
   }
   _initUsersButtonListener() {
@@ -356,6 +366,22 @@ class Model {
       body: JSON.stringify(editedData)
     });
   }
+  isPlotOkay(plot) {
+    if (plot.value.length > 9 || plot.value.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  isDateOkay(date) {
+    const recordDate = new Date(date.value),
+      currentDate = new Date();
+    if (recordDate <= currentDate) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 /***/ }),
@@ -432,7 +458,7 @@ class View {
   }
   toggleInputs(inputs) {
     inputs.forEach((input, index) => {
-      if (index === 3 || index === 1) {
+      if (index === 1 || index === 3 || index === 10 || index === 11) {
         return;
       }
       input.classList.toggle(`${View.JS_CLASSES.COMMON.LOCKED_INPUT}`);
@@ -563,11 +589,24 @@ class View {
         </div>`;
   }
   displayRecord(section, record) {
-    let likesUsersEmails = '';
-    for (let email of record.likesUsersEmails) {
-      likesUsersEmails += `${email}, `;
+    let dynamicRecordDate = '';
+    let month = '',
+      day = '';
+    if (++record.date.monthNumber < 10) {
+      month = `0${record.date.monthNumber}`;
     }
-    likesUsersEmails = likesUsersEmails.slice(0, -2);
+    if (record.date.dayNumber < 10) {
+      day = `0${record.date.dayNumber}`;
+    }
+    dynamicRecordDate = `${month}/${day}/${record.date.year}`;
+    let dynamicUsersEmailsLength = '';
+    if (record.likesUsersEmails.length === 0) {
+      dynamicUsersEmailsLength = `no emails`;
+    } else if (record.likesUsersEmails.length === 1) {
+      dynamicUsersEmailsLength = `${record.likesUsersEmails.length} email`;
+    } else {
+      dynamicUsersEmailsLength = `${record.likesUsersEmails.length} emails`;
+    }
     let dunamicContentCategories = '';
     switch (record.dreamCategory) {
       case 'Usual':
@@ -685,7 +724,7 @@ class View {
             <img src="${record.dreamImageUrl}" class="record-image"
                 id="record-image"></img> 
         </div>
-        <input type="text" placeholder="no image url" class="profile-input locked-input"
+        <input type="text" placeholder="no image url" maxlength="500" class="profile-input locked-input"
         id="record-url-input" value="${record.dreamImageUrl}">
         <span class="profile-span">ID</span>
         <input type="text" placeholder="empty" maxlength="15" class="profile-input locked-input"
@@ -708,16 +747,16 @@ class View {
             class="profile-input locked-input" id="plot-input" value="${record.dreamPlot}"></textarea>
         <span class="profile-span">Date</span>
         <input type="text" placeholder="empty" id="datepicker"
-            class="datepicker profile-input locked-input" value="TODO">
+            class="datepicker profile-input locked-input" value="${dynamicRecordDate}">
         <span class="profile-span">Views</span>
-        <input type="text" placeholder="empty" id="views-input"
+        <input type="text" placeholder="empty" maxlength="50" id="views-input"
             class="datepicker profile-input locked-input" value="${record.views}">
         <span class="profile-span">Likes</span>
         <input type="text" placeholder="empty" id="likes-input"
             class="datepicker profile-input locked-input" value="${record.likes}">
         <span class="profile-span">Like user emails</span>
         <input type="text" placeholder="empty" id="likes-user-emails-input"
-            class="datepicker profile-input locked-input" value="${likesUsersEmails}">
+            class="datepicker profile-input locked-input" value="${dynamicUsersEmailsLength}">
         <div class="button-block">
             <button class="edit-button">Edit</button>
             <button class="delete-button">Delete</button>

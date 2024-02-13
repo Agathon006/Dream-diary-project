@@ -178,7 +178,7 @@ export default class Controller {
                         break;
                     }
                 };
-                
+
                 if (previousInputs.every((value, index) => {
                     if (index !== 6) {
                         return value === sectionInputs[index].value;
@@ -195,20 +195,20 @@ export default class Controller {
                         };
 
                         event.target.innerText = 'Edit';
-                    } else {
-                        if (sectionInputs[0].id === 'avatar-url-input') {
-                            if (this._isUserValidationOkay(sectionInputs)) {
-                                this.view.clearClassWrongInputFromElements();
-                                this.view.clearClassWrongSpanFromElements();
-                                if (previousInputs[2] !== sectionInputs[2].value) {
-                                    this._isNewNicknameExist(sectionInputs[2], previousInputs, sectionInputs)
-                                } else {
-                                    this._updateUserData(sectionInputs, previousInputs[1]);
-                                }
+                    }
+                } else {
+                    if (sectionInputs[0].id === 'avatar-url-input') {
+                        if (this._isUserValidationOkay(sectionInputs)) {
+                            this.view.clearClassWrongInputFromElements();
+                            this.view.clearClassWrongSpanFromElements();
+                            if (previousInputs[2] !== sectionInputs[2].value) {
+                                this._isNewNicknameExist(sectionInputs[2], previousInputs, sectionInputs)
+                            } else {
+                                this._updateUserData(sectionInputs, previousInputs[1]);
                             }
-                        } else if (sectionInputs[0].id === 'record-url-input') {
-                            this._isRecordValidationOkay(sectionInputs);
                         }
+                    } else if (sectionInputs[0].id === 'record-url-input') {
+                        this._isRecordValidationOkay(sectionInputs);
                     }
                 }
             }
@@ -307,6 +307,17 @@ export default class Controller {
         let isValidationOkay = true;
         this.view.clearClassWrongInputFromElements();
         this.view.clearClassWrongSpanFromElements();
+
+        if (!this.model.isPlotOkay(inputs[7])) {
+            this.view.addClassWrongInput(inputs[7]);
+            this.view.createWrongSpanElement(inputs[7], "Dream description must have at least 10 symbols");
+            isValidationOkay = false;
+        }
+        if (!this.model.isDateOkay(inputs[8])) {
+            this.view.addClassWrongInput(inputs[8]);
+            this.view.createWrongSpanElement(inputs[8], "Put correct date");
+            isValidationOkay = false;
+        }
 
         return isValidationOkay;
     }

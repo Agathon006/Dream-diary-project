@@ -71,7 +71,7 @@ export default class View {
 
     toggleInputs(inputs) {
         inputs.forEach((input, index) => {
-            if (index === 3 || index === 1) {
+            if (index === 1 || index === 3 || index === 10 || index === 11) {
                 return;
             }
             input.classList.toggle(`${View.JS_CLASSES.COMMON.LOCKED_INPUT}`);
@@ -222,11 +222,25 @@ export default class View {
 
     displayRecord(section, record) {
 
-        let likesUsersEmails = '';
-        for (let email of record.likesUsersEmails) {
-            likesUsersEmails += `${email}, `;
+        let dynamicRecordDate = '';
+        let month = '',
+            day = '';
+        if (++record.date.monthNumber < 10) {
+            month = `0${record.date.monthNumber}`
         }
-        likesUsersEmails = likesUsersEmails.slice(0, -2);
+        if (record.date.dayNumber < 10) {
+            day = `0${record.date.dayNumber}`
+        }
+        dynamicRecordDate = `${month}/${day}/${record.date.year}`;
+
+        let dynamicUsersEmailsLength = '';
+        if (record.likesUsersEmails.length === 0) {
+            dynamicUsersEmailsLength = `no emails`;
+        } else if (record.likesUsersEmails.length === 1) {
+            dynamicUsersEmailsLength = `${record.likesUsersEmails.length} email`;
+        } else {
+            dynamicUsersEmailsLength = `${record.likesUsersEmails.length} emails`;
+        }
 
         let dunamicContentCategories = '';
         switch (record.dreamCategory) {
@@ -347,7 +361,7 @@ export default class View {
             <img src="${record.dreamImageUrl}" class="record-image"
                 id="record-image"></img> 
         </div>
-        <input type="text" placeholder="no image url" class="profile-input locked-input"
+        <input type="text" placeholder="no image url" maxlength="500" class="profile-input locked-input"
         id="record-url-input" value="${record.dreamImageUrl}">
         <span class="profile-span">ID</span>
         <input type="text" placeholder="empty" maxlength="15" class="profile-input locked-input"
@@ -370,16 +384,16 @@ export default class View {
             class="profile-input locked-input" id="plot-input" value="${record.dreamPlot}"></textarea>
         <span class="profile-span">Date</span>
         <input type="text" placeholder="empty" id="datepicker"
-            class="datepicker profile-input locked-input" value="TODO">
+            class="datepicker profile-input locked-input" value="${dynamicRecordDate}">
         <span class="profile-span">Views</span>
-        <input type="text" placeholder="empty" id="views-input"
+        <input type="text" placeholder="empty" maxlength="50" id="views-input"
             class="datepicker profile-input locked-input" value="${record.views}">
         <span class="profile-span">Likes</span>
         <input type="text" placeholder="empty" id="likes-input"
             class="datepicker profile-input locked-input" value="${record.likes}">
         <span class="profile-span">Like user emails</span>
         <input type="text" placeholder="empty" id="likes-user-emails-input"
-            class="datepicker profile-input locked-input" value="${likesUsersEmails}">
+            class="datepicker profile-input locked-input" value="${dynamicUsersEmailsLength}">
         <div class="button-block">
             <button class="edit-button">Edit</button>
             <button class="delete-button">Delete</button>

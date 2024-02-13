@@ -52,4 +52,23 @@ export default class Model {
         })
     }
 
+    isPlotOkay(plot) {
+        if (plot.value.length > 9 || plot.value.length === 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    isDateOkay(date) {
+        const recordDate = new Date(date.value),
+            currentDate = new Date();
+
+        if (recordDate <= currentDate) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
