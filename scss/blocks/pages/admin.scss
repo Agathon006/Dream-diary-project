@@ -126,6 +126,46 @@
             display: flex;
             flex-direction: column;
 
+            .pagination-switcher {
+                margin: 20px 0;
+                padding: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border: 2px black solid;
+                border-radius: 30px;
+
+                .pagination-switcher__button {
+                    width: 50px;
+                    height: 50px;
+                    background-color: transparent;
+                    color: black;
+                    border: 2px black solid;
+
+                    &:hover {
+                        background-color: rgb(227, 227, 227);
+                    }
+                }
+
+                .pagination-switcher__plot {
+                    text-align: center;
+
+                    .pagination-switcher__plot-top {}
+
+                    .pagination-switcher__plot-bottom {
+                        margin-top: 10px;
+                    }
+
+                    .pagination-switcher__plot-text {}
+
+                    .pagination-switcher__plot-key {
+                        font-size: 24px;
+                        font-weight: 900;
+                        color: black;
+                    }
+                }
+            }
+
             .tags-container {
                 display: flex;
                 flex-wrap: wrap;

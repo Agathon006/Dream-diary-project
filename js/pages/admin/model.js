@@ -1,11 +1,11 @@
 export default class Model {
 
-    getPromiseGetAllUsers(page = 1) {
-        return fetch(`http://localhost:3000/users?_page=${page}&_per_page=20`)
+    getPromiseGetAllUsers(page) {
+        return fetch(`http://localhost:3000/users?_page=${page}&_per_page=10`)
     }
 
-    getPromiseGetAllRecords(page = 1) {
-        return fetch(`http://localhost:3000/records?_page=${page}&_per_page=20`)
+    getPromiseGetAllRecords(page) {
+        return fetch(`http://localhost:3000/records?_page=${page}&_per_page=10`)
     }
 
     getPromiseGetUserById(id) {

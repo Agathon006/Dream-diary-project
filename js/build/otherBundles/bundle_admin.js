@@ -20,18 +20,14 @@ class Controller {
   init() {
     this._initAdminPage();
     this._initModalListener();
-    this._initSectionListener();
     this._initUsersButtonListener();
     this._initRecordsButtonListener();
+    this._initSectionListener();
   }
   _initAdminPage() {
     const usersOption = this.view.getUsersButtonElement();
     this.view.toggleClassSelected(usersOption);
-    this.model.getPromiseGetAllUsers().then(response => response.json()).then(data => {
-      this.view.displayUsersTable(data);
-    }).catch(error => {
-      console.error('Error:', error);
-    });
+    this._displayAllUsers();
   }
   _initModalListener() {
     const modalWrapper = this.view.getModalWrapperElement(),
@@ -39,27 +35,9 @@ class Controller {
     modalWrapper.addEventListener('click', event => {
       if (event.target.id === 'option-yes') {
         if (section.children[1].classList.contains('profile-avatar')) {
-          this.model.getPromiseDeleteUserById(section.children[4].value).then(response => response.json()).then(data => {
-            this.view.toggleClassHidden(modalWrapper);
-            this.model.getPromiseGetAllUsers().then(response => response.json()).then(data => {
-              this.view.displayUsersTable(data);
-            }).catch(error => {
-              console.error('Error:', error);
-            });
-          }).catch(error => {
-            console.error('Error:', error);
-          });
+          this._deleteUser(modalWrapper, section);
         } else if (section.children[1].classList.contains('record-image')) {
-          this.model.getPromiseDeleteRecordById(section.children[4].value).then(response => response.json()).then(data => {
-            this.view.toggleClassHidden(modalWrapper);
-            this.model.getPromiseGetAllRecords().then(response => response.json()).then(data => {
-              this.view.displayRecordsTable(data);
-            }).catch(error => {
-              console.error('Error:', error);
-            });
-          }).catch(error => {
-            console.error('Error:', error);
-          });
+          this._deleteRecord(modalWrapper, section);
         }
       }
       if (event.target.id === 'option-no') {
@@ -70,46 +48,80 @@ class Controller {
       }
     });
   }
+  _deleteUser(modalWrapper, section) {
+    this.model.getPromiseDeleteUserById(section.children[4].value).then(response => response.json()).then(data => {
+      this.view.toggleClassHidden(modalWrapper);
+      this.model.getPromiseGetAllUsers().then(response => response.json()).then(data => {
+        this.view.displayUsersTable(data);
+      }).catch(error => {
+        console.error('Error:', error);
+      });
+    }).catch(error => {
+      console.error('Error:', error);
+    });
+  }
+  _deleteRecord(modalWrapper, section) {
+    this.model.getPromiseDeleteRecordById(section.children[4].value).then(response => response.json()).then(data => {
+      this.view.toggleClassHidden(modalWrapper);
+      this.model.getPromiseGetAllRecords().then(response => response.json()).then(data => {
+        this.view.displayRecordsTable(data);
+      }).catch(error => {
+        console.error('Error:', error);
+      });
+    }).catch(error => {
+      console.error('Error:', error);
+    });
+  }
+  _initUsersButtonListener() {
+    const usersButton = this.view.getUsersButtonElement(),
+      recordsButton = this.view.getRecordsButtonElement();
+    usersButton.addEventListener('click', () => {
+      this.view.toggleClassSelected(usersButton);
+      this.view.toggleClassSelected(recordsButton);
+      this._displayAllUsers();
+    });
+  }
+  _initRecordsButtonListener() {
+    const usersButton = this.view.getUsersButtonElement(),
+      recordsButton = this.view.getRecordsButtonElement();
+    recordsButton.addEventListener('click', () => {
+      this.view.toggleClassSelected(usersButton);
+      this.view.toggleClassSelected(recordsButton);
+      this._displayAllRecords();
+    });
+  }
   _initSectionListener() {
     const section = this.view.getSectionElement();
     let previousInputs = [],
       previousTags = [];
     section.addEventListener('click', event => {
       if (event.target.classList.contains('edit-user-button')) {
-        this.model.getPromiseGetUserById(event.target.parentNode.parentNode.children[0].innerText).then(response => response.json()).then(data => {
-          this.view.displayUser(section, data);
-          $('#datepicker').datepicker();
-        }).catch(error => {
-          console.error('Error:', error);
-        });
+        this._displayUser(event.target.parentNode.parentNode.children[0].innerText);
       }
       if (event.target.classList.contains('edit-record-button')) {
-        this.model.getPromiseGetRecordById(event.target.parentNode.parentNode.children[0].innerText).then(response => response.json()).then(data => {
-          this.view.displayRecord(section, data);
-          $('#datepicker').datepicker();
-          const tagsCloseButtons = this.view.getAllTagsCloseButtons();
-          for (let button of tagsCloseButtons) {
-            this.view.toggleClassNotExist(button);
-          }
-          ;
-          this._initTagsInputListener();
-        }).catch(error => {
-          console.error('Error:', error);
-        });
+        this._displayRecord(event.target.parentNode.parentNode.children[0].innerText);
+      }
+      if (event.target.id === 'pagination-switcher-button-prev') {
+        const curentPageNumberElement = this.view.getCurrentPageNumberElement();
+        if (section.parentNode.children[0].children[0].classList.contains('selected')) {
+          this._displayAllUsers(+curentPageNumberElement.innerText - 1);
+        } else {
+          this._displayAllRecords(+curentPageNumberElement.innerText - 1);
+        }
+      }
+      if (event.target.id === 'pagination-switcher-button-next') {
+        const curentPageNumberElement = this.view.getCurrentPageNumberElement();
+        if (section.parentNode.children[0].children[0].classList.contains('selected')) {
+          this._displayAllUsers(+curentPageNumberElement.innerText + 1);
+        } else {
+          this._displayAllRecords(+curentPageNumberElement.innerText + 1);
+        }
       }
       if (event.target.id === 'return-button') {
         if (section.parentNode.children[0].children[0].classList.contains('selected')) {
-          this.model.getPromiseGetAllUsers().then(response => response.json()).then(data => {
-            this.view.displayUsersTable(data);
-          }).catch(error => {
-            console.error('Error:', error);
-          });
+          this._displayAllUsers();
         } else {
-          this.model.getPromiseGetAllRecords().then(response => response.json()).then(data => {
-            this.view.displayRecordsTable(data);
-          }).catch(error => {
-            console.error('Error:', error);
-          });
+          this._displayAllRecords();
         }
       }
       if (event.target.classList.contains('delete-button')) {
@@ -184,6 +196,68 @@ class Controller {
           this._initHandleSave(previousInputs, sectionInputs, recordTags);
         }
       }
+    });
+  }
+  _displayUser(id) {
+    this.model.getPromiseGetUserById(id).then(response => response.json()).then(data => {
+      this.view.displayUser(section, data);
+      $('#datepicker').datepicker();
+    }).catch(error => {
+      console.error('Error:', error);
+    });
+  }
+  _displayRecord(id) {
+    this.model.getPromiseGetRecordById(id).then(response => response.json()).then(data => {
+      this.view.displayRecord(section, data);
+      $('#datepicker').datepicker();
+      const tagsCloseButtons = this.view.getAllTagsCloseButtons();
+      for (let button of tagsCloseButtons) {
+        this.view.toggleClassNotExist(button);
+      }
+      ;
+      this._initTagsInputListener();
+    }).catch(error => {
+      console.error('Error:', error);
+    });
+  }
+  _displayAllUsers(currentPageNumber = 1) {
+    this.model.getPromiseGetAllUsers(currentPageNumber).then(response => response.json()).then(data => {
+      this.view.displayPaginationPart(data.data.length, data.pages, currentPageNumber);
+      const buttonPrev = this.view.getButtonPrevElement(),
+        buttonNext = this.view.getButtonNextElement();
+      if (data.prev === null) {
+        this.view.toggleClassHidden(buttonPrev);
+      } else if (buttonPrev.classList.contains('hidden')) {
+        this.view.toggleClassHidden(buttonPrev);
+      }
+      if (data.next === null) {
+        this.view.toggleClassHidden(buttonNext);
+      } else if (buttonNext.classList.contains('hidden')) {
+        this.view.toggleClassHidden(buttonNext);
+      }
+      this.view.displayUsersTable(data);
+    }).catch(error => {
+      console.error('Error:', error);
+    });
+  }
+  _displayAllRecords(currentPageNumber = 1) {
+    this.model.getPromiseGetAllRecords(currentPageNumber).then(response => response.json()).then(data => {
+      this.view.displayPaginationPart(data.data.length, data.pages, currentPageNumber);
+      const buttonPrev = this.view.getButtonPrevElement(),
+        buttonNext = this.view.getButtonNextElement();
+      if (data.prev === null) {
+        this.view.toggleClassHidden(buttonPrev);
+      } else if (buttonPrev.classList.contains('hidden')) {
+        this.view.toggleClassHidden(buttonPrev);
+      }
+      if (data.next === null) {
+        this.view.toggleClassHidden(buttonNext);
+      } else if (buttonNext.classList.contains('hidden')) {
+        this.view.toggleClassHidden(buttonNext);
+      }
+      this.view.displayRecordsTable(data);
+    }).catch(error => {
+      console.error('Error:', error);
     });
   }
   _initHandleSave(previousInputs, sectionInputs, recordTags) {
@@ -319,32 +393,6 @@ class Controller {
       console.error('Error:', error);
     });
   }
-  _initUsersButtonListener() {
-    const usersButton = this.view.getUsersButtonElement(),
-      recordsButton = this.view.getRecordsButtonElement();
-    usersButton.addEventListener('click', () => {
-      this.view.toggleClassSelected(usersButton);
-      this.view.toggleClassSelected(recordsButton);
-      this.model.getPromiseGetAllUsers().then(response => response.json()).then(data => {
-        this.view.displayUsersTable(data);
-      }).catch(error => {
-        console.error('Error:', error);
-      });
-    });
-  }
-  _initRecordsButtonListener() {
-    const usersButton = this.view.getUsersButtonElement(),
-      recordsButton = this.view.getRecordsButtonElement();
-    recordsButton.addEventListener('click', () => {
-      this.view.toggleClassSelected(usersButton);
-      this.view.toggleClassSelected(recordsButton);
-      this.model.getPromiseGetAllRecords().then(response => response.json()).then(data => {
-        this.view.displayRecordsTable(data);
-      }).catch(error => {
-        console.error('Error:', error);
-      });
-    });
-  }
 }
 
 /***/ }),
@@ -360,11 +408,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
 class Model {
-  getPromiseGetAllUsers(page = 1) {
-    return fetch(`http://localhost:3000/users?_page=${page}&_per_page=20`);
+  getPromiseGetAllUsers(page) {
+    return fetch(`http://localhost:3000/users?_page=${page}&_per_page=10`);
   }
-  getPromiseGetAllRecords(page = 1) {
-    return fetch(`http://localhost:3000/records?_page=${page}&_per_page=20`);
+  getPromiseGetAllRecords(page) {
+    return fetch(`http://localhost:3000/records?_page=${page}&_per_page=10`);
   }
   getPromiseGetUserById(id) {
     return fetch(`http://localhost:3000/users/${id}`);
@@ -478,6 +526,11 @@ class View {
     },
     MODAL_WINDOW: {
       MODAL_WRAPPER: 'modal-wrapper'
+    },
+    PAGINATION: {
+      BUTTON_PREV: 'pagination-switcher-button-prev',
+      CURRENT_PAGE_NUMBER: 'current-page-number',
+      BUTTON_NEXT: 'pagination-switcher-button-next'
     }
   };
   static JS_CLASSES = {
@@ -511,6 +564,15 @@ class View {
   }
   getAllTagsCloseButtons() {
     return document.querySelectorAll(`.${View.JS_CLASSES.RECORD.TAGS.CLOSE_BUTTON}`);
+  }
+  getButtonPrevElement() {
+    return document.querySelector(`#${View.ID.PAGINATION.BUTTON_PREV}`);
+  }
+  getCurrentPageNumberElement() {
+    return document.querySelector(`#${View.ID.PAGINATION.CURRENT_PAGE_NUMBER}`);
+  }
+  getButtonNextElement() {
+    return document.querySelector(`#${View.ID.PAGINATION.BUTTON_NEXT}`);
   }
   toggleClassHidden(element) {
     element.classList.toggle(`${View.JS_CLASSES.COMMON.HIDDEN}`);
@@ -554,6 +616,28 @@ class View {
       item.remove();
     });
   }
+  displayPaginationPart(itemsNumber, pagesNumber, currentPageNumber = 1) {
+    const section = this.getSectionElement();
+    let dynamicContent = '';
+    itemsNumber === 1 ? dynamicContent = 'item' : dynamicContent = 'items';
+    section.innerHTML = `<div class="pagination-switcher">
+            <button class="pagination-switcher__button" id="pagination-switcher-button-prev"><</button>
+            <div class="pagination-switcher__plot">
+                <div class="pagination-switcher__plot-top">
+                    <span class="pagination-switcher__plot-text">Found: </span>
+                    <span class="pagination-switcher__plot-key">${itemsNumber}</span>
+                    <span class="pagination-switcher__plot-text"> ${dynamicContent}</span>
+                </div>
+                <div class="pagination-switcher__plot-bottom">
+                    <span class="pagination-switcher__plot-text">Page </span>
+                    <span class="pagination-switcher__plot-key" id="current-page-number">${currentPageNumber}</span>
+                    <span class="pagination-switcher__plot-text"> of </span>
+                    <span class="pagination-switcher__plot-key">${pagesNumber}</span>
+                </div>
+            </div>
+            <button class="pagination-switcher__button" id="pagination-switcher-button-next">></button>
+        </div>`;
+  }
   displayUsersTable(data) {
     const section = this.getSectionElement();
     let dynamicData = '';
@@ -570,7 +654,7 @@ class View {
                     </tr>
                 `;
     });
-    section.innerHTML = `
+    section.innerHTML += `
         <table class="table">
             <thead class="table-head">
             <tr class="table-tr">
@@ -599,7 +683,7 @@ class View {
                 </tr>
             `;
     });
-    section.innerHTML = `
+    section.innerHTML += `
         <table class="table">
             <thead class="table-head">
             <tr class="table-tr">

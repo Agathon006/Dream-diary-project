@@ -11,6 +11,11 @@ export default class View {
         MODAL_WINDOW: {
             MODAL_WRAPPER: 'modal-wrapper',
         },
+        PAGINATION: {
+            BUTTON_PREV: 'pagination-switcher-button-prev',
+            CURRENT_PAGE_NUMBER: 'current-page-number',
+            BUTTON_NEXT: 'pagination-switcher-button-next',
+        }
     }
 
     static JS_CLASSES = {
@@ -49,6 +54,18 @@ export default class View {
 
     getAllTagsCloseButtons() {
         return document.querySelectorAll(`.${View.JS_CLASSES.RECORD.TAGS.CLOSE_BUTTON}`);
+    }
+
+    getButtonPrevElement() {
+        return document.querySelector(`#${View.ID.PAGINATION.BUTTON_PREV}`);
+    }
+
+    getCurrentPageNumberElement() {
+        return document.querySelector(`#${View.ID.PAGINATION.CURRENT_PAGE_NUMBER}`);
+    }
+
+    getButtonNextElement() {
+        return document.querySelector(`#${View.ID.PAGINATION.BUTTON_NEXT}`);
     }
 
     toggleClassHidden(element) {
@@ -101,6 +118,32 @@ export default class View {
         });
     }
 
+    displayPaginationPart(itemsNumber, pagesNumber, currentPageNumber = 1) {
+        const section = this.getSectionElement();
+
+        let dynamicContent = '';
+        itemsNumber === 1 ? dynamicContent = 'item' : dynamicContent = 'items';
+
+        section.innerHTML =
+            `<div class="pagination-switcher">
+            <button class="pagination-switcher__button" id="pagination-switcher-button-prev"><</button>
+            <div class="pagination-switcher__plot">
+                <div class="pagination-switcher__plot-top">
+                    <span class="pagination-switcher__plot-text">Found: </span>
+                    <span class="pagination-switcher__plot-key">${itemsNumber}</span>
+                    <span class="pagination-switcher__plot-text"> ${dynamicContent}</span>
+                </div>
+                <div class="pagination-switcher__plot-bottom">
+                    <span class="pagination-switcher__plot-text">Page </span>
+                    <span class="pagination-switcher__plot-key" id="current-page-number">${currentPageNumber}</span>
+                    <span class="pagination-switcher__plot-text"> of </span>
+                    <span class="pagination-switcher__plot-key">${pagesNumber}</span>
+                </div>
+            </div>
+            <button class="pagination-switcher__button" id="pagination-switcher-button-next">></button>
+        </div>`
+    }
+
     displayUsersTable(data) {
         const section = this.getSectionElement();
 
@@ -121,7 +164,7 @@ export default class View {
                 `;
         });
 
-        section.innerHTML = `
+        section.innerHTML += `
         <table class="table">
             <thead class="table-head">
             <tr class="table-tr">
@@ -156,7 +199,7 @@ export default class View {
             `;
         });
 
-        section.innerHTML = `
+        section.innerHTML += `
         <table class="table">
             <thead class="table-head">
             <tr class="table-tr">
