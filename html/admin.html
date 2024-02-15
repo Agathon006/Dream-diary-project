@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="../js/build/otherBundles/bundle_authorization.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin page</title>
+
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <link href="../bootstrap/datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <script src="../bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="icon" href="../icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/admin.css">
+    <script src="../js/build/otherBundles/bundle_admin.js" defer></script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <span class="header__title">Admin page</span>
+            <a href="./sign_in.html" class="header__exit-link">Exit</a>
+        </div>
+    </header>
+    <main class="main">
+        <div class="modal-wrapper hidden" id="modal-wrapper">
+            <div class="modal-window">
+                <span class="modal-window__span">Are you sure?</span>
+                <div class="modal-window__options">
+                    <button class="modal-window__options-yes" id="option-yes">Yes</button>
+                    <button class="modal-window__options-no" id="option-no">No</button>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <nav class="navigation-panel">
+                <button class="navigation-panel__option" id="users-button">Users</button>
+                <div class="navigation-separator"></div>
+                <button class="navigation-panel__option" id="records-button">Dream records</button>
+            </nav>
+            <section class="section" id="section">
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

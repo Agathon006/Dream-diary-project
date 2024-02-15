@@ -68,6 +68,10 @@ button {
   opacity: 0;
 }
 
+.not-exist {
+  display: none !important;
+}
+
 .wrong-input {
   border: 2px red solid !important;
 }
@@ -86,6 +90,11 @@ button {
   border: none !important;
   cursor: default;
   pointer-events: none;
+}
+
+.selected {
+  color: rgba(0, 0, 0, 0.5) !important;
+  cursor: default !important;
 }
 
 .footer, .header, a, button {
@@ -116,6 +125,10 @@ button {
   opacity: 0;
 }
 
+.not-exist {
+  display: none !important;
+}
+
 .wrong-input {
   border: 2px red solid !important;
 }
@@ -134,6 +147,11 @@ button {
   border: none !important;
   cursor: default;
   pointer-events: none;
+}
+
+.selected {
+  color: rgba(0, 0, 0, 0.5) !important;
+  cursor: default !important;
 }
 
 .header .container .header__navigation {
@@ -301,6 +319,10 @@ button {
   opacity: 0;
 }
 
+.not-exist {
+  display: none !important;
+}
+
 .wrong-input {
   border: 2px red solid !important;
 }
@@ -319,6 +341,11 @@ button {
   border: none !important;
   cursor: default;
   pointer-events: none;
+}
+
+.selected {
+  color: rgba(0, 0, 0, 0.5) !important;
+  cursor: default !important;
 }
 
 .footer .container {

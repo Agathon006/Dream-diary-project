@@ -14,7 +14,7 @@ export default class Controller {
     }
 
     _initTagsInputListener() {
-        $('#record-form-tags-input').on('keyup', function (event) {
+        $('#tags-input').on('keyup', function (event) {
             if (event.key === 'Enter' || event.key === ',') {
                 var tag = $(this).val().trim().replace(/,+$/, '');
                 if (tag) {
@@ -23,7 +23,7 @@ export default class Controller {
                 $(this).val('');
                 console.log(document.querySelectorAll('.badge').length)
                 if (document.querySelectorAll('.badge').length > 4) {
-                    $('#record-form-tags-input').prop('disabled', true);
+                    $('#tags-input').prop('disabled', true);
                 }
             }
         });

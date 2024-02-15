@@ -1,6 +1,18 @@
 {
   "users": [
     {
+      "id": "d1d2",
+      "nickname": "Admin",
+      "email": "dreamDiaryAdmin@gmail.com",
+      "password": "n3ASD22dnsandASDk321dkn3dnas8d3",
+      "role": "admin",
+      "name": "",
+      "surname": "",
+      "birthDate": "",
+      "profileInfo": "",
+      "avatar": ""
+    },
+    {
       "id": "d4d5",
       "nickname": "Agathon006",
       "email": "agaton615@gmail.com",
@@ -8,8 +20,8 @@
       "role": "user",
       "name": "",
       "surname": "",
-      "birthDate": "",
-      "profileInfo": "",
+      "birthDate": "10/01/2023",
+      "profileInfo": "123",
       "avatar": "https://android-obzor.com/wp-content/uploads/2022/03/man-silhouette.jpg"
     },
     {
@@ -32,20 +44,20 @@
       "dreamTitle": "Dream 1",
       "dreamCategory": "Usual",
       "dreamMood": "Typical dream",
-      "dreamPlot": "Bla bla bla",
+      "dreamPlot": "",
       "dreamTags": [
         "apple",
         "bread",
-        "milk"
+        "as"
       ],
       "email": "agaton615@gmail.com",
       "date": {
-        "dayNumber": 3,
-        "monthNumber": 1,
-        "year": 2024,
-        "weekNumber": 6
+        "dayNumber": 21,
+        "monthNumber": 8,
+        "year": 2023,
+        "weekNumber": 4
       },
-      "views": 80,
+      "views": "80211212211",
       "likes": 1,
       "likesUsersEmails": [
         "agaton615@gmail.com"

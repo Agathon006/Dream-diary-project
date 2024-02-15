@@ -8,6 +8,10 @@
     opacity: 0;
 }
 
+.not-exist {
+    display: none !important;
+}
+
 .wrong-input {
     border: 2px red solid !important;
 }
@@ -26,4 +30,9 @@
     border: none  !important;
     cursor: default;
     pointer-events: none;
+}
+
+.selected {
+    color: rgba(0, 0, 0, 0.5) !important;
+    cursor: default !important;
 }
