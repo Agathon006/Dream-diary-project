@@ -289,7 +289,7 @@ export default class Controller {
                 } else if (buttonNext.classList.contains('hidden')) {
                     this.view.toggleClassHidden(buttonNext);
                 }
-                
+
                 this.view.displayRecordsTable(data);
             })
             .catch(error => {

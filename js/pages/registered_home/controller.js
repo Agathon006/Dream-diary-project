@@ -5,6 +5,7 @@ export default class Controller {
     }
 
     init() {
+        this._initNotification();
         this._initDreamSearchInputElement();
         this._initDreamSearchListener();
         this._initDreamCategoryListener();
@@ -13,6 +14,53 @@ export default class Controller {
         this._initMainPlotListener();
         this._initUserSearchListener();
         this._initDreamRecords();
+    }
+
+    _initNotification() {
+        var interaction = {
+            interacted: false
+        };
+
+        var defaultInterval = setInterval(() => {
+            const currentTime = new Date();
+            const hours = currentTime.getHours();
+            const minutes = currentTime.getMinutes();
+
+            if (hours === 22 && minutes === 0) {
+                const notification = this.view.getNotificationBlockElement();
+                notification.style.display = 'block';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 5000);
+            }
+        }, 60000);
+
+        document.addEventListener('click', () => {
+            interaction.interacted = true;
+            clearInterval(defaultInterval);
+
+            setInterval(() => {
+                const currentTime = new Date();
+                const hours = currentTime.getHours();
+                const minutes = currentTime.getMinutes();
+
+                if (hours === 22 && minutes === 0) {
+                    const notification = this.view.getNotificationBlockElement();
+
+                    if (notification.style.display !== 'block') {
+                        notification.style.display = 'block';
+
+                        const sound = new Audio('../audio/notification.mp3');
+                        sound.play();
+
+                        setTimeout(() => {
+                            notification.style.display = 'none';
+                        }, 5000);
+                    }
+
+                }
+            }, 60000);
+        });
     }
 
     _initDreamSearchInputElement() {

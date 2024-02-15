@@ -341,6 +341,21 @@ button {
   width: 48px;
 }
 
+.main .notification {
+  padding: 10px;
+  display: none;
+  position: fixed;
+  z-index: 2;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%);
+  border-radius: 20px;
+  font-size: 72px;
+  background-color: #9f9f9f;
+  border: 3px solid black;
+  transition: 0.5s;
+  filter: drop-shadow(0 0 5px white);
+}
 .main .container .main-wrapper {
   padding: 20px 0;
   display: flex;

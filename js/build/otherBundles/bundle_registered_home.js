@@ -18,6 +18,7 @@ class Controller {
     this.model = model;
   }
   init() {
+    this._initNotification();
     this._initDreamSearchInputElement();
     this._initDreamSearchListener();
     this._initDreamCategoryListener();
@@ -26,6 +27,43 @@ class Controller {
     this._initMainPlotListener();
     this._initUserSearchListener();
     this._initDreamRecords();
+  }
+  _initNotification() {
+    var interaction = {
+      interacted: false
+    };
+    var defaultInterval = setInterval(() => {
+      const currentTime = new Date();
+      const hours = currentTime.getHours();
+      const minutes = currentTime.getMinutes();
+      if (hours === 22 && minutes === 0) {
+        const notification = this.view.getNotificationBlockElement();
+        notification.style.display = 'block';
+        setTimeout(() => {
+          notification.style.display = 'none';
+        }, 5000);
+      }
+    }, 60000);
+    document.addEventListener('click', () => {
+      interaction.interacted = true;
+      clearInterval(defaultInterval);
+      setInterval(() => {
+        const currentTime = new Date();
+        const hours = currentTime.getHours();
+        const minutes = currentTime.getMinutes();
+        if (hours === 22 && minutes === 0) {
+          const notification = this.view.getNotificationBlockElement();
+          if (notification.style.display !== 'block') {
+            notification.style.display = 'block';
+            const sound = new Audio('../audio/notification.mp3');
+            sound.play();
+            setTimeout(() => {
+              notification.style.display = 'none';
+            }, 5000);
+          }
+        }
+      }, 60000);
+    });
   }
   _initDreamSearchInputElement() {
     const dreamSearchInput = this.view.getDreamSearchInputElement();
@@ -598,6 +636,7 @@ __webpack_require__.r(__webpack_exports__);
 class View {
   static ID = {
     MAIN: {
+      NOTIFICATION_BLOCK: 'notification',
       PREV_BUTTON: 'pagination-switcher-button-prev',
       NEXT_BUTTON: 'pagination-switcher-button-next',
       CURRENT_PAGE_NUMBER: 'current-page-number',
@@ -615,6 +654,9 @@ class View {
       USER_SEARCH_DIV: 'user-search-div'
     }
   };
+  getNotificationBlockElement() {
+    return document.querySelector(`#${View.ID.MAIN.NOTIFICATION_BLOCK}`);
+  }
   getDreamSearchInputElement() {
     return document.querySelector(`#${View.ID.FILTER.DREAM_SEARCH_INPUT}`);
   }
