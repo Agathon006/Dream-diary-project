@@ -2,6 +2,7 @@ export default class View {
 
     static ID = {
         MAIN: {
+            NOTIFICATION_BLOCK: 'notification',
             PREV_BUTTON: 'pagination-switcher-button-prev',
             NEXT_BUTTON: 'pagination-switcher-button-next',
             CURRENT_PAGE_NUMBER: 'current-page-number',
@@ -18,6 +19,10 @@ export default class View {
             DREAM_SORT_ICON: 'dream-sort-icon',
             USER_SEARCH_DIV: 'user-search-div',
         },
+    }
+
+    getNotificationBlockElement() {
+        return document.querySelector(`#${View.ID.MAIN.NOTIFICATION_BLOCK}`);
     }
 
     getDreamSearchInputElement() {
