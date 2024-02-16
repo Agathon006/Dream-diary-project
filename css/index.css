@@ -132,6 +132,18 @@
 .secondary-style .dream-record-head__top-right-like-button:hover {
   filter: drop-shadow(0 0 5px #232e2f);
 }
+.secondary-style .dream-record__main-top-right-liked-this {
+  color: rgb(255, 0, 217);
+}
+.secondary-style .main__filter-block-span {
+  color: #9f9f9f;
+}
+.secondary-style audio::-webkit-media-controls-panel {
+  background-color: #3f676b;
+}
+.secondary-style audio::-webkit-media-controls-current-time-display {
+  color: #00ff00;
+}
 
 .primary-style-light {
   background-color: #46d4e1;
@@ -272,6 +284,19 @@
 }
 .secondary-style-light .dream-record-head__top-right-like-button:hover {
   filter: drop-shadow(0 0 5px #46d4e1);
+}
+.secondary-style-light .dream-record__main-top-right-liked-this {
+  color: rgb(255, 0, 0);
+}
+.secondary-style-light .main__filter-block-span {
+  color: #000000;
+}
+.secondary-style-light audio::-webkit-media-controls-panel {
+  background-color: #85dde5;
+}
+.secondary-style-light audio::-webkit-media-controls-current-time-display {
+  color: #00de00;
+  text-shadow: -0.5px -0.5px 0 #000, 0.5px 0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
 }
 
 .main {
@@ -442,6 +467,18 @@ button {
 .secondary-style .dream-record-head__top-right-like-button:hover {
   filter: drop-shadow(0 0 5px #232e2f);
 }
+.secondary-style .dream-record__main-top-right-liked-this {
+  color: rgb(255, 0, 217);
+}
+.secondary-style .main__filter-block-span {
+  color: #9f9f9f;
+}
+.secondary-style audio::-webkit-media-controls-panel {
+  background-color: #3f676b;
+}
+.secondary-style audio::-webkit-media-controls-current-time-display {
+  color: #00ff00;
+}
 
 .primary-style-light {
   background-color: #46d4e1;
@@ -582,6 +619,19 @@ button {
 }
 .secondary-style-light .dream-record-head__top-right-like-button:hover {
   filter: drop-shadow(0 0 5px #46d4e1);
+}
+.secondary-style-light .dream-record__main-top-right-liked-this {
+  color: rgb(255, 0, 0);
+}
+.secondary-style-light .main__filter-block-span {
+  color: #000000;
+}
+.secondary-style-light audio::-webkit-media-controls-panel {
+  background-color: #85dde5;
+}
+.secondary-style-light audio::-webkit-media-controls-current-time-display {
+  color: #00de00;
+  text-shadow: -0.5px -0.5px 0 #000, 0.5px 0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
 }
 
 .underlined {
@@ -757,6 +807,18 @@ button {
 .secondary-style .dream-record-head__top-right-like-button:hover {
   filter: drop-shadow(0 0 5px #232e2f);
 }
+.secondary-style .dream-record__main-top-right-liked-this {
+  color: rgb(255, 0, 217);
+}
+.secondary-style .main__filter-block-span {
+  color: #9f9f9f;
+}
+.secondary-style audio::-webkit-media-controls-panel {
+  background-color: #3f676b;
+}
+.secondary-style audio::-webkit-media-controls-current-time-display {
+  color: #00ff00;
+}
 
 .primary-style-light {
   background-color: #46d4e1;
@@ -897,6 +959,19 @@ button {
 }
 .secondary-style-light .dream-record-head__top-right-like-button:hover {
   filter: drop-shadow(0 0 5px #46d4e1);
+}
+.secondary-style-light .dream-record__main-top-right-liked-this {
+  color: rgb(255, 0, 0);
+}
+.secondary-style-light .main__filter-block-span {
+  color: #000000;
+}
+.secondary-style-light audio::-webkit-media-controls-panel {
+  background-color: #85dde5;
+}
+.secondary-style-light audio::-webkit-media-controls-current-time-display {
+  color: #00de00;
+  text-shadow: -0.5px -0.5px 0 #000, 0.5px 0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
 }
 
 .underlined {
@@ -1205,6 +1280,18 @@ button {
 .secondary-style .dream-record-head__top-right-like-button:hover {
   filter: drop-shadow(0 0 5px #232e2f);
 }
+.secondary-style .dream-record__main-top-right-liked-this {
+  color: rgb(255, 0, 217);
+}
+.secondary-style .main__filter-block-span {
+  color: #9f9f9f;
+}
+.secondary-style audio::-webkit-media-controls-panel {
+  background-color: #3f676b;
+}
+.secondary-style audio::-webkit-media-controls-current-time-display {
+  color: #00ff00;
+}
 
 .primary-style-light {
   background-color: #46d4e1;
@@ -1345,6 +1432,19 @@ button {
 }
 .secondary-style-light .dream-record-head__top-right-like-button:hover {
   filter: drop-shadow(0 0 5px #46d4e1);
+}
+.secondary-style-light .dream-record__main-top-right-liked-this {
+  color: rgb(255, 0, 0);
+}
+.secondary-style-light .main__filter-block-span {
+  color: #000000;
+}
+.secondary-style-light audio::-webkit-media-controls-panel {
+  background-color: #85dde5;
+}
+.secondary-style-light audio::-webkit-media-controls-current-time-display {
+  color: #00de00;
+  text-shadow: -0.5px -0.5px 0 #000, 0.5px 0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
 }
 
 .underlined {
