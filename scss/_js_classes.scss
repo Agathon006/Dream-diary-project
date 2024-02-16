@@ -27,7 +27,7 @@
 
 .locked-input {
     background: transparent !important;
-    border: none  !important;
+    border: none !important;
     cursor: default;
     pointer-events: none;
 }
@@ -35,4 +35,25 @@
 .selected {
     color: rgba(0, 0, 0, 0.5) !important;
     cursor: default !important;
+}
+
+@keyframes changeColor {
+    0% {
+        background-color: #ffffff;
+    }
+
+    50% {
+        background-color: #dbdbdb;
+    }
+
+    100% {
+        background-color: #ffffff;
+    }
+}
+
+.waiting-background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    animation: changeColor 1s infinite;
 }

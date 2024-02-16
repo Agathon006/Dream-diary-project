@@ -5464,6 +5464,7 @@ class Controller {
           if (data.length) {
             dreamUserAvatar.src = data[0].avatar;
             dreamUserNickname.innerText = data[0].nickname;
+            this.view.toggleClassWaitingBackgroundOfMain();
           } else {
             console.log('User not found');
           }
@@ -5714,6 +5715,9 @@ class View {
       icon.src = '../icons/like_inactive.svg';
     }
     ;
+  }
+  toggleClassWaitingBackgroundOfMain() {
+    document.querySelector('.main').classList.toggle('waiting-background');
   }
 }
 

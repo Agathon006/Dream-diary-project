@@ -89,4 +89,8 @@ export default class View {
         };
     }
 
+    toggleClassWaitingBackgroundOfMain() {
+        document.querySelector('.main').classList.toggle('waiting-background');
+    }
+
 }

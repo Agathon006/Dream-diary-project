@@ -65,6 +65,7 @@ export default class Controller {
                                 if (data.length) {
                                     dreamUserAvatar.src = data[0].avatar;
                                     dreamUserNickname.innerText = data[0].nickname;
+                                    this.view.toggleClassWaitingBackgroundOfMain();
                                 } else {
                                     console.log('User not found');
                                 }

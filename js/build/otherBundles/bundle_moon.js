@@ -29,6 +29,7 @@ class Controller {
   _initMyPlaceButton() {
     const myPlaceButton = this.view.getMyPlaceButtonElement();
     myPlaceButton.addEventListener('click', () => {
+      this.view.toggleClassesWaitingBackgroundOfForecastDayElements();
       navigator.geolocation.getCurrentPosition(position => {
         this.model.getWeatherForecastForCurrentLocation(position.coords.latitude, position.coords.longitude).then(response => response.json()).then(data => {
           this.view.toggleClassHidden(myPlaceButton);
@@ -51,6 +52,7 @@ class Controller {
             this.view.whichColorForCloudCover(forecastContainer.children[i].children[3].children[1], data.list[j].clouds.all, forecastContainer.children[i].children[4]);
           }
           ;
+          this.view.toggleClassesWaitingBackgroundOfForecastDayElements();
         }).catch(error => {
           console.log('Error getting data from weather API: ', error);
         });
@@ -78,6 +80,7 @@ class Controller {
         this.view.whichColorForCloudCover(forecastContainer.children[i].children[3].children[1], data.list[j].clouds.all, forecastContainer.children[i].children[4]);
       }
       ;
+      this.view.toggleClassesWaitingBackgroundOfForecastDayElements();
     }).catch(error => {
       console.log('Error getting data from weather API: ', error);
     });
@@ -278,6 +281,11 @@ class View {
   toggleClassHidden(element) {
     element.style.transition = 'none';
     element.classList.toggle(View.JS_CLASSES.COMMON.HIDDEN);
+  }
+  toggleClassesWaitingBackgroundOfForecastDayElements() {
+    document.querySelectorAll('.forecast-day').forEach(element => {
+      element.classList.toggle('waiting-background');
+    });
   }
 }
 

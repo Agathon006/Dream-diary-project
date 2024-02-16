@@ -18,6 +18,7 @@ export default class Controller {
         const myPlaceButton = this.view.getMyPlaceButtonElement();
 
         myPlaceButton.addEventListener('click', () => {
+            this.view.toggleClassesWaitingBackgroundOfForecastDayElements();
 
             navigator.geolocation.getCurrentPosition((position) => {
                 this.model.getWeatherForecastForCurrentLocation(position.coords.latitude, position.coords.longitude)
@@ -47,6 +48,7 @@ export default class Controller {
                             forecastContainer.children[i].children[3].children[1].innerText = `${data.list[j].clouds.all}%`;
                             this.view.whichColorForCloudCover(forecastContainer.children[i].children[3].children[1], data.list[j].clouds.all, forecastContainer.children[i].children[4]);
                         };
+                        this.view.toggleClassesWaitingBackgroundOfForecastDayElements();
                     })
                     .catch(error => {
                         console.log('Error getting data from weather API: ', error)
@@ -82,6 +84,7 @@ export default class Controller {
                     forecastContainer.children[i].children[3].children[1].innerText = `${data.list[j].clouds.all}%`;
                     this.view.whichColorForCloudCover(forecastContainer.children[i].children[3].children[1], data.list[j].clouds.all, forecastContainer.children[i].children[4]);
                 };
+                this.view.toggleClassesWaitingBackgroundOfForecastDayElements();
             })
             .catch(error => {
                 console.log('Error getting data from weather API: ', error)
