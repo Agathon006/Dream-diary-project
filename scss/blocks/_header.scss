@@ -75,7 +75,7 @@
                 .header__navigation-list-separator {
                     width: 1px;
                     height: 20px;
-                    background-color: $text_color_primary;
+                    transition: .5s;
                 }
             }
 
@@ -100,7 +100,7 @@
                         height: 1px;
                         width: 100%;
                         margin: 5px 0;
-                        background-color: $text_color_primary;
+                        transition: .5s;
                     }
                 }
 
@@ -115,6 +115,7 @@
                         justify-content: space-around;
                         border-radius: 25px;
                         padding: 5px;
+                        transition: .5s;
 
                         .themes-switcher-icon {
                             width: 24px;
@@ -125,6 +126,7 @@
                             display: inline-block;
                             width: 30px;
                             height: 17px;
+                            transition: .5s;
 
                             input {
                                 opacity: 0;

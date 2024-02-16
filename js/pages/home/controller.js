@@ -19,6 +19,12 @@ export default class Controller {
             linkedinImage = this.view.getFooterLinkedinImageElement(),
             githubImage = this.view.getFooterGithubImageElement();
 
+        if (localStorage.getItem('theme') === 'dark') {
+            themesSwitcherCheckbox.checked = true;
+        } else if (localStorage.getItem('theme') === 'light') {
+            themesSwitcherCheckbox.checked = false;
+        }
+
         if (themesSwitcherCheckbox.checked) {
             header.classList.toggle('primary-style');
             main.classList.toggle('secondary-style');
@@ -47,11 +53,13 @@ export default class Controller {
             footer.classList.toggle('primary-style-light');
 
             if (themesSwitcherCheckbox.checked) {
+                localStorage.theme = 'dark';
                 themeImage.src = './icons/header/theme-dark.svg';
                 telegramImage.src = './icons/footer/telegram-dark.svg';
                 linkedinImage.src = './icons/footer/linkedin-dark.svg';
                 githubImage.src = './icons/footer/github-dark.svg';
             } else {
+                localStorage.theme = 'light';
                 themeImage.src = './icons/header/theme-light.svg';
                 telegramImage.src = './icons/footer/telegram-light.svg';
                 linkedinImage.src = './icons/footer/linkedin-light.svg';

@@ -18,6 +18,12 @@
 .primary-style .themes-switcher-container {
   background-color: #9f9f9f;
 }
+.primary-style .header__navigation-list-separator {
+  background-color: #9f9f9f;
+}
+.primary-style .header__navigation-end-account-separator {
+  background-color: #9f9f9f;
+}
 
 .secondary-style {
   background-color: #9f9f9f;
@@ -54,6 +60,12 @@
   color: #000000;
 }
 .primary-style-light .themes-switcher-container {
+  background-color: #000000;
+}
+.primary-style-light .header__navigation-list-separator {
+  background-color: #000000;
+}
+.primary-style-light .header__navigation-end-account-separator {
   background-color: #000000;
 }
 
@@ -128,6 +140,12 @@ button {
 .primary-style .themes-switcher-container {
   background-color: #9f9f9f;
 }
+.primary-style .header__navigation-list-separator {
+  background-color: #9f9f9f;
+}
+.primary-style .header__navigation-end-account-separator {
+  background-color: #9f9f9f;
+}
 
 .secondary-style {
   background-color: #9f9f9f;
@@ -164,6 +182,12 @@ button {
   color: #000000;
 }
 .primary-style-light .themes-switcher-container {
+  background-color: #000000;
+}
+.primary-style-light .header__navigation-list-separator {
+  background-color: #000000;
+}
+.primary-style-light .header__navigation-end-account-separator {
   background-color: #000000;
 }
 

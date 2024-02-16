@@ -22,6 +22,14 @@
     .themes-switcher-container {
         background-color: $background_color_secondary;
     }
+
+    .header__navigation-list-separator {
+        background-color: $background_color_secondary;
+    }
+
+    .header__navigation-end-account-separator {
+        background-color: $background_color_secondary;
+    }
 }
 
 .secondary-style {
@@ -63,6 +71,14 @@
     }
 
     .themes-switcher-container {
+        background-color: $text_color_secondary;
+    }
+
+    .header__navigation-list-separator {
+        background-color: $text_color_secondary;
+    }
+
+    .header__navigation-end-account-separator {
         background-color: $text_color_secondary;
     }
 }
