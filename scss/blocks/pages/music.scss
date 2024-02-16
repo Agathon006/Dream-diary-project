@@ -7,7 +7,6 @@
 @import '../footer';
 
 .main {
-    @extend %secondary_style;
 
     .container {}
 
@@ -41,23 +40,11 @@
             }
 
             audio::-webkit-media-controls-panel {
-                background-color: #3f676b;
+                transition: .5s;
             }
 
             audio::-webkit-media-controls-current-time-display {
-                color: #00ff00;
-            }
-
-            audio::-webkit-media-controls-time-remaining-display,
-            audio::-webkit-media-controls-play-button,
-            audio::-webkit-media-controls-mute-button,
-            audio::-webkit-media-controls-rewind-button,
-            audio::-webkit-media-controls-seek-back-button,
-            audio::-webkit-media-controls-seek-forward-button,
-            audio::-webkit-media-controls-volume-slider,
-            audio::-webkit-media-controls-timeline,
-            audio::-webkit-media-controls-fullscreen-button {
-                color: #ffffff;
+                transition: .5s;
             }
         }
     }

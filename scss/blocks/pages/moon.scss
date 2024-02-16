@@ -7,7 +7,6 @@
 @import '../footer';
 
 .main {
-    @extend %secondary_style;
 
     .container {
 
@@ -39,7 +38,6 @@
 
                     &:hover {
                         color: #dedede;
-                        filter: drop-shadow(0 0 5px $background_color_primary);
                     }
                 }
             }
@@ -67,6 +65,11 @@
 
                     .forecast-day__span {
                         margin-bottom: 10px;
+                        text-shadow: 
+                          -1px -1px 0 #000,
+                          1px -1px 0 #000,
+                          -1px 1px 0 #000,
+                          1px 1px 0 #000;
                     }
 
                     .forecast-day__span-result {
@@ -74,6 +77,11 @@
                         font-size: 26px;
                         font-weight: 900;
                         margin-top: 10px;
+                        text-shadow: 
+                          -1px -1px 0 #000,
+                          1px -1px 0 #000,
+                          -1px 1px 0 #000,
+                          1px 1px 0 #000;
                     }
                 }
             }

@@ -7,7 +7,6 @@
 @import '../footer';
 
 .main {
-    @extend %secondary_style;
 
     .container {
 
@@ -94,10 +93,6 @@
                 transition: .5s;
                 font-size: 26px;
                 font-weight: 600;
-
-                &:hover {
-                    background-color: $text_color_primary;
-                }
             }
         }
     }

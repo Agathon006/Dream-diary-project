@@ -7,7 +7,6 @@
 @import '../footer';
 
 .main {
-    @extend %secondary_style;
     display: flex;
     justify-content: center;
 
@@ -28,6 +27,7 @@
             background-color: rgb(233, 233, 233);
             padding: 0 20px;
             width: 300px;
+            border: 2px solid black;
 
             .register-form-separator {
                 align-self: center;
@@ -68,10 +68,6 @@
                 transition: .5s;
                 font-size: 26px;
                 font-weight: 600;
-
-                &:hover {
-                    background-color: $text_color_primary;
-                }
             }
 
             .register-form__checkbox-part {
