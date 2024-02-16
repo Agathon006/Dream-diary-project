@@ -448,23 +448,28 @@ export default class Controller {
                 if (!records.pages) {
                     this.view.displayNoRecordsMessage(mainPlot);
                 } else {
-                    if (records.pages === 1) {
-                        this.view.displaySimplePagination(mainPlot, records.items);
-                    } else {
-                        this.view.displayPagination(mainPlot, records.items, currentPageNumber, records.pages);
-                        if (currentPageNumber > 1) {
-                            const prevButton = this.view.getPrevButton();
-                            this.view.removeClassHidden(prevButton);
-                        };
-                        if (currentPageNumber === records.pages) {
-                            const nextButton = this.view.getNextButton();
-                            this.view.addClassHidden(nextButton);
+                    async function setupPagination(mainPlot, currentPageNumber, records, view) {
+                        if (records.pages === 1) {
+                            view.displaySimplePagination(mainPlot, records.items);
+                        } else {
+                            view.displayPagination(mainPlot, records.items, currentPageNumber, records.pages);
+                            if (currentPageNumber > 1) {
+                                const prevButton = view.getPrevButton();
+                                view.removeClassHidden(prevButton);
+                            };
+                            if (currentPageNumber === records.pages) {
+                                const nextButton = view.getNextButton();
+                                view.addClassHidden(nextButton);
+                            }
                         }
                     }
-
-                    records.data.forEach((record, index) => {
-                        this._putDreamRecord(mainPlot, record);
-                    });
+                    setupPagination(mainPlot, currentPageNumber, records, this.view)
+                        .then(() => {
+                            records.data.forEach((record, index) => {
+                                this._putDreamRecord(mainPlot, record);
+                            });
+                        });
+                    this.view.toggleClassWaitingBackgroundOfMain();
                 }
             })
             .catch(error => {

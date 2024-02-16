@@ -162,4 +162,8 @@ export default class View {
             input.classList.toggle('locked-input');
         });
     }
+
+    toggleClassWaitingBackgroundOfMain() {
+        document.querySelector('.main').classList.toggle('waiting-background');
+    }
 }

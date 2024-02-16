@@ -68,6 +68,8 @@ export default class Controller {
                 birthDateInput.value = userInfo.birthDate;
                 aboutInput.value = userInfo.profileInfo;
 
+                this.view.toggleClassWaitingBackgroundOfMain();
+
                 this._passwordEditButtonListener(userInfo);
 
                 this._editButtonListener(userInfo, profileMainAvatar);

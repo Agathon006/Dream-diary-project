@@ -80,6 +80,7 @@ export default class View {
     clearMainPlotHtml() {
         const mainPlot = this.getMainPlotElement();
         mainPlot.innerHTML = ``;
+        this.toggleClassWaitingBackgroundOfMain();
     }
 
     addClassHidden(element) {
@@ -211,5 +212,9 @@ export default class View {
                     <button class="user-search__main-button" id="user-search-main-button">x</button>
                 </div>
             </div>`
+    }
+
+    toggleClassWaitingBackgroundOfMain() {
+        document.querySelector('.main').classList.toggle('waiting-background');
     }
 }

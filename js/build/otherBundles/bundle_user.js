@@ -5466,6 +5466,7 @@ class Controller {
       surnameInput.value = userInfo.surname;
       birthDateInput.value = userInfo.birthDate;
       aboutInput.value = userInfo.profileInfo;
+      this.view.toggleClassWaitingBackgroundOfMain();
       this._passwordEditButtonListener(userInfo);
       this._editButtonListener(userInfo, profileMainAvatar);
     }).catch(error => {
@@ -5894,6 +5895,9 @@ class View {
       ;
       input.classList.toggle('locked-input');
     });
+  }
+  toggleClassWaitingBackgroundOfMain() {
+    document.querySelector('.main').classList.toggle('waiting-background');
   }
 }
 

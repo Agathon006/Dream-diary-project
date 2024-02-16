@@ -673,6 +673,24 @@ button {
   cursor: default !important;
 }
 
+@keyframes changeColor {
+  0% {
+    background-color: #ffffff;
+  }
+  50% {
+    background-color: #dbdbdb;
+  }
+  100% {
+    background-color: #ffffff;
+  }
+}
+.waiting-background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: changeColor 1s infinite;
+}
+
 .header {
   background-color: rgb(127, 246, 255);
 }

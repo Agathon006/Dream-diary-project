@@ -98,4 +98,10 @@ export default class View {
         element.classList.toggle(View.JS_CLASSES.COMMON.HIDDEN);
     }
 
+    toggleClassesWaitingBackgroundOfForecastDayElements() {
+        document.querySelectorAll('.forecast-day').forEach((element) => {
+            element.classList.toggle('waiting-background');
+        });
+    }
+
 }
