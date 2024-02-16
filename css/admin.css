@@ -1,4 +1,4 @@
-button, a {
+.primary-style {
   background-color: #232e2f;
   color: #9f9f9f;
   font-family: "Courier New", Courier, monospace;
@@ -6,6 +6,72 @@ button, a {
   font-weight: bold;
   letter-spacing: -1px;
   transition: 0.5s;
+}
+.primary-style a {
+  background-color: #232e2f;
+  color: #9f9f9f;
+}
+.primary-style button {
+  background-color: #232e2f;
+  color: #9f9f9f;
+}
+.primary-style .themes-switcher-container {
+  background-color: #9f9f9f;
+}
+
+.secondary-style {
+  background-color: #9f9f9f;
+  color: #000000;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 20px;
+  font-weight: 400;
+  transition: 0.5s;
+}
+.secondary-style a {
+  background-color: #232e2f;
+  color: #9f9f9f;
+}
+.secondary-style button {
+  background-color: #232e2f;
+  color: #9f9f9f;
+}
+
+.primary-style-light {
+  background-color: #46d4e1;
+  color: #000000;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  transition: 0.5s;
+}
+.primary-style-light a {
+  background-color: #46d4e1;
+  color: #000000;
+}
+.primary-style-light button {
+  background-color: #46d4e1;
+  color: #000000;
+}
+.primary-style-light .themes-switcher-container {
+  background-color: #000000;
+}
+
+.secondary-style-light {
+  background-color: #cefbff;
+  color: #000000;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 20px;
+  font-weight: 400;
+  transition: 0.5s;
+}
+.secondary-style-light a {
+  background-color: #46d4e1;
+  color: #000000;
+}
+.secondary-style-light button {
+  background-color: #46d4e1;
+  color: #000000;
 }
 
 .main {
@@ -23,16 +89,26 @@ button, a {
 }
 
 a {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  transition: 0.5s;
   text-decoration: none;
 }
 
 button {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  transition: 0.5s;
   border: none;
   border-radius: 100%;
   cursor: pointer;
 }
 
-a, button {
+.primary-style {
   background-color: #232e2f;
   color: #9f9f9f;
   font-family: "Courier New", Courier, monospace;
@@ -40,6 +116,72 @@ a, button {
   font-weight: bold;
   letter-spacing: -1px;
   transition: 0.5s;
+}
+.primary-style a {
+  background-color: #232e2f;
+  color: #9f9f9f;
+}
+.primary-style button {
+  background-color: #232e2f;
+  color: #9f9f9f;
+}
+.primary-style .themes-switcher-container {
+  background-color: #9f9f9f;
+}
+
+.secondary-style {
+  background-color: #9f9f9f;
+  color: #000000;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 20px;
+  font-weight: 400;
+  transition: 0.5s;
+}
+.secondary-style a {
+  background-color: #232e2f;
+  color: #9f9f9f;
+}
+.secondary-style button {
+  background-color: #232e2f;
+  color: #9f9f9f;
+}
+
+.primary-style-light {
+  background-color: #46d4e1;
+  color: #000000;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  transition: 0.5s;
+}
+.primary-style-light a {
+  background-color: #46d4e1;
+  color: #000000;
+}
+.primary-style-light button {
+  background-color: #46d4e1;
+  color: #000000;
+}
+.primary-style-light .themes-switcher-container {
+  background-color: #000000;
+}
+
+.secondary-style-light {
+  background-color: #cefbff;
+  color: #000000;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 20px;
+  font-weight: 400;
+  transition: 0.5s;
+}
+.secondary-style-light a {
+  background-color: #46d4e1;
+  color: #000000;
+}
+.secondary-style-light button {
+  background-color: #46d4e1;
+  color: #000000;
 }
 
 .underlined {

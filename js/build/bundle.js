@@ -17,8 +17,55 @@ class Controller {
     this.view = view;
   }
   init() {
+    this._initChangeThemeCheckboxListener();
     this._initReasonsSectionsButtonListener();
     this._initDoNotHaveDreamSectionsButtonListener();
+  }
+  _initChangeThemeCheckboxListener() {
+    const themesSwitcherCheckbox = this.view.getThemeCheckboxElement(),
+      header = this.view.getHeaderElement(),
+      main = this.view.getMainElement(),
+      footer = this.view.getFooterElement(),
+      themeImage = this.view.getHeaderThemeImageElement(),
+      telegramImage = this.view.getFooterTelegramImageElement(),
+      linkedinImage = this.view.getFooterLinkedinImageElement(),
+      githubImage = this.view.getFooterGithubImageElement();
+    if (themesSwitcherCheckbox.checked) {
+      header.classList.toggle('primary-style');
+      main.classList.toggle('secondary-style');
+      footer.classList.toggle('primary-style');
+      themeImage.src = './icons/header/theme-dark.svg';
+      telegramImage.src = './icons/footer/telegram-dark.svg';
+      linkedinImage.src = './icons/footer/linkedin-dark.svg';
+      githubImage.src = './icons/footer/github-dark.svg';
+    } else {
+      header.classList.toggle('primary-style-light');
+      main.classList.toggle('secondary-style-light');
+      footer.classList.toggle('primary-style-light');
+      themeImage.src = './icons/header/theme-light.svg';
+      telegramImage.src = './icons/footer/telegram-light.svg';
+      linkedinImage.src = './icons/footer/linkedin-light.svg';
+      githubImage.src = './icons/footer/github-light.svg';
+    }
+    themesSwitcherCheckbox.addEventListener('change', function () {
+      header.classList.toggle('primary-style');
+      main.classList.toggle('secondary-style');
+      footer.classList.toggle('primary-style');
+      header.classList.toggle('primary-style-light');
+      main.classList.toggle('secondary-style-light');
+      footer.classList.toggle('primary-style-light');
+      if (themesSwitcherCheckbox.checked) {
+        themeImage.src = './icons/header/theme-dark.svg';
+        telegramImage.src = './icons/footer/telegram-dark.svg';
+        linkedinImage.src = './icons/footer/linkedin-dark.svg';
+        githubImage.src = './icons/footer/github-dark.svg';
+      } else {
+        themeImage.src = './icons/header/theme-light.svg';
+        telegramImage.src = './icons/footer/telegram-light.svg';
+        linkedinImage.src = './icons/footer/linkedin-light.svg';
+        githubImage.src = './icons/footer/github-light.svg';
+      }
+    });
   }
   _initReasonsSectionsButtonListener() {
     const button = this.view.getReasonsSectionsButtonElement(),
@@ -55,16 +102,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 class View {
   static ID = {
+    THEME: {
+      CHECKBOX: 'theme-checkbox'
+    },
     REASONS_SECTIONS: {
       BUTTON: 'reasons-sections-button'
     },
     DO_NOT_HAVE_DREAM_SECTIONS: {
       BUTTON: 'do-not-have-dreams-sections-button'
+    },
+    HEADER: {
+      THEME_IMAGE: 'theme-image'
+    },
+    FOOTER: {
+      TELEGRAM_IMAGE: 'telegram-image',
+      LINKEDIN_IMAGE: 'linkedin-image',
+      GITHUB_IMAGE: 'github-image'
     }
   };
   static CLASSES = {
-    DO_NOT_HAVE_DREAMS_BLOCK: 'do-not-have-dreams-block'
+    DO_NOT_HAVE_DREAMS_BLOCK: 'do-not-have-dreams-block',
+    BODY: {
+      HEADER: 'header',
+      MAIN: 'main',
+      FOOTER: 'footer'
+    }
   };
+  getHeaderThemeImageElement() {
+    return document.querySelector(`#${View.ID.HEADER.THEME_IMAGE}`);
+  }
+  getFooterTelegramImageElement() {
+    return document.querySelector(`#${View.ID.FOOTER.TELEGRAM_IMAGE}`);
+  }
+  getFooterLinkedinImageElement() {
+    return document.querySelector(`#${View.ID.FOOTER.LINKEDIN_IMAGE}`);
+  }
+  getFooterGithubImageElement() {
+    return document.querySelector(`#${View.ID.FOOTER.GITHUB_IMAGE}`);
+  }
+  getHeaderElement() {
+    return document.querySelector(`.${View.CLASSES.BODY.HEADER}`);
+  }
+  getMainElement() {
+    return document.querySelector(`.${View.CLASSES.BODY.MAIN}`);
+  }
+  getFooterElement() {
+    return document.querySelector(`.${View.CLASSES.BODY.FOOTER}`);
+  }
+  getThemeCheckboxElement() {
+    return document.querySelector(`#${View.ID.THEME.CHECKBOX}`);
+  }
   getReasonsSectionsButtonElement() {
     return document.querySelector(`#${View.ID.REASONS_SECTIONS.BUTTON}`);
   }

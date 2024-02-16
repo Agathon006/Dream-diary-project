@@ -15,12 +15,20 @@
 }
 
 a {
-    @extend %primary_style;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    transition: .5s;
     text-decoration: none;
 }
 
 button {
-    @extend %primary_style;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    transition: .5s;
     border: none;
     border-radius: 100%;
     cursor: pointer;

@@ -3,7 +3,6 @@
 @import '../js_classes';
 
 .header {
-    @extend %primary_style;
 
     .container {
 
@@ -114,8 +113,6 @@
                         display: flex;
                         align-items: center;
                         justify-content: space-around;
-                        background-color: $text_color_primary;
-                        color: $background_color_primary;
                         border-radius: 25px;
                         padding: 5px;
 
@@ -151,7 +148,7 @@
                             left: 0;
                             right: 0;
                             bottom: 0;
-                            background-color: $background_color_primary;
+                            background-color: gray;
                             transition: .4s;
                             border-radius: 40%;
 

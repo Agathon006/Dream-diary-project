@@ -7,7 +7,6 @@
 @import './blocks/footer';
 
 .main {
-    @extend %secondary_style;
 
     .container {
         padding: 50px 0;

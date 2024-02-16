@@ -1,6 +1,6 @@
 @import '../variables/variables';
 
-%primary_style {
+.primary-style {
     background-color: $background_color_primary;
     color: $text_color_primary;
     font-family: 'Courier New', Courier, monospace;
@@ -8,12 +8,80 @@
     font-weight: bold;
     letter-spacing: -1px;
     transition: .5s;
+
+    a {
+        background-color: $background_color_primary;
+        color: $text_color_primary;
+    }
+
+    button {
+        background-color: $background_color_primary;
+        color: $text_color_primary;
+    }
+
+    .themes-switcher-container {
+        background-color: $background_color_secondary;
+    }
 }
 
-%secondary_style {
+.secondary-style {
     background-color: $background_color_secondary;
     color: $text_color_secondary;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 20px;
     font-weight: 400;
+    transition: .5s;
+
+    a {
+        background-color: $background_color_primary;
+        color: $text_color_primary;
+    }
+
+    button {
+        background-color: $background_color_primary;
+        color: $text_color_primary;
+    }
+}
+
+.primary-style-light {
+    background-color: $background_color_primary_light;
+    color: $text_color_primary_light;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    transition: .5s;
+
+    a {
+        background-color: $background_color_primary_light;
+        color: $text_color_secondary;
+    }
+
+    button {
+        background-color: $background_color_primary_light;
+        color: $text_color_secondary;
+    }
+
+    .themes-switcher-container {
+        background-color: $text_color_secondary;
+    }
+}
+
+.secondary-style-light {
+    background-color: $background_color_secondary_light;
+    color: $text_color_secondary;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+    font-weight: 400;
+    transition: .5s;
+
+    a {
+        background-color: $background_color_primary_light;
+        color: $text_color_secondary;
+    }
+
+    button {
+        background-color: $background_color_primary_light;
+        color: $text_color_secondary;
+    }
 }
