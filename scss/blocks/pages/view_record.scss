@@ -7,7 +7,6 @@
 @import '../footer';
 
 .main {
-    @extend %secondary_style;
 
     .container {
         .dream-record-head {
@@ -32,7 +31,6 @@
 
                         &:hover {
                             color: #dedede;
-                            filter: drop-shadow(0 0 5px $background_color_primary);
                         }
                     }
                 }
@@ -70,7 +68,6 @@
 
                         &:hover {
                             color: #dedede;
-                            filter: drop-shadow(0 0 5px $background_color_primary);
                         }
 
                         .dream-record-head__top-right-like-button-number {

@@ -7,7 +7,6 @@
 @import '../footer';
 
 .main {
-    @extend %secondary_style;
 
     .container {
 
@@ -39,7 +38,6 @@
 
                     &:hover {
                         color: #dedede;
-                        filter: drop-shadow(0 0 5px $background_color_primary);
                     }
                 }
             }

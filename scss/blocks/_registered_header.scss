@@ -43,7 +43,6 @@
                 .header__navigation-list-separator {
                     width: 1px;
                     height: 20px;
-                    background-color: $text_color_primary;
                 }
             }
 
@@ -68,7 +67,6 @@
                         height: 1px;
                         width: 100%;
                         margin: 5px 0;
-                        background-color: $text_color_primary;
                     }
                 }
 
@@ -81,8 +79,6 @@
                         display: flex;
                         align-items: center;
                         justify-content: space-around;
-                        background-color: $text_color_primary;
-                        color: $background_color_primary;
                         border-radius: 25px;
                         padding: 5px;
 
@@ -101,9 +97,7 @@
                                 width: 0;
                                 height: 0;
 
-                                &:checked+.themes-switcher__slider {
-                                    background-color: #366c67;
-                                }
+                                &:checked+.themes-switcher__slider {}
 
                                 &:checked+.themes-switcher__slider:before {
                                     transform: translateX(13px);
@@ -118,7 +112,6 @@
                             left: 0;
                             right: 0;
                             bottom: 0;
-                            background-color: $background_color_primary;
                             transition: .4s;
                             border-radius: 40%;
 

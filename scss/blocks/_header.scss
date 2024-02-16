@@ -133,9 +133,7 @@
                                 width: 0;
                                 height: 0;
 
-                                &:checked+.themes-switcher__slider {
-                                    background-color: #366c67;
-                                }
+                                &:checked+.themes-switcher__slider {}
 
                                 &:checked+.themes-switcher__slider:before {
                                     transform: translateX(13px);
@@ -150,7 +148,6 @@
                             left: 0;
                             right: 0;
                             bottom: 0;
-                            background-color: gray;
                             transition: .4s;
                             border-radius: 40%;
 

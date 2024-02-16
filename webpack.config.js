@@ -56,6 +56,10 @@ module.exports = {
       import: "./js/clear_cash.js",
       filename: "otherBundles/bundle_[name].js",
     },
+    theme: {
+      import: "./js/theme.js",
+      filename: "otherBundles/bundle_[name].js",
+    },
   },
   output: {
     filename: 'bundle.js',

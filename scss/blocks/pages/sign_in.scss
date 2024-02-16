@@ -7,7 +7,6 @@
 @import '../footer';
 
 .main {
-    @extend %secondary_style;
     display: flex;
     justify-content: center;
 
@@ -61,10 +60,6 @@
                 font-size: 26px;
                 font-weight: 600;
                 margin-top: 20px;
-
-                &:hover {
-                    background-color: $text_color_primary;
-                }
             }
 
             .register-form__checkbox-part {

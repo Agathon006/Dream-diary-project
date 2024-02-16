@@ -23,6 +23,10 @@
         background-color: $background_color_secondary;
     }
 
+    .themes-switcher__slider {
+        background-color: $background_color_primary;
+    }
+
     .header__navigation-list-separator {
         background-color: $background_color_secondary;
     }
@@ -49,6 +53,155 @@
         background-color: $background_color_primary;
         color: $text_color_primary;
     }
+
+    .notification {
+        background-color: $background_color_secondary;
+    }
+
+    .pagination-switcher {
+        background-color: $background_color_primary;
+        color: $text_color_primary;
+    }
+
+    .pagination-switcher__button {
+        background-color: $text_color_primary;
+        color: $background_color_primary;
+
+        &:hover {
+            color: black;
+            filter: drop-shadow(0 0 5px $text_color_primary);
+        }
+    }
+
+    .container {
+
+        .main-wrapper {
+
+            .main__plot {
+
+                .pagination-switcher {
+
+                    .pagination-switcher__plot {
+
+                        .pagination-switcher__plot-key {
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .empty-message {
+        background-color: $background_color_primary;
+        color: $text_color_primary;
+    }
+
+    .empty-message__button {
+        background-color: $text_color_primary;
+        color: $background_color_primary;
+
+        &:hover {
+            color: black;
+            filter: drop-shadow(0 0 5px $text_color_primary);
+        }
+    }
+
+    .dream-record {
+        background-color: $background_color_primary;
+        color: $text_color_primary;
+    }
+
+    .dream-record__main-bottom-user {
+        background-color: $text_color_primary;
+        color: $background_color_primary;
+
+        &:hover {
+            color: black;
+            filter: drop-shadow(0 0 5px $text_color_primary);
+        }
+    }
+
+    .dream-record__main-bottom-look-link {
+        background-color: $text_color_primary;
+        color: $background_color_primary;
+
+        &:hover {
+            color: black;
+            filter: drop-shadow(0 0 5px $text_color_primary);
+        }
+    }
+
+    .main__filter-block {
+        background-color: $background_color_primary;
+    }
+
+    .main__filter-block-search-button {
+        background-color: $text_color_primary;
+
+        &:hover {
+            filter: drop-shadow(0 0 5px $text_color_primary);
+        }
+    }
+
+    .user-search__main-button {
+        background-color: $text_color_primary;
+        color: $background_color_primary;
+
+        &:hover {
+            color: black;
+            filter: drop-shadow(0 0 5px $text_color_primary);
+        }
+    }
+
+    .main__filter-add-link {
+
+        &:hover {
+            filter: drop-shadow(0 0 5px $background_color_primary);
+        }
+    }
+
+    .record-form__submit {
+
+        &:hover {
+            background-color: $text_color_primary;
+        }
+    }
+
+    .forecast-place-button {
+
+        &:hover {
+            filter: drop-shadow(0 0 5px $background_color_primary);
+        }
+    }
+
+    .register-form__submit {
+
+        &:hover {
+            filter: drop-shadow(0 0 5px $background_color_primary);
+        }
+    }
+
+    .register-form__submit {
+
+        &:hover {
+            filter: drop-shadow(0 0 5px $background_color_primary);
+        }
+    }
+
+    .dream-record-head__top-left-return-button {
+
+        &:hover {
+            filter: drop-shadow(0 0 5px $background_color_primary);
+        }
+    }
+
+    .dream-record-head__top-right-like-button {
+
+        &:hover {
+            filter: drop-shadow(0 0 5px $background_color_primary);
+        }
+    }
 }
 
 .primary-style-light {
@@ -63,15 +216,27 @@
     a {
         background-color: $background_color_primary_light;
         color: $text_color_secondary;
+
+        &:hover {
+            color: rgb(25, 25, 25);
+        }
     }
 
     button {
         background-color: $background_color_primary_light;
         color: $text_color_secondary;
+
+        &:hover {
+            color: rgb(25, 25, 25);
+        }
     }
 
     .themes-switcher-container {
         background-color: $text_color_secondary;
+    }
+
+    .themes-switcher__slider {
+        background-color: $background_color_primary_light;
     }
 
     .header__navigation-list-separator {
@@ -99,5 +264,154 @@
     button {
         background-color: $background_color_primary_light;
         color: $text_color_secondary;
+    }
+
+    .notification {
+        background-color: $background_color_secondary_light;
+    }
+
+    .pagination-switcher {
+        background-color: $background_color_primary_light;
+        color: $text_color_secondary;
+    }
+
+    .pagination-switcher__button {
+        background-color: $text_color_secondary;
+        color: $background_color_primary_light;
+
+        &:hover {
+            color: white;
+            filter: drop-shadow(0 0 5px $text_color_secondary);
+        }
+    }
+
+    .container {
+
+        .main-wrapper {
+
+            .main__plot {
+
+                .pagination-switcher {
+
+                    .pagination-switcher__plot {
+
+                        .pagination-switcher__plot-key {
+                            color: black;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .empty-message {
+        background-color: $background_color_primary_light;
+        color: $text_color_secondary;
+    }
+
+    .empty-message__button {
+        background-color: $text_color_secondary;
+        color: $background_color_primary_light;
+
+        &:hover {
+            color: white;
+            filter: drop-shadow(0 0 5px $text_color_secondary);
+        }
+    }
+
+    .dream-record {
+        background-color: $background_color_primary_light;
+        color: $text_color_secondary;
+    }
+
+    .dream-record__main-bottom-user {
+        background-color: $text_color_secondary;
+        color: $background_color_primary_light;
+
+        &:hover {
+            color: white;
+            filter: drop-shadow(0 0 5px $text_color_secondary);
+        }
+    }
+
+    .dream-record__main-bottom-look-link {
+        background-color: $text_color_secondary;
+        color: $background_color_primary_light;
+
+        &:hover {
+            color: white;
+            filter: drop-shadow(0 0 5px $text_color_secondary);
+        }
+    }
+
+    .main__filter-block {
+        background-color: $background_color_primary_light;
+    }
+
+    .main__filter-block-search-button {
+        background-color: $text_color_secondary;
+
+        &:hover {
+            filter: drop-shadow(0 0 5px $text_color_secondary);
+        }
+    }
+
+    .user-search__main-button {
+        background-color: $text_color_secondary;
+        color: $background_color_primary_light;
+
+        &:hover {
+            color: white;
+            filter: drop-shadow(0 0 5px $text_color_secondary);
+        }
+    }
+
+    .main__filter-add-link {
+
+        &:hover {
+            filter: drop-shadow(0 0 5px $background_color_primary_light);
+        }
+    }
+
+    .record-form__submit {
+
+        &:hover {
+            background-color: $background_color_primary_light;
+        }
+    }
+
+    .forecast-place-button {
+
+        &:hover {
+            filter: drop-shadow(0 0 5px $background_color_primary_light);
+        }
+    }
+
+    .register-form__submit {
+
+        &:hover {
+            filter: drop-shadow(0 0 5px $background_color_primary_light);
+        }
+    }
+
+    .register-form__submit {
+
+        &:hover {
+            filter: drop-shadow(0 0 5px $background_color_primary_light);
+        }
+    }
+
+    .dream-record-head__top-left-return-button {
+
+        &:hover {
+            filter: drop-shadow(0 0 5px $background_color_primary_light);
+        }
+    }
+
+    .dream-record-head__top-right-like-button {
+
+        &:hover {
+            filter: drop-shadow(0 0 5px $background_color_primary_light);
+        }
     }
 }
