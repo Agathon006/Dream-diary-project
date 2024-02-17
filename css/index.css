@@ -1179,6 +1179,9 @@ button {
   align-items: center;
   font-size: 20px;
 }
+.header .container .header__navigation .header__navigation-end .header__navigation-end-settings .language-container .language-button {
+  transition: 0.5s;
+}
 .header .container .header__navigation .header__navigation-end .header__navigation-end-settings .language-container .language-button:hover {
   color: #dedede;
 }

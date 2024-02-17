@@ -136,6 +136,7 @@
                         font-size: 20px;
 
                         .language-button {
+                            transition: .5s;
 
                             &:hover {
                                 color: #dedede;
