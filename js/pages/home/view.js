@@ -62,6 +62,7 @@ export default class View {
                 document.querySelector(`#reasons-sections-button`).textContent = i18next.t('home.reasons_sections_button');
 
                 document.querySelector(`#do-not-have-dreams-block-title`).textContent = i18next.t('home.do_not_have_dreams_block_title');
+                document.querySelector(`#do-not-have-dreams-block-subtitle`).textContent = i18next.t('home.do_not_have_dreams_block_subtitle');
                 document.querySelector(`#do-not-have-dreams-block-first-section-title`).textContent = i18next.t('home.do_not_have_dreams_block_first_section_title');
                 document.querySelector(`#do-not-have-dreams-block-first-section-plot`).textContent = i18next.t('home.do_not_have_dreams_block_first_section_plot');
                 document.querySelector(`#do-not-have-dreams-block-second-section-title`).textContent = i18next.t('home.do_not_have_dreams_block_second_section_title');
