@@ -7,7 +7,14 @@
         "register": "Зарегистрироваться",
         "sign_in": "Войти"
     },
-    "registered_header": {},
+    "registered_header": {
+        "home": "Главная",
+        "time": "Мировое время",
+        "moon": "Лунные фазы",
+        "music": "Музыка",
+        "profile": "Профиль",
+        "sign_out": "Выйти"
+    },
     "footer": {
         "footer_plot": "Дневник снов"
     },
@@ -40,7 +47,9 @@
     },
     "make_record": {},
     "moon": {},
-    "music": {},
+    "music": {
+        "music_player_title": "Музыкальный плеер"
+    },
     "register": {
         "form_title": "Максимально используйте свой сон",
         "form_nickname_span": "Никнейм(5-15 символов)",
