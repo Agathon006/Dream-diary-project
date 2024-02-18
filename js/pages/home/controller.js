@@ -4,8 +4,15 @@ export default class Controller {
     }
 
     init() {
+        this._initTranslation();
         this._initReasonsSectionsButtonListener();
         this._initDoNotHaveDreamSectionsButtonListener();
+    }
+
+    _initTranslation() {
+        if (localStorage.getItem('language') === 'ru') {
+            this.view.translatePage();
+        }
     }
 
     _initReasonsSectionsButtonListener() {
