@@ -105,7 +105,7 @@ export default class Controller {
         if (!this.model.isPasswordOkay(formInfo.password)) {
             this.view.addClassWrongInput(passwordInput);
             if (localStorage.getItem('language') === 'ru') {
-                this.view.createWrongSpanElement(passwordInput, "Пароль должно состоять из 6-200 символов с хотя бы 1 заглавной и 1 строчной буквами");
+                this.view.createWrongSpanElement(passwordInput, "Пароль должен состоять из 6-200 символов с хотя бы 1 заглавной и 1 строчной буквами");
             } else {
                 this.view.createWrongSpanElement(passwordInput, "Password must have 6-200 symbols with at least 1 uppercase and 1 lowercase letter");
             }

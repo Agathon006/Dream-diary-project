@@ -64,25 +64,28 @@
     </header>
     <main class="main">
         <div class="form-wrapper">
-            <h1 class="register-title">Make the most of your sleep</h1>
+            <h1 class="register-title" id="form-title">Make the most of your sleep</h1>
             <form action="#" class="register-form" id="register-form">
-                <span class="register-form__span">Nickname(5-15 characters)</span>
+                <span class="register-form__span" id="form-nickname-span">Nickname(5-15 characters)</span>
                 <input type="text" required="true" name="nickname" class="register-form__input" id="nickname-input">
                 <span class="register-form__span">Email</span>
                 <input type="text" required="true" name="email" class="register-form__input" id="email-input">
-                <span class="register-form__span">Password(6+ characters)</span>
+                <span class="register-form__span" id="form-password-span">Password(6+ characters)</span>
                 <input type="password" required="true" name="password" class="register-form__input" id="password-input">
                 <div class="register-form__checkbox-part">
                     <input type="checkbox" id="password-check-box" name="showPassword">
-                    <label for="password-check-box" class="register-form__span-small">Show password</label>
+                    <label for="password-check-box" class="register-form__span-small" id="form-show-password-span">Show
+                        password</label>
                 </div>
-                <span class="register-form__span-small">By clicking register, you agree to the application
+                <span class="register-form__span-small" id="form-small-span">By clicking register, you agree to the
+                    application
                     polices.</span>
                 <input type="submit" name="register" value="Register" class="register-form__submit"
                     id="register-form-submit">
                 <div class="register-form__bottom">
-                    <span class="register-form__span-small">Already registered?</span>
-                    <a href="./sign_in.html" class="register-form__bottom-link">Sign in</a>
+                    <span class="register-form__span-small" id="form-already-registered-span">Already registered?</span>
+                    <a href="./sign_in.html" class="register-form__bottom-link" id="form-already-registered-button">Sign
+                        in</a>
                 </div>
                 <div class="register-form-separator"></div>
                 <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -92,12 +95,13 @@
                 </div>
                 <div class="g_id_signin" data-type="standard"></div>
                 <div class="dev-message google-message" id="google-message">
-                    <p class="dev-message__plot">Sign in by services is under development, you need to register by basic
+                    <p class="dev-message__plot" id="form-dev-message">Sign in by services is under development, you
+                        need to register by basic
                         way instead.</p>
                 </div>
             </form>
             <form class="code-form hidden" id="code-form">
-                <p class="code-form__title">Enter your verification code</p>
+                <p class="code-form__title" id="code-title">Enter your verification code</p>
                 <div class="code-form__numbers">
                     <input type="text" class="code-form__number">
                     <input type="text" class="code-form__number">
@@ -106,16 +110,17 @@
                     <input type="text" class="code-form__number">
                     <input type="text" class="code-form__number">
                 </div>
-                <p class="code-form__plot">We sent a verification code to your email for confirmation. Please check
+                <p class="code-form__plot" id="code-plot">We sent a verification code to your email for confirmation.
+                    Please check
                     your
                     email.</p>
             </form>
             <div class="dev-message hidden" id="dev-message">
                 <div class="dev-message__decor"></div>
-                <p class="dev-message__plot">Sorry, but this feature is under development, your verification code
-                    here: <span class="dev-message__code" id="dev-message-code"></span>
+                <p class="dev-message__plot" id="code-dev-message">Sorry, but this feature is under development, your
+                    verification code here:
                 </p>
-
+                <span class="dev-message__code" id="dev-message-code"></span>
             </div>
         </div>
     </main>
@@ -126,7 +131,7 @@
                 <span class="footer__data-element">2024</span>
                 <span class="footer__data-element">github</span>
             </section>
-            <span class="footer__plot">Dream diary</span>
+            <span class="footer__plot" id="footer-plot">Dream diary</span>
             <section class="footer__social">
                 <a href="https://t.me/agathon006" target="_blank" class="footer__social-link">
                     <img src="" alt="telegram" class="footer__social-link-image" id="telegram-image">
