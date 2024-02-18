@@ -1580,6 +1580,10 @@ button {
 }
 .main .container .wrapper .forecast-container .forecast-day .forecast-day__span {
   margin-bottom: 10px;
+  text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
+}
+.main .container .wrapper .forecast-container .forecast-day .forecast-day__span-percent {
+  margin-bottom: 10px;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 .main .container .wrapper .forecast-container .forecast-day .forecast-day__span-result {

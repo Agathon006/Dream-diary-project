@@ -7,10 +7,17 @@ export default class Controller {
     }
 
     init() {
+        this._initTranslation();
         this._initMyPlaceButton()
         this._initCurrentForecast()
         this._initMoonphases()
         this._initCurrentMoonPhaseBorder()
+    }
+
+    _initTranslation() {
+        if (localStorage.getItem('language') === 'ru') {
+            this.view.translatePage();
+        }
     }
 
     _initMyPlaceButton() {
@@ -29,7 +36,11 @@ export default class Controller {
                         const forecastContainer = this.view.getForecastContainerElement(),
                             forecastPlace = this.view.getForecastPlaceElement();
 
-                        forecastPlace.innerText = `Place: ${data.city.name}`;
+                        if (localStorage.getItem('language') === 'ru') {
+                            forecastPlace.innerText = `Место: ${data.city.name}`;
+                        } else {
+                            forecastPlace.innerText = `Place: ${data.city.name}`;
+                        }
 
                         let firstNewDayWeatherIndex = 0;
 
@@ -44,7 +55,11 @@ export default class Controller {
                             let j = i * 8 + firstNewDayWeatherIndex;
                             forecastContainer.children[i].children[0].innerText = data.list[j].dt_txt;
                             forecastContainer.children[i].children[1].src = `./../icons/moon/${data.list[j].weather[0].icon}.png`;
-                            forecastContainer.children[i].children[2].innerText = data.list[j].weather[0].main;
+                            if (localStorage.getItem('language') === 'ru') {
+                                forecastContainer.children[i].children[2].innerText = this._defineRuWeather(data.list[j].weather[0].main);
+                            } else {
+                                forecastContainer.children[i].children[2].innerText = data.list[j].weather[0].main;
+                            }
                             forecastContainer.children[i].children[3].children[1].innerText = `${data.list[j].clouds.all}%`;
                             this.view.whichColorForCloudCover(forecastContainer.children[i].children[3].children[1], data.list[j].clouds.all, forecastContainer.children[i].children[4]);
                         };
@@ -65,7 +80,11 @@ export default class Controller {
                 const forecastContainer = this.view.getForecastContainerElement(),
                     forecastPlace = this.view.getForecastPlaceElement();
 
-                forecastPlace.innerText = `Place: ${data.city.name}`;
+                if (localStorage.getItem('language') === 'ru') {
+                    forecastPlace.innerText = `Место: ${data.city.name}`;
+                } else {
+                    forecastPlace.innerText = `Place: ${data.city.name}`;
+                }
 
                 let firstNewDayWeatherIndex = 0;
 
@@ -80,7 +99,11 @@ export default class Controller {
                     let j = i * 8 + firstNewDayWeatherIndex;
                     forecastContainer.children[i].children[0].innerText = data.list[j].dt_txt;
                     forecastContainer.children[i].children[1].src = `./../icons/moon/${data.list[j].weather[0].icon}.png`;
-                    forecastContainer.children[i].children[2].innerText = data.list[j].weather[0].main;
+                    if (localStorage.getItem('language') === 'ru') {
+                        forecastContainer.children[i].children[2].innerText = this._defineRuWeather(data.list[j].weather[0].main);
+                    } else {
+                        forecastContainer.children[i].children[2].innerText = data.list[j].weather[0].main;
+                    }
                     forecastContainer.children[i].children[3].children[1].innerText = `${data.list[j].clouds.all}%`;
                     this.view.whichColorForCloudCover(forecastContainer.children[i].children[3].children[1], data.list[j].clouds.all, forecastContainer.children[i].children[4]);
                 };
@@ -89,6 +112,31 @@ export default class Controller {
             .catch(error => {
                 console.log('Error getting data from weather API: ', error)
             });
+    }
+
+    _defineRuWeather(weatherCondition) {
+        switch (weatherCondition) {
+            case 'Clear':
+                return 'Ясно';
+            case 'Clouds':
+                return 'Облачно';
+            case 'Rain':
+                return 'Дождь';
+            case 'Snow':
+                return 'Снег';
+            case 'Thunderstorm':
+                return 'Гроза';
+            case 'Drizzle':
+                return 'Морось';
+            case 'Fog':
+                return 'Туман';
+            case 'Mist':
+                return 'Мгла';
+            case 'Haze':
+                return 'Мгла';
+            default:
+                return 'Неизвестно';
+        }
     }
 
     _initMoonphases() {
@@ -168,12 +216,14 @@ export default class Controller {
 
                 if (targetDateObj >= startDate && targetDateObj <= endDate) {
                     span.style.fontWeight = '900';
-                    span.parentElement.style.border = '2px solid black'
+                    span.parentElement.style.border = '2px solid black';
+                    span.parentElement.children[1].style.fontWeight = '900';
                 }
             } else {
                 if (targetDate === dates[0]) {
                     span.style.fontWeight = '900';
-                    span.parentElement.style.border = '2px solid black'
+                    span.parentElement.style.border = '2px solid black';
+                    span.parentElement.children[1].style.fontWeight = '900';
                 }
             }
         });
