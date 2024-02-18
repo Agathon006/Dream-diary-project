@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+
 export default class View {
 
     static ID = {
@@ -67,7 +69,11 @@ export default class View {
     }
 
     transformCurrentSubtitle(currentDate, options) {
-        this.getSubtitle('CURRENT').textContent = currentDate.toLocaleString('en-US', options);
+        if (localStorage.getItem('language') === 'ru') {
+            this.getSubtitle('CURRENT').textContent = this.defineRuMonth(currentDate.toLocaleString('en-US', options));
+        } else {
+            this.getSubtitle('CURRENT').textContent = currentDate.toLocaleString('en-US', options);
+        }
     }
 
     transformNewYorkClock(hours, minutes, seconds) {
@@ -78,7 +84,11 @@ export default class View {
 
     transformNewYorkSubtitle(currentDate, options) {
         currentDate.setHours(currentDate.getHours() - 8);
-        this.getSubtitle('NEW_YORK').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("-5");
+        if (localStorage.getItem('language') === 'ru') {
+            this.getSubtitle('NEW_YORK').textContent = this.defineRuMonth(currentDate.toLocaleString('en-US', options)).slice(0, -2).concat("-5");
+        } else {
+            this.getSubtitle('NEW_YORK').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("-5");
+        }
     }
 
     transformLondonClock(hours, minutes, seconds) {
@@ -89,7 +99,11 @@ export default class View {
 
     transformLondonSubtitle(currentDate, options) {
         currentDate.setHours(currentDate.getHours() + 5);
-        this.getSubtitle('LONDON').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat(" -");
+        if (localStorage.getItem('language') === 'ru') {
+            this.getSubtitle('LONDON').textContent = this.defineRuMonth(currentDate.toLocaleString('en-US', options)).slice(0, -2).concat(" -");
+        } else {
+            this.getSubtitle('LONDON').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat(" -");
+        }
     }
 
     transformTokyoClock(hours, minutes, seconds) {
@@ -100,7 +114,11 @@ export default class View {
 
     transformTokyoSubtitle(currentDate, options) {
         currentDate.setHours(currentDate.getHours() + 9);
-        this.getSubtitle('TOKYO').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+9");
+        if (localStorage.getItem('language') === 'ru') {
+            this.getSubtitle('TOKYO').textContent = this.defineRuMonth(currentDate.toLocaleString('en-US', options)).slice(0, -2).concat("+9");
+        } else {
+            this.getSubtitle('TOKYO').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+9");
+        }
     }
 
     transformBerlinClock(hours, minutes, seconds) {
@@ -111,7 +129,11 @@ export default class View {
 
     transformBerlinSubtitle(currentDate, options) {
         currentDate.setHours(currentDate.getHours() - 8);
-        this.getSubtitle('BERLIN').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+1");
+        if (localStorage.getItem('language') === 'ru') {
+            this.getSubtitle('BERLIN').textContent = this.defineRuMonth(currentDate.toLocaleString('en-US', options)).slice(0, -2).concat("+1");
+        } else {
+            this.getSubtitle('BERLIN').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+1");
+        }
     }
 
     transformChinaClock(hours, minutes, seconds) {
@@ -122,7 +144,11 @@ export default class View {
 
     transformChinaSubtitle(currentDate, options) {
         currentDate.setHours(currentDate.getHours() + 7);
-        this.getSubtitle('CHINA').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+8");
+        if (localStorage.getItem('language') === 'ru') {
+            this.getSubtitle('CHINA').textContent = this.defineRuMonth(currentDate.toLocaleString('en-US', options)).slice(0, -2).concat("+8");
+        } else {
+            this.getSubtitle('CHINA').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+8");
+        }
     }
 
     transformSydneyClock(hours, minutes, seconds) {
@@ -133,7 +159,11 @@ export default class View {
 
     transformSydneySubtitle(currentDate, options) {
         currentDate.setHours(currentDate.getHours() + 3);
-        this.getSubtitle('SYDNEY').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+11");
+        if (localStorage.getItem('language') === 'ru') {
+            this.getSubtitle('SYDNEY').textContent = this.defineRuMonth(currentDate.toLocaleString('en-US', options)).slice(0, -2).concat("+11");
+        } else {
+            this.getSubtitle('SYDNEY').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+11");
+        }
     }
 
     transformCaliforniaClock(hours, minutes, seconds) {
@@ -144,7 +174,11 @@ export default class View {
 
     transformCaliforniaSubtitle(currentDate, options) {
         currentDate.setHours(currentDate.getHours() + 5);
-        this.getSubtitle('CALIFORNIA').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("-8");
+        if (localStorage.getItem('language') === 'ru') {
+            this.getSubtitle('CALIFORNIA').textContent = this.defineRuMonth(currentDate.toLocaleString('en-US', options)).slice(0, -2).concat("-8");
+        } else {
+            this.getSubtitle('CALIFORNIA').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("-8");
+        }
     }
 
     transformIndiaClock(hours, minutes, seconds) {
@@ -156,7 +190,81 @@ export default class View {
     transformIndiaSubtitle(currentDate, options) {
         currentDate.setHours(currentDate.getHours() - 11);
         currentDate.setMinutes(currentDate.getMinutes() + 30);
-        this.getSubtitle('INDIA').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+5:30");
+        if (localStorage.getItem('language') === 'ru') {
+            this.getSubtitle('INDIA').textContent = this.defineRuMonth(currentDate.toLocaleString('en-US', options)).slice(0, -2).concat("+5:30");
+        } else {
+            this.getSubtitle('INDIA').textContent = currentDate.toLocaleString('en-US', options).slice(0, -2).concat("+5:30");
+        }
+    }
+
+    defineRuMonth(date) {
+        const month = date.substring(0, 3);
+        switch (month) {
+            case 'Jan':
+                return 'Янв' + date.substring(3);
+            case 'Feb':
+                return 'Фев' + date.substring(3);
+            case 'Mar':
+                return 'Мар' + date.substring(3);
+            case 'Apr':
+                return 'Апр' + date.substring(3);
+            case 'May':
+                return 'Май' + date.substring(3);
+            case 'Jun':
+                return 'Июн' + date.substring(3);
+            case 'Jul':
+                return 'Июл' + date.substring(3);
+            case 'Aug':
+                return 'Авг' + date.substring(3);
+            case 'Sep':
+                return 'Сен' + date.substring(3);
+            case 'Oct':
+                return 'Окт' + date.substring(3);
+            case 'Nov':
+                return 'Ноя' + date.substring(3);
+            case 'Dec':
+                return 'Дек' + date.substring(3);
+            default:
+                return '???';
+        }
+    }
+
+    translatePage() {
+        fetch('../dictionary.json')
+            .then(response => response.json())
+            .then(data => {
+                i18next.init({
+                    lng: 'ru',
+                    debug: false,
+                    resources: {
+                        ru: {
+                            translation: data
+                        }
+                    }
+                });
+
+                document.querySelector(`#header-link-home`).textContent = i18next.t('registered_header.home');
+                document.querySelector(`#header-link-time`).textContent = i18next.t('registered_header.moon');
+                document.querySelector(`#header-link-moon`).textContent = i18next.t('registered_header.time');
+                document.querySelector(`#header-link-music`).textContent = i18next.t('registered_header.music');
+                document.querySelector(`#header-link-profile`).textContent = i18next.t('registered_header.profile');
+                document.querySelector(`#header-link-sign-out`).textContent = i18next.t('registered_header.sign_out');
+
+                document.querySelector(`#title`).textContent = i18next.t('time.title');
+                document.querySelector(`#new-york-span`).textContent = i18next.t('time.new_york_span');
+                document.querySelector(`#london-span`).textContent = i18next.t('time.london_span');
+                document.querySelector(`#tokyo-span`).textContent = i18next.t('time.tokyo_span');
+                document.querySelector(`#berlin-span`).textContent = i18next.t('time.berlin_span');
+                document.querySelector(`#china-span`).textContent = i18next.t('time.china_span');
+                document.querySelector(`#sydney-span`).textContent = i18next.t('time.sydney_span');
+                document.querySelector(`#california-span`).textContent = i18next.t('time.california_span');
+                document.querySelector(`#india-span`).textContent = i18next.t('time.india_span');
+
+                document.querySelector(`#footer-plot`).textContent = i18next.t('footer.footer_plot');
+            })
+            .catch(error => {
+                console.error('Error loading JSON file:', error);
+            });
     }
 
 }

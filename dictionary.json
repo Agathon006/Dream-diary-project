@@ -86,7 +86,17 @@
         "not_registered_span": "Не зарегистрированы?",
         "not_registered_button": "Зарегистрироваться"
     },
-    "time": {},
+    "time": {
+        "title": "Текущее время",
+        "new_york_span": "Нью-Йорк",
+        "london_span": "Лондон",
+        "tokyo_span": "Токио",
+        "berlin_span": "Берлин",
+        "china_span": "Китай",
+        "sydney_span": "Сидней",
+        "california_span": "Калифорния",
+        "india_span": "Индия"
+    },
     "user": {},
     "view_record": {}
 }
