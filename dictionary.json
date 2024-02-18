@@ -43,7 +43,14 @@
     "music": {},
     "register": {},
     "registered_home": {},
-    "sign_in": {},
+    "sign_in": {
+        "form_title": "Максимально используйте свой сон",
+        "form_password_span": "Пароль",
+        "form_show_password_span": "Показать пароль",
+        "form_submit": "Войти",
+        "not_registered_span": "Не зарегистрированы?",
+        "not_registered_button": "Зарегистрироваться"
+    },
     "time": {},
     "user": {},
     "view_record": {}

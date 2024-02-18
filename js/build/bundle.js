@@ -83,7 +83,7 @@ class View {
     return document.querySelector(`#${View.ID.DO_NOT_HAVE_DREAM_SECTIONS.BUTTON}`);
   }
   translatePage() {
-    fetch('dictionary.json').then(response => response.json()).then(data => {
+    fetch('./dictionary.json').then(response => response.json()).then(data => {
       i18next__WEBPACK_IMPORTED_MODULE_0__["default"].init({
         lng: 'ru',
         debug: false,

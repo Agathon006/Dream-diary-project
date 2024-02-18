@@ -28,7 +28,7 @@ export default class View {
     }
 
     translatePage() {
-        fetch('dictionary.json')
+        fetch('./dictionary.json')
             .then(response => response.json())
             .then(data => {
                 i18next.init({
