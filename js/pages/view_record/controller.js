@@ -40,7 +40,7 @@ export default class Controller {
                 return response.json();
             })
             .then(record => {
-                const newViewsNumber = record.views + 1;
+                const newViewsNumber = (+record.views) + 1;
                 this.model.getPromiseChangeRecordViews(recordId, newViewsNumber)
                     .then(response => {
                         if (!response.ok) {

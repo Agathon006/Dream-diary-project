@@ -23,26 +23,32 @@
                 </a>
                 <ul class="header__navigation-list">
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link underlined" href="#">Home</a>
+                        <a class="header__navigation-list-element-link underlined" href="#"
+                            id="header-link-home">Home</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./time.html">World time</a>
+                        <a class="header__navigation-list-element-link" href="./time.html" id="header-link-time">World
+                            time</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./moon.html">Moon phases</a>
+                        <a class="header__navigation-list-element-link" href="./moon.html" id="header-link-moon">Moon
+                            phases</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./music.html">Music player</a>
+                        <a class="header__navigation-list-element-link" href="./music.html" id="header-link-music">Music
+                            player</a>
                     </li>
                 </ul>
                 <div class="header__navigation-end">
                     <div class="header__navigation-end-account" id="header-navigation-end-account">
-                        <a class="header__navigation-end-account-link" href="./user.html">Profile</a>
+                        <a class="header__navigation-end-account-link" href="./user.html"
+                            id="header-link-profile">Profile</a>
                         <div class="header__navigation-end-account-separator"></div>
-                        <a class="header__navigation-end-account-link" href="./sign_in.html">Sign out</a>
+                        <a class="header__navigation-end-account-link" href="./sign_in.html"
+                            id="header-link-sign-out">Sign out</a>
                     </div>
                     <div class="header__navigation-end-settings">
                         <div class="themes-switcher-container">
@@ -71,14 +77,14 @@
                 <div class="main__plot" id="main-plot"></div>
                 <div class="main__filter">
                     <div class="main__filter-block">
-                        <span class="main__filter-block-span">Dreams search by title</span>
+                        <span class="main__filter-block-span" id="filter-search-span">Dreams search by title</span>
                         <div class="main__filter-block-search">
                             <input type="text" class="main__filter-block-input" id="dream-search-input">
                             <button class="main__filter-block-search-button" id="dream-search-button"></button>
                         </div>
                     </div>
                     <div class="main__filter-block">
-                        <span class="main__filter-block-span">Dream category</span>
+                        <span class="main__filter-block-span" id="filter-category-span">Dream category</span>
                         <div class="main__filter-block-main">
                             <select name="dreamCategory" class="main__filter-block-input" id="dream-category-select">
                                 <option value="All">All Categories</option>
@@ -94,7 +100,7 @@
                         </div>
                     </div>
                     <div class="main__filter-block">
-                        <span class="main__filter-block-span">Dream mood</span>
+                        <span class="main__filter-block-span" id="filter-mood-span">Dream mood</span>
                         <div class="main__filter-block-main">
                             <select name="dreamMood" class="main__filter-block-input" id="dream-mood-select">
                                 <option value="All">All moods</option>
@@ -109,7 +115,7 @@
                         </div>
                     </div>
                     <div class="main__filter-block">
-                        <span class="main__filter-block-span">Sort by</span>
+                        <span class="main__filter-block-span" id="filter-sort-span">Sort by</span>
                         <div class="main__filter-block-main">
                             <select name="sort" class="main__filter-block-input" id="dream-sort-select">
                                 <option value="Default">Default</option>
@@ -121,7 +127,7 @@
                         </div>
                     </div>
                     <div id="user-search-div"></div>
-                    <a href="./make_record.html" class="main__filter-add-link">Share a dream</a>
+                    <a href="./make_record.html" class="main__filter-add-link" id="share-dream-link">Share a dream</a>
                 </div>
             </div>
         </div>
@@ -133,7 +139,7 @@
                 <span class="footer__data-element">2024</span>
                 <span class="footer__data-element">github</span>
             </section>
-            <span class="footer__plot">Dream diary</span>
+            <span class="footer__plot" id="footer-plot">Dream diary</span>
             <section class="footer__social">
                 <a href="https://t.me/agathon006" target="_blank" class="footer__social-link">
                     <img src="" alt="telegram" class="footer__social-link-image" id="telegram-image">
