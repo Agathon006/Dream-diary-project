@@ -102,7 +102,6 @@
                 .get-random-url-button {
                     padding: 0 10px;
                     border-radius: 20px;
-                    transition: none;
 
                     &:hover {
                         color: #dedede;
@@ -118,7 +117,7 @@
             }
 
             .profile-edit-button {
-                width: 200px;
+                width: 250px;
                 height: 50px;
                 border-radius: 20px;
 

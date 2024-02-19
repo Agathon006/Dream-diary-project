@@ -17,6 +17,7 @@
 
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/user.css">
+    <script src="../js/build/otherBundles/bundle_translation.js" defer></script>
     <script src="../js/build/otherBundles/bundle_user.js" defer></script>
     <script src="../js/build/otherBundles/bundle_theme.js" defer></script>
 </head>
@@ -30,26 +31,32 @@
                 </a>
                 <ul class="header__navigation-list">
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./registered_home.html">Home</a>
+                        <a class="header__navigation-list-element-link" href="./registered_home.html"
+                            id="header-link-home">Home</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./time.html">World time</a>
+                        <a class="header__navigation-list-element-link" href="./time.html" id="header-link-time">World
+                            time</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./moon.html">Moon phases</a>
+                        <a class="header__navigation-list-element-link" href="./moon.html" id="header-link-moon">Moon
+                            phases</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./music.html">Music player</a>
+                        <a class="header__navigation-list-element-link" href="./music.html" id="header-link-music">Music
+                            player</a>
                     </li>
                 </ul>
                 <div class="header__navigation-end">
                     <div class="header__navigation-end-account" id="header-navigation-end-account">
-                        <a class="header__navigation-end-account-link underlined" href="#">Profile</a>
+                        <a class="header__navigation-end-account-link" href="#"
+                            id="header-link-profile">Profile</a>
                         <div class="header__navigation-end-account-separator"></div>
-                        <a class="header__navigation-end-account-link" href="./sign_in.html">Sign out</a>
+                        <a class="header__navigation-end-account-link" href="./sign_in.html"
+                            id="header-link-sign-out">Sign out</a>
                     </div>
                     <div class="header__navigation-end-settings">
                         <div class="themes-switcher-container">
@@ -78,7 +85,7 @@
                             id="profile-main-avatar"></img>
                     </div>
                     <div class="profile-main__plot">
-                        <span class="profile-span">Nickname</span>
+                        <span class="profile-span" id="profile-nickname-span">Nickname</span>
                         <input type="text" placeholder="Nickname" maxlength="15" class="profile-input locked-input"
                             id="nickname-input">
                         <span class="profile-span">Email</span>
@@ -95,26 +102,26 @@
                         <div class="password-edit__checkbox-part hidden" id="password-edit-checkbox-part">
                             <input type="checkbox" name="showPassword" class="password-checkbox"
                                 id="password-check-box">
-                            <label for="password-check-box" class="checkbox-span">Show password</label>
+                            <label for="password-check-box" class="checkbox-span" id="show-password-span">Show password</label>
                         </div>
                     </div>
                 </div>
                 <div class="profile-avatar-url">
-                    <input type="text" placeholder="put any image url from the internet" class="profile-input locked-input"
-                        id="avatar-url-input">
+                    <input type="text" placeholder="put any image url"
+                        class="profile-input locked-input" id="avatar-url-input">
                     <button class="get-random-url-button hidden" id="get-random-url-button">Get random url</button>
                 </div>
                 <div class="profile-secondary">
-                    <span class="profile-span">Name</span>
+                    <span class="profile-span" id="profile-name-span">Name</span>
                     <input type="text" placeholder="Name" maxlength="20" class="profile-input locked-input"
                         id="name-input">
-                    <span class="profile-span">Surname</span>
+                    <span class="profile-span" id="profile-surname-span">Surname</span>
                     <input type="text" placeholder="Surname" maxlength="20" class="profile-input locked-input"
                         id="surname-input">
-                    <span class="profile-span">Birth date</span>
+                    <span class="profile-span" id="profile-birth-date-span">Birth date</span>
                     <input type="text" placeholder="When were you born?" id="datepicker"
                         class="datepicker profile-input locked-input">
-                    <span class="profile-span">About me</span>
+                    <span class="profile-span" id="profile-about-me-span">About me</span>
                     <textarea rows="4" placeholder="Put something about yourself" maxlength="300"
                         class="profile-input locked-input" id="about-input"></textarea>
                 </div>
@@ -129,7 +136,7 @@
                 <span class="footer__data-element">2024</span>
                 <span class="footer__data-element">github</span>
             </section>
-            <span class="footer__plot">Dream diary</span>
+            <span class="footer__plot" id="footer-plot">Dream diary</span>
             <section class="footer__social">
                 <a href="https://t.me/agathon006" target="_blank" class="footer__social-link">
                     <img src="" alt="telegram" class="footer__social-link-image" id="telegram-image">

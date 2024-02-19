@@ -10,6 +10,7 @@
     <link rel="icon" href="../icons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/make_record.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="../js/build/otherBundles/bundle_translation.js" defer></script>
     <script src="../js/build/otherBundles/bundle_make_record.js" defer></script>
     <script src="../js/build/otherBundles/bundle_theme.js" defer></script>
 </head>
@@ -23,26 +24,32 @@
                 </a>
                 <ul class="header__navigation-list">
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./registered_home.html">Home</a>
+                        <a class="header__navigation-list-element-link" href="./registered_home.html"
+                            id="header-link-home">Home</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./time.html">World time</a>
+                        <a class="header__navigation-list-element-link" href="./time.html" id="header-link-time">World
+                            time</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./moon.html">Moon phases</a>
+                        <a class="header__navigation-list-element-link" href="./moon.html" id="header-link-moon">Moon
+                            phases</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./music.html">Music player</a>
+                        <a class="header__navigation-list-element-link" href="./music.html" id="header-link-music">Music
+                            player</a>
                     </li>
                 </ul>
                 <div class="header__navigation-end">
                     <div class="header__navigation-end-account" id="header-navigation-end-account">
-                        <a class="header__navigation-end-account-link" href="./user.html">Profile</a>
+                        <a class="header__navigation-end-account-link" href="./user.html"
+                            id="header-link-profile">Profile</a>
                         <div class="header__navigation-end-account-separator"></div>
-                        <a class="header__navigation-end-account-link" href="./sign_in.html">Sign out</a>
+                        <a class="header__navigation-end-account-link" href="./sign_in.html"
+                            id="header-link-sign-out">Sign out</a>
                     </div>
                     <div class="header__navigation-end-settings">
                         <div class="themes-switcher-container">
@@ -68,15 +75,15 @@
                 <div class="record-form__left-part">
                     <img src="../img/default-dream-image.svg" alt="dream image" class="record-form__left-part-image">
                     <input name="dreamImageUrl" type="text" placeholder="put dream image url..."
-                        class="record-form__input">
+                        class="record-form__input" id="record-form-image-url-input">
                 </div>
                 <div class="record-form__right-part">
                     <div>
-                        <span class="record-form__span">Dream title</span>
+                        <span class="record-form__span" id="record-form-title-span">Dream title</span>
                         <input name="dreamTitle" type="text" class="record-form__input" id="record-form-title">
                     </div>
                     <div class="dream-category-wrapper">
-                        <span class="record-form__span">Choose dream category</span>
+                        <span class="record-form__span" id="record-form-category-span">Choose dream category</span>
                         <div class="dream-category-wrapper__select-wrapper">
                             <select name="dreamCategory" class="record-form__input category-select"
                                 id="dream-category-select">
@@ -93,7 +100,7 @@
                         </div>
                     </div>
                     <div class="dream-category-wrapper">
-                        <span class="record-form__span">Choose dream mood</span>
+                        <span class="record-form__span" id="record-form-mood-span">Choose dream mood</span>
                         <div class="dream-category-wrapper__select-wrapper">
                             <select name="dreamMood" class="record-form__input mood-select" id="dream-mood-select">
                                 <option value="" hidden>Mood</option>
@@ -107,12 +114,12 @@
                                 class="dream-category-icon" id="dream-mood-icon">
                         </div>
                     </div>
-                    <span class="record-form__span">Dream plot</span>
+                    <span class="record-form__span" id="record-form-plot-span">Dream plot</span>
                     <textarea name="dreamPlot" rows="10" placeholder="Tell about your dream" maxlength="500"
                         class="record-form__input-plot" id="record-form-plot"></textarea>
-                    <span class="record-form__span">Add 1-5 tags(optional)</span>
+                    <span class="record-form__span" id="record-form-tags-span">Add 1-5 tags(optional)</span>
                     <textarea name="dreamTags" rows="2" placeholder="love milk, bread, my cheese" maxlength="250"
-                        class="record-form__input-plot" id="record-form-tags-input"></textarea>
+                        class="record-form__input-plot" id="tags-input"></textarea>
                     <div class="record-form__input-plot tags-container" id="record-form-tags-container"></div>
                     <input type="submit" name="make record" value="Share" class="record-form__submit"
                         id="record-form-submit">
@@ -127,7 +134,7 @@
                 <span class="footer__data-element">2024</span>
                 <span class="footer__data-element">github</span>
             </section>
-            <span class="footer__plot">Dream diary</span>
+            <span class="footer__plot" id="footer-plot">Dream diary</span>
             <section class="footer__social">
                 <a href="https://t.me/agathon006" target="_blank" class="footer__social-link">
                     <img src="" alt="telegram" class="footer__social-link-image" id="telegram-image">

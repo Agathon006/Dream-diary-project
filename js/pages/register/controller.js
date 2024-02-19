@@ -5,9 +5,16 @@ export default class Controller {
     }
 
     init() {
+        this._initTranslation();
         this._googleSignInListener();
         this._passwordCheckBoxListener();
         this._initFormListener();
+    }
+
+    _initTranslation() {
+        if (localStorage.getItem('language') === 'ru') {
+            this.view.translatePage();
+        }
     }
 
     _googleSignInListener() {
@@ -25,7 +32,11 @@ export default class Controller {
             // console.log("Image URL: " + responsePayload.picture);
             // console.log("Email: " + responsePayload.email);
 
-            alert('Sign in by services is under development, you need to register by basic way instead.');
+            if (localStorage.getItem('language') === 'ru') {
+                alert('Вход с помощью сервисов находится в стадии разработки, вместо этого вам следует зарегистрироваться обычным способом.');
+            } else {
+                alert('Sign in by services is under development, you need to register by basic way instead.');
+            }
         }
     }
 
@@ -79,7 +90,11 @@ export default class Controller {
                     }
                 })
                 .catch(error => {
-                    this.view.createWrongSpanElement(submitButton, `Something go wrong... ${error}`);
+                    if (localStorage.getItem('language') === 'ru') {
+                        this.view.createWrongSpanElement(submitButton, `Что-то пошло не так... ${error}`);
+                    } else {
+                        this.view.createWrongSpanElement(submitButton, `Something go wrong... ${error}`);
+                    }
                 });
         });
     }
@@ -97,17 +112,29 @@ export default class Controller {
 
         if (!this.model.isNicknameOkay(formInfo.nickname)) {
             this.view.addClassWrongInput(nicknameInput);
-            this.view.createWrongSpanElement(nicknameInput, "Nickname must consist of 5-15 numbers/letters and can't start with a number");
+            if (localStorage.getItem('language') === 'ru') {
+                this.view.createWrongSpanElement(nicknameInput, "Никнейм должен состоять из 5-15 цифр/букв и не может начинаться с цифры");
+            } else {
+                this.view.createWrongSpanElement(nicknameInput, "Nickname must consist of 5-15 numbers/letters and can't start with a number");
+            }
             isValidationOkay = false;
         }
         if (!this.model.isEmailOkay(formInfo.email)) {
             this.view.addClassWrongInput(emailInput);
-            this.view.createWrongSpanElement(emailInput, "Incorrect email");
+            if (localStorage.getItem('language') === 'ru') {
+                this.view.createWrongSpanElement(emailInput, "Некорректный email");
+            } else {
+                this.view.createWrongSpanElement(emailInput, "Incorrect email");
+            }
             isValidationOkay = false;
         }
         if (!this.model.isPasswordOkay(formInfo.password)) {
             this.view.addClassWrongInput(passwordInput);
-            this.view.createWrongSpanElement(passwordInput, "Password must have 6-200 symbols with at least 1 uppercase and 1 lowercase letter");
+            if (localStorage.getItem('language') === 'ru') {
+                this.view.createWrongSpanElement(passwordInput, "Пароль должен состоять из 6-200 символов с хотя бы 1 заглавной и 1 строчной буквами");
+            } else {
+                this.view.createWrongSpanElement(passwordInput, "Password must have 6-200 symbols with at least 1 uppercase and 1 lowercase letter");
+            }
             isValidationOkay = false;
         }
 
@@ -123,14 +150,22 @@ export default class Controller {
         return this.model.isNicknameInDb(formInfo.nickname)
             .then(response => {
                 if (!response.ok) {
-                    this.view.createWrongSpanElement(submitButton, "Network response was not ok");
+                    if (localStorage.getItem('language') === 'ru') {
+                        this.view.createWrongSpanElement(nicknameInput, "Проблемы с соединением");
+                    } else {
+                        this.view.createWrongSpanElement(nicknameInput, "Network response was not ok");
+                    }
                 }
                 return response.json();
             })
             .then(data => {
                 if (data.length) {
                     this.view.addClassWrongInput(nicknameInput);
-                    this.view.createWrongSpanElement(nicknameInput, "That nickname is already used");
+                    if (localStorage.getItem('language') === 'ru') {
+                        this.view.createWrongSpanElement(nicknameInput, "Этот никнейм уже используется");
+                    } else {
+                        this.view.createWrongSpanElement(nicknameInput, "That nickname is already used");
+                    }
                     return true;
                 }
                 return false;
@@ -147,14 +182,22 @@ export default class Controller {
         return this.model.isEmailInDb(formInfo.email)
             .then(response => {
                 if (!response.ok) {
-                    this.view.createWrongSpanElement(submitButton, "Network response was not ok");
+                    if (localStorage.getItem('language') === 'ru') {
+                        this.view.createWrongSpanElement(emailInput, "Проблемы с соединением");
+                    } else {
+                        this.view.createWrongSpanElement(emailInput, "Network response was not ok");
+                    }
                 }
                 return response.json();
             })
             .then(data => {
                 if (data.length) {
                     this.view.addClassWrongInput(emailInput);
-                    this.view.createWrongSpanElement(emailInput, "That email is already used");
+                    if (localStorage.getItem('language') === 'ru') {
+                        this.view.createWrongSpanElement(emailInput, "Этот email уже используется");
+                    } else {
+                        this.view.createWrongSpanElement(emailInput, "That email is already used");
+                    }
                     return true;
                 }
                 return false;
@@ -190,7 +233,11 @@ export default class Controller {
                             this.model.registerNewUser(JSON.stringify(formInfo))
                                 .then((response) => {
                                     if (!response.ok) {
-                                        this.view.createWrongSpanElement(submitButton, "Network response was not ok");
+                                        if (localStorage.getItem('language') === 'ru') {
+                                            this.view.createWrongSpanElement(submitButton, "Проблемы с соединением");
+                                        } else {
+                                            this.view.createWrongSpanElement(submitButton, "Network response was not ok");
+                                        }
                                     }
                                     return true;
                                 })
@@ -199,7 +246,11 @@ export default class Controller {
                                     window.location.href = "./registered_home.html";
                                 })
                                 .catch((error) => {
-                                    this.view.createWrongSpanElement(submitButton, `Something go wrong... ${error}`);
+                                    if (localStorage.getItem('language') === 'ru') {
+                                        this.view.createWrongSpanElement(submitButton, `Что-то пошло не так... ${error}`);
+                                    } else {
+                                        this.view.createWrongSpanElement(submitButton, `Something go wrong... ${error}`);
+                                    }
                                 });
                         };
                     }

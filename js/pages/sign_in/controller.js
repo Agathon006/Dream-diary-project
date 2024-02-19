@@ -5,8 +5,15 @@ export default class Controller {
     }
 
     init() {
+        this._initTranslation();
         this._initFormListener();
         this._passwordCheckBoxListener();
+    }
+
+    _initTranslation() {
+        if (localStorage.getItem('language') === 'ru') {
+            this.view.translatePage();
+        }
     }
 
     _initFormListener() {
@@ -33,7 +40,11 @@ export default class Controller {
             this.model.getPromiseDbUsers()
                 .then(response => {
                     if (!response.ok) {
-                        this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+                        if (localStorage.getItem('language') === 'ru') {
+                            this.view.createWrongSpanElement(SubmitButton, "Проблемы с соединением");
+                        } else {
+                            this.view.createWrongSpanElement(SubmitButton, "Network response was not ok");
+                        }
                     }
                     return response.json();
                 })
@@ -54,10 +65,18 @@ export default class Controller {
                     }
                     this.view.addClassWrongInput(emailInput);
                     this.view.addClassWrongInput(passwordInput);
-                    this.view.createWrongSpanElement(SubmitButton, `Incorrect email or password`);
+                    if (localStorage.getItem('language') === 'ru') {
+                        this.view.createWrongSpanElement(SubmitButton, `Неверный email или пароль`);
+                    } else {
+                        this.view.createWrongSpanElement(SubmitButton, `Incorrect email or password`);
+                    }
                 })
                 .catch(error => {
-                    this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
+                    if (localStorage.getItem('language') === 'ru') {
+                        this.view.createWrongSpanElement(SubmitButton, `Что-то пошло не так... ${error}`);
+                    } else {
+                        this.view.createWrongSpanElement(SubmitButton, `Something go wrong... ${error}`);
+                    }
                 });
 
 
@@ -76,12 +95,20 @@ export default class Controller {
 
         if (!this.model.isEmailOkay(formInfo.email)) {
             this.view.addClassWrongInput(emailInput);
-            this.view.createWrongSpanElement(emailInput, "Incorrect email");
+            if (localStorage.getItem('language') === 'ru') {
+                this.view.createWrongSpanElement(emailInput, "Некорректный email");
+            } else {
+                this.view.createWrongSpanElement(emailInput, "Incorrect email");
+            }
             isValidationOkay = false;
         }
         if (!this.model.isPasswordOkay(formInfo.password)) {
             this.view.addClassWrongInput(passwordInput);
-            this.view.createWrongSpanElement(passwordInput, "Password must have 6-200 symbols with at least 1 uppercase and 1 lowercase letter");
+            if (localStorage.getItem('language') === 'ru') {
+                this.view.createWrongSpanElement(passwordInput, "Пароль должен состоять из 6-200 символов с хотя бы 1 заглавной и 1 строчной буквами");
+            } else {
+                this.view.createWrongSpanElement(passwordInput, "Password must have 6-200 symbols with at least 1 uppercase and 1 lowercase letter");
+            }
             isValidationOkay = false;
         }
 

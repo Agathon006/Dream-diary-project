@@ -60,6 +60,10 @@ module.exports = {
       import: "./js/theme.js",
       filename: "otherBundles/bundle_[name].js",
     },
+    translation: {
+      import: "./js/translation.js",
+      filename: "otherBundles/bundle_[name].js",
+    },
   },
   output: {
     filename: 'bundle.js',

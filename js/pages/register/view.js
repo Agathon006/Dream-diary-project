@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+
 export default class View {
 
     static ID = {
@@ -119,5 +121,39 @@ export default class View {
         document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.WRONG_SPAN}`).forEach(item => {
             item.remove();
         });
+    }
+
+    translatePage() {
+        fetch('../dictionary.json')
+            .then(response => response.json())
+            .then(data => {
+                i18next.init({
+                    lng: 'ru',
+                    debug: false,
+                    resources: {
+                        ru: {
+                            translation: data
+                        }
+                    }
+                });
+
+                document.querySelector(`#form-title`).textContent = i18next.t('register.form_title');
+                document.querySelector(`#form-nickname-span`).textContent = i18next.t('register.form_nickname_span');
+                document.querySelector(`#form-password-span`).textContent = i18next.t('register.form_password_span');
+                document.querySelector(`#form-show-password-span`).textContent = i18next.t('register.form_show_password_span');
+                document.querySelector(`#form-small-span`).textContent = i18next.t('register.form_small_span');
+                document.querySelector(`#register-form-submit`).value = i18next.t('register.form_submit');
+                document.querySelector(`#form-already-registered-span`).textContent = i18next.t('register.already_registered_span');
+                document.querySelector(`#form-already-registered-button`).textContent = i18next.t('register.already_registered_button');
+                document.querySelector(`#form-dev-message`).textContent = i18next.t('register.form_dev_message');
+                document.querySelector(`#code-title`).textContent = i18next.t('register.code_title');
+                document.querySelector(`#code-plot`).textContent = i18next.t('register.code_plot');
+                document.querySelector(`#code-dev-message`).textContent = i18next.t('register.code_dev_message');
+
+                document.querySelector(`#footer-plot`).textContent = i18next.t('footer.footer_plot');
+            })
+            .catch(error => {
+                console.error('Error loading JSON file:', error);
+            });
     }
 }

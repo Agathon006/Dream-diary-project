@@ -5,6 +5,7 @@ export default class Controller {
     }
 
     init() {
+        this._initTranslation();
         this._initNotification();
         this._initDreamSearchInputElement();
         this._initDreamSearchListener();
@@ -14,6 +15,12 @@ export default class Controller {
         this._initMainPlotListener();
         this._initUserSearchListener();
         this._initDreamRecords();
+    }
+
+    _initTranslation() {
+        if (localStorage.getItem('language') === 'ru') {
+            this.view.translatePage();
+        }
     }
 
     _initNotification() {
@@ -490,7 +497,11 @@ export default class Controller {
                         weekDay = this.model.whichWeekDayNameByNumber(record.date.weekNumber);
                     let likedThis = '';
                     if (record.likesUsersEmails.includes(record.email)) {
-                        likedThis = '<span class="dream-record__main-top-right-liked-this">You liked this</span>';
+                        if (localStorage.getItem('language') === 'ru') {
+                            likedThis = '<span class="dream-record__main-top-right-liked-this">Вам понравилось</span>';
+                        } else {
+                            likedThis = '<span class="dream-record__main-top-right-liked-this">You liked this</span>';
+                        }
                     };
                     this.view.displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, data[0].avatar, data[0].nickname, record.id, likedThis);
                 } else {

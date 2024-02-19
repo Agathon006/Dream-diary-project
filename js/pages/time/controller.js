@@ -5,8 +5,15 @@ export default class Controller {
     }
 
     init() {
+        this._initTranslation();
         this._updateClocks();
         setInterval(this._updateClocks, 1000);
+    }
+
+    _initTranslation() {
+        if (localStorage.getItem('language') === 'ru') {
+            this.view.translatePage();
+        }
     }
 
     _updateClocks() {

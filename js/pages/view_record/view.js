@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+
 export default class View {
 
     static ID = {
@@ -91,6 +93,37 @@ export default class View {
 
     toggleClassWaitingBackgroundOfMain() {
         document.querySelector('.main').classList.toggle('waiting-background');
+    }
+
+    translatePage() {
+        fetch('../dictionary.json')
+            .then(response => response.json())
+            .then(data => {
+                i18next.init({
+                    lng: 'ru',
+                    debug: false,
+                    resources: {
+                        ru: {
+                            translation: data
+                        }
+                    }
+                });
+
+                document.querySelector(`#header-link-home`).textContent = i18next.t('registered_header.home');
+                document.querySelector(`#header-link-time`).textContent = i18next.t('registered_header.moon');
+                document.querySelector(`#header-link-moon`).textContent = i18next.t('registered_header.time');
+                document.querySelector(`#header-link-music`).textContent = i18next.t('registered_header.music');
+                document.querySelector(`#header-link-profile`).textContent = i18next.t('registered_header.profile');
+                document.querySelector(`#header-link-sign-out`).textContent = i18next.t('registered_header.sign_out');
+
+                document.querySelector(`#return-link`).textContent = i18next.t('view_record.return_link');
+                document.querySelector(`#dream-author-span`).textContent = i18next.t('view_record.dream_author_span');
+
+                document.querySelector(`#footer-plot`).textContent = i18next.t('footer.footer_plot');
+            })
+            .catch(error => {
+                console.error('Error loading JSON file:', error);
+            });
     }
 
 }

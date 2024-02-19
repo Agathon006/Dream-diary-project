@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="icon" href="../icons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/view_record.css">
+    <script src="../js/build/otherBundles/bundle_translation.js" defer></script>
     <script src="../js/build/otherBundles/bundle_view_record.js" defer></script>
     <script src="../js/build/otherBundles/bundle_theme.js" defer></script>
 </head>
@@ -22,26 +23,28 @@
                 </a>
                 <ul class="header__navigation-list">
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./registered_home.html">Home</a>
+                        <a class="header__navigation-list-element-link" href="./registered_home.html"
+                            id="header-link-home">Home</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./time.html">World time</a>
+                        <a class="header__navigation-list-element-link" href="./time.html" id="header-link-time">World
+                            time</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./moon.html">Moon phases</a>
+                        <a class="header__navigation-list-element-link" href="./moon.html" id="header-link-moon">Moon phases</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./music.html">Music player</a>
+                        <a class="header__navigation-list-element-link" href="./music.html" id="header-link-music">Music player</a>
                     </li>
                 </ul>
                 <div class="header__navigation-end">
                     <div class="header__navigation-end-account" id="header-navigation-end-account">
-                        <a class="header__navigation-end-account-link" href="./user.html">Profile</a>
+                        <a class="header__navigation-end-account-link" href="./user.html" id="header-link-profile">Profile</a>
                         <div class="header__navigation-end-account-separator"></div>
-                        <a class="header__navigation-end-account-link" href="./sign_in.html">Sign out</a>
+                        <a class="header__navigation-end-account-link" href="./sign_in.html" id="header-link-sign-out">Sign out</a>
                     </div>
                     <div class="header__navigation-end-settings">
                         <div class="themes-switcher-container">
@@ -66,7 +69,7 @@
             <div class="dream-record-head">
                 <div class="dream-record-head__top">
                     <div class="dream-record-head__top-left">
-                        <a href="./registered_home.html" class="dream-record-head__top-left-return-button">return</a>
+                        <a href="./registered_home.html" class="dream-record-head__top-left-return-button" id="return-link">return</a>
                     </div>
                     <div class="dream-record-head__top-middle">
                         <h1 class="dream-record-head__top-middle-title" id="dream-title">Dream title</h1>
@@ -75,7 +78,8 @@
                     <div class="dream-record-head__top-right">
                         <h3 class="dream-record-head__top-right-views" id="dream-views">0 views</h3>
                         <button class="dream-record-head__top-right-like-button" id="likes-button">
-                            <span class="dream-record-head__top-right-like-button-number" id="dream-likes-number">0</span>
+                            <span class="dream-record-head__top-right-like-button-number"
+                                id="dream-likes-number">0</span>
                             <img src="../icons/like_inactive.svg" alt="like"
                                 class="dream-record-head__top-right-like-button-icon" id="dream-like-icon">
                         </button>
@@ -98,7 +102,7 @@
                         <img src="" alt="Author avatar" class="dream-record-head__bottom-right-avatar"
                             id="dream-user-avatar">
                         <div class="dream-record-head__bottom-right-texts">
-                            <span class="dream-record-head__bottom-right-texts-title">Dream author</span>
+                            <span class="dream-record-head__bottom-right-texts-title" id="dream-author-span">Dream author</span>
                             <span class="dream-record-head__bottom-right-texts-user-nickname"
                                 id="dream-user-nickname">Somebody</span>
                         </div>
@@ -124,7 +128,7 @@
                 <span class="footer__data-element">2024</span>
                 <span class="footer__data-element">github</span>
             </section>
-            <span class="footer__plot">Dream diary</span>
+            <span class="footer__plot" id="footer-plot">Dream diary</span>
             <section class="footer__social">
                 <a href="https://t.me/agathon006" target="_blank" class="footer__social-link">
                     <img src="" alt="telegram" class="footer__social-link-image" id="telegram-image">

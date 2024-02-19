@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="icon" href="../icons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/sign_in.css">
+    <script src="../js/build/otherBundles/bundle_translation.js" defer></script>
     <script src="../js/build/otherBundles/bundle_sign_in.js" defer></script>
     <script src="../js/build/otherBundles/bundle_theme.js" defer></script>
 </head>
@@ -63,21 +64,21 @@
     </header>
     <main class="main">
         <div class="form-wrapper">
-            <h1 class="register-title">Make the most of your sleep</h1>
+            <h1 class="register-title" id="form-title">Make the most of your sleep</h1>
             <form action="#" class="register-form" id="register-form">
                 <span class="register-form__span">Email</span>
                 <input type="text" required="true" name="email" class="register-form__input" id="email-input">
-                <span class="register-form__span">Password</span>
+                <span class="register-form__span" id="form-password-span">Password</span>
                 <input type="password" required="true" name="password" class="register-form__input" id="password-input">
                 <div class="register-form__checkbox-part">
                     <input type="checkbox" id="password-check-box" name="showPassword">
-                    <label for="password-check-box" class="register-form__span-small">Show password</label>
+                    <label for="password-check-box" class="register-form__span-small" id="form-show-password-span">Show password</label>
                 </div>
                 <input type="submit" name="register" value="Sign in" class="register-form__submit"
                     id="register-form-submit">
                 <div class="register-form__bottom">
-                    <span class="register-form__span-small">Not registered?</span>
-                    <a href="./register.html" class="register-form__bottom-link">Register</a>
+                    <span class="register-form__span-small" id="not-registered-span">Not registered?</span>
+                    <a href="./register.html" class="register-form__bottom-link" id="not-registered-button">Register</a>
                 </div>
             </form>
         </div>
@@ -89,7 +90,7 @@
                 <span class="footer__data-element">2024</span>
                 <span class="footer__data-element">github</span>
             </section>
-            <span class="footer__plot">Dream diary</span>
+            <span class="footer__plot" id="footer-plot">Dream diary</span>
             <section class="footer__social">
                 <a href="https://t.me/agathon006" target="_blank" class="footer__social-link">
                     <img src="" alt="telegram" class="footer__social-link-image" id="telegram-image">

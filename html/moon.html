@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="icon" href="../icons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/moon.css">
+    <script src="../js/build/otherBundles/bundle_translation.js" defer></script>
     <script src="../js/build/otherBundles/bundle_moon.js" defer></script>
     <script src="../js/build/otherBundles/bundle_theme.js" defer></script>
 </head>
@@ -22,26 +23,32 @@
                 </a>
                 <ul class="header__navigation-list">
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./registered_home.html">Home</a>
+                        <a class="header__navigation-list-element-link" href="./registered_home.html"
+                            id="header-link-home">Home</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./time.html">World time</a>
+                        <a class="header__navigation-list-element-link" href="./time.html" id="header-link-time">World
+                            time</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link underlined" href="#">Moon phases</a>
+                        <a class="header__navigation-list-element-link underlined" href="#" id="header-link-moon">Moon
+                            phases</a>
                     </li>
                     <div class="header__navigation-list-separator"></div>
                     <li class="header__navigation-list-element">
-                        <a class="header__navigation-list-element-link" href="./music.html">Music player</a>
+                        <a class="header__navigation-list-element-link" href="./music.html" id="header-link-music">Music
+                            player</a>
                     </li>
                 </ul>
                 <div class="header__navigation-end">
                     <div class="header__navigation-end-account" id="header-navigation-end-account">
-                        <a class="header__navigation-end-account-link" href="./user.html">Profile</a>
+                        <a class="header__navigation-end-account-link" href="./user.html"
+                            id="header-link-profile">Profile</a>
                         <div class="header__navigation-end-account-separator"></div>
-                        <a class="header__navigation-end-account-link" href="./sign_in.html">Sign out</a>
+                        <a class="header__navigation-end-account-link" href="./sign_in.html"
+                            id="header-link-sign-out">Sign out</a>
                     </div>
                     <div class="header__navigation-end-settings">
                         <div class="themes-switcher-container">
@@ -64,16 +71,18 @@
     <main class="main">
         <div class="container">
             <div class="wrapper">
-                <h1 class="title">What causes moon phases?</h1>
-                <p class="plot">The moon's phases are determined by the relative positions of the Earth, moon, and sun.
+                <h1 class="title" id="what-causes-title">What causes moon phases?</h1>
+                <p class="plot" id="what-causes-plot-first">The moon's phases are determined by the relative positions
+                    of the Earth, moon, and sun.
                     As the moon orbits the Earth, the amount of the moon's illuminated surface visible from the Earth
                     changes. This change in the moon's appearance is known as the moon's phase.</p>
-                <p class="plot">The most common phases are the new moon, waxing crescent, first quarter, waxing gibbous,
+                <p class="plot" id="what-causes-plot-second">The most common phases are the new moon, waxing crescent,
+                    first quarter, waxing gibbous,
                     full moon, waning gibbous, third quarter, and waning crescent.</p>
-                <h1 class="title">Can you see the moon soon?</h1>
+                <h1 class="title" id="can-you-see-title">Can you see the moon soon?</h1>
                 <div class="forecast-place">
                     <span class="forecast-place-title" id="forecast-place"></span>
-                    <button class="forecast-place-button" id="forecast-place-button">my place</button>
+                    <button class="forecast-place-button" id="forecast-place-button">my location</button>
                 </div>
                 <div class="forecast-container" id="forecast-container">
                     <div class="forecast-day waiting-background">
@@ -81,8 +90,8 @@
                         <img src="" alt="weather-icon" class="forecast-day__icon">
                         <span class="forecast-day__span"></span>
                         <div>
-                            <span class="forecast-day__span">cloud cover:</span>
-                            <span class="forecast-day__span"></span>
+                            <span class="forecast-day__span" id="cloud-cover-span-first">cloud cover:</span>
+                            <span class="forecast-day__span-percent"></span>
                         </div>
                         <span class="forecast-day__span-result"></span>
                     </div>
@@ -91,8 +100,8 @@
                         <img src="" alt="weather-icon" class="forecast-day__icon">
                         <span class="forecast-day__span"></span>
                         <div>
-                            <span class="forecast-day__span">cloud cover:</span>
-                            <span class="forecast-day__span"></span>
+                            <span class="forecast-day__span" id="cloud-cover-span-second">cloud cover:</span>
+                            <span class="forecast-day__span-percent"></span>
                         </div>
                         <span class="forecast-day__span-result"></span>
                     </div>
@@ -101,8 +110,8 @@
                         <img src="" alt="weather-icon" class="forecast-day__icon">
                         <span class="forecast-day__span"></span>
                         <div>
-                            <span class="forecast-day__span">cloud cover:</span>
-                            <span class="forecast-day__span"></span>
+                            <span class="forecast-day__span" id="cloud-cover-span-third">cloud cover:</span>
+                            <span class="forecast-day__span-percent"></span>
                         </div>
                         <span class="forecast-day__span-result"></span>
                     </div>
@@ -111,8 +120,8 @@
                         <img src="" alt="weather-icon" class="forecast-day__icon">
                         <span class="forecast-day__span"></span>
                         <div>
-                            <span class="forecast-day__span">cloud cover:</span>
-                            <span class="forecast-day__span"></span>
+                            <span class="forecast-day__span" id="cloud-cover-span-fourth">cloud cover:</span>
+                            <span class="forecast-day__span-percent"></span>
                         </div>
                         <span class="forecast-day__span-result"></span>
                     </div>
@@ -121,55 +130,55 @@
                         <img src="" alt="weather-icon" class="forecast-day__icon">
                         <span class="forecast-day__span"></span>
                         <div>
-                            <span class="forecast-day__span">cloud cover:</span>
-                            <span class="forecast-day__span"></span>
+                            <span class="forecast-day__span" id="cloud-cover-span-fifth">cloud cover:</span>
+                            <span class="forecast-day__span-percent"></span>
                         </div>
                         <span class="forecast-day__span-result"></span>
                     </div>
                 </div>
-                <h1 class="title">Current moon phases</h1>
+                <h1 class="title" id="current-moon-title">Current moon phases</h1>
                 <div class="moon-phases-container" id="moon-phases-container">
                     <div class="moon-phase">
                         <img src="../icons/moon/new_moon.svg" alt="new moon" class="moon-phase__icon">
-                        <span class="moon-phase__span">New moon</span>
+                        <span class="moon-phase__span" id="current-moon-new">New moon</span>
                         <span class="moon-phase__span moon-phase__current-date-span" id="new-moon-date"></span>
                     </div>
                     <div class="moon-phase">
                         <img src="../icons/moon/start_moon.svg" alt="start moon" class="moon-phase__icon">
-                        <span class="moon-phase__span">Growing moon</span>
+                        <span class="moon-phase__span" id="current-moon-growing">Growing moon</span>
                         <span class="moon-phase__span moon-phase__current-date-span" id="growing-moon-date"></span>
                     </div>
                     <div class="moon-phase">
                         <img src="../icons/moon/full-moon.svg" alt="full moon" class="moon-phase__icon">
-                        <span class="moon-phase__span">Full moon</span>
+                        <span class="moon-phase__span" id="current-moon-full">Full moon</span>
                         <span class="moon-phase__span moon-phase__current-date-span" id="full-moon-date"></span>
                     </div>
                     <div class="moon-phase">
                         <img src="../icons/moon/end_moon.svg" alt="end moon" class="moon-phase__icon">
-                        <span class="moon-phase__span">Waning moon</span>
+                        <span class="moon-phase__span" id="current-moon-waning">Waning moon</span>
                         <span class="moon-phase__span moon-phase__current-date-span" id="waning-moon-date"></span>
                     </div>
                 </div>
-                <h1 class="title">Next moon phases</h1>
+                <h1 class="title" id="next-moon-title">Next moon phases</h1>
                 <div class="moon-phases-container" id="moon-phases-container">
                     <div class="moon-phase">
                         <img src="../icons/moon/new_moon.svg" alt="new moon" class="moon-phase__icon">
-                        <span class="moon-phase__span">New moon</span>
+                        <span class="moon-phase__span" id="next-moon-new">New moon</span>
                         <span class="moon-phase__span" id="next-new-moon-date"></span>
                     </div>
                     <div class="moon-phase">
                         <img src="../icons/moon/start_moon.svg" alt="start moon" class="moon-phase__icon">
-                        <span class="moon-phase__span">Growing moon</span>
+                        <span class="moon-phase__span" id="next-moon-growing">Growing moon</span>
                         <span class="moon-phase__span" id="next-growing-moon-date"></span>
                     </div>
                     <div class="moon-phase">
                         <img src="../icons/moon/full-moon.svg" alt="full moon" class="moon-phase__icon">
-                        <span class="moon-phase__span">Full moon</span>
+                        <span class="moon-phase__span" id="next-moon-full">Full moon</span>
                         <span class="moon-phase__span" id="next-full-moon-date"></span>
                     </div>
                     <div class="moon-phase">
                         <img src="../icons/moon/end_moon.svg" alt="end moon" class="moon-phase__icon">
-                        <span class="moon-phase__span">Waning moon</span>
+                        <span class="moon-phase__span" id="next-moon-waning">Waning moon</span>
                         <span class="moon-phase__span" id="next-waning-moon-date"></span>
                     </div>
                 </div>
@@ -183,7 +192,7 @@
                 <span class="footer__data-element">2024</span>
                 <span class="footer__data-element">github</span>
             </section>
-            <span class="footer__plot">Dream diary</span>
+            <span class="footer__plot" id="footer-plot">Dream diary</span>
             <section class="footer__social">
                 <a href="https://t.me/agathon006" target="_blank" class="footer__social-link">
                     <img src="" alt="telegram" class="footer__social-link-image" id="telegram-image">

@@ -20,9 +20,9 @@
       "role": "user",
       "name": "",
       "surname": "",
-      "birthDate": "10/01/2023",
-      "profileInfo": "123",
-      "avatar": "https://android-obzor.com/wp-content/uploads/2022/03/man-silhouette.jpg"
+      "birthDate": "",
+      "profileInfo": "",
+      "avatar": "https://images.unsplash.com/photo-1705407193485-98a3cca5d125?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1NjA0Nzh8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDgzMDk3Mjl8&ixlib=rb-4.0.3&q=85"
     },
     {
       "id": "598b",
@@ -57,7 +57,7 @@
         "year": 2023,
         "weekNumber": 4
       },
-      "views": "8021121221111111111111111111111",
+      "views": 14,
       "likes": 1,
       "likesUsersEmails": [
         "agaton615@gmail.com"
@@ -81,7 +81,7 @@
         "year": 2024,
         "weekNumber": 0
       },
-      "views": 3,
+      "views": 4,
       "likes": 1,
       "likesUsersEmails": [
         "agaton615@gmail.com"
@@ -208,6 +208,25 @@
         "weekNumber": 1
       },
       "views": 1,
+      "likes": 0,
+      "likesUsersEmails": []
+    },
+    {
+      "id": "6330",
+      "dreamImageUrl": "",
+      "dreamTitle": "Dream 0",
+      "dreamCategory": "Conscious dream",
+      "dreamMood": "Made me think",
+      "dreamPlot": "Something about dream 0...",
+      "dreamTags": [],
+      "email": "agaton615@gmail.com",
+      "date": {
+        "dayNumber": 19,
+        "monthNumber": 1,
+        "year": 2024,
+        "weekNumber": 1
+      },
+      "views": 0,
       "likes": 0,
       "likesUsersEmails": []
     }
