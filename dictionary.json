@@ -97,6 +97,24 @@
         "california_span": "Калифорния",
         "india_span": "Индия"
     },
-    "user": {},
+    "user": {
+        "profile_nickname_span": "Никнейм",
+        "profile_nickname_placeholder": "Никнейм",
+        "profile_password_span": "Пароль",
+        "repeat_password_span": "Повторите пароль",
+        "password_edit_button": "Изменить пароль",
+        "show_password_span": "Показать пароль",
+        "avatar_url_input": "введите url картинки",
+        "get_random_url_button": "Случайное фото",
+        "profile_name_span": "Имя",
+        "profile_name_placeholder": "Ваше имя",
+        "profile_surname_span": "Фамилия",
+        "profile_surname_placeholder": "Ваша фамилия",
+        "profile_birth_date_span": "Дата рождения",
+        "profile_birth_date_placeholder": "Когда вы родились?",
+        "profile_about_me_span": "Обо мне",
+        "profile_about_me_placeholder": "Расскажите о себе",
+        "profile_edit_button": "Редактировать"
+    },
     "view_record": {}
 }

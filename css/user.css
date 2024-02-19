@@ -1605,7 +1605,6 @@ button {
 .main .container .profile-wrapper .profile-avatar-url .get-random-url-button {
   padding: 0 10px;
   border-radius: 20px;
-  transition: none;
 }
 .main .container .profile-wrapper .profile-avatar-url .get-random-url-button:hover {
   color: #dedede;
@@ -1617,7 +1616,7 @@ button {
   flex-direction: column;
 }
 .main .container .profile-wrapper .profile-edit-button {
-  width: 200px;
+  width: 250px;
   height: 50px;
   border-radius: 20px;
 }

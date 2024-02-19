@@ -6,12 +6,19 @@ export default class Controller {
         this.oldPasswordMode = true;
     }
     init() {
+        this._initTranslation();
         this._getRandomUrlButtonListener();
         this._datepickerListener();
         this._userProfileListener();
         this._passwordRepeatInputListener();
         this._passwordInputListener();
         this._passwordCheckBoxListener();
+    }
+
+    _initTranslation() {
+        if (localStorage.getItem('language') === 'ru') {
+            this.view.translatePage();
+        }
     }
 
     _getRandomUrlButtonListener() {
@@ -33,7 +40,11 @@ export default class Controller {
                     this.view.updateImageSrc(profileMainAvatar, profileImageUrl.value);
                 })
                 .catch(error => {
-                    console.error('Error fetching random image URL', error);
+                    if (localStorage.getItem('language') === 'ru') {
+                        console.error('Ошибка получения случайного URL картинки', error);
+                    } else {
+                        console.error('Error fetching random image URL', error);
+                    }
                 });
         });
     }
@@ -75,7 +86,11 @@ export default class Controller {
                 this._editButtonListener(userInfo, profileMainAvatar);
             })
             .catch(error => {
-                console.error('Error getting user info from DB:', error);
+                if (localStorage.getItem('language') === 'ru') {
+                    console.error('Ошибка получения информации о пользователе из базы данных:', error);
+                } else {
+                    console.error('Error getting user info from DB:', error);
+                }
             });
     }
 
@@ -83,6 +98,7 @@ export default class Controller {
         const passwordEditButton = this.view.getPasswordEditButton(),
             passwordInput = this.view.getRrofilePasswordElement(),
             repeatPasswordSpan = this.view.getRrofileRepeatPasswordSpanElement(),
+            passwordSpan = this.view.getRrofilePasswordSpanElement(),
             repeatPasswordInput = this.view.getRrofileRepeatPasswordElement(),
             inputs = this.view.getRrofilePasswordInputs(),
             passwordEditCheckboxPart = this.view.getPasswordEditCheckboxPart(),
@@ -92,29 +108,45 @@ export default class Controller {
 
         passwordEditButton.addEventListener('click', () => {
 
-            if (passwordEditButton.textContent === 'Change password') {
+            if (passwordEditButton.textContent === 'Change password' || passwordEditButton.textContent === 'Изменить пароль') {
                 this.view.toggleInputs(inputs);
                 this.view.toggleClassHidden(repeatPasswordSpan);
                 this.view.toggleClassHidden(repeatPasswordInput);
-                passwordEditButton.textContent = 'Cancel';
-            } else if (passwordEditButton.textContent === 'Cancel') {
+                if (localStorage.getItem('language') === 'ru') {
+                    passwordEditButton.textContent = 'Отменить';
+                } else {
+                    passwordEditButton.textContent = 'Cancel';
+                }
+            } else if (passwordEditButton.textContent === 'Cancel' || passwordEditButton.textContent === 'Отменить') {
                 this.view.clearClassWrongInputFromElements();
                 repeatPasswordInput.value = '';
                 this.view.toggleInputs(inputs);
                 this.view.toggleClassHidden(repeatPasswordSpan);
                 this.view.toggleClassHidden(repeatPasswordInput);
-                passwordEditButton.textContent = 'Change password';
+                if (localStorage.getItem('language') === 'ru') {
+                    passwordEditButton.textContent = 'Изменить пароль';
+                } else {
+                    passwordEditButton.textContent = 'Change password';
+                }
             } else {
                 if (!this.model.isPasswordOkay(passwordInput.value)) {
                     this.view.clearClassWrongInputFromElements();
                     this.view.clearClassWrongSpanFromElements();
                     this.view.addClassWrongInput(passwordInput);
-                    this.view.createWrongSpanElement(passwordInput, "Password must have 6-200 symbols with at least 1 uppercase and 1 lowercase letter");
+                    if (localStorage.getItem('language') === 'ru') {
+                        this.view.createWrongSpanElement(passwordInput, "Пароль должен состоять из 6-200 символов с хотя бы 1 заглавной и 1 строчной буквами");
+                    } else {
+                        this.view.createWrongSpanElement(passwordInput, "Password must have 6-200 symbols with at least 1 uppercase and 1 lowercase letter");
+                    }
                 } else if (passwordInput.value === oldPassword) {
                     this.view.clearClassWrongInputFromElements();
                     this.view.clearClassWrongSpanFromElements();
                     this.view.addClassWrongInput(passwordInput);
-                    this.view.createWrongSpanElement(passwordInput, "It's old password");
+                    if (localStorage.getItem('language') === 'ru') {
+                        this.view.createWrongSpanElement(passwordInput, "Это старый пароль");
+                    } else {
+                        this.view.createWrongSpanElement(passwordInput, "It's old password");
+                    }
                 } else {
                     this.view.clearClassWrongInputFromElements();
                     this.view.clearClassWrongSpanFromElements();
@@ -126,7 +158,6 @@ export default class Controller {
                         this.model.getPromiseEditUser(userInfo.id, editedUser)
                             .then(response => {
                                 if (response.ok) {
-                                    console.log('User password updated successfully');
                                     this.view.removeClassRightInput(passwordInput);
                                     this.view.removeClassRightInput(repeatPasswordInput);
                                     oldPassword = passwordInput.value;
@@ -138,7 +169,13 @@ export default class Controller {
                                     this.view.toggleClassHidden(repeatPasswordSpan);
                                     this.view.toggleClassHidden(repeatPasswordInput);
                                     this.view.toggleClassHidden(passwordEditCheckboxPart);
-                                    passwordEditButton.textContent = 'Change password';
+                                    if (localStorage.getItem('language') === 'ru') {
+                                        passwordEditButton.textContent = 'Изменить пароль';
+                                        passwordSpan.textContent = 'Пароль';
+                                    } else {
+                                        passwordEditButton.textContent = 'Change password';
+                                        passwordSpan.textContent = 'Password';
+                                    }
                                     this.oldPasswordMode = true;
                                 } else {
                                     console.error('Failed to update user password');
@@ -161,19 +198,23 @@ export default class Controller {
             repeatPasswordInput = this.view.getRrofileRepeatPasswordElement();
 
         repeatPasswordInput.addEventListener('input', () => {
-            console.log(passwordInput.value);
-            console.log(repeatPasswordInput.value);
             if (this._arePasswordsMatches(passwordInput, repeatPasswordInput)) {
                 if (this.oldPasswordMode) {
                     const passwordEditCheckboxPart = this.view.getPasswordEditCheckboxPart();
                     this.view.toggleClassHidden(passwordEditCheckboxPart);
-                    passwordSpan.innerText = 'New password';
                     passwordInput.disabled = false;
                     passwordInput.value = '';
                     repeatPasswordInput.value = '';
-                    repeatPasswordSpan.innerText = 'Repeat new password';
                     this.view.removeClassRightInput(repeatPasswordInput);
-                    passwordEditButton.textContent = 'Save';
+                    if (localStorage.getItem('language') === 'ru') {
+                        passwordSpan.innerText = 'Новый пароль';
+                        repeatPasswordSpan.innerText = 'Повторите новый пароль';
+                        passwordEditButton.textContent = 'Сохранить';
+                    } else {
+                        passwordSpan.innerText = 'New password';
+                        repeatPasswordSpan.innerText = 'Repeat new password';
+                        passwordEditButton.textContent = 'Save';
+                    }
                     this.oldPasswordMode = false;
                 }
             }
@@ -230,10 +271,14 @@ export default class Controller {
 
             const inputs = this.view.getRrofileInputs();
 
-            if (editButton.textContent === 'Edit') {
+            if (editButton.textContent === 'Edit' || editButton.textContent === 'Редактировать') {
                 this.view.toggleInputs(inputs);
                 this.view.toggleClassHidden(getRandomUrlButton);
-                editButton.textContent = 'Save';
+                if (localStorage.getItem('language') === 'ru') {
+                    editButton.textContent = 'Сохранить';
+                } else {
+                    editButton.textContent = 'Save';
+                }
                 inputsBeforeEdit = [];
                 for (let i = 0; i < 7; i++) {
                     inputsBeforeEdit.push(inputs[i].value);
@@ -246,7 +291,11 @@ export default class Controller {
                 } else {
                     this.view.toggleInputs(inputs);
                     this.view.toggleClassHidden(getRandomUrlButton);
-                    editButton.textContent = 'Edit';
+                    if (localStorage.getItem('language') === 'ru') {
+                        editButton.textContent = 'Редактировать';
+                    } else {
+                        editButton.textContent = 'Edit';
+                    }
                 }
             }
         })
@@ -260,22 +309,38 @@ export default class Controller {
         let isValidationOkay = true;
         if (!inputs[0].value.match(/^[a-zA-Z][a-zA-Z0-9_]{4,14}$/)) {
             this.view.addClassWrongInput(inputs[0]);
-            this.view.createWrongSpanElement(inputs[0], "Nickname must consist of 5-15 numbers/letters and can't start with a number");
+            if (localStorage.getItem('language') === 'ru') {
+                this.view.createWrongSpanElement(inputs[0], "Пароль должен состоять из 6-200 символов с хотя бы 1 заглавной и 1 строчной буквами");
+            } else {
+                this.view.createWrongSpanElement(inputs[0], "Nickname must consist of 5-15 numbers/letters and can't start with a number");
+            }
             isValidationOkay = false;
         }
         if (!inputs[3].value.match(/^[A-Za-z]*$/)) {
             this.view.addClassWrongInput(inputs[3]);
-            this.view.createWrongSpanElement(inputs[3], "Name must consist of letters");
+            if (localStorage.getItem('language') === 'ru') {
+                this.view.createWrongSpanElement(inputs[3], "Имя должно состоять из букв");
+            } else {
+                this.view.createWrongSpanElement(inputs[3], "Name must consist of letters");
+            }
             isValidationOkay = false;
         }
         if (!inputs[4].value.match(/^[A-Za-z]*$/)) {
             this.view.addClassWrongInput(inputs[4]);
-            this.view.createWrongSpanElement(inputs[4], "Surname must consist of letters");
+            if (localStorage.getItem('language') === 'ru') {
+                this.view.createWrongSpanElement(inputs[4], "Фамилия должна состоять из букв");
+            } else {
+                this.view.createWrongSpanElement(inputs[4], "Surname must consist of letters");
+            }
             isValidationOkay = false;
         }
         if (!inputs[5].value.match(/\/(19[0-9][0-9]|200[0-2]|202[0-3])$/) && inputs[5].value !== '') {
             this.view.addClassWrongInput(inputs[5]);
-            this.view.createWrongSpanElement(inputs[5], "Put correct date");
+            if (localStorage.getItem('language') === 'ru') {
+                this.view.createWrongSpanElement(inputs[5], "Введите корректную дату");
+            } else {
+                this.view.createWrongSpanElement(inputs[5], "Put correct date");
+            }
             isValidationOkay = false;
         }
         return isValidationOkay;
@@ -309,7 +374,11 @@ export default class Controller {
                 .then(data => {
                     if (data.length) {
                         this.view.addClassWrongInput(inputs[0]);
-                        this.view.createWrongSpanElement(inputs[0], 'Nickname is already used');
+                        if (localStorage.getItem('language') === 'ru') {
+                            this.view.createWrongSpanElement(inputs[0], 'Никнейм уже используется');
+                        } else {
+                            this.view.createWrongSpanElement(inputs[0], 'Nickname is already used');
+                        }
                     }
                     else {
                         this._updateProfileInDb(userInfo.id, editedUser, profileMainAvatar, inputs, editButton);
