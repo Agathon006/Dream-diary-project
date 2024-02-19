@@ -198,7 +198,6 @@ export default class View {
                 document.querySelector(`#password-edit-button`).textContent = i18next.t('user.password_edit_button');
                 document.querySelector(`#show-password-span`).textContent = i18next.t('user.show_password_span');
                 document.querySelector(`#get-random-url-button`).textContent = i18next.t('user.get_random_url_button');
-
                 document.querySelector(`#profile-name-span`).textContent = i18next.t('user.profile_name_span');
                 document.querySelector(`#name-input`).placeholder = i18next.t('user.profile_name_placeholder');
                 document.querySelector(`#profile-surname-span`).textContent = i18next.t('user.profile_surname_span');

@@ -116,5 +116,8 @@
         "profile_about_me_placeholder": "Расскажите о себе",
         "profile_edit_button": "Редактировать"
     },
-    "view_record": {}
+    "view_record": {
+        "return_link": "вернуться",
+        "dream_author_span": "Автор сна"
+    }
 }

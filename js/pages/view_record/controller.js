@@ -5,8 +5,15 @@ export default class Controller {
     }
 
     init() {
+        this._initTranslation();
         this._initDreamRecord();
         this._initLikeButtonListener();
+    }
+
+    _initTranslation() {
+        if (localStorage.getItem('language') === 'ru') {
+            this.view.translatePage();
+        }
     }
 
     _initDreamRecord() {
@@ -43,8 +50,13 @@ export default class Controller {
                     })
                     .then(record => {
                         dreamTitle.innerText = record.dreamTitle;
-                        dreamDate.innerText = `Dreamed ${record.date.dayNumber} ${this.model.whichMonthNameByNumber(record.date.monthNumber)} ${record.date.year}`;
-                        dreamViews.innerText = `${record.views} views`;
+                        if (localStorage.getItem('language') === 'ru') {
+                            dreamDate.innerText = `Приснился ${record.date.dayNumber} ${this._translateMonthToRu(this.model.whichMonthNameByNumber(record.date.monthNumber))} ${record.date.year}`;
+                            dreamViews.innerText = `${record.views} просмотров`;
+                        } else {
+                            dreamDate.innerText = `Dreamed ${record.date.dayNumber} ${this.model.whichMonthNameByNumber(record.date.monthNumber)} ${record.date.year}`;
+                            dreamViews.innerText = `${record.views} views`;
+                        }
                         dreamLikesNumber.innerText = record.likes;
 
                         const jwt = require('jsonwebtoken');
@@ -54,9 +66,14 @@ export default class Controller {
                         }
 
                         dreamCategory.src = this.model.whichDreamCategoryIcon(record.dreamCategory);
-                        dreamCategorySpan.innerText = record.dreamCategory;
                         dreamMood.src = this.model.whichDreamMoodIcon(record.dreamMood);
-                        dreamMoodSpan.innerText = record.dreamMood;
+                        if (localStorage.getItem('language') === 'ru') {
+                            dreamCategorySpan.innerText = this._translateCategoryToRu(record.dreamCategory);
+                            dreamMoodSpan.innerText = this._translateMoodToRu(record.dreamMood);
+                        } else {
+                            dreamCategorySpan.innerText = record.dreamCategory;
+                            dreamMoodSpan.innerText = record.dreamMood;
+                        }
                         dreamImage.src = record.dreamImageUrl;
                         dreamPlot.innerText = record.dreamPlot;
                         this.model.getPromiseGetUserByEmail(record.email)
@@ -81,6 +98,73 @@ export default class Controller {
             .catch(error => {
                 console.error('Error during getting record', error);
             });
+    }
+
+    _translateCategoryToRu(Category) {
+        switch (Category) {
+            case 'Usual':
+                return 'Обыденность';
+            case 'Just talking':
+                return 'Диалог';
+            case 'Nightmare':
+                return 'Кошмар';
+            case 'Action':
+                return 'Экшен';
+            case 'Trash':
+                return 'Бред';
+            case 'Conscious dream':
+                return 'Осознанный сон';
+            default:
+                return '???';
+        }
+    }
+
+    _translateMoodToRu(Mood) {
+        switch (Mood) {
+            case 'Typical dream':
+                return 'Типичный сон';
+            case 'Fun dream':
+                return 'Весёлый сон';
+            case 'Sad dream':
+                return 'Грустный сон';
+            case 'Terrible':
+                return 'Ужас';
+            case 'Made me think':
+                return 'Заставил задуматься';
+            default:
+                return '???';
+        }
+    }
+
+    _translateMonthToRu(month) {
+        switch (month) {
+            case 'January':
+                return 'Января';
+            case 'February':
+                return 'Февраля';
+            case 'March':
+                return 'Марта';
+            case 'April':
+                return 'Апреля';
+            case 'May':
+                return 'Мая';
+            case 'June':
+                return 'Июня';
+            case 'July':
+                return 'Июля';
+            case 'August':
+                return 'Августа';
+            case 'September':
+                return 'Сентября';
+            case 'October':
+                return 'Октября';
+            case 'November':
+                return 'Ноября';
+            case 'December':
+                return 'Декабря';
+            default:
+                return '???';
+        }
     }
 
     _initLikeButtonListener() {
