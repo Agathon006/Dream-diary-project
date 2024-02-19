@@ -1,5 +1,3 @@
-import { error } from 'jquery';
-
 export default class Controller {
     constructor(view, model) {
         this.view = view;
@@ -7,10 +5,17 @@ export default class Controller {
     }
 
     init() {
+        this._initTranslation();
         this._initTagsInputListener();
         this._initDreamCategoryListener();
         this._initDreamMoodListener();
         this._initFormListener();
+    }
+
+    _initTranslation() {
+        if (localStorage.getItem('language') === 'ru') {
+            this.view.translatePage();
+        }
     }
 
     _initTagsInputListener() {
@@ -21,7 +26,6 @@ export default class Controller {
                     $('#record-form-tags-container').append('<span class="badge badge-primary mr-1">' + tag + ' <button class="close" type="button" aria-label="Close"><span aria-hidden="true">&times;</span></button></span>');
                 }
                 $(this).val('');
-                console.log(document.querySelectorAll('.badge').length)
                 if (document.querySelectorAll('.badge').length > 4) {
                     $('#tags-input').prop('disabled', true);
                 }
@@ -30,7 +34,7 @@ export default class Controller {
 
         $('#record-form-tags-container').on('click', '.badge', function () {
             $(this).remove();
-            $('#record-form-tags-input').prop('disabled', false);
+            $('#tags-input').prop('disabled', false);
         });
     }
 
@@ -141,12 +145,20 @@ export default class Controller {
 
         if (!this.model.isTitleOkay(formInfo.dreamTitle)) {
             this.view.addClassWrongInput(recordTitle);
-            this.view.createWrongSpanElement(recordTitle, "Dream title can't be empty");
+            if (localStorage.getItem('language') === 'ru') {
+                this.view.createWrongSpanElement(recordTitle, "Название сна не может быть пустым");
+            } else {
+                this.view.createWrongSpanElement(recordTitle, "Dream title can't be empty");
+            }
             isValidationOkay = false;
         }
         if (!this.model.isPlotOkay(formInfo.dreamPlot)) {
             this.view.addClassWrongInput(recordPlot);
-            this.view.createWrongSpanElement(recordPlot, "Dream description must have at least 10 symbols");
+            if (localStorage.getItem('language') === 'ru') {
+                this.view.createWrongSpanElement(recordPlot, "Описание сна должно состоять хотя бы из 10 символов");
+            } else {
+                this.view.createWrongSpanElement(recordPlot, "Dream description must have at least 10 symbols");
+            }
             isValidationOkay = false;
         }
 
@@ -159,16 +171,23 @@ export default class Controller {
         this.model.registerNewRecord(JSON.stringify(formInfo))
             .then((response) => {
                 if (!response.ok) {
-                    this.view.createWrongSpanElement(submitButton, "Network response was not ok");
+                    if (localStorage.getItem('language') === 'ru') {
+                        this.view.createWrongSpanElement(submitButton, "Проблемы с соединением");
+                    } else {
+                        this.view.createWrongSpanElement(submitButton, "Network response was not ok");
+                    }
                 }
                 return true;
             })
             .then((response) => {
-                console.log('Success')
                 window.location.href = "./registered_home.html";
             })
             .catch((error) => {
-                this.view.createWrongSpanElement(submitButton, `Something go wrong... ${error}`);
+                if (localStorage.getItem('language') === 'ru') {
+                    this.view.createWrongSpanElement(submitButton, `Что-то пошло не так... ${error}`);
+                } else {
+                    this.view.createWrongSpanElement(submitButton, `Something go wrong... ${error}`);
+                }
             });
     }
 }
