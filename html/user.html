@@ -62,7 +62,7 @@
                         <div class="themes-switcher-container">
                             <img src="" alt="dark-theme-icon" class="themes-switcher-icon" id="theme-image">
                             <label class="themes-switcher">
-                                <input type="checkbox" checked id="theme-checkbox">
+                                <input type="checkbox" checked class="theme-checkbox" id="theme-checkbox">
                                 <span class="themes-switcher__slider"></span>
                             </label>
                         </div>
@@ -83,6 +83,49 @@
             </nav>
         </div>
     </header>
+    <div class="burger-content-wrapper not-exist" id="burger-content">
+        <div class="burger-content__top">
+            <div class="burger-content__top-account" id="header-navigation-end-account">
+                <a class="burger-content__top-account-link" href="#"
+                    id="header-link-register">Profile</a>
+                <div class="burger-content__top-account-separator"></div>
+                <a class="burger-content__top-account-link" href="./sign_in.html" id="header-link-sign-in">Sign out</a>
+            </div>
+            <div class="burger-content__top-settings">
+                <div class="themes-switcher-container">
+                    <img src="../icons/header/theme-burger.svg" alt="dark-theme-icon" class="themes-switcher-icon"
+                        id="theme-image-burger">
+                    <label class="themes-switcher">
+                        <input type="checkbox" checked class="theme-checkbox" id="theme-checkbox">
+                        <span class="themes-switcher__slider"></span>
+                    </label>
+                </div>
+                <div class="language-container">
+                    <button class="language-button underlined">en</button>
+                    <span class="language-separator">/</span>
+                    <button class="language-button">ru</button>
+                </div>
+            </div>
+        </div>
+        <ul class="burger-content__navigation-list">
+            <li class="burger-content__navigation-list-element">
+                <a class="burger-content__navigation-list-element-link" href="./registered_home.html"
+                    id="header-link-home">Home</a>
+            </li>
+            <li class="burger-content__navigation-list-element">
+                <a class="burger-content__navigation-list-element-link" href="./time.html"
+                    id="header-link-time">World time</a>
+            </li>
+            <li class="burger-content__navigation-list-element">
+                <a class="burger-content__navigation-list-element-link" href="./moon.html"
+                    id="header-link-moon">Moon phases</a>
+            </li>
+            <li class="burger-content__navigation-list-element">
+                <a class="burger-content__navigation-list-element-link" href="./music.html"
+                    id="header-link-music">Music player</a>
+            </li>
+        </ul>
+    </div>
     <main class="main waiting-background">
         <div class="container">
             <div class="profile-wrapper">
