@@ -181,6 +181,160 @@
                     }
                 }
             }
+
+            .burger-menu {
+                display: none;
+
+                .burger-menu__button {
+                    width: 50px;
+                    height: 50px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+                    border-radius: 0;
+
+                    .burger-menu__button-element {
+                        height: 5px;
+                        width: 45px;
+                        background-color: black;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.body {
+    position: relative;
+
+    .burger-content-wrapper {
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        min-height: 100vh;
+        width: 40%;
+        background-color: black;
+        padding: 20px;
+
+        .burger-content__top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+
+            .burger-content__top-account {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .burger-content__top-account-link {
+                    color: white;
+                }
+
+                .burger-content__top-account-separator {
+                    height: 2px;
+                    width: 90%;
+                    background-color: white;
+                    margin: 10px 0;
+                }
+            }
+
+            .burger-content__top-settings {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+
+                .themes-switcher-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                    border-radius: 25px;
+                    padding: 5px;
+                    transition: .5s;
+                    border: 1px white solid;
+
+                    .themes-switcher-icon {
+                        width: 24px;
+                    }
+
+                    .themes-switcher {
+                        position: relative;
+                        display: inline-block;
+                        width: 30px;
+                        height: 17px;
+                        transition: .5s;
+
+                        input {
+                            opacity: 0;
+                            width: 0;
+                            height: 0;
+
+                            &:checked+.themes-switcher__slider {
+                                background-color: white;
+                            }
+
+                            &:checked+.themes-switcher__slider:before {
+                                transform: translateX(13px);
+                                background-color: black;
+                            }
+                        }
+                    }
+
+                    .themes-switcher__slider {
+                        position: absolute;
+                        cursor: pointer;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        transition: .4s;
+                        border: 1px white solid;
+                        border-radius: 40%;
+
+                        &:before {
+                            top: 1px;
+                            position: absolute;
+                            content: "";
+                            height: 13px;
+                            width: 13px;
+                            left: 2px;
+                            bottom: 2px;
+                            background-color: white;
+                            transition: .4s;
+                            border-radius: 40%;
+                        }
+                    }
+                }
+
+                .language-container {
+
+                    .language-button {
+                        background-color: transparent;
+                        color: white;
+                    }
+
+                    .language-separator {
+                        font-size: 24px;
+                        color: white;
+                    }
+                }
+            }
+        }
+
+        .burger-content__navigation-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .burger-content__navigation-list-element {
+                margin: 20px 0;
+            }
+
+            .burger-content__navigation-list-element-link {
+                color: white;
+            }
         }
     }
 }
@@ -197,6 +351,30 @@
                     .header__navigation-list-element {
                         width: min-content;
                     }
+                }
+            }
+
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+
+        .container {
+
+            .header__navigation {
+
+                .header__navigation-list {
+                    display: none;
+                }
+
+                .header__navigation-end {
+                    display: none;
+                }
+
+                .burger-menu {
+                    display: block;
                 }
             }
 
