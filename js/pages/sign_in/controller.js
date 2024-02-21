@@ -6,6 +6,7 @@ export default class Controller {
 
     init() {
         this._initTranslation();
+        this._initBurgerButtonListener();
         this._initFormListener();
         this._passwordCheckBoxListener();
     }
@@ -14,6 +15,17 @@ export default class Controller {
         if (localStorage.getItem('language') === 'ru') {
             this.view.translatePage();
         }
+    }
+
+    _initBurgerButtonListener() {
+        document.querySelector('.body').addEventListener('click', (event) => {
+            if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
+                document.querySelector('#burger-content').classList.remove('not-exist');
+            }
+            else if (!event.target.closest('.burger-content-wrapper')) {
+                document.querySelector('#burger-content').classList.add('not-exist');
+            }
+        });
     }
 
     _initFormListener() {
