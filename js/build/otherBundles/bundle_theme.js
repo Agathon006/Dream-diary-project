@@ -11,10 +11,14 @@ const themesSwitcherCheckboxes = document.querySelectorAll(`.theme-checkbox`),
   telegramImage = document.querySelector(`#telegram-image`),
   linkedinImage = document.querySelector(`#linkedin-image`),
   githubImage = document.querySelector(`#github-image`),
+  burgerIconElements = document.querySelectorAll('.burger-menu__button-element'),
   currentPath = window.location.pathname;
 if (localStorage.getItem('theme') === 'dark') {
   themesSwitcherCheckboxes.forEach(item => {
     item.checked = true;
+  });
+  burgerIconElements.forEach(item => {
+    item.style.backgroundColor = '#9f9f9f';
   });
   header.classList.toggle('primary-style');
   main.classList.toggle('secondary-style');
@@ -33,6 +37,9 @@ if (localStorage.getItem('theme') === 'dark') {
 } else if (localStorage.getItem('theme') === 'light') {
   themesSwitcherCheckboxes.forEach(item => {
     item.checked = false;
+  });
+  burgerIconElements.forEach(item => {
+    item.style.backgroundColor = 'black';
   });
   header.classList.toggle('primary-style-light');
   main.classList.toggle('secondary-style-light');
@@ -59,6 +66,9 @@ themesSwitcherCheckboxes.forEach((item, index) => {
     footer.classList.toggle('primary-style-light');
     if (themesSwitcherCheckboxes[0].checked && index === 0 || themesSwitcherCheckboxes[1].checked && index === 1) {
       localStorage.theme = 'dark';
+      burgerIconElements.forEach(item => {
+        item.style.backgroundColor = '#9f9f9f';
+      });
       if (currentPath.includes('/html/')) {
         themeImage.src = '../icons/header/theme-dark.svg';
         telegramImage.src = '../icons/footer/telegram-dark.svg';
@@ -72,6 +82,9 @@ themesSwitcherCheckboxes.forEach((item, index) => {
       }
     } else {
       localStorage.theme = 'light';
+      burgerIconElements.forEach(item => {
+        item.style.backgroundColor = 'black';
+      });
       if (currentPath.includes('/html/')) {
         themeImage.src = '../icons/header/theme-light.svg';
         telegramImage.src = '../icons/footer/telegram-light.svg';
