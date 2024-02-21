@@ -1156,6 +1156,15 @@ button {
 .header .container .header__navigation .header__navigation-end .header__navigation-end-settings .language-container .language-button:hover {
   color: #dedede;
 }
+@media (max-width: 1024px) {
+  .header .container .header__navigation .header__navigation-list {
+    gap: 20px;
+  }
+  .header .container .header__navigation .header__navigation-list .header__navigation-list-element {
+    width: -moz-min-content;
+    width: min-content;
+  }
+}
 .primary-style {
   background-color: #232e2f;
   color: #9f9f9f;
@@ -1608,6 +1617,10 @@ button {
 }
 .main .container .main-wrapper .main__plot .dream-record .dream-record__visual {
   margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
 }
 .main .container .main-wrapper .main__plot .dream-record .dream-record__visual .dream-record__visual-primary {
   width: 148px;
@@ -1645,6 +1658,9 @@ button {
   flex-direction: column;
   justify-content: space-between;
   width: 85%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-top {
   display: flex;
@@ -1683,15 +1699,12 @@ button {
 .main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-middle .dream-record__main-middle-tags {
   margin-bottom: 5px;
 }
-.main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-middle .dream-record__main-middle-plot {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 .main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-bottom {
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 .main .container .main-wrapper .main__plot .dream-record .dream-record__main .dream-record__main-bottom .dream-record__main-bottom-user {
   padding: 0 10px 0 0;
@@ -1781,12 +1794,14 @@ button {
 .main .container .main-wrapper .main__filter .user-search .user-search__main {
   margin-top: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 .main .container .main-wrapper .main__filter .user-search .user-search__main .user-search__main-left {
   display: flex;
   align-items: center;
+  margin-right: 20px;
 }
 .main .container .main-wrapper .main__filter .user-search .user-search__main .user-search__main-left .user-search__main-left-avatar {
   width: 64px;
@@ -1812,11 +1827,25 @@ button {
   width: 64px;
   height: 64px;
 }
-.main .container .main-wrapper .main__filter .main__filter-add-link {
-  font-size: 40px;
-  padding: 5px 20px;
+.main .container .main-wrapper .main__filter .main__filter-add-link-wrapper {
   border-radius: 50px;
+  text-align: center;
+  padding: 0;
 }
-.main .container .main-wrapper .main__filter .main__filter-add-link:hover {
+.main .container .main-wrapper .main__filter .main__filter-add-link-wrapper .main__filter-add-link {
+  font-size: 32px;
+  background-color: transparent;
+  padding: 5px 20px;
+}
+.main .container .main-wrapper .main__filter .main__filter-add-link-wrapper .main__filter-add-link:hover {
   color: #dedede;
+}
+
+@media (max-width: 1024px) {
+  .main .container .main-wrapper .main__filter .main__filter-block .main__filter-block-main .main__filter-block-input {
+    direction: rtl;
+  }
+  .main .container .main-wrapper .main__filter .main__filter-add-link-wrapper .main__filter-add-link {
+    padding: 0;
+  }
 }/*# sourceMappingURL=registered_home.css.map */

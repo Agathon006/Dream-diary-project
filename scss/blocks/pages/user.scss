@@ -144,3 +144,19 @@
         }
     }
 }
+
+@media (max-width: 1024px) {
+    .main {
+
+        .container {
+
+            .profile-wrapper {
+
+                .profile-main {
+                    flex-wrap: wrap;
+                }
+            }
+
+        }
+    }
+}

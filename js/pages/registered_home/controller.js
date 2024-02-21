@@ -453,6 +453,7 @@ export default class Controller {
             })
             .then(records => {
                 if (!records.pages) {
+                    this.view.toggleClassWaitingBackgroundOfMain();
                     this.view.displayNoRecordsMessage(mainPlot);
                 } else {
                     async function setupPagination(mainPlot, currentPageNumber, records, view) {

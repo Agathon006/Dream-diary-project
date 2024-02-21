@@ -1156,6 +1156,15 @@ button {
 .header .container .header__navigation .header__navigation-end .header__navigation-end-settings .language-container .language-button:hover {
   color: #dedede;
 }
+@media (max-width: 1024px) {
+  .header .container .header__navigation .header__navigation-list {
+    gap: 20px;
+  }
+  .header .container .header__navigation .header__navigation-list .header__navigation-list-element {
+    width: -moz-min-content;
+    width: min-content;
+  }
+}
 .primary-style {
   background-color: #232e2f;
   color: #9f9f9f;
@@ -1612,4 +1621,5 @@ button {
 }
 .main .container .wrapper .moon-phases-container .moon-phase .moon-phase__span {
   margin-top: 5px;
+  text-align: center;
 }/*# sourceMappingURL=moon.css.map */

@@ -94,8 +94,8 @@ class View {
         }
       });
       document.querySelector(`#header-link-home`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.home');
-      document.querySelector(`#header-link-time`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.moon');
-      document.querySelector(`#header-link-moon`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.time');
+      document.querySelector(`#header-link-time`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.time');
+      document.querySelector(`#header-link-moon`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.moon');
       document.querySelector(`#header-link-music`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.music');
       document.querySelector(`#header-link-register`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.register');
       document.querySelector(`#header-link-sign-in`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.sign_in');

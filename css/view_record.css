@@ -1156,6 +1156,15 @@ button {
 .header .container .header__navigation .header__navigation-end .header__navigation-end-settings .language-container .language-button:hover {
   color: #dedede;
 }
+@media (max-width: 1024px) {
+  .header .container .header__navigation .header__navigation-list {
+    gap: 20px;
+  }
+  .header .container .header__navigation .header__navigation-list .header__navigation-list-element {
+    width: -moz-min-content;
+    width: min-content;
+  }
+}
 .primary-style {
   background-color: #232e2f;
   color: #9f9f9f;
@@ -1650,6 +1659,7 @@ button {
 }
 .main .container .dream-record-main .dream-record-main-wrapper {
   display: flex;
+  width: 100%;
 }
 .main .container .dream-record-main .dream-record-main-wrapper .dream-record-main__img {
   min-width: 400px;
@@ -1665,10 +1675,11 @@ button {
   min-height: 100%;
   background-image: url(./../img/default-dream-image.svg);
   background-size: cover;
+  background-position: center;
 }
 .main .container .dream-record-main .dream-record-main-wrapper .dream-record-main__plot {
   margin-left: 20px;
   font-size: 36px;
-  width: 75%;
+  width: calc(100% - 400px);
   word-wrap: break-word;
 }/*# sourceMappingURL=view_record.css.map */

@@ -91,6 +91,7 @@
 
                 .do-not-have-dreams-block__image {
                     width: 35%;
+                    object-fit: cover; 
                 }
             }
         }
@@ -100,6 +101,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+
+            .subtitle {
+                text-align: center;
+            }
         }
     }
 }

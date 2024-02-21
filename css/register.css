@@ -1064,7 +1064,6 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 30px;
 }
 .header .container .header__navigation .header__navigation-list .header__navigation-list-element {
   text-align: center;
@@ -1184,6 +1183,12 @@ button {
 }
 .header .container .header__navigation .header__navigation-end .header__navigation-end-settings .language-container .language-button:hover {
   color: #dedede;
+}
+@media (max-width: 1024px) {
+  .header .container .header__navigation .header__navigation-list .header__navigation-list-element {
+    width: -moz-min-content;
+    width: min-content;
+  }
 }
 .primary-style {
   background-color: #232e2f;

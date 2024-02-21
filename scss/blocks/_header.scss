@@ -26,8 +26,6 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                gap: 30px;
-
 
                 .header__navigation-list-element {
                     text-align: center;
@@ -183,6 +181,25 @@
                     }
                 }
             }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .header {
+
+        .container {
+
+            .header__navigation {
+
+                .header__navigation-list {
+
+                    .header__navigation-list-element {
+                        width: min-content;
+                    }
+                }
+            }
+
         }
     }
 }

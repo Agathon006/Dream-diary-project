@@ -1156,6 +1156,15 @@ button {
 .header .container .header__navigation .header__navigation-end .header__navigation-end-settings .language-container .language-button:hover {
   color: #dedede;
 }
+@media (max-width: 1024px) {
+  .header .container .header__navigation .header__navigation-list {
+    gap: 20px;
+  }
+  .header .container .header__navigation .header__navigation-list .header__navigation-list-element {
+    width: -moz-min-content;
+    width: min-content;
+  }
+}
 .primary-style {
   background-color: #232e2f;
   color: #9f9f9f;
@@ -1636,4 +1645,10 @@ button {
 }
 .main .container .profile-wrapper .profile-span {
   margin: 20px 0 0 10px;
+}
+
+@media (max-width: 1024px) {
+  .main .container .profile-wrapper .profile-main {
+    flex-wrap: wrap;
+  }
 }/*# sourceMappingURL=user.css.map */
