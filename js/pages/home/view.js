@@ -48,6 +48,13 @@ export default class View {
                 document.querySelector(`#header-link-register`).textContent = i18next.t('header.register');
                 document.querySelector(`#header-link-sign-in`).textContent = i18next.t('header.sign_in');
 
+                document.querySelector(`#header-link-home-burger`).textContent = i18next.t('header.home');
+                document.querySelector(`#header-link-time-burger`).textContent = i18next.t('header.time');
+                document.querySelector(`#header-link-moon-burger`).textContent = i18next.t('header.moon');
+                document.querySelector(`#header-link-music-burger`).textContent = i18next.t('header.music');
+                document.querySelector(`#header-link-register-burger`).textContent = i18next.t('header.register');
+                document.querySelector(`#header-link-sign-in-burger`).textContent = i18next.t('header.sign_in');
+
                 document.querySelector(`#main-title`).textContent = i18next.t('home.main_title');
                 document.querySelector(`#main-subtitle`).textContent = i18next.t('home.main_subtitle');
 

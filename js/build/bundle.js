@@ -109,6 +109,12 @@ class View {
       document.querySelector(`#header-link-music`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.music');
       document.querySelector(`#header-link-register`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.register');
       document.querySelector(`#header-link-sign-in`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.sign_in');
+      document.querySelector(`#header-link-home-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.home');
+      document.querySelector(`#header-link-time-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.time');
+      document.querySelector(`#header-link-moon-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.moon');
+      document.querySelector(`#header-link-music-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.music');
+      document.querySelector(`#header-link-register-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.register');
+      document.querySelector(`#header-link-sign-in-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('header.sign_in');
       document.querySelector(`#main-title`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('home.main_title');
       document.querySelector(`#main-subtitle`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('home.main_subtitle');
       document.querySelector(`#reasons-block-title`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('home.reasons_block_title');

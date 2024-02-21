@@ -435,6 +435,13 @@ export default class View {
                 document.querySelector(`#header-link-profile`).textContent = i18next.t('registered_header.profile');
                 document.querySelector(`#header-link-sign-out`).textContent = i18next.t('registered_header.sign_out');
 
+                document.querySelector(`#header-link-home-burger`).textContent = i18next.t('registered_header.home');
+                document.querySelector(`#header-link-time-burger`).textContent = i18next.t('registered_header.time');
+                document.querySelector(`#header-link-moon-burger`).textContent = i18next.t('registered_header.moon');
+                document.querySelector(`#header-link-music-burger`).textContent = i18next.t('registered_header.music');
+                document.querySelector(`#header-link-profile-burger`).textContent = i18next.t('registered_header.profile');
+                document.querySelector(`#header-link-sign-out-burger`).textContent = i18next.t('registered_header.sign_out');
+
                 document.querySelector(`#notification`).innerHTML = `
                     <p>${i18next.t('registered_home.notification')}<img src="../icons/like_active.svg" alt="heart"></p>
                 `;
