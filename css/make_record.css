@@ -1747,7 +1747,13 @@ button {
   display: flex;
   flex-direction: column;
 }
+.main .container .record-form .record-form__right-part .tags-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .main .container .record-form .dream-category-wrapper {
+  margin: 10px 0;
   display: flex;
 }
 .main .container .record-form .dream-category-wrapper .dream-category-wrapper__select-wrapper {
@@ -1761,9 +1767,9 @@ button {
   margin: 20px 20px 5px;
 }
 .main .container .record-form .record-form__input {
-  margin: 5px 20px 40px;
+  margin: 5px 20px;
   padding: 5px 10px;
-  max-width: 400px;
+  max-width: 100%;
   color: black;
   font-size: 36px;
   background: transparent;
@@ -1794,4 +1800,38 @@ button {
   transition: 0.5s;
   font-size: 26px;
   font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .main .container .record-form {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .main .container .record-form .record-form__left-part {
+    min-width: 100%;
+    margin-right: 0;
+  }
+  .main .container .record-form .record-form__right-part {
+    width: 100%;
+  }
+}
+@media (max-width: 425px) {
+  .main .container .record-form .record-form__right-part .dream-title-wrapper .record-form__input {
+    width: 80%;
+  }
+  .main .container .record-form .record-form__right-part .dream-category-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .main .container .record-form .record-form__right-part .dream-category-wrapper .dream-category-wrapper__select-wrapper {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  .main .container .record-form .record-form__right-part .dream-category-wrapper .dream-category-wrapper__select-wrapper .record-form__input {
+    font-size: 24px;
+  }
+  .main .container .record-form .record-form__right-part .record-form__input-plot {
+    font-size: 24px;
+  }
 }/*# sourceMappingURL=make_record.css.map */

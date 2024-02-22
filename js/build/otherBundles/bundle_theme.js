@@ -55,6 +55,27 @@ if (localStorage.getItem('theme') === 'dark') {
     linkedinImage.src = './icons/footer/linkedin-light.svg';
     githubImage.src = './icons/footer/github-light.svg';
   }
+} else {
+  themesSwitcherCheckboxes.forEach(item => {
+    item.checked = true;
+  });
+  burgerIconElements.forEach(item => {
+    item.style.backgroundColor = '#9f9f9f';
+  });
+  header.classList.toggle('primary-style');
+  main.classList.toggle('secondary-style');
+  footer.classList.toggle('primary-style');
+  if (currentPath.includes('/html/')) {
+    themeImage.src = '../icons/header/theme-dark.svg';
+    telegramImage.src = '../icons/footer/telegram-dark.svg';
+    linkedinImage.src = '../icons/footer/linkedin-dark.svg';
+    githubImage.src = '../icons/footer/github-dark.svg';
+  } else {
+    themeImage.src = './icons/header/theme-dark.svg';
+    telegramImage.src = './icons/footer/telegram-dark.svg';
+    linkedinImage.src = './icons/footer/linkedin-dark.svg';
+    githubImage.src = './icons/footer/github-dark.svg';
+  }
 }
 themesSwitcherCheckboxes.forEach((item, index) => {
   item.addEventListener('change', function () {

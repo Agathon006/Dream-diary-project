@@ -1762,6 +1762,7 @@ button {
 .main .container .dream-record-head .dream-record-head__top .dream-record-head__top-right .dream-record-head__top-right-views {
   margin-bottom: 10px;
   font-size: 24px;
+  text-align: center;
 }
 .main .container .dream-record-head .dream-record-head__top .dream-record-head__top-right .dream-record-head__top-right-like-button {
   font-size: 40px;
@@ -1848,6 +1849,9 @@ button {
   background-color: white;
   background-image: url(./../img/default-dream-image.svg);
   background-size: cover;
+  background-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .main .container .dream-record-main .dream-record-main-wrapper .dream-record-main__img:before {
   content: "";
@@ -1863,4 +1867,44 @@ button {
   font-size: 36px;
   width: calc(100% - 400px);
   word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+  .body .main .container .dream-record-main .dream-record-main-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .body .main .container .dream-record-main .dream-record-main-wrapper .dream-record-main__plot {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+@media (max-width: 425px) {
+  .body .main .container .dream-record-head .dream-record-head__top {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .body .main .container .dream-record-head .dream-record-head__top .dream-record-head__top-right {
+    align-items: center;
+  }
+  .body .main .container .dream-record-head .dream-record-head__bottom {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .body .main .container .dream-record-head .dream-record-head__bottom .dream-record-head__bottom-right {
+    flex-direction: column;
+  }
+  .body .main .container .dream-record-head .dream-record-head__bottom .dream-record-head__bottom-right .dream-record-head__bottom-right-texts {
+    margin-left: 0;
+  }
+  .body .main .container .dream-record-head .dream-record-head__bottom .dream-record-head__bottom-right .dream-record-head__bottom-right-texts .dream-record-head__bottom-right-texts-title {
+    text-align: center;
+  }
+  .body .main .container .dream-record-main .dream-record-main-wrapper .dream-record-main__img {
+    min-width: 300px;
+    min-height: 300px;
+  }
+  .body .main .container .dream-record-main .dream-record-main-wrapper .dream-record-main__plot {
+    font-size: 24px;
+  }
 }/*# sourceMappingURL=view_record.css.map */
