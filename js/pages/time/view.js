@@ -27,6 +27,7 @@ export default class View {
         },
         SECOND_CONTAINERS: {
             CURRENT: 'second-container-current',
+            CURRENT_SMALL: 'second-container-current-small',
             NEW_YORK: 'second-container-new-york',
             LONDON: 'second-container-london',
             TOKYO: 'second-container-tokyo',
@@ -64,6 +65,7 @@ export default class View {
 
     transformCurrentClock(hours, minutes, seconds) {
         this.getSecondContainer('CURRENT').style.transform = `rotate(${6 * seconds}deg)`;
+        this.getSecondContainer('CURRENT_SMALL').style.transform = `rotate(${6 * seconds}deg)`;
         this.getMinuteContainer('CURRENT').style.transform = `rotate(${6 * minutes + 0.1 * seconds}deg)`;
         this.getHourContainer('CURRENT').style.transform = `rotate(${30 * hours + 0.5 * minutes}deg)`;
     }

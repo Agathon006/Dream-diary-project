@@ -175,7 +175,7 @@
 
     .burger-content-wrapper {
         position: fixed;
-        z-index: 2;
+        z-index: 5;
         top: 0;
         right: 0;
         min-height: 100vh;
@@ -188,6 +188,8 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
 
             .burger-content__top-account {
                 display: flex;
@@ -345,6 +347,35 @@
                 }
             }
 
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .body {
+
+        .burger-content-wrapper {
+            width: 60%;
+        }
+    }
+}
+
+@media (max-width: 375px) {
+    .body {
+
+        .burger-content-wrapper {
+
+            .burger-content__top {
+                justify-content: center;
+            }
+
+            .burger-content__navigation-list {
+    
+                .burger-content__navigation-list-element {
+                    
+                    margin: 10px 0;
+                }
+            }
         }
     }
 }

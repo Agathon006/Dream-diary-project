@@ -333,6 +333,11 @@ button {
   cursor: pointer;
 }
 
+@media (max-width: 425px) {
+  .container {
+    max-width: 95%;
+  }
+}
 .primary-style {
   background-color: #232e2f;
   color: #9f9f9f;
