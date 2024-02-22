@@ -1803,4 +1803,23 @@ button {
 .main .container .wrapper .moon-phases-container .moon-phase .moon-phase__span {
   margin-top: 5px;
   text-align: center;
+}
+
+@media (max-width: 425px) {
+  .main .container .wrapper .forecast-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .main .container .wrapper .forecast-container .forecast-day {
+    width: 90%;
+  }
+  .main .container .wrapper .moon-phases-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .main .container .wrapper .moon-phases-container .moon-phase {
+    width: 90%;
+  }
 }/*# sourceMappingURL=moon.css.map */
