@@ -35,6 +35,18 @@
       "birthDate": "",
       "profileInfo": "",
       "avatar": ""
+    },
+    {
+      "id": "8c54",
+      "nickname": "Agathon007",
+      "email": "agaton115@gmail.com",
+      "password": "2051868Dd",
+      "role": "user",
+      "name": "",
+      "surname": "",
+      "birthDate": "",
+      "profileInfo": "",
+      "avatar": ""
     }
   ],
   "records": [
@@ -57,7 +69,7 @@
         "year": 2023,
         "weekNumber": 4
       },
-      "views": 14,
+      "views": 41,
       "likes": 1,
       "likesUsersEmails": [
         "agaton615@gmail.com"
@@ -184,9 +196,11 @@
         "year": 2024,
         "weekNumber": 0
       },
-      "views": 0,
-      "likes": 0,
-      "likesUsersEmails": []
+      "views": 48,
+      "likes": 1,
+      "likesUsersEmails": [
+        "agaton615@gmail.com"
+      ]
     },
     {
       "id": "ed53",
@@ -226,7 +240,52 @@
         "year": 2024,
         "weekNumber": 1
       },
-      "views": 0,
+      "views": 1,
+      "likes": 0,
+      "likesUsersEmails": []
+    },
+    {
+      "id": "d801",
+      "dreamImageUrl": "https://sun9-35.userapi.com/impf/c628818/v628818043/33602/WdtMVWYk9tM.jpg?size=604x453&quality=96&sign=27ea6c8fba5779d1a9b756626664a77a&c_uniq_tag=5j9atGZbdKa7JbQwzV74EmmBrY7lQG5AKU97SpWx-Vk&type=album",
+      "dreamTitle": "Adaptive dream",
+      "dreamCategory": "Conscious dream",
+      "dreamMood": "Made me think",
+      "dreamPlot": "Something about adaptive dream...",
+      "dreamTags": [
+        "tag",
+        "idk",
+        "okay"
+      ],
+      "email": "agaton615@gmail.com",
+      "date": {
+        "dayNumber": 22,
+        "monthNumber": 1,
+        "year": 2024,
+        "weekNumber": 4
+      },
+      "views": 5,
+      "likes": 0,
+      "likesUsersEmails": []
+    },
+    {
+      "id": "1195",
+      "dreamImageUrl": "",
+      "dreamTitle": "Breark dream",
+      "dreamCategory": "Nightmare",
+      "dreamMood": "Terrible",
+      "dreamPlot": "It will break your adaptive lol",
+      "dreamTags": [
+        "lololollololollololollololollololollololollololollololollololollololollololol",
+        "lololollololollololollololollololol"
+      ],
+      "email": "agaton615@gmail.com",
+      "date": {
+        "dayNumber": 22,
+        "monthNumber": 1,
+        "year": 2024,
+        "weekNumber": 4
+      },
+      "views": 1,
       "likes": 0,
       "likesUsersEmails": []
     }

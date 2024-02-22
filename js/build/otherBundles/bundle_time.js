@@ -19,6 +19,7 @@ class Controller {
   }
   init() {
     this._initTranslation();
+    this._initBurgerButtonListener();
     this._updateClocks();
     setInterval(this._updateClocks, 1000);
   }
@@ -26,6 +27,15 @@ class Controller {
     if (localStorage.getItem('language') === 'ru') {
       this.view.translatePage();
     }
+  }
+  _initBurgerButtonListener() {
+    document.querySelector('.body').addEventListener('click', event => {
+      if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
+        document.querySelector('#burger-content').classList.remove('not-exist');
+      } else if (!event.target.closest('.burger-content-wrapper')) {
+        document.querySelector('#burger-content').classList.add('not-exist');
+      }
+    });
   }
   _updateClocks() {
     const currentDate = new Date();
@@ -102,6 +112,7 @@ class View {
     },
     SECOND_CONTAINERS: {
       CURRENT: 'second-container-current',
+      CURRENT_SMALL: 'second-container-current-small',
       NEW_YORK: 'second-container-new-york',
       LONDON: 'second-container-london',
       TOKYO: 'second-container-tokyo',
@@ -137,6 +148,7 @@ class View {
   }
   transformCurrentClock(hours, minutes, seconds) {
     this.getSecondContainer('CURRENT').style.transform = `rotate(${6 * seconds}deg)`;
+    this.getSecondContainer('CURRENT_SMALL').style.transform = `rotate(${6 * seconds}deg)`;
     this.getMinuteContainer('CURRENT').style.transform = `rotate(${6 * minutes + 0.1 * seconds}deg)`;
     this.getHourContainer('CURRENT').style.transform = `rotate(${30 * hours + 0.5 * minutes}deg)`;
   }
@@ -300,6 +312,12 @@ class View {
       document.querySelector(`#header-link-music`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.music');
       document.querySelector(`#header-link-profile`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.profile');
       document.querySelector(`#header-link-sign-out`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.sign_out');
+      document.querySelector(`#header-link-home-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.home');
+      document.querySelector(`#header-link-time-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.time');
+      document.querySelector(`#header-link-moon-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.moon');
+      document.querySelector(`#header-link-music-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.music');
+      document.querySelector(`#header-link-profile-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.profile');
+      document.querySelector(`#header-link-sign-out-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.sign_out');
       document.querySelector(`#title`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('time.title');
       document.querySelector(`#new-york-span`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('time.new_york_span');
       document.querySelector(`#london-span`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('time.london_span');

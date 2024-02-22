@@ -19,24 +19,27 @@
         .music-player__title {
             font-size: 46px;
             margin-bottom: 20px;
+            text-align: center;
         }
 
         .music-player__track-wrapper {
+            margin: 10px 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             width: 100%;
 
             .music-player__track-span {
+                width: fit-content;
                 text-align: end;
-                width: 14%;
                 margin-right: 10px;
                 font-size: 26px;
             }
 
             .music-player__track {
                 margin: 10px 0;
-                width: 80%;
+                width: 100%;
             }
 
             audio::-webkit-media-controls-panel {

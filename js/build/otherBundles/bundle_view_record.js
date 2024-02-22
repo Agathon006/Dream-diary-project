@@ -5415,6 +5415,7 @@ class Controller {
   }
   init() {
     this._initTranslation();
+    this._initBurgerButtonListener();
     this._initDreamRecord();
     this._initLikeButtonListener();
   }
@@ -5422,6 +5423,15 @@ class Controller {
     if (localStorage.getItem('language') === 'ru') {
       this.view.translatePage();
     }
+  }
+  _initBurgerButtonListener() {
+    document.querySelector('.body').addEventListener('click', event => {
+      if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
+        document.querySelector('#burger-content').classList.remove('not-exist');
+      } else if (!event.target.closest('.burger-content-wrapper')) {
+        document.querySelector('#burger-content').classList.add('not-exist');
+      }
+    });
   }
   _initDreamRecord() {
     const recordId = localStorage.getItem('dreamRecordID'),
@@ -5818,6 +5828,12 @@ class View {
       document.querySelector(`#header-link-music`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.music');
       document.querySelector(`#header-link-profile`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.profile');
       document.querySelector(`#header-link-sign-out`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.sign_out');
+      document.querySelector(`#header-link-home-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.home');
+      document.querySelector(`#header-link-time-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.time');
+      document.querySelector(`#header-link-moon-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.moon');
+      document.querySelector(`#header-link-music-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.music');
+      document.querySelector(`#header-link-profile-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.profile');
+      document.querySelector(`#header-link-sign-out-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.sign_out');
       document.querySelector(`#return-link`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('view_record.return_link');
       document.querySelector(`#dream-author-span`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('view_record.dream_author_span');
       document.querySelector(`#footer-plot`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('footer.footer_plot');

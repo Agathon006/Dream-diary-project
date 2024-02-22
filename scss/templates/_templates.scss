@@ -206,7 +206,7 @@
     .dream-record__main-top-right-liked-this {
         color: rgb(255, 0, 217);
     }
-    
+
     .main__filter-block-span {
         color: $background_color_secondary;
     }
@@ -434,7 +434,7 @@
     .dream-record__main-top-right-liked-this {
         color: rgb(255, 0, 0);
     }
-    
+
     .main__filter-block-span {
         color: $text_color_secondary;
     }
@@ -445,10 +445,10 @@
 
     audio::-webkit-media-controls-current-time-display {
         color: #00de00;
-        text-shadow: 
-          -.5px -.5px 0 #000,
-          .5px .5px 0 #000,
-          -.5px .5px 0 #000,
-          .5px .5px 0 #000;
+        text-shadow:
+            -.5px -.5px 0 #000,
+            .5px .5px 0 #000,
+            -.5px .5px 0 #000,
+            .5px .5px 0 #000;
     }
 }

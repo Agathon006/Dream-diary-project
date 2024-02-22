@@ -19,6 +19,7 @@ class Controller {
   }
   init() {
     this._initTranslation();
+    this._initBurgerButtonListener();
     this._initNotification();
     this._initDreamSearchInputElement();
     this._initDreamSearchListener();
@@ -33,6 +34,15 @@ class Controller {
     if (localStorage.getItem('language') === 'ru') {
       this.view.translatePage();
     }
+  }
+  _initBurgerButtonListener() {
+    document.querySelector('.body').addEventListener('click', event => {
+      if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
+        document.querySelector('#burger-content').classList.remove('not-exist');
+      } else if (!event.target.closest('.burger-content-wrapper')) {
+        document.querySelector('#burger-content').classList.add('not-exist');
+      }
+    });
   }
   _initNotification() {
     var interaction = {
@@ -375,6 +385,7 @@ class Controller {
       return response.json();
     }).then(records => {
       if (!records.pages) {
+        this.view.toggleClassWaitingBackgroundOfMain();
         this.view.displayNoRecordsMessage(mainPlot);
       } else {
         async function setupPagination(mainPlot, currentPageNumber, records, view) {
@@ -1039,6 +1050,12 @@ class View {
       document.querySelector(`#header-link-music`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.music');
       document.querySelector(`#header-link-profile`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.profile');
       document.querySelector(`#header-link-sign-out`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.sign_out');
+      document.querySelector(`#header-link-home-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.home');
+      document.querySelector(`#header-link-time-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.time');
+      document.querySelector(`#header-link-moon-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.moon');
+      document.querySelector(`#header-link-music-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.music');
+      document.querySelector(`#header-link-profile-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.profile');
+      document.querySelector(`#header-link-sign-out-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.sign_out');
       document.querySelector(`#notification`).innerHTML = `
                     <p>${i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_home.notification')}<img src="../icons/like_active.svg" alt="heart"></p>
                 `;

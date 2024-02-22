@@ -5416,6 +5416,7 @@ class Controller {
   }
   init() {
     this._initTranslation();
+    this._initBurgerButtonListener();
     this._getRandomUrlButtonListener();
     this._datepickerListener();
     this._userProfileListener();
@@ -5427,6 +5428,15 @@ class Controller {
     if (localStorage.getItem('language') === 'ru') {
       this.view.translatePage();
     }
+  }
+  _initBurgerButtonListener() {
+    document.querySelector('.body').addEventListener('click', event => {
+      if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
+        document.querySelector('#burger-content').classList.remove('not-exist');
+      } else if (!event.target.closest('.burger-content-wrapper')) {
+        document.querySelector('#burger-content').classList.add('not-exist');
+      }
+    });
   }
   _getRandomUrlButtonListener() {
     const accessKey = 'LbQIwO2aXDXY-0LkU8nHbgbJvw8n6LB_16Og8cHjOeE',
@@ -5986,6 +5996,12 @@ class View {
       document.querySelector(`#header-link-music`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.music');
       document.querySelector(`#header-link-profile`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.profile');
       document.querySelector(`#header-link-sign-out`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.sign_out');
+      document.querySelector(`#header-link-home-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.home');
+      document.querySelector(`#header-link-time-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.time');
+      document.querySelector(`#header-link-moon-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.moon');
+      document.querySelector(`#header-link-music-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.music');
+      document.querySelector(`#header-link-profile-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.profile');
+      document.querySelector(`#header-link-sign-out-burger`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('registered_header.sign_out');
       document.querySelector(`#profile-nickname-span`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('user.profile_nickname_span');
       document.querySelector(`#nickname-input`).placeholder = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('user.profile_nickname_placeholder');
       document.querySelector(`#password-span`).textContent = i18next__WEBPACK_IMPORTED_MODULE_0__["default"].t('user.profile_password_span');

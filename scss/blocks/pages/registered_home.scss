@@ -100,6 +100,10 @@
 
                     .dream-record__visual {
                         margin-right: 10px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        gap: 20px;
 
                         .dream-record__visual-primary {
                             width: 148px;
@@ -145,6 +149,9 @@
                         flex-direction: column;
                         justify-content: space-between;
                         width: 85%;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
 
                         .dream-record__main-top {
                             display: flex;
@@ -196,19 +203,18 @@
                                 .dream-record__main-middle-tags-button {}
                             }
 
-                            .dream-record__main-middle-plot {
-                                white-space: nowrap;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                            }
+                            .dream-record__main-middle-plot {}
                         }
 
                         .dream-record__main-bottom {
                             margin-top: 10px;
                             display: flex;
                             justify-content: space-between;
+                            flex-wrap: wrap;
+                            gap: 5px;
 
                             .dream-record__main-bottom-user {
+                                align-items: center;
                                 padding: 0 10px 0 0;
                                 display: flex;
                                 font-size: 40px;
@@ -314,12 +320,14 @@
                     .user-search__main {
                         margin-top: 10px;
                         display: flex;
-                        justify-content: space-between;
+                        justify-content: center;
                         align-items: center;
+                        flex-wrap: wrap;
 
                         .user-search__main-left {
                             display: flex;
                             align-items: center;
+                            margin-right: 20px;
 
                             .user-search__main-left-avatar {
                                 width: 64px;
@@ -352,13 +360,172 @@
                     }
                 }
 
-                .main__filter-add-link {
-                    font-size: 40px;
-                    padding: 5px 20px;
+                .main__filter-add-link-wrapper {
                     border-radius: 50px;
+                    text-align: center;
+                    padding: 0;
 
-                    &:hover {
-                        color: #dedede;
+                    .main__filter-add-link {
+                        font-size: 32px;
+                        background-color: transparent;
+                        padding: 5px 20px;
+
+                        &:hover {
+                            color: #dedede;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+
+    .main {
+
+        .container {
+
+            .main-wrapper {
+
+                .main__filter {
+
+                    .main__filter-block {
+
+                        .main__filter-block-main {
+
+                            .main__filter-block-input {
+                                direction: rtl;
+                            }
+                        }
+                    }
+
+                    .main__filter-add-link-wrapper {
+
+                        .main__filter-add-link {
+                            padding: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+
+    .main {
+
+        .container {
+
+            .main-wrapper {
+                flex-direction: column-reverse;
+                gap: 20px;
+
+                .main__plot {
+                    width: 100%;
+                }
+
+                .main__filter {
+                    width: 100%;
+                    position: static;
+
+                    .main__filter-block {
+
+                        .main__filter-block-main {
+
+                            .main__filter-block-input {
+                                direction: ltr;
+                            }
+                        }
+                    }
+
+                    .main__filter-add-link-wrapper {
+
+                        .main__filter-add-link {
+                            padding: 5px 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 425px) {
+
+    .main {
+
+        .container {
+
+            .main-wrapper {
+
+                .main__filter {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    .main__filter-block {
+                        width: 90%;
+                    }
+                }
+
+                .main__plot {
+
+                    .dream-record {
+                        margin: 20px 0;
+                        padding: 5px;
+                        flex-direction: column;
+                        gap: 10px;
+                        align-items: center;
+
+                        .dream-record__visual {
+                            width: 100%;
+                            margin-right: 0;
+                            align-items: center;
+
+                            .dream-record__visual-secondary {
+                                gap: 50px;
+                            }
+                        }
+
+                        .dream-record__main {
+                            width: 95%;
+
+                            .dream-record__main-top {
+                                flex-direction: column;
+                                gap: 10px;
+                                align-items: center;
+
+                                .dream-record__main-top-left {
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                }
+
+                                .dream-record__main-top-right {
+                                    align-items: center;
+                                }
+                            }
+
+                            .dream-record__main-middle {
+
+                                .dream-record__main-middle-tags {
+                                    display: flex;
+                                    justify-content: center;
+                                    flex-wrap: wrap;
+                                }
+                            }
+
+                            .dream-record__main-bottom {
+                                justify-content: center;
+                                flex-wrap: wrap;
+
+                                .dream-record__main-bottom-user {
+                                    font-size: 32px;
+                                }
+                            }
+                        }
                     }
                 }
             }

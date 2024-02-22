@@ -14,7 +14,7 @@
     <script src="../js/build/otherBundles/bundle_theme.js" defer></script>
 </head>
 
-<body>
+<body class="body">
     <header class="header">
         <div class="container">
             <nav class="header__navigation">
@@ -54,7 +54,7 @@
                         <div class="themes-switcher-container">
                             <img src="" alt="dark-theme-icon" class="themes-switcher-icon" id="theme-image">
                             <label class="themes-switcher">
-                                <input type="checkbox" checked id="theme-checkbox">
+                                <input type="checkbox" checked class="theme-checkbox" id="theme-checkbox">
                                 <span class="themes-switcher__slider"></span>
                             </label>
                         </div>
@@ -65,9 +65,59 @@
                         </div>
                     </div>
                 </div>
+                <div class="burger-menu">
+                    <button class="burger-menu__button" id="burger-button">
+                        <div class="burger-menu__button-element"></div>
+                        <div class="burger-menu__button-element"></div>
+                        <div class="burger-menu__button-element"></div>
+                    </button>
+                </div>
             </nav>
         </div>
     </header>
+    <div class="burger-content-wrapper not-exist" id="burger-content">
+        <div class="burger-content__top">
+            <div class="burger-content__top-account" id="header-navigation-end-account">
+                <a class="burger-content__top-account-link" href="./user.html"
+                    id="header-link-profile-burger">Profile</a>
+                <div class="burger-content__top-account-separator"></div>
+                <a class="burger-content__top-account-link" href="./sign_in.html" id="header-link-sign-out-burger">Sign out</a>
+            </div>
+            <div class="burger-content__top-settings">
+                <div class="themes-switcher-container">
+                    <img src="../icons/header/theme-burger.svg" alt="dark-theme-icon" class="themes-switcher-icon"
+                        id="theme-image-burger">
+                    <label class="themes-switcher">
+                        <input type="checkbox" checked class="theme-checkbox" id="theme-checkbox">
+                        <span class="themes-switcher__slider"></span>
+                    </label>
+                </div>
+                <div class="language-container">
+                    <button class="language-button underlined">en</button>
+                    <span class="language-separator">/</span>
+                    <button class="language-button">ru</button>
+                </div>
+            </div>
+        </div>
+        <ul class="burger-content__navigation-list">
+            <li class="burger-content__navigation-list-element">
+                <a class="burger-content__navigation-list-element-link underlined" href="#"
+                    id="header-link-home-burger">Home</a>
+            </li>
+            <li class="burger-content__navigation-list-element">
+                <a class="burger-content__navigation-list-element-link" href="./time.html"
+                    id="header-link-time-burger">World time</a>
+            </li>
+            <li class="burger-content__navigation-list-element">
+                <a class="burger-content__navigation-list-element-link" href="./moon.html"
+                    id="header-link-moon-burger">Moon phases</a>
+            </li>
+            <li class="burger-content__navigation-list-element">
+                <a class="burger-content__navigation-list-element-link" href="./music.html"
+                    id="header-link-music-burger">Music player</a>
+            </li>
+        </ul>
+    </div>
     <main class="main waiting-background">
         <div class="notification" id="notification">
             <p>Good night<img src="../icons/like_active.svg" alt="heart"></p>
@@ -127,7 +177,10 @@
                         </div>
                     </div>
                     <div id="user-search-div"></div>
-                    <a href="./make_record.html" class="main__filter-add-link" id="share-dream-link">Share a dream</a>
+                    <button class="main__filter-add-link-wrapper">
+                        <a href="./make_record.html" class="main__filter-add-link" id="share-dream-link">Share a
+                            dream</a>
+                    </button>
                 </div>
             </div>
         </div>

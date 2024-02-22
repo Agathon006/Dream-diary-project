@@ -333,6 +333,11 @@ button {
   cursor: pointer;
 }
 
+@media (max-width: 425px) {
+  .container {
+    max-width: 95%;
+  }
+}
 .primary-style {
   background-color: #232e2f;
   color: #9f9f9f;
@@ -1156,6 +1161,170 @@ button {
 .header .container .header__navigation .header__navigation-end .header__navigation-end-settings .language-container .language-button:hover {
   color: #dedede;
 }
+.header .container .header__navigation .burger-menu {
+  display: none;
+}
+.header .container .header__navigation .burger-menu .burger-menu__button {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 0;
+}
+.header .container .header__navigation .burger-menu .burger-menu__button .burger-menu__button-element {
+  height: 5px;
+  width: 45px;
+}
+
+.body {
+  position: relative;
+}
+.body .burger-content-wrapper {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  right: 0;
+  min-height: 100vh;
+  height: 100%;
+  width: 40%;
+  background-color: black;
+  padding: 20px;
+}
+.body .burger-content-wrapper .burger-content__top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.body .burger-content-wrapper .burger-content__top .burger-content__top-account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.body .burger-content-wrapper .burger-content__top .burger-content__top-account .burger-content__top-account-link {
+  color: white;
+}
+.body .burger-content-wrapper .burger-content__top .burger-content__top-account .burger-content__top-account-separator {
+  height: 2px;
+  width: 90%;
+  background-color: white;
+  margin: 10px 0;
+}
+.body .burger-content-wrapper .burger-content__top .burger-content__top-settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.body .burger-content-wrapper .burger-content__top .burger-content__top-settings .themes-switcher-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 25px;
+  padding: 5px;
+  transition: 0.5s;
+  border: 1px white solid;
+}
+.body .burger-content-wrapper .burger-content__top .burger-content__top-settings .themes-switcher-container .themes-switcher-icon {
+  width: 24px;
+}
+.body .burger-content-wrapper .burger-content__top .burger-content__top-settings .themes-switcher-container .themes-switcher {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+  transition: 0.5s;
+}
+.body .burger-content-wrapper .burger-content__top .burger-content__top-settings .themes-switcher-container .themes-switcher input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.body .burger-content-wrapper .burger-content__top .burger-content__top-settings .themes-switcher-container .themes-switcher input:checked + .themes-switcher__slider {
+  background-color: white;
+}
+.body .burger-content-wrapper .burger-content__top .burger-content__top-settings .themes-switcher-container .themes-switcher input:checked + .themes-switcher__slider:before {
+  transform: translateX(13px);
+  background-color: black;
+}
+.body .burger-content-wrapper .burger-content__top .burger-content__top-settings .themes-switcher-container .themes-switcher__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.4s;
+  border: 1px white solid;
+  border-radius: 40%;
+}
+.body .burger-content-wrapper .burger-content__top .burger-content__top-settings .themes-switcher-container .themes-switcher__slider:before {
+  top: 1px;
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 40%;
+}
+.body .burger-content-wrapper .burger-content__top .burger-content__top-settings .language-container .language-button {
+  background-color: transparent;
+  color: white;
+}
+.body .burger-content-wrapper .burger-content__top .burger-content__top-settings .language-container .language-separator {
+  font-size: 24px;
+  color: white;
+}
+.body .burger-content-wrapper .burger-content__navigation-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.body .burger-content-wrapper .burger-content__navigation-list .burger-content__navigation-list-element {
+  margin: 20px 0;
+}
+.body .burger-content-wrapper .burger-content__navigation-list .burger-content__navigation-list-element-link {
+  color: white;
+}
+
+@media (max-width: 1024px) {
+  .header .container .header__navigation .header__navigation-list {
+    gap: 20px;
+  }
+  .header .container .header__navigation .header__navigation-list .header__navigation-list-element {
+    width: -moz-min-content;
+    width: min-content;
+  }
+}
+@media (max-width: 768px) {
+  .header .container .header__navigation .header__navigation-list {
+    display: none;
+  }
+  .header .container .header__navigation .header__navigation-end {
+    display: none;
+  }
+  .header .container .header__navigation .burger-menu {
+    display: block;
+  }
+}
+@media (max-width: 425px) {
+  .body .burger-content-wrapper {
+    width: 60%;
+  }
+  .body .burger-content-wrapper .burger-content__top {
+    justify-content: center;
+  }
+  .body .burger-content-wrapper .burger-content__navigation-list .burger-content__navigation-list-element {
+    margin: 10px 0;
+    text-align: center;
+  }
+}
 .primary-style {
   background-color: #232e2f;
   color: #9f9f9f;
@@ -1532,6 +1701,27 @@ button {
   width: 48px;
 }
 
+@media (max-width: 425px) {
+  .footer .container {
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .footer .container .footer__social {
+    display: flex;
+  }
+  .footer .container .footer__social .footer__social-link {
+    display: block;
+    margin: 10px;
+  }
+  .footer .container .footer__social .footer__social-link .footer__social-link-image {
+    width: 48px;
+  }
+}
 .main .container .wrapper {
   padding: 40px 0;
 }
@@ -1612,4 +1802,24 @@ button {
 }
 .main .container .wrapper .moon-phases-container .moon-phase .moon-phase__span {
   margin-top: 5px;
+  text-align: center;
+}
+
+@media (max-width: 425px) {
+  .main .container .wrapper .forecast-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .main .container .wrapper .forecast-container .forecast-day {
+    width: 90%;
+  }
+  .main .container .wrapper .moon-phases-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .main .container .wrapper .moon-phases-container .moon-phase {
+    width: 90%;
+  }
 }/*# sourceMappingURL=moon.css.map */

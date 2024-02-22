@@ -27,6 +27,7 @@ export default class View {
         },
         SECOND_CONTAINERS: {
             CURRENT: 'second-container-current',
+            CURRENT_SMALL: 'second-container-current-small',
             NEW_YORK: 'second-container-new-york',
             LONDON: 'second-container-london',
             TOKYO: 'second-container-tokyo',
@@ -64,6 +65,7 @@ export default class View {
 
     transformCurrentClock(hours, minutes, seconds) {
         this.getSecondContainer('CURRENT').style.transform = `rotate(${6 * seconds}deg)`;
+        this.getSecondContainer('CURRENT_SMALL').style.transform = `rotate(${6 * seconds}deg)`;
         this.getMinuteContainer('CURRENT').style.transform = `rotate(${6 * minutes + 0.1 * seconds}deg)`;
         this.getHourContainer('CURRENT').style.transform = `rotate(${30 * hours + 0.5 * minutes}deg)`;
     }
@@ -249,6 +251,13 @@ export default class View {
                 document.querySelector(`#header-link-music`).textContent = i18next.t('registered_header.music');
                 document.querySelector(`#header-link-profile`).textContent = i18next.t('registered_header.profile');
                 document.querySelector(`#header-link-sign-out`).textContent = i18next.t('registered_header.sign_out');
+
+                document.querySelector(`#header-link-home-burger`).textContent = i18next.t('registered_header.home');
+                document.querySelector(`#header-link-time-burger`).textContent = i18next.t('registered_header.time');
+                document.querySelector(`#header-link-moon-burger`).textContent = i18next.t('registered_header.moon');
+                document.querySelector(`#header-link-music-burger`).textContent = i18next.t('registered_header.music');
+                document.querySelector(`#header-link-profile-burger`).textContent = i18next.t('registered_header.profile');
+                document.querySelector(`#header-link-sign-out-burger`).textContent = i18next.t('registered_header.sign_out');
 
                 document.querySelector(`#title`).textContent = i18next.t('time.title');
                 document.querySelector(`#new-york-span`).textContent = i18next.t('time.new_york_span');
