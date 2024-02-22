@@ -160,3 +160,47 @@
         }
     }
 }
+
+@media (max-width: 425px) {
+
+    .main {
+
+        .container {
+
+            .profile-wrapper {
+
+                .profile-main {
+
+                    .profile-main__plot {
+                        margin-left: 0;
+                    }
+
+                    .profile-main__password {
+
+                        .profile-password-input {
+                            max-width: 300px;
+                            margin: 20px 0;
+                        }
+                    }
+                }
+
+                .profile-secondary {
+
+                    .wrong-span {
+                        margin-left: 0;
+                    }
+                }
+
+                .profile-input {
+                    max-width: 300px;
+                    margin: 20px 0;
+                }
+
+                .profile-span {
+                    margin: 20px 0 0 0;
+                }
+            }
+        }
+    }
+
+}

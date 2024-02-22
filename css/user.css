@@ -1832,4 +1832,23 @@ button {
   .main .container .profile-wrapper .profile-main {
     flex-wrap: wrap;
   }
+}
+@media (max-width: 425px) {
+  .main .container .profile-wrapper .profile-main .profile-main__plot {
+    margin-left: 0;
+  }
+  .main .container .profile-wrapper .profile-main .profile-main__password .profile-password-input {
+    max-width: 300px;
+    margin: 20px 0;
+  }
+  .main .container .profile-wrapper .profile-secondary .wrong-span {
+    margin-left: 0;
+  }
+  .main .container .profile-wrapper .profile-input {
+    max-width: 300px;
+    margin: 20px 0;
+  }
+  .main .container .profile-wrapper .profile-span {
+    margin: 20px 0 0 0;
+  }
 }/*# sourceMappingURL=user.css.map */
