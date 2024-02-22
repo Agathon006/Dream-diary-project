@@ -1728,6 +1728,11 @@ button {
   justify-content: space-between;
 }
 .main .container .record-form .badge {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
   margin: 0 10px;
 }
 .main .container .record-form .wrong-span {

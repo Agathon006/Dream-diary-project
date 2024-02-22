@@ -214,6 +214,7 @@
                             gap: 5px;
 
                             .dream-record__main-bottom-user {
+                                align-items: center;
                                 padding: 0 10px 0 0;
                                 display: flex;
                                 font-size: 40px;
@@ -403,6 +404,127 @@
 
                         .main__filter-add-link {
                             padding: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+
+    .main {
+
+        .container {
+
+            .main-wrapper {
+                flex-direction: column-reverse;
+                gap: 20px;
+
+                .main__plot {
+                    width: 100%;
+                }
+
+                .main__filter {
+                    width: 100%;
+                    position: static;
+
+                    .main__filter-block {
+
+                        .main__filter-block-main {
+
+                            .main__filter-block-input {
+                                direction: ltr;
+                            }
+                        }
+                    }
+
+                    .main__filter-add-link-wrapper {
+
+                        .main__filter-add-link {
+                            padding: 5px 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 425px) {
+
+    .main {
+
+        .container {
+
+            .main-wrapper {
+
+                .main__filter {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    .main__filter-block {
+                        width: 90%;
+                    }
+                }
+
+                .main__plot {
+
+                    .dream-record {
+                        margin: 20px 0;
+                        padding: 5px;
+                        flex-direction: column;
+                        gap: 10px;
+                        align-items: center;
+
+                        .dream-record__visual {
+                            width: 100%;
+                            margin-right: 0;
+                            align-items: center;
+
+                            .dream-record__visual-secondary {
+                                gap: 50px;
+                            }
+                        }
+
+                        .dream-record__main {
+                            width: 95%;
+
+                            .dream-record__main-top {
+                                flex-direction: column;
+                                gap: 10px;
+                                align-items: center;
+
+                                .dream-record__main-top-left {
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                }
+
+                                .dream-record__main-top-right {
+                                    align-items: center;
+                                }
+                            }
+
+                            .dream-record__main-middle {
+
+                                .dream-record__main-middle-tags {
+                                    display: flex;
+                                    justify-content: center;
+                                    flex-wrap: wrap;
+                                }
+                            }
+
+                            .dream-record__main-bottom {
+                                justify-content: center;
+                                flex-wrap: wrap;
+
+                                .dream-record__main-bottom-user {
+                                    font-size: 32px;
+                                }
+                            }
                         }
                     }
                 }

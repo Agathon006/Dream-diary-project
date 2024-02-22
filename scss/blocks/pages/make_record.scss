@@ -16,6 +16,11 @@
             justify-content: space-between;
 
             .badge {
+                width: 100%;
+                overflow: hidden;
+                white-space:nowrap;
+                text-overflow:ellipsis;
+                display:inline-block;
                 margin: 0 10px;
             }
 
