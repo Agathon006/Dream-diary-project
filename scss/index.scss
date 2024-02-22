@@ -91,7 +91,7 @@
 
                 .do-not-have-dreams-block__image {
                     width: 35%;
-                    object-fit: cover; 
+                    object-fit: cover;
                 }
             }
         }
@@ -104,6 +104,46 @@
 
             .subtitle {
                 text-align: center;
+            }
+        }
+    }
+}
+
+@media (max-width: 425px) {
+
+    .body {
+
+        .main {
+
+            .container {
+
+                .reasons-block {
+
+                    .reasons-block__sections {
+                        flex-direction: column;
+                        gap: 20px;
+
+                        .reasons-block__sections-section {
+                            width: 100%;
+                        }
+                    }
+                }
+
+                .do-not-have-dreams-block {
+
+                    .do-not-have-dreams-block-wrapper {
+                        flex-direction: column;
+                        gap: 20px;
+
+                        .do-not-have-dreams-block__sections {
+                            width: 100%;
+                        }
+
+                        .do-not-have-dreams-block__image {
+                            width: 100%;
+                        }
+                    }
+                }
             }
         }
     }
