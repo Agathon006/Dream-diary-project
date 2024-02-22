@@ -1342,13 +1342,12 @@ button {
   .body .burger-content-wrapper {
     width: 60%;
   }
-}
-@media (max-width: 375px) {
   .body .burger-content-wrapper .burger-content__top {
     justify-content: center;
   }
   .body .burger-content-wrapper .burger-content__navigation-list .burger-content__navigation-list-element {
     margin: 10px 0;
+    text-align: center;
   }
 }
 .primary-style {
@@ -1774,6 +1773,7 @@ button {
   font-size: 40px;
   padding: 5px 20px;
   border-radius: 50px;
+  text-align: center;
 }
 .main .container .home-button:hover {
   color: #dedede;
@@ -1831,6 +1831,9 @@ button {
 }
 
 @media (max-width: 425px) {
+  .body .main .container .main-title {
+    font-size: 64px;
+  }
   .body .main .container .reasons-block .reasons-block__sections {
     flex-direction: column;
     gap: 20px;
@@ -1841,9 +1844,16 @@ button {
   .body .main .container .do-not-have-dreams-block .do-not-have-dreams-block-wrapper {
     flex-direction: column;
     gap: 20px;
+    text-align: center;
   }
   .body .main .container .do-not-have-dreams-block .do-not-have-dreams-block-wrapper .do-not-have-dreams-block__sections {
     width: 100%;
+  }
+  .body .main .container .do-not-have-dreams-block .do-not-have-dreams-block-wrapper .do-not-have-dreams-block__sections .do-not-have-dreams-block__sections-section {
+    padding: 0 3px;
+  }
+  .body .main .container .do-not-have-dreams-block .do-not-have-dreams-block-wrapper .do-not-have-dreams-block__sections .home-button {
+    font-size: 36px;
   }
   .body .main .container .do-not-have-dreams-block .do-not-have-dreams-block-wrapper .do-not-have-dreams-block__image {
     width: 100%;

@@ -1317,13 +1317,12 @@ button {
   .body .burger-content-wrapper {
     width: 60%;
   }
-}
-@media (max-width: 375px) {
   .body .burger-content-wrapper .burger-content__top {
     justify-content: center;
   }
   .body .burger-content-wrapper .burger-content__navigation-list .burger-content__navigation-list-element {
     margin: 10px 0;
+    text-align: center;
   }
 }
 .primary-style {

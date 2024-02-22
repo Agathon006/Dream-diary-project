@@ -1342,13 +1342,12 @@ button {
   .body .burger-content-wrapper {
     width: 60%;
   }
-}
-@media (max-width: 375px) {
   .body .burger-content-wrapper .burger-content__top {
     justify-content: center;
   }
   .body .burger-content-wrapper .burger-content__navigation-list .burger-content__navigation-list-element {
     margin: 10px 0;
+    text-align: center;
   }
 }
 .primary-style {
@@ -1756,7 +1755,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 .main .form-wrapper .register-title {
   margin-bottom: 20px;
@@ -1882,4 +1881,22 @@ button {
   font-family: "Courier New", Courier, monospace;
   font-size: 24px;
   font-weight: 900;
+}
+
+@media (max-width: 425px) {
+  .main .form-wrapper .register-title {
+    text-align: center;
+  }
+  .main .form-wrapper .register-form {
+    width: 80%;
+  }
+  .main .form-wrapper .register-form .register-form__submit {
+    font-size: 20px;
+  }
+  .main .form-wrapper .code-form {
+    width: 80%;
+  }
+  .main .form-wrapper .dev-message {
+    width: 80%;
+  }
 }/*# sourceMappingURL=register.css.map */

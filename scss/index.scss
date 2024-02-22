@@ -39,6 +39,7 @@
             font-size: 40px;
             padding: 5px 20px;
             border-radius: 50px;
+            text-align: center;
 
             &:hover {
                 color: #dedede;
@@ -117,6 +118,10 @@
 
             .container {
 
+                .main-title {
+                    font-size: 64px;
+                }
+
                 .reasons-block {
 
                     .reasons-block__sections {
@@ -134,9 +139,18 @@
                     .do-not-have-dreams-block-wrapper {
                         flex-direction: column;
                         gap: 20px;
+                        text-align: center;
 
                         .do-not-have-dreams-block__sections {
                             width: 100%;
+
+                            .do-not-have-dreams-block__sections-section {
+                                padding: 0 3px;
+                            }
+
+                            .home-button {
+                                font-size: 36px;
+                            }
                         }
 
                         .do-not-have-dreams-block__image {
