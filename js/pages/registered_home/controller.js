@@ -83,38 +83,56 @@ export default class Controller {
     }
 
     _initDreamSearchInputElement() {
-        const dreamSearchInput = this.view.getDreamSearchInputElement();
-        dreamSearchInput.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
+        const dreamSearchInput = this.view.getDreamSearchInputElement(),
+            dreamSearchButton = this.view.getDreamSearchButtonElement();
 
-                this.view.clearMainPlotHtml();
+        this.model.getPromisegetDreamRecords()
+            .then(response => response.json())
+            .then(data => {
+                const possibleSuggestions = data.map(record => record.dreamTitle);
+                let counter = 0;
 
-                const categorySelect = this.view.getDreamCategorySelectElement(),
-                    moodSelect = this.view.getDreamMoodSelectElement();
+                dreamSearchInput.addEventListener('keydown', (event) => {
 
-                const userSearchDiv = this.view.getUserSearchDivElement();
-                try {
-                    const userNickname = userSearchDiv.children[0].children[1].children[0].children[1].innerText;
-                    this.model.getPromiseGetUserByNickname(userNickname)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.length) {
-                                this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[moodSelect.selectedIndex].value,
-                                    moodSelect.options[moodSelect.selectedIndex].value, data[0].email);
-                            } else {
-                                console.log('User not found');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                }
-                catch {
-                    this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[moodSelect.selectedIndex].value,
-                        moodSelect.options[moodSelect.selectedIndex].value);
-                }
-            }
-        });
+                    let searchInputValue = dreamSearchInput.value.toLowerCase(),
+                        autoSuggestions = this.view.getDreamSearchAutocompleteElement();
+
+                    autoSuggestions.innerHTML = "",
+                        counter = 0;
+
+                    for (let i = 0; i < possibleSuggestions.length; i++) {
+                        const suggestion = possibleSuggestions[i];
+                        if (suggestion.toLowerCase().includes(searchInputValue) && searchInputValue.length > 0) {
+                            let suggestionElement = document.createElement("a");
+                            suggestionElement.textContent = suggestion;
+                            suggestionElement.href = "#";
+                            suggestionElement.onclick = function () {
+                                dreamSearchInput.value = suggestion;
+                                autoSuggestions.style.display = "none";
+
+                                dreamSearchButton.click();
+                            };
+
+                            autoSuggestions.appendChild(suggestionElement);
+                            counter++;
+                        }
+                        if (counter === 3) {
+                            break;
+                        }
+                    }
+
+                    if (searchInputValue.length > 0) {
+                        autoSuggestions.style.display = "block";
+                    } else {
+                        autoSuggestions.style.display = "none";
+                    }
+
+                    if (event.key === 'Enter') {
+                        dreamSearchButton.click();
+                    }
+                });
+            })
+            .catch(error => console.error('Error:', error));
     }
 
     _initDreamSearchListener() {

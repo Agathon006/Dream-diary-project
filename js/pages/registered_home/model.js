@@ -112,6 +112,10 @@ export default class Model {
         return fetch(`http://localhost:3000/users?nickname=${nickanme}`)
     }
 
+    getPromisegetDreamRecords() {
+        return fetch(`http://localhost:3000/records`)
+    }
+
     whichDreamCategoryIcon(categoryName) {
 
         switch (categoryName) {

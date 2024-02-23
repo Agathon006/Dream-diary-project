@@ -12,6 +12,7 @@ export default class View {
         },
         FILTER: {
             DREAM_SEARCH_INPUT: 'dream-search-input',
+            DREAM_SEARCH_AUTOCOMPLETE: 'auto-suggestions',
             DREAM_SEARCH_BUTTON: 'dream-search-button',
             DREAM_CATEGORY_SELECT: 'dream-category-select',
             DREAM_CATEGORY_ICON: 'dream-category-icon',
@@ -29,6 +30,10 @@ export default class View {
 
     getDreamSearchInputElement() {
         return document.querySelector(`#${View.ID.FILTER.DREAM_SEARCH_INPUT}`);
+    }
+
+    getDreamSearchAutocompleteElement() {
+        return document.querySelector(`#${View.ID.FILTER.DREAM_SEARCH_AUTOCOMPLETE}`);
     }
 
     getDreamSearchButtonElement() {
