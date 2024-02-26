@@ -5424,11 +5424,21 @@ class Controller {
     this._passwordCheckBoxListener();
     this._initFormListener();
   }
+
+  /**
+  Initializes the translation based on the user's selected language.
+  Calls the view's translatePage method if language is set to 'ru'.
+  @function _initTranslation */
   _initTranslation() {
     if (localStorage.getItem('language') === 'ru') {
       this.view.translatePage();
     }
   }
+
+  /**
+  Initializes the listener for the burger button.
+  Toggles the visibility of the burger content based on user interactions.
+  @function _initBurgerButtonListener */
   _initBurgerButtonListener() {
     document.querySelector('.body').addEventListener('click', event => {
       if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -5438,6 +5448,10 @@ class Controller {
       }
     });
   }
+
+  /**
+  Google sign in listener function.
+  This function listens for credential response from Google sign in. */
   _googleSignInListener() {
     window.handleCredentialResponse = response => {
       // Under development (needed node js)
@@ -5460,6 +5474,10 @@ class Controller {
       }
     };
   }
+
+  /**
+  Listen for changes on the password check box and toggle the password input type accordingly.
+  */
   _passwordCheckBoxListener() {
     const passwordCheckBox = this.view.getPassworCheckBoxInputElement();
     passwordCheckBox.addEventListener('change', () => {
@@ -5471,6 +5489,9 @@ class Controller {
       }
     });
   }
+
+  /**
+  Initializes the form listener for the registration form. */
   _initFormListener() {
     const form = this.view.getRegistrerFormElement(),
       submitButton = this.view.getSubmitInputElement();
@@ -5507,6 +5528,10 @@ class Controller {
       });
     });
   }
+
+  /**
+  Checks if form validation is okay.
+  @returns {boolean} Returns true if form validation is okay, false otherwise. */
   _isFormValidationOkay() {
     const form = this.view.getRegistrerFormElement(),
       nicknameInput = this.view.getNicknameInputElement(),
@@ -5544,6 +5569,10 @@ class Controller {
     }
     return isValidationOkay;
   }
+
+  /**
+  Checks if the provided nickname already exists in the database.
+  @returns {Promise<boolean>} A promise that resolves to a boolean indicating if the nickname exists or not. */
   _getPromiseIsNicknameExist() {
     const form = this.view.getRegistrerFormElement(),
       nicknameInput = this.view.getNicknameInputElement();
@@ -5571,6 +5600,10 @@ class Controller {
       return false;
     });
   }
+
+  /**
+  Checks if the provided email already exists in the database.
+  @returns {Promise<boolean>} A promise that resolves to a boolean indicating if the email exists or not. */
   _getPromiseIsEmailExist() {
     const form = this.view.getRegistrerFormElement(),
       emailInput = this.view.getEmailInputElement();
@@ -5598,6 +5631,11 @@ class Controller {
       return false;
     });
   }
+
+  /**
+  Initializes event listeners for a verification code form
+  @param {object} formInfo - Information about the form
+  @param {Element} submitButton - The submit button element */
   _initCodeFormListener(formInfo, submitButton) {
     const form = this.view.getCodeFormElement(),
       numberInputs = this.view.getCodeFormNumberInputs(),
@@ -5643,6 +5681,13 @@ class Controller {
       });
     });
   }
+
+  /**
+  Checks if the entered verification code in the number inputs matches the expected verification code
+  @param {NodeList} numberInputs - List of input elements for the verification code
+  @param {string} verificationCode - Expected verification code to match against
+  @param {Element} form - The form element containing the number inputs
+  @returns {boolean} - Returns true if verification code is correct, false otherwise */
   _isVerificationCodeCorrect(numberInputs, verificationCode, form) {
     numberInputs.forEach((input, index) => {
       this.view.removeClassWrongInput(form);
@@ -5679,21 +5724,50 @@ __webpack_require__.r(__webpack_exports__);
  * @module js/pages/register/model
  */
 class Model {
+  /**
+  Validates if a nickname is okay based on specific criteria
+  @param {string} nicknameInput - The nickname to be validated
+  @return {boolean} - True if the nickname matches the criteria, otherwise false */
   isNicknameOkay(nicknameInput) {
     return nicknameInput.match(/^[a-zA-Z][a-zA-Z0-9_]{4,14}$/);
   }
+
+  /**
+  Validates if an email is okay based on specific criteria
+  @param {string} emailInput - The email to be validated
+  @return {boolean} - True if the email matches the criteria, otherwise false */
   isEmailOkay(emailInput) {
     return emailInput.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/);
   }
+
+  /**
+  Validates if a password is okay based on specific criteria
+  @param {string} passwordInput - The password to be validated
+  @return {boolean} - True if the password matches the criteria, otherwise false */
   isPasswordOkay(passwordInput) {
     return passwordInput.match(/^(?=.*[a-z])(?=.*[A-Z]).{6,200}$/);
   }
+
+  /**
+  Checks if a nickname exists in the database
+  @param {string} nickname - The nickname to check in the database
+  @return {Promise} - A Promise object with the result of the database query */
   isNicknameInDb(nickname) {
     return fetch(`http://localhost:3000/users?nickname=${nickname}`);
   }
+
+  /**
+  Checks if an email exists in the database
+  @param {string} email - The email to check in the database
+  @return {Promise} - A Promise object with the result of the database query */
   isEmailInDb(email) {
     return fetch(`http://localhost:3000/users?email=${email}`);
   }
+
+  /**
+  Generates a random code of a specified length
+  @param {number} length - The length of the random code to generate
+  @return {string} - The randomly generated code */
   generateRandomCode(length) {
     let result = '';
     const characters = '0123456789';
@@ -5703,6 +5777,10 @@ class Model {
     }
     return result;
   }
+
+  /**
+  Validates if the input value is a number and adjusts it accordingly.
+  @param {object} input - The input element to be validated. */
   passIfNumber(input) {
     if (input.value.length === 1) {
       if (!input.value.match(/^[0-9]$/)) {
@@ -5718,6 +5796,11 @@ class Model {
       input.value = '';
     }
   }
+
+  /**
+  Registers a new user by sending a POST request to the specified URL.
+  @param {object} data - The data to be sent in the request body.
+  @returns {Promise} - A Promise containing the response from the server. */
   registerNewUser(data) {
     return fetch('http://localhost:3000/users', {
       method: 'POST',
@@ -5727,6 +5810,11 @@ class Model {
       body: data
     });
   }
+
+  /**
+  Creates a JSON Web Token using the provided user data.
+  @param {Object} userData - The data of the user to include in the JWT payload.
+  */
   createJwt(userData) {
     const jwt = __webpack_require__(/*! jsonwebtoken */ "./node_modules/jsonwebtoken/index.js");
     const payload = userData;
@@ -5791,57 +5879,125 @@ class View {
       HIDDEN: 'hidden'
     }
   };
+
+  /**
+  Returns the register form element.
+  @returns {HTMLElement} The register form element. */
   getRegistrerFormElement() {
     return document.querySelector(`#${View.ID.REGISTER_FORM.FORM}`);
   }
+
+  /**
+  Returns the nickname input element.
+  @returns {HTMLElement} The nickname input element. */
   getNicknameInputElement() {
     return document.querySelector(`#${View.ID.REGISTER_FORM.NICKNAME_INPUT}`);
   }
+
+  /**
+  Returns the email input element.
+  @returns {HTMLElement} The email input element. */
   getEmailInputElement() {
     return document.querySelector(`#${View.ID.REGISTER_FORM.EMAIL_INPUT}`);
   }
+
+  /**
+  Returns the password input element.
+  @returns {HTMLElement} The password input element. */
   getPasswordInputElement() {
     return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_INPUT}`);
   }
+
+  /**
+  Returns the password checkbox input element.
+  @returns {HTMLElement} The password checkbox input element. */
   getPassworCheckBoxInputElement() {
     return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_CHECKBOX_INPUT}`);
   }
+
+  /**
+  Returns the submit input element.
+  @returns {HTMLElement} The submit input element. */
   getSubmitInputElement() {
     return document.querySelector(`#${View.ID.REGISTER_FORM.SUBMIT_INPUT}`);
   }
+
+  /**
+  Get the form element for the code.
+  @returns {Element} The form element for the code. */
   getCodeFormElement() {
     return document.querySelector(`#${View.ID.CODE_FORM.FORM}`);
   }
+
+  /**
+  Get all number input elements in the code form.
+  @returns {NodeList} All number input elements in the code form. */
   getCodeFormNumberInputs() {
     return document.querySelectorAll(`.${View.JS_CLASSES.CODE_FORM.NUMBER}`);
   }
+
+  /**
+  Get the development message element.
+  @returns {Element} The development message element. */
   getDevMessageElement() {
     return document.querySelector(`#${View.ID.DEV_MESSAGE.FORM}`);
   }
+
+  /**
+  Get the development message code element.
+  @returns {Element} The development message code element. */
   getDevMessageCodeElement() {
     return document.querySelector(`#${View.ID.DEV_MESSAGE.CODE}`);
   }
+
+  /**
+  Remove the hidden class from an element.
+  @param {Element} element - The element to remove the hidden class from. */
   removeClassHidden(element) {
     element.classList.remove(View.JS_CLASSES.COMMON.HIDDEN);
   }
+
+  /**
+  Add the wrong input class to an element.
+  @param {Element} element - The element to add the wrong input class to. */
   addClassWrongInput(element) {
     element.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
   }
+
+  /**
+  Add the right input class to an element.
+  @param {Element} element - The element to add the right input class to. */
   addClassRightInput(element) {
     element.classList.add(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
   }
+
+  /**
+  Remove the wrong input class from an element.
+  @param {Element} element - The element to remove the wrong input class from. */
   removeClassWrongInput(element) {
     element.classList.remove(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
   }
+
+  /**
+  Removes the class for right input from the element
+  @param {HTMLElement} element - The element to remove the class from */
   removeClassRightInput(element) {
     element.classList.remove(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
   }
+
+  /**
+  Creates a warning span element with the given message and adds it before the specified element
+  @param {HTMLElement} element - The element before which the warning span will be added
+  @param {string} message - The message to be displayed in the warning span */
   createWrongSpanElement(element, message) {
     let warningSpan = document.createElement('span');
     warningSpan.innerText = message;
     warningSpan.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_SPAN);
     element.parentNode.insertBefore(warningSpan, element.nextSibling);
   }
+
+  /**
+  Adds the class for right input to elements that are not marked as wrong input */
   addClassRightToNotWrongElements() {
     document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(element => {
       if (!element.classList.contains(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT)) {
@@ -5849,17 +6005,28 @@ class View {
       }
     });
   }
+
+  /**
+  Removes classes 'wrong_input' and 'right_input' from input elements
+  that belong to the register form. */
   clearClassWrongAndRightInputFromElements() {
     document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(item => {
       item.classList.remove(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
       item.classList.remove(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
     });
   }
+
+  /**
+  Removes elements with class 'wrong_span' from the register form. */
   clearClassWrongSpanFromElements() {
     document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.WRONG_SPAN}`).forEach(item => {
       item.remove();
     });
   }
+
+  /**
+  Translates the page content between English and Russian using data from a dictionary JSON file.
+  */
   translatePage() {
     fetch('../dictionary.json').then(response => response.json()).then(data => {
       i18next__WEBPACK_IMPORTED_MODULE_0__["default"].init({
