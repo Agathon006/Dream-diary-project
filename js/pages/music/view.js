@@ -7,6 +7,9 @@ import i18next from 'i18next';
 
 export default class View {
 
+    /**
+    Translates the page content between English and Russian using data from a dictionary JSON file.
+    */
     translatePage() {
         fetch('../dictionary.json')
             .then(response => response.json())

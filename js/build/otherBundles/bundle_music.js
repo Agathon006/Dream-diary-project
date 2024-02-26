@@ -25,11 +25,21 @@ class Controller {
     this._initTranslation();
     this._initBurgerButtonListener();
   }
+
+  /**
+  Initializes the translation based on the user's selected language.
+  Calls the view's translatePage method if language is set to 'ru'.
+  @function _initTranslation */
   _initTranslation() {
     if (localStorage.getItem('language') === 'ru') {
       this.view.translatePage();
     }
   }
+
+  /**
+  Initializes the listener for the burger button.
+  Toggles the visibility of the burger content based on user interactions.
+  @function _initBurgerButtonListener */
   _initBurgerButtonListener() {
     document.querySelector('.body').addEventListener('click', event => {
       if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -61,6 +71,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class View {
+  /**
+  Translates the page content between English and Russian using data from a dictionary JSON file.
+  */
   translatePage() {
     fetch('../dictionary.json').then(response => response.json()).then(data => {
       i18next__WEBPACK_IMPORTED_MODULE_0__["default"].init({
