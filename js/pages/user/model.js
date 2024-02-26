@@ -1,3 +1,7 @@
+/**
+ * user page model module.
+ * @module js/pages/user/model
+ */
 export default class Model {
 
     getPromiseGetRandomImageUrl(accessKey) {

@@ -5408,6 +5408,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Controller)
 /* harmony export */ });
+/**
+ * register page controller module.
+ * @module js/pages/register/controller
+ */
 class Controller {
   constructor(view, model) {
     this.view = view;
@@ -5670,6 +5674,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
+/**
+ * register page model module.
+ * @module js/pages/register/model
+ */
 class Model {
   isNicknameOkay(nicknameInput) {
     return nicknameInput.match(/^[a-zA-Z][a-zA-Z0-9_]{4,14}$/);
@@ -5745,6 +5753,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ View)
 /* harmony export */ });
 /* harmony import */ var i18next__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! i18next */ "./node_modules/i18next/dist/esm/i18next.js");
+/**
+ * register page view module.
+ * @module js/pages/register/view
+ */
+
 
 class View {
   static ID = {
@@ -55195,6 +55208,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controller.js */ "./js/pages/register/controller.js");
 
 
+/**
+ * register page index module.
+ * @module js/pages/register/index
+ */
 
 
 

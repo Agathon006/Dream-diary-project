@@ -1,3 +1,8 @@
+/**
+ * time page controller module.
+ * @module js/pages/time/controller
+ */
+
 export default class Controller {
     constructor(view) {
         this.view = view;

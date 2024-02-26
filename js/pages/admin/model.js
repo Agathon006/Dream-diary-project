@@ -1,3 +1,7 @@
+/**
+ * admin model module.
+ * @module js/pages/admin/model
+ */
 export default class Model {
 
     getPromiseGetAllUsers(page) {

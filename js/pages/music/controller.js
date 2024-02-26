@@ -1,3 +1,8 @@
+/**
+ * music page controller module.
+ * @module js/pages/music/controller
+ */
+
 export default class Controller {
     constructor(view) {
         this.view = view;

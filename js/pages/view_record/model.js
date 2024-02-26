@@ -1,3 +1,7 @@
+/**
+ * view_record page model module.
+ * @module js/pages/view_record/model
+ */
 export default class Model {
 
     getPromiseChangeRecordViews(id, newNumber) {

@@ -1,3 +1,7 @@
+/**
+ * register page controller module.
+ * @module js/pages/register/controller
+ */
 export default class Controller {
     constructor(view, model) {
         this.view = view;

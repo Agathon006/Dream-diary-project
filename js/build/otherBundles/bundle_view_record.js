@@ -5408,6 +5408,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Controller)
 /* harmony export */ });
+/**
+ * view_record page controller module.
+ * @module js/pages/view_record/controller
+ */
+
 class Controller {
   constructor(view, model) {
     this.view = view;
@@ -5622,6 +5627,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
+/**
+ * view_record page model module.
+ * @module js/pages/view_record/model
+ */
 class Model {
   getPromiseChangeRecordViews(id, newNumber) {
     return fetch(`http://localhost:3000/records/${id}`, {
@@ -5734,6 +5743,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ View)
 /* harmony export */ });
 /* harmony import */ var i18next__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! i18next */ "./node_modules/i18next/dist/esm/i18next.js");
+/**
+ * view_record page view module.
+ * @module js/pages/view_record/view
+ */
+
 
 class View {
   static ID = {
@@ -55161,6 +55175,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controller.js */ "./js/pages/view_record/controller.js");
 
 
+/**
+ * view_record page index module.
+ * @module js/pages/view_record/index
+ */
 
 
 

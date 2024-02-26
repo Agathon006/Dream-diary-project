@@ -1,3 +1,8 @@
+/**
+ * moon page view module.
+ * @module js/pages/moon/view
+ */
+
 import i18next from 'i18next';
 
 export default class View {

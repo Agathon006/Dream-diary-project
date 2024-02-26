@@ -1,3 +1,7 @@
+/**
+ * registered_home page model module.
+ * @module js/pages/registered_home/model
+ */
 export default class Model {
 
     getPromiseGetDreamRecords(page, searchInput, category, mood, sort, email) {

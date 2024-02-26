@@ -1,3 +1,8 @@
+/**
+ * user page view module.
+ * @module js/pages/user/view
+ */
+
 import i18next from 'i18next';
 
 export default class View {

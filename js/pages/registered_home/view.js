@@ -1,3 +1,8 @@
+/**
+ * registered_home page view module.
+ * @module js/pages/registered_home/view
+ */
+
 import i18next from 'i18next';
 
 export default class View {

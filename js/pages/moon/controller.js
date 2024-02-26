@@ -1,3 +1,8 @@
+/**
+ * moon page controller module.
+ * @module js/pages/moon/controller
+ */
+
 import { Date } from "core-js";
 
 export default class Controller {

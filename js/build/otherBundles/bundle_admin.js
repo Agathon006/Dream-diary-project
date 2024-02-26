@@ -12,6 +12,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Controller)
 /* harmony export */ });
+/**
+ * admin controller module.
+ * @module js/pages/admin/controller
+ */
 class Controller {
   constructor(view, model) {
     this.view = view;
@@ -407,6 +411,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
+/**
+ * admin model module.
+ * @module js/pages/admin/model
+ */
 class Model {
   getPromiseGetAllUsers(page) {
     return fetch(`http://localhost:3000/users?_page=${page}&_per_page=10`);
@@ -515,6 +523,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ View)
 /* harmony export */ });
+/**
+ * admin view module.
+ * @module js/pages/admin/view
+ */
 class View {
   static ID = {
     SECTION: {
@@ -992,6 +1004,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controller.js */ "./js/pages/admin/controller.js");
 
 
+/**
+ * admin index module.
+ * @module js/pages/admin/index
+ */
 
 
 

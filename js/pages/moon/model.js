@@ -1,3 +1,7 @@
+/**
+ * moon page model module.
+ * @module js/pages/moon/model
+ */
 export default class Model {
 
     getWeatherForecastMinsk() {

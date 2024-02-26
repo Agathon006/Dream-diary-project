@@ -5408,6 +5408,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Controller)
 /* harmony export */ });
+/**
+ * make_record page controller module.
+ * @module js/pages/make_record/controller
+ */
 class Controller {
   constructor(view, model) {
     this.view = view;
@@ -5596,6 +5600,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
+/**
+ * make_record page model module.
+ * @module js/pages/make_record/model
+ */
 class Model {
   isTitleOkay(title) {
     if (title) {
@@ -5636,6 +5644,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ View)
 /* harmony export */ });
 /* harmony import */ var i18next__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! i18next */ "./node_modules/i18next/dist/esm/i18next.js");
+/**
+ * make_record page view module.
+ * @module js/pages/make_record/view
+ */
+
 
 class View {
   static ID = {
@@ -55067,6 +55080,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controller.js */ "./js/pages/make_record/controller.js");
 
 
+/**
+ * make_record page index module.
+ * @module js/pages/make_record/index
+ */
 
 
 

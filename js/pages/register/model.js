@@ -1,3 +1,7 @@
+/**
+ * register page model module.
+ * @module js/pages/register/model
+ */
 export default class Model {
 
     isNicknameOkay(nicknameInput) {

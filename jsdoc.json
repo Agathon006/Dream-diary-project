@@ -1,0 +1,28 @@
+{
+    "source": {
+        "include": [
+            "js",
+            "js/pages/admin",
+            "js/pages/home",
+            "js/pages/make_record",
+            "js/pages/moon",
+            "js/pages/music",
+            "js/pages/register",
+            "js/pages/registered_home",
+            "js/pages/sign_in",
+            "js/pages/time",
+            "js/pages/user",
+            "js/pages/view_record"
+        ],
+        "exclude": [
+            "node_modules"
+        ],
+        "recurse": true
+    },
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "opts": {
+        "destination": "docs"
+    }
+}

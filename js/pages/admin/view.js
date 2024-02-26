@@ -1,3 +1,7 @@
+/**
+ * admin view module.
+ * @module js/pages/admin/view
+ */
 export default class View {
 
     static ID = {

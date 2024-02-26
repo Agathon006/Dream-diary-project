@@ -1,3 +1,8 @@
+/**
+ * view_record page controller module.
+ * @module js/pages/view_record/controller
+ */
+
 export default class Controller {
     constructor(view, model) {
         this.view = view;

@@ -1,3 +1,8 @@
+/**
+ * user page controller module.
+ * @module js/pages/user/controller
+ */
+
 export default class Controller {
     constructor(view, model) {
         this.view = view;

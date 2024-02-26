@@ -1,3 +1,7 @@
+/**
+ * sign_in page model module.
+ * @module js/pages/sign_in/model
+ */
 export default class Model {
 
     isEmailOkay(emailInput) {

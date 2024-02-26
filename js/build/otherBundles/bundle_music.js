@@ -12,6 +12,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Controller)
 /* harmony export */ });
+/**
+ * music page controller module.
+ * @module js/pages/music/controller
+ */
+
 class Controller {
   constructor(view) {
     this.view = view;
@@ -49,6 +54,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ View)
 /* harmony export */ });
 /* harmony import */ var i18next__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! i18next */ "./node_modules/i18next/dist/esm/i18next.js");
+/**
+ * music page view module.
+ * @module js/pages/music/view
+ */
+
 
 class View {
   translatePage() {
@@ -2548,6 +2558,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controller_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controller.js */ "./js/pages/music/controller.js");
 
 
+/**
+ * music page index module.
+ * @module js/pages/music/index
+ */
 
 
 window.addEventListener('DOMContentLoaded', () => {

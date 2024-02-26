@@ -1,3 +1,7 @@
+/**
+ * make_record page controller module.
+ * @module js/pages/make_record/controller
+ */
 export default class Controller {
     constructor(view, model) {
         this.view = view;

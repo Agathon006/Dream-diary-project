@@ -1,3 +1,7 @@
+/**
+ * make_record page model module.
+ * @module js/pages/make_record/model
+ */
 export default class Model {
 
     isTitleOkay(title) {

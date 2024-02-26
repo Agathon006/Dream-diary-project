@@ -1,3 +1,8 @@
+/**
+ * sign_in page view module.
+ * @module js/pages/sign_in/view
+ */
+
 import i18next from 'i18next';
 
 export default class View {

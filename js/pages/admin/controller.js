@@ -1,3 +1,7 @@
+/**
+ * admin controller module.
+ * @module js/pages/admin/controller
+ */
 export default class Controller {
     constructor(view, model) {
         this.view = view;

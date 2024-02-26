@@ -3,6 +3,11 @@ var __webpack_exports__ = {};
 /*!*********************!*\
   !*** ./js/theme.js ***!
   \*********************/
+/**
+ * theme change script.
+ * @module js/theme
+ */
+
 const themesSwitcherCheckboxes = document.querySelectorAll(`.theme-checkbox`),
   header = document.querySelector(`.header`),
   main = document.querySelector(`.main`),

@@ -1,3 +1,8 @@
+/**
+ * view_record page view module.
+ * @module js/pages/view_record/view
+ */
+
 import i18next from 'i18next';
 
 export default class View {
