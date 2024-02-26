@@ -40,46 +40,79 @@ export default class View {
         },
     }
 
+    /**
+    Gets the section element.
+    @returns {Element} - The section element. */
     getSectionElement() {
         return document.querySelector(`#${View.ID.SECTION.SECTION}`);
     }
 
+    /**
+    Gets the users button element.
+    @returns {Element} - The users button element. */
     getUsersButtonElement() {
         return document.querySelector(`#${View.ID.BUTTONS.USERS_BUTTON}`);
     }
 
+    /**
+    Gets the records button element.
+    @returns {Element} - The records button element. */
     getRecordsButtonElement() {
         return document.querySelector(`#${View.ID.BUTTONS.RECORDS_BUTTON}`);
     }
 
+    /**
+    Gets the modal wrapper element.
+    @returns {Element} - The modal wrapper element. */
     getModalWrapperElement() {
         return document.querySelector(`#${View.ID.MODAL_WINDOW.MODAL_WRAPPER}`);
     }
 
+    /**
+    Gets all tags close buttons elements.
+    @returns {NodeList} - List of all tags close buttons elements. */
     getAllTagsCloseButtons() {
         return document.querySelectorAll(`.${View.JS_CLASSES.RECORD.TAGS.CLOSE_BUTTON}`);
     }
 
+    /**
+    Gets the previous button element for pagination.
+    @returns {Element} - The previous button element for pagination. */
     getButtonPrevElement() {
         return document.querySelector(`#${View.ID.PAGINATION.BUTTON_PREV}`);
     }
 
+    /**
+    Gets the current page number element for pagination.
+    @returns {Element} - The current page number element for pagination. */
     getCurrentPageNumberElement() {
         return document.querySelector(`#${View.ID.PAGINATION.CURRENT_PAGE_NUMBER}`);
     }
 
+    /**
+    Retrieves the next button element from the DOM
+    @returns {Element} The next button element */
     getButtonNextElement() {
         return document.querySelector(`#${View.ID.PAGINATION.BUTTON_NEXT}`);
     }
 
+    /**
+    Toggles the hidden class on an element
+    @param {Element} element - The element to toggle the hidden class on */
     toggleClassHidden(element) {
         element.classList.toggle(`${View.JS_CLASSES.COMMON.HIDDEN}`);
     }
 
+    /**
+    Toggles the not exist class on an element
+    @param {Element} element - The element to toggle the not exist class on */
     toggleClassNotExist(element) {
         element.classList.toggle(`${View.JS_CLASSES.COMMON.NOT_EXIST}`);
     }
 
+    /**
+    Toggles the selected class on an element and enables/disables it based on the class state
+    @param {Element} element - The element to toggle the selected class on */
     toggleClassSelected(element) {
         if (element.classList.contains(`${View.JS_CLASSES.COMMON.SELECTED}`)) {
             element.disabled = false;
@@ -90,6 +123,9 @@ export default class View {
         }
     }
 
+    /**
+    Toggles the class of specified input elements based on their index.
+    @param {Array} inputs - An array of input elements. */
     toggleInputs(inputs) {
         inputs.forEach((input, index) => {
             if (index === 1 || index === 3 || index === 10 || index === 11) {
@@ -99,10 +135,17 @@ export default class View {
         });
     }
 
+    /**
+    Adds a specific class to the element to indicate a wrong input.
+    @param {Element} element - The element to add the class to. */
     addClassWrongInput(element) {
         element.classList.add(View.JS_CLASSES.PROFILE.WRONG_INPUT);
     }
 
+    /**
+    Creates a span element with a warning message and inserts it after the specified element.
+    @param {Element} element - The element to insert the warning span after.
+    @param {string} message - The message to display in the warning span. */
     createWrongSpanElement(element, message) {
         let warningSpan = document.createElement('span');
         warningSpan.innerText = message;
@@ -110,18 +153,28 @@ export default class View {
         element.parentNode.insertBefore(warningSpan, element.nextSibling);
     }
 
+    /**
+    Clears the class "wrong input" from all elements with that class. */
     clearClassWrongInputFromElements() {
         document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.WRONG_INPUT}`).forEach(item => {
             item.classList.remove(View.JS_CLASSES.PROFILE.WRONG_INPUT);
         });
     }
 
+    /**
+    Removes all elements with the class "wrong span" from the DOM. */
     clearClassWrongSpanFromElements() {
         document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.WRONG_SPAN}`).forEach(item => {
             item.remove();
         });
     }
 
+    /**
+    Displays the pagination part of the profile page.
+    @param {number} itemsNumber - The total number of items to display.
+    @param {number} pagesNumber - The total number of pages to show in pagination.
+    @param {number} currentPageNumber - The current page number (default is 1).
+    */
     displayPaginationPart(itemsNumber, pagesNumber, currentPageNumber = 1) {
         const section = this.getSectionElement();
 
@@ -148,6 +201,11 @@ export default class View {
         </div>`
     }
 
+    /**
+    Display users table based on the provided data
+    @param {object} data - The data containing user information
+    @returns {void}
+    */
     displayUsersTable(data) {
         const section = this.getSectionElement();
 
@@ -184,6 +242,10 @@ export default class View {
 
     }
 
+    /**
+     * Renders a table of records based on the provided data.
+     * @param {Object} data - The data object containing records to be displayed.
+     */
     displayRecordsTable(data) {
         const section = this.getSectionElement();
 
@@ -218,6 +280,12 @@ export default class View {
 
     }
 
+    /**
+     * Renders a user's information in a specific section with options to select user roles.
+     * 
+     * @param {HTMLElement} section - The HTML element where the user information will be displayed.
+     * @param {Object} user - The user object containing information to be displayed.
+     */
     displayUser(section, user) {
         let dunamicContentRoles = '';
         if (user.role === 'user') {
@@ -267,6 +335,10 @@ export default class View {
         </div>`;
     }
 
+    /**
+    Displays the record with the given section and record details.
+    @param {HTMLElement} section - The section element where the record will be displayed.
+    @param {Object} record - The record object containing the details to be displayed. */
     displayRecord(section, record) {
 
         let dynamicRecordDate = '';
