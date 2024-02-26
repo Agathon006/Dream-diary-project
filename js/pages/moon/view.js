@@ -36,54 +36,107 @@ export default class View {
         },
     }
 
+    /**
+     * Get the forecast place element.
+     * @returns {Element} The forecast place element.
+     */
     getForecastPlaceElement() {
         return document.querySelector(`#${View.ID.FORECAST.PLACE}`);
     }
 
+    /**
+     * Get the 'My Place' button element in the forecast.
+     * @returns {Element} The 'My Place' button element.
+     */
     getMyPlaceButtonElement() {
         return document.querySelector(`#${View.ID.FORECAST.MY_PLACE_BUTTON}`);
     }
 
+    /**
+     * Get the forecast container element.
+     * @returns {Element} The forecast container element.
+     */
     getForecastContainerElement() {
         return document.querySelector(`#${View.ID.FORECAST.CONTAINER}`);
     }
 
+    /**
+     * Get the new moon date span element.
+     * @returns {Element} The new moon date span element.
+     */
     getNewMoonDateSpanElement() {
         return document.querySelector(`#${View.ID.MOON_PHASES.NEW_MOON_DATE}`);
     }
 
+    /**
+     * Get the growing moon date span element.
+     * @returns {Element} The growing moon date span element.
+     */
     getGrowingMoonDateSpanElement() {
         return document.querySelector(`#${View.ID.MOON_PHASES.GROWING_MOON_DATE}`);
     }
 
+    /**
+     * Get the full moon date span element.
+     * @returns {Element} The full moon date span element.
+     */
     getFullMoonDateSpanElement() {
         return document.querySelector(`#${View.ID.MOON_PHASES.FULL_MOON_DATE}`);
     }
 
+    /**
+     * Get the waning moon date span element.
+     * @returns {Element} The waning moon date span element.
+     */
     getWaningDateSpanElement() {
         return document.querySelector(`#${View.ID.MOON_PHASES.WANING_MOON_DATE}`);
     }
 
+    /**
+    * Returns the span element for the next new moon date.
+    * @returns {Element} The span element for the next new moon date.
+    */
     getNextNewMoonDateSpanElement() {
         return document.querySelector(`#${View.ID.NEXT_MOON_PHASES.NEXT_NEW_MOON_DATE}`);
     }
 
+    /**
+     * Returns the span element for the next growing moon date.
+     * @returns {Element} The span element for the next growing moon date.
+     */
     getNextGrowingMoonDateSpanElement() {
         return document.querySelector(`#${View.ID.NEXT_MOON_PHASES.NEXT_GROWING_MOON_DATE}`);
     }
 
+    /**
+     * Returns the span element for the next full moon date.
+     * @returns {Element} The span element for the next full moon date.
+     */
     getNextFullMoonDateSpanElement() {
         return document.querySelector(`#${View.ID.NEXT_MOON_PHASES.NEXT_FULL_MOON_DATE}`);
     }
 
+    /**
+     * Returns the span element for the next waning moon date.
+     * @returns {Element} The span element for the next waning moon date.
+     */
     getNextWaningDateSpanElement() {
         return document.querySelector(`#${View.ID.NEXT_MOON_PHASES.NEXT_WANING_MOON_DATE}`);
     }
 
+    /**
+     * Returns an array of span elements for the current moon phase dates.
+     * @returns {Element[]} An array of span elements for the current moon phase dates.
+     */
     getCurrentMoonPhaseDateSpansElements() {
         return document.querySelectorAll(`.${View.JS_CLASSES.MOON_PHASES.DATES_SPANS}`);
     }
 
+    /**
+    Changes the color of the specified element based on the cloud cover number.
+    @param {HTMLElement} element - The element to change the color of.
+    @param {number} number - The cloud cover number.
+    @param {HTMLElement} resultElement - The element to display the result text in. */
     whichColorForCloudCover(element, number, resultElement) {
         if (number > 67) {
             element.style.color = 'red';
@@ -112,17 +165,25 @@ export default class View {
         }
     }
 
+    /**
+    Toggles the 'hidden' class on the specified element, effectively hiding or showing it.
+    @param {Element} element - The element to toggle the 'hidden' class on. */
     toggleClassHidden(element) {
         element.style.transition = 'none';
         element.classList.toggle(View.JS_CLASSES.COMMON.HIDDEN);
     }
 
+    /**
+    Toggles the 'waiting-background' class on all elements with the class 'forecast-day'. */
     toggleClassesWaitingBackgroundOfForecastDayElements() {
         document.querySelectorAll('.forecast-day').forEach((element) => {
             element.classList.toggle('waiting-background');
         });
     }
 
+    /**
+    Translates the page content between English and Russian using data from a dictionary JSON file.
+    */
     translatePage() {
         fetch('../dictionary.json')
             .then(response => response.json())
