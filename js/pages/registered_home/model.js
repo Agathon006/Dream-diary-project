@@ -4,6 +4,15 @@
  */
 export default class Model {
 
+    /**
+    Fetches dream records based on specified parameters.
+    @param {number} page - The page number to retrieve dream records from.
+    @param {string} searchInput - The search input for filtering dream records.
+    @param {string} category - The category of the dream records to filter by.
+    @param {string} mood - The mood of the dream records to filter by.
+    @param {string} sort - The sorting order for the dream records.
+    @param {string} email - The email address associated with the dream records.
+    @returns {Promise} - A Promise that resolves with the dream records fetched from the API. */
     getPromiseGetDreamRecords(page, searchInput, category, mood, sort, email) {
         if (sort !== 'Default') {
             if (searchInput != '' && category !== 'All' && mood !== 'All' && email !== 'All') {
@@ -108,18 +117,33 @@ export default class Model {
         }
     }
 
+    /**
+    Fetches user by email from the API.
+    @param {string} email - The email address of the user to fetch.
+    @returns {Promise} - A Promise that resolves with the user data fetched from the API. */
     getPromiseGetUserByEmail(email) {
         return fetch(`http://localhost:3000/users?email=${email}`)
     }
 
+    /**
+    Fetches user by nickname from the API.
+    @param {string} nickname - The nickname of the user to fetch.
+    @returns {Promise} - A Promise that resolves with the user data fetched from the API. */
     getPromiseGetUserByNickname(nickanme) {
         return fetch(`http://localhost:3000/users?nickname=${nickanme}`)
     }
 
+    /**
+    Fetches all dream records from the API.
+    @returns {Promise} - A Promise that resolves with the dream records fetched from the API. */
     getPromisegetDreamRecords() {
         return fetch(`http://localhost:3000/records`)
     }
 
+    /**
+    Returns the icon path based on the dream category name
+    @param {string} categoryName - The name of the dream category
+    @returns {string} - The path to the corresponding icon */
     whichDreamCategoryIcon(categoryName) {
 
         switch (categoryName) {
@@ -142,6 +166,10 @@ export default class Model {
         }
     }
 
+    /**
+    Returns the icon path based on the dream mood name
+    @param {string} moodName - The name of the dream mood
+    @returns {string} - The path to the corresponding icon */
     whichDreamMoodIcon(moodName) {
 
         switch (moodName) {
@@ -160,6 +188,10 @@ export default class Model {
         }
     }
 
+    /**
+    Returns the name of the month based on the month number provided.
+    @param {number} monthNumber - The month number (0-11).
+    @returns {string} - The name of the month corresponding to the month number provided. */
     whichMonthNameByNumber(monthNumber) {
 
         switch (monthNumber) {
@@ -192,6 +224,10 @@ export default class Model {
         }
     }
 
+    /**
+    Returns the name of the week day based on the week day number provided.
+    @param {number} weekNumber - The week day number (0-6).
+    @returns {string} - The name of the week day corresponding to the week day number provided. */
     whichWeekDayNameByNumber(weekNumber) {
 
         switch (weekNumber) {
