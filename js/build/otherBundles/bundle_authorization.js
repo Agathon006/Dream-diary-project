@@ -52283,6 +52283,10 @@ var __webpack_exports__ = {};
   \*****************************/
 
 
+/**
+ * authorization script.
+ * @module js/authorization
+ */
 const jwt = __webpack_require__(/*! jsonwebtoken */ "./node_modules/jsonwebtoken/index.js");
 try {
   const decodedJwt = jwt.verify(localStorage.getItem('token'), localStorage.getItem('secretKey'));

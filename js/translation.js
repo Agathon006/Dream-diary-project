@@ -1,3 +1,8 @@
+/**
+ * translation script.
+ * @module js/translation
+ */
+
 if (localStorage.getItem('language') === 'ru') {
     document.querySelectorAll('.language-container').forEach(item => {
         item.children[0].classList.toggle('underlined');

@@ -12,6 +12,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Controller)
 /* harmony export */ });
+/**
+ * registered_home page controller module.
+ * @module js/pages/registered_home/controller
+ */
+
 class Controller {
   constructor(view, model) {
     this.view = view;
@@ -30,11 +35,21 @@ class Controller {
     this._initUserSearchListener();
     this._initDreamRecords();
   }
+
+  /**
+  Initializes the translation based on the user's selected language.
+  Calls the view's translatePage method if language is set to 'ru'.
+  @function _initTranslation */
   _initTranslation() {
     if (localStorage.getItem('language') === 'ru') {
       this.view.translatePage();
     }
   }
+
+  /**
+  Initializes the listener for the burger button.
+  Toggles the visibility of the burger content based on user interactions.
+  @function _initBurgerButtonListener */
   _initBurgerButtonListener() {
     document.querySelector('.body').addEventListener('click', event => {
       if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -44,6 +59,11 @@ class Controller {
       }
     });
   }
+
+  /**
+  Initializes notification functionality for the application.
+  Sets up an interaction object to track user interaction and a default interval to check for notifications every minute.
+  Listens for click events on the document to track user interaction and adjust notification checking accordingly. */
   _initNotification() {
     var interaction = {
       interacted: false
@@ -81,6 +101,10 @@ class Controller {
       }, 60000);
     });
   }
+
+  /**
+  Initializes the dream search input element, fetches dream records from the model and displays auto-suggestions based on user input.
+  */
   _initDreamSearchInputElement() {
     const dreamSearchInput = this.view.getDreamSearchInputElement(),
       dreamSearchButton = this.view.getDreamSearchButtonElement();
@@ -120,6 +144,10 @@ class Controller {
       });
     }).catch(error => console.error('Error:', error));
   }
+
+  /**
+  Initializes the event listener for dream search functionality
+  */
   _initDreamSearchListener() {
     const dreamSearchInput = this.view.getDreamSearchInputElement(),
       dreamSearchButton = this.view.getDreamSearchButtonElement();
@@ -145,6 +173,10 @@ class Controller {
       }
     });
   }
+
+  /**
+  Initialize the Dream Category listener for the select element and icon element
+  */
   _initDreamCategoryListener() {
     const dreamCategorySelect = this.view.getDreamCategorySelectElement(),
       dreamCategoryIcon = this.view.getDreamCategoryIconElement();
@@ -195,6 +227,10 @@ class Controller {
       }
     });
   }
+
+  /**
+  Initialize the Dream Mood listener for the select element and icon element
+  */
   _initDreamMoodListener() {
     const dreamMoodSelect = this.view.getDreamMoodSelectElement(),
       dreamMoodIcon = this.view.getDreamMoodIconElement();
@@ -242,6 +278,10 @@ class Controller {
       }
     });
   }
+
+  /**
+  Initialize the Sort listener for the dream records by likes/views
+  */
   _initSortListener() {
     const dreamSortSelect = this.view.getDreamSortSelectElement(),
       dreamSortIcon = this.view.getDreamSortIconElement();
@@ -280,6 +320,10 @@ class Controller {
       }
     });
   }
+
+  /**
+  Initialize the Main plot listener for the dynamic content in form of dream records accorging to filter and sort
+  */
   _initMainPlotListener() {
     const mainPlot = this.view.getMainPlotElement();
     mainPlot.addEventListener('click', event => {
@@ -377,6 +421,10 @@ class Controller {
       }
     });
   }
+
+  /**
+  Initialize the User Search listener for the user search div element
+  */
   _initUserSearchListener() {
     const userSearchDiv = this.view.getUserSearchDivElement();
     userSearchDiv.addEventListener('click', event => {
@@ -390,6 +438,15 @@ class Controller {
       }
     });
   }
+
+  /**
+  Initialize dream records based on the parameters provided.
+  @param {number} [currentPageNumber=1] - The current page number for pagination.
+  @param {string} [searchInput=''] - The search input for filtering records.
+  @param {string} [dreamCategory='All'] - The category of the dreams to filter.
+  @param {string} [dreamMood='All'] - The mood of the dreams to filter.
+  @param {string} [sort='Default'] - The sorting option for the records.
+  @param {string} [userEmail='All'] - The user email for filtering records. */
   _initDreamRecords(currentPageNumber = 1, searchInput = '', dreamCategory = 'All', dreamMood = 'All', sort = 'Default', userEmail = 'All') {
     const mainPlot = this.view.getMainPlotElement();
     this.model.getPromiseGetDreamRecords(currentPageNumber, searchInput, dreamCategory, dreamMood, sort, userEmail).then(response => {
@@ -429,6 +486,11 @@ class Controller {
       console.error('Error during getting records', error);
     });
   }
+
+  /**
+  Put a dream record on the main plot with specified data.
+  @param {Object} mainPlot - The main plot object where the dream record will be displayed.
+  @param {Object} record - The dream record data to be displayed. */
   _putDreamRecord(mainPlot, record) {
     this.model.getPromiseGetUserByEmail(record.email).then(response => response.json()).then(data => {
       if (data.length) {
@@ -469,7 +531,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
+/**
+ * registered_home page model module.
+ * @module js/pages/registered_home/model
+ */
 class Model {
+  /**
+  Fetches dream records based on specified parameters.
+  @param {number} page - The page number to retrieve dream records from.
+  @param {string} searchInput - The search input for filtering dream records.
+  @param {string} category - The category of the dream records to filter by.
+  @param {string} mood - The mood of the dream records to filter by.
+  @param {string} sort - The sorting order for the dream records.
+  @param {string} email - The email address associated with the dream records.
+  @returns {Promise} - A Promise that resolves with the dream records fetched from the API. */
   getPromiseGetDreamRecords(page, searchInput, category, mood, sort, email) {
     if (sort !== 'Default') {
       if (searchInput != '' && category !== 'All' && mood !== 'All' && email !== 'All') {
@@ -567,15 +642,34 @@ class Model {
       return fetch(`http://localhost:3000/records?_page=${page}&_per_page=5`);
     }
   }
+
+  /**
+  Fetches user by email from the API.
+  @param {string} email - The email address of the user to fetch.
+  @returns {Promise} - A Promise that resolves with the user data fetched from the API. */
   getPromiseGetUserByEmail(email) {
     return fetch(`http://localhost:3000/users?email=${email}`);
   }
+
+  /**
+  Fetches user by nickname from the API.
+  @param {string} nickname - The nickname of the user to fetch.
+  @returns {Promise} - A Promise that resolves with the user data fetched from the API. */
   getPromiseGetUserByNickname(nickanme) {
     return fetch(`http://localhost:3000/users?nickname=${nickanme}`);
   }
+
+  /**
+  Fetches all dream records from the API.
+  @returns {Promise} - A Promise that resolves with the dream records fetched from the API. */
   getPromisegetDreamRecords() {
     return fetch(`http://localhost:3000/records`);
   }
+
+  /**
+  Returns the icon path based on the dream category name
+  @param {string} categoryName - The name of the dream category
+  @returns {string} - The path to the corresponding icon */
   whichDreamCategoryIcon(categoryName) {
     switch (categoryName) {
       case 'Category':
@@ -596,6 +690,11 @@ class Model {
         console.log('No such option in select dream category');
     }
   }
+
+  /**
+  Returns the icon path based on the dream mood name
+  @param {string} moodName - The name of the dream mood
+  @returns {string} - The path to the corresponding icon */
   whichDreamMoodIcon(moodName) {
     switch (moodName) {
       case 'Typical dream':
@@ -612,6 +711,11 @@ class Model {
         console.log('No such option in select dream category');
     }
   }
+
+  /**
+  Returns the name of the month based on the month number provided.
+  @param {number} monthNumber - The month number (0-11).
+  @returns {string} - The name of the month corresponding to the month number provided. */
   whichMonthNameByNumber(monthNumber) {
     switch (monthNumber) {
       case 0:
@@ -642,6 +746,11 @@ class Model {
         console.log('No such month');
     }
   }
+
+  /**
+  Returns the name of the week day based on the week day number provided.
+  @param {number} weekNumber - The week day number (0-6).
+  @returns {string} - The name of the week day corresponding to the week day number provided. */
   whichWeekDayNameByNumber(weekNumber) {
     switch (weekNumber) {
       case 0:
@@ -677,6 +786,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ View)
 /* harmony export */ });
 /* harmony import */ var i18next__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! i18next */ "./node_modules/i18next/dist/esm/i18next.js");
+/**
+ * registered_home page view module.
+ * @module js/pages/registered_home/view
+ */
+
 
 class View {
   static ID = {
@@ -700,62 +814,137 @@ class View {
       USER_SEARCH_DIV: 'user-search-div'
     }
   };
+
+  /**
+  Returns the notification block element
+  @returns {Element} The notification block element */
   getNotificationBlockElement() {
     return document.querySelector(`#${View.ID.MAIN.NOTIFICATION_BLOCK}`);
   }
+
+  /**
+  Returns the dream search input element
+  @returns {Element} The dream search input element */
   getDreamSearchInputElement() {
     return document.querySelector(`#${View.ID.FILTER.DREAM_SEARCH_INPUT}`);
   }
+
+  /**
+  Returns the dream search autocomplete element
+  @returns {Element} The dream search autocomplete element */
   getDreamSearchAutocompleteElement() {
     return document.querySelector(`#${View.ID.FILTER.DREAM_SEARCH_AUTOCOMPLETE}`);
   }
+
+  /**
+  Returns the dream search button element
+  @returns {Element} The dream search button element */
   getDreamSearchButtonElement() {
     return document.querySelector(`#${View.ID.FILTER.DREAM_SEARCH_BUTTON}`);
   }
+
+  /**
+  Returns the dream category select element
+  @returns {Element} The dream category select element */
   getDreamCategorySelectElement() {
     return document.querySelector(`#${View.ID.FILTER.DREAM_CATEGORY_SELECT}`);
   }
+
+  /**
+  Returns the dream category icon element
+  @returns {Element} The dream category icon element */
   getDreamCategoryIconElement() {
     return document.querySelector(`#${View.ID.FILTER.DREAM_CATEGORY_ICON}`);
   }
+
+  /**
+  Finds and returns the dream mood select element from the DOM.
+  @returns {Element} The dream mood select element. */
   getDreamMoodSelectElement() {
     return document.querySelector(`#${View.ID.FILTER.DREAM_MOOD_SELECT}`);
   }
+
+  /**
+  Finds and returns the dream mood icon element from the DOM.
+  @returns {Element} The dream mood icon element. */
   getDreamMoodIconElement() {
     return document.querySelector(`#${View.ID.FILTER.DREAM_MOOD_ICON}`);
   }
+
+  /**
+  Finds and returns the dream sort select element from the DOM.
+  @returns {Element} The dream sort select element. */
   getDreamSortSelectElement() {
     return document.querySelector(`#${View.ID.FILTER.DREAM_SORT_SELECT}`);
   }
+
+  /**
+  Finds and returns the dream sort icon element from the DOM.
+  @returns {Element} The dream sort icon element. */
   getDreamSortIconElement() {
     return document.querySelector(`#${View.ID.FILTER.DREAM_SORT_ICON}`);
   }
+
+  /**
+  Finds and returns the current page number element from the DOM.
+  @returns {Element} The current page number element. */
   getCurrentPageNumberElement() {
     return document.querySelector(`#${View.ID.MAIN.CURRENT_PAGE_NUMBER}`);
   }
+
+  /**
+  Finds and returns the previous button element from the DOM.
+  @returns {Element} The previous button element. */
   getPrevButton() {
     return document.querySelector(`#${View.ID.MAIN.PREV_BUTTON}`);
   }
+
+  /**
+  Finds and returns the next button element from the DOM.
+  @returns {Element} The next button element. */
   getNextButton() {
     return document.querySelector(`#${View.ID.MAIN.NEXT_BUTTON}`);
   }
+
+  /**
+  Finds and returns the main plot element from the DOM.
+  @returns {Element} The main plot element. */
   getMainPlotElement() {
     return document.querySelector(`#${View.ID.MAIN.MAIN_PLOT}`);
   }
+
+  /**
+  Retrieves the user search div element from the DOM.
+  @returns {Element|null} The user search div element if found, or null if not found. */
   getUserSearchDivElement() {
     return document.querySelector(`#${View.ID.FILTER.USER_SEARCH_DIV}`);
   }
+
+  /**
+  Clears the main plot HTML content and adds waiting background class. */
   clearMainPlotHtml() {
     const mainPlot = this.getMainPlotElement();
     mainPlot.innerHTML = ``;
     this.toggleClassWaitingBackgroundOfMain();
   }
+
+  /**
+  Adds the 'hidden' class to the specified element.
+  @param {Element} element - The element to add the 'hidden' class to. */
   addClassHidden(element) {
     element.classList.add('hidden');
   }
+
+  /**
+  Removes the 'hidden' class from the specified element.
+  @param {Element} element - The element to remove the 'hidden' class from. */
   removeClassHidden(element) {
     element.classList.remove('hidden');
   }
+
+  /**
+  Display a message when there are no records to show based on the selected language.
+  @param {HTMLElement} mainPlot - The main plot element where the message will be displayed. */
   displayNoRecordsMessage(mainPlot) {
     if (localStorage.getItem('language') === 'ru') {
       mainPlot.innerHTML += `<div class="empty-message">
@@ -769,6 +958,11 @@ class View {
                 </div>`;
     }
   }
+
+  /**
+  Displays simple pagination based on the selected language and number of dreams
+  @param {HTMLElement} mainPlot - The element where the pagination will be displayed
+  @param {number} dreamsNumber - The number of dreams to determine the content of pagination */
   displaySimplePagination(mainPlot, dreamsNumber) {
     if (localStorage.getItem('language') === 'ru') {
       let dynamicContent = '';
@@ -808,6 +1002,13 @@ class View {
                 </div>`;
     }
   }
+
+  /**
+  Display pagination based on the current language and dream count
+  @param {HTMLElement} mainPlot - The main element to display pagination in
+  @param {number} dreamsNumber - The number of dreams to display
+  @param {number} currentPageNumber - The current page number being displayed
+  @param {number} pagesNumber - The total number of pages available */
   displayPagination(mainPlot, dreamsNumber, currentPageNumber, pagesNumber) {
     if (localStorage.getItem('language') === 'ru') {
       let dynamicContent = '';
@@ -859,6 +1060,21 @@ class View {
                 </div>`;
     }
   }
+
+  /**
+  Display the dream record on the webpage
+  @param {HTMLElement} mainPlot - The element where the dream record will be displayed
+  @param {Object} record - The dream record data
+  @param {string} dreamCategoryIcon - The icon representing the dream category
+  @param {string} dreamCategoryIconDescription - Description of the dream category icon
+  @param {string} dreamMoodIcon - The icon representing the dream mood
+  @param {string} dreamMoodIconDescription - Description of the dream mood icon
+  @param {string} monthName - The name of the month when the dream occurred
+  @param {string} weekDay - The day of the week when the dream occurred
+  @param {string} avatarUrl - The URL of the user's avatar
+  @param {string} nickname - The user's nickname
+  @param {string} id - The unique ID of the dream record
+  @param {string} likedThis - Indicates if the user has liked this dream record */
   displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, avatarUrl, nickname, id, likedThis) {
     var dynamicTagContent = '',
       likesSpan = '';
@@ -973,6 +1189,11 @@ class View {
         </div>`;
     }
   }
+
+  /**
+  Translates the month from English to Russian.
+  @param {string} month - The month in English (e.g. 'January').
+  @returns {string} - The month translated to Russian (e.g. 'Января'). */
   translateMonthToRu(month) {
     switch (month) {
       case 'January':
@@ -1003,6 +1224,11 @@ class View {
         return '???';
     }
   }
+
+  /**
+  Translates the week day from English to Russian.
+  @param {string} weekDay - The week day in English (e.g. 'Monday').
+  @returns {string} - The week day translated to Russian (e.g. 'Понедельник'). */
   translateWeekDayToRu(weekDay) {
     switch (weekDay) {
       case 'Monday':
@@ -1023,6 +1249,12 @@ class View {
         return '???';
     }
   }
+
+  /**
+  Displays the user filter based on the user's avatar URL and nickname,
+  considering the language stored in the localStorage.
+  @param {string} userAvatarUrl - The URL of the user's avatar.
+  @param {string} userNickname - The user's nickname. */
   displayUserFilter(userAvatarUrl, userNickname) {
     const userSearchDiv = this.getUserSearchDivElement();
     if (localStorage.getItem('language') === 'ru') {
@@ -1051,9 +1283,17 @@ class View {
                 </div>`;
     }
   }
+
+  /**
+  Toggles the 'waiting-background' class on the '.main' element,
+  which is used to apply styling for waiting/loading state. */
   toggleClassWaitingBackgroundOfMain() {
     document.querySelector('.main').classList.toggle('waiting-background');
   }
+
+  /**
+  Translates the page content between English and Russian using data from a dictionary JSON file.
+  */
   translatePage() {
     fetch('../dictionary.json').then(response => response.json()).then(data => {
       i18next__WEBPACK_IMPORTED_MODULE_0__["default"].init({
@@ -3575,6 +3815,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controller.js */ "./js/pages/registered_home/controller.js");
 
 
+/**
+ * registered_home page index module.
+ * @module js/pages/registered_home/index
+ */
 
 
 

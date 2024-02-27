@@ -1,3 +1,8 @@
+/**
+ * registered_home page view module.
+ * @module js/pages/registered_home/view
+ */
+
 import i18next from 'i18next';
 
 export default class View {
@@ -24,80 +29,136 @@ export default class View {
         },
     }
 
+    /**
+    Returns the notification block element
+    @returns {Element} The notification block element */
     getNotificationBlockElement() {
         return document.querySelector(`#${View.ID.MAIN.NOTIFICATION_BLOCK}`);
     }
 
+    /**
+    Returns the dream search input element
+    @returns {Element} The dream search input element */
     getDreamSearchInputElement() {
         return document.querySelector(`#${View.ID.FILTER.DREAM_SEARCH_INPUT}`);
     }
 
+    /**
+    Returns the dream search autocomplete element
+    @returns {Element} The dream search autocomplete element */
     getDreamSearchAutocompleteElement() {
         return document.querySelector(`#${View.ID.FILTER.DREAM_SEARCH_AUTOCOMPLETE}`);
     }
 
+    /**
+    Returns the dream search button element
+    @returns {Element} The dream search button element */
     getDreamSearchButtonElement() {
         return document.querySelector(`#${View.ID.FILTER.DREAM_SEARCH_BUTTON}`);
     }
 
+    /**
+    Returns the dream category select element
+    @returns {Element} The dream category select element */
     getDreamCategorySelectElement() {
         return document.querySelector(`#${View.ID.FILTER.DREAM_CATEGORY_SELECT}`);
     }
 
+    /**
+    Returns the dream category icon element
+    @returns {Element} The dream category icon element */
     getDreamCategoryIconElement() {
         return document.querySelector(`#${View.ID.FILTER.DREAM_CATEGORY_ICON}`);
     }
 
+    /**
+    Finds and returns the dream mood select element from the DOM.
+    @returns {Element} The dream mood select element. */
     getDreamMoodSelectElement() {
         return document.querySelector(`#${View.ID.FILTER.DREAM_MOOD_SELECT}`);
     }
 
+    /**
+    Finds and returns the dream mood icon element from the DOM.
+    @returns {Element} The dream mood icon element. */
     getDreamMoodIconElement() {
         return document.querySelector(`#${View.ID.FILTER.DREAM_MOOD_ICON}`);
     }
 
+    /**
+    Finds and returns the dream sort select element from the DOM.
+    @returns {Element} The dream sort select element. */
     getDreamSortSelectElement() {
         return document.querySelector(`#${View.ID.FILTER.DREAM_SORT_SELECT}`);
     }
 
+    /**
+    Finds and returns the dream sort icon element from the DOM.
+    @returns {Element} The dream sort icon element. */
     getDreamSortIconElement() {
         return document.querySelector(`#${View.ID.FILTER.DREAM_SORT_ICON}`);
     }
 
+    /**
+    Finds and returns the current page number element from the DOM.
+    @returns {Element} The current page number element. */
     getCurrentPageNumberElement() {
         return document.querySelector(`#${View.ID.MAIN.CURRENT_PAGE_NUMBER}`);
     }
 
+    /**
+    Finds and returns the previous button element from the DOM.
+    @returns {Element} The previous button element. */
     getPrevButton() {
         return document.querySelector(`#${View.ID.MAIN.PREV_BUTTON}`);
     }
 
+    /**
+    Finds and returns the next button element from the DOM.
+    @returns {Element} The next button element. */
     getNextButton() {
         return document.querySelector(`#${View.ID.MAIN.NEXT_BUTTON}`);
     }
 
+    /**
+    Finds and returns the main plot element from the DOM.
+    @returns {Element} The main plot element. */
     getMainPlotElement() {
         return document.querySelector(`#${View.ID.MAIN.MAIN_PLOT}`);
     }
 
+    /**
+    Retrieves the user search div element from the DOM.
+    @returns {Element|null} The user search div element if found, or null if not found. */
     getUserSearchDivElement() {
         return document.querySelector(`#${View.ID.FILTER.USER_SEARCH_DIV}`);
     }
 
+    /**
+    Clears the main plot HTML content and adds waiting background class. */
     clearMainPlotHtml() {
         const mainPlot = this.getMainPlotElement();
         mainPlot.innerHTML = ``;
         this.toggleClassWaitingBackgroundOfMain();
     }
 
+    /**
+    Adds the 'hidden' class to the specified element.
+    @param {Element} element - The element to add the 'hidden' class to. */
     addClassHidden(element) {
         element.classList.add('hidden');
     }
 
+    /**
+    Removes the 'hidden' class from the specified element.
+    @param {Element} element - The element to remove the 'hidden' class from. */
     removeClassHidden(element) {
         element.classList.remove('hidden');
     }
 
+    /**
+    Display a message when there are no records to show based on the selected language.
+    @param {HTMLElement} mainPlot - The main plot element where the message will be displayed. */
     displayNoRecordsMessage(mainPlot) {
         if (localStorage.getItem('language') === 'ru') {
             mainPlot.innerHTML +=
@@ -114,6 +175,10 @@ export default class View {
         }
     }
 
+    /**
+    Displays simple pagination based on the selected language and number of dreams
+    @param {HTMLElement} mainPlot - The element where the pagination will be displayed
+    @param {number} dreamsNumber - The number of dreams to determine the content of pagination */
     displaySimplePagination(mainPlot, dreamsNumber) {
         if (localStorage.getItem('language') === 'ru') {
             let dynamicContent = '';
@@ -156,6 +221,12 @@ export default class View {
         }
     }
 
+    /**
+    Display pagination based on the current language and dream count
+    @param {HTMLElement} mainPlot - The main element to display pagination in
+    @param {number} dreamsNumber - The number of dreams to display
+    @param {number} currentPageNumber - The current page number being displayed
+    @param {number} pagesNumber - The total number of pages available */
     displayPagination(mainPlot, dreamsNumber, currentPageNumber, pagesNumber) {
         if (localStorage.getItem('language') === 'ru') {
             let dynamicContent = '';
@@ -210,6 +281,20 @@ export default class View {
         }
     }
 
+    /**
+    Display the dream record on the webpage
+    @param {HTMLElement} mainPlot - The element where the dream record will be displayed
+    @param {Object} record - The dream record data
+    @param {string} dreamCategoryIcon - The icon representing the dream category
+    @param {string} dreamCategoryIconDescription - Description of the dream category icon
+    @param {string} dreamMoodIcon - The icon representing the dream mood
+    @param {string} dreamMoodIconDescription - Description of the dream mood icon
+    @param {string} monthName - The name of the month when the dream occurred
+    @param {string} weekDay - The day of the week when the dream occurred
+    @param {string} avatarUrl - The URL of the user's avatar
+    @param {string} nickname - The user's nickname
+    @param {string} id - The unique ID of the dream record
+    @param {string} likedThis - Indicates if the user has liked this dream record */
     displayDreamRecord(mainPlot, record, dreamCategoryIcon, dreamCategoryIconDescription, dreamMoodIcon, dreamMoodIconDescription, monthName, weekDay, avatarUrl, nickname, id, likedThis) {
         var dynamicTagContent = '',
             likesSpan = '';
@@ -332,6 +417,10 @@ export default class View {
         }
     }
 
+    /**
+    Translates the month from English to Russian.
+    @param {string} month - The month in English (e.g. 'January').
+    @returns {string} - The month translated to Russian (e.g. 'Января'). */
     translateMonthToRu(month) {
         switch (month) {
             case 'January':
@@ -363,6 +452,10 @@ export default class View {
         }
     }
 
+    /**
+    Translates the week day from English to Russian.
+    @param {string} weekDay - The week day in English (e.g. 'Monday').
+    @returns {string} - The week day translated to Russian (e.g. 'Понедельник'). */
     translateWeekDayToRu(weekDay) {
         switch (weekDay) {
             case 'Monday':
@@ -384,6 +477,11 @@ export default class View {
         }
     }
 
+    /**
+    Displays the user filter based on the user's avatar URL and nickname,
+    considering the language stored in the localStorage.
+    @param {string} userAvatarUrl - The URL of the user's avatar.
+    @param {string} userNickname - The user's nickname. */
     displayUserFilter(userAvatarUrl, userNickname) {
         const userSearchDiv = this.getUserSearchDivElement();
         if (localStorage.getItem('language') === 'ru') {
@@ -415,10 +513,16 @@ export default class View {
         }
     }
 
+    /**
+    Toggles the 'waiting-background' class on the '.main' element,
+    which is used to apply styling for waiting/loading state. */
     toggleClassWaitingBackgroundOfMain() {
         document.querySelector('.main').classList.toggle('waiting-background');
     }
 
+    /**
+    Translates the page content between English and Russian using data from a dictionary JSON file.
+    */
     translatePage() {
         fetch('../dictionary.json')
             .then(response => response.json())

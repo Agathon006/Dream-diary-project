@@ -1,3 +1,8 @@
+/**
+ * view_record page controller module.
+ * @module js/pages/view_record/controller
+ */
+
 export default class Controller {
     constructor(view, model) {
         this.view = view;
@@ -11,12 +16,20 @@ export default class Controller {
         this._initLikeButtonListener();
     }
 
+    /**
+     * Initializes translation based on the stored language preference.
+     * If the stored language is Russian ('ru'), it translates the page using the view's translatePage method.
+     */
     _initTranslation() {
         if (localStorage.getItem('language') === 'ru') {
             this.view.translatePage();
         }
     }
 
+    /**
+     * Initializes a click event listener for the burger button to control the burger content visibility.
+     * Toggles the visibility of the burger content based on the target click and the element's classes.
+     */
     _initBurgerButtonListener() {
         document.querySelector('.body').addEventListener('click', (event) => {
             if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -28,6 +41,10 @@ export default class Controller {
         });
     }
 
+    /**
+    Initializes the dream record by retrieving the record ID from local storage
+    and updating the views count for the record.
+    */
     _initDreamRecord() {
         const recordId = localStorage.getItem('dreamRecordID'),
             dreamTitle = this.view.getDreamTitleElement(),
@@ -112,6 +129,10 @@ export default class Controller {
             });
     }
 
+    /**
+    Translates the given category to Russian.
+    @param {string} Category - The category to translate.
+    @returns {string} The translated category in Russian. */
     _translateCategoryToRu(Category) {
         switch (Category) {
             case 'Usual':
@@ -131,6 +152,10 @@ export default class Controller {
         }
     }
 
+    /**
+    Translates mood from English to Russian.
+    @param {string} Mood - The mood to be translated.
+    @returns {string} The translated mood in Russian. */
     _translateMoodToRu(Mood) {
         switch (Mood) {
             case 'Typical dream':
@@ -148,6 +173,10 @@ export default class Controller {
         }
     }
 
+    /**
+    Translates the English month name to Russian.
+    @param {string} month - The month name in English.
+    @returns {string} The month name translated to Russian. */
     _translateMonthToRu(month) {
         switch (month) {
             case 'January':
@@ -179,6 +208,12 @@ export default class Controller {
         }
     }
 
+    /**
+    Initializes the event listener for the like button of a dream record.
+    Retrieves the necessary elements from the view and adds a click event listener.
+    Uses JWT to verify the user's token and secret key.
+    Calls the model's method to get the dream record's data and updates the likes number.
+    */
     _initLikeButtonListener() {
         const recordId = localStorage.getItem('dreamRecordID'),
             dreamLikesButton = this.view.getDreamLikesButtonElement(),

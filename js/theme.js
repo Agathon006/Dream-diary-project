@@ -1,3 +1,8 @@
+/**
+ * theme change script.
+ * @module js/theme
+ */
+
 const themesSwitcherCheckboxes = document.querySelectorAll(`.theme-checkbox`),
     header = document.querySelector(`.header`),
     main = document.querySelector(`.main`),

@@ -1,3 +1,8 @@
+/**
+ * registered_home page controller module.
+ * @module js/pages/registered_home/controller
+ */
+
 export default class Controller {
     constructor(view, model) {
         this.view = view;
@@ -18,12 +23,20 @@ export default class Controller {
         this._initDreamRecords();
     }
 
+    /**
+    Initializes the translation based on the user's selected language.
+    Calls the view's translatePage method if language is set to 'ru'.
+    @function _initTranslation */
     _initTranslation() {
         if (localStorage.getItem('language') === 'ru') {
             this.view.translatePage();
         }
     }
 
+    /**
+    Initializes the listener for the burger button.
+    Toggles the visibility of the burger content based on user interactions.
+    @function _initBurgerButtonListener */
     _initBurgerButtonListener() {
         document.querySelector('.body').addEventListener('click', (event) => {
             if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -35,6 +48,10 @@ export default class Controller {
         });
     }
 
+    /**
+    Initializes notification functionality for the application.
+    Sets up an interaction object to track user interaction and a default interval to check for notifications every minute.
+    Listens for click events on the document to track user interaction and adjust notification checking accordingly. */
     _initNotification() {
         var interaction = {
             interacted: false
@@ -82,6 +99,9 @@ export default class Controller {
         });
     }
 
+    /**
+    Initializes the dream search input element, fetches dream records from the model and displays auto-suggestions based on user input.
+    */
     _initDreamSearchInputElement() {
         const dreamSearchInput = this.view.getDreamSearchInputElement(),
             dreamSearchButton = this.view.getDreamSearchButtonElement();
@@ -135,6 +155,9 @@ export default class Controller {
             .catch(error => console.error('Error:', error));
     }
 
+    /**
+    Initializes the event listener for dream search functionality
+    */
     _initDreamSearchListener() {
         const dreamSearchInput = this.view.getDreamSearchInputElement(),
             dreamSearchButton = this.view.getDreamSearchButtonElement();
@@ -173,6 +196,9 @@ export default class Controller {
         });
     }
 
+    /**
+    Initialize the Dream Category listener for the select element and icon element
+    */
     _initDreamCategoryListener() {
         const dreamCategorySelect = this.view.getDreamCategorySelectElement(),
             dreamCategoryIcon = this.view.getDreamCategoryIconElement();
@@ -233,6 +259,9 @@ export default class Controller {
         });
     }
 
+    /**
+    Initialize the Dream Mood listener for the select element and icon element
+    */
     _initDreamMoodListener() {
         const dreamMoodSelect = this.view.getDreamMoodSelectElement(),
             dreamMoodIcon = this.view.getDreamMoodIconElement();
@@ -289,6 +318,9 @@ export default class Controller {
         });
     }
 
+    /**
+    Initialize the Sort listener for the dream records by likes/views
+    */
     _initSortListener() {
         const dreamSortSelect = this.view.getDreamSortSelectElement(),
             dreamSortIcon = this.view.getDreamSortIconElement();
@@ -336,7 +368,9 @@ export default class Controller {
         });
     }
 
-
+    /**
+    Initialize the Main plot listener for the dynamic content in form of dream records accorging to filter and sort
+    */
     _initMainPlotListener() {
         const mainPlot = this.view.getMainPlotElement();
         mainPlot.addEventListener('click', (event) => {
@@ -455,6 +489,9 @@ export default class Controller {
         });
     }
 
+    /**
+    Initialize the User Search listener for the user search div element
+    */
     _initUserSearchListener() {
         const userSearchDiv = this.view.getUserSearchDivElement();
         userSearchDiv.addEventListener('click', (event) => {
@@ -471,6 +508,14 @@ export default class Controller {
         });
     }
 
+    /**
+    Initialize dream records based on the parameters provided.
+    @param {number} [currentPageNumber=1] - The current page number for pagination.
+    @param {string} [searchInput=''] - The search input for filtering records.
+    @param {string} [dreamCategory='All'] - The category of the dreams to filter.
+    @param {string} [dreamMood='All'] - The mood of the dreams to filter.
+    @param {string} [sort='Default'] - The sorting option for the records.
+    @param {string} [userEmail='All'] - The user email for filtering records. */
     _initDreamRecords(currentPageNumber = 1, searchInput = '', dreamCategory = 'All', dreamMood = 'All', sort = 'Default', userEmail = 'All') {
         const mainPlot = this.view.getMainPlotElement();
 
@@ -515,6 +560,10 @@ export default class Controller {
             });
     }
 
+    /**
+    Put a dream record on the main plot with specified data.
+    @param {Object} mainPlot - The main plot object where the dream record will be displayed.
+    @param {Object} record - The dream record data to be displayed. */
     _putDreamRecord(mainPlot, record) {
         this.model.getPromiseGetUserByEmail(record.email)
             .then(response => response.json())

@@ -12,6 +12,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Controller)
 /* harmony export */ });
+/**
+ * home controller module.
+ * @module js/pages/home/controller
+ */
+
 class Controller {
   constructor(view) {
     this.view = view;
@@ -22,11 +27,17 @@ class Controller {
     this._initReasonsSectionsButtonListener();
     this._initDoNotHaveDreamSectionsButtonListener();
   }
+
+  /**
+  Initializes translation based on the language stored in localStorage. */
   _initTranslation() {
     if (localStorage.getItem('language') === 'ru') {
       this.view.translatePage();
     }
   }
+
+  /**
+  Initializes a listener for the burger button to toggle the visibility of the burger menu. */
   _initBurgerButtonListener() {
     document.querySelector('.body').addEventListener('click', event => {
       if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -36,6 +47,11 @@ class Controller {
       }
     });
   }
+
+  /**
+  Initializes the listener for the Reasons Sections Button. When clicked, it scrolls
+  to the 'Do Not Have Dreams' block element on the page.
+  */
   _initReasonsSectionsButtonListener() {
     const button = this.view.getReasonsSectionsButtonElement(),
       doNotHaveDreamsBlockElement = this.view.getDoNotHaveDreamsBlockElement();
@@ -46,6 +62,11 @@ class Controller {
       });
     });
   }
+
+  /**
+  Initializes the event listener for the "Do Not Have Dream Sections" button.
+  When the button is clicked, the page scrolls to the bottom smoothly.
+  */
   _initDoNotHaveDreamSectionsButtonListener() {
     const button = this.view.getDoNotHaveDreamSectionsButtonElement();
     button.addEventListener('click', () => {
@@ -71,6 +92,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var i18next__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! i18next */ "./node_modules/i18next/dist/esm/i18next.js");
 
+
+/**
+ * home view module.
+ * @module js/pages/home/view
+ */
+
 class View {
   static ID = {
     REASONS_SECTIONS: {
@@ -83,15 +110,32 @@ class View {
   static CLASSES = {
     DO_NOT_HAVE_DREAMS_BLOCK: 'do-not-have-dreams-block'
   };
+  Assistant;
+
+  /**
+  Retrieves the button element for reasons sections based on its ID.
+  @returns {Element} The button element for reasons sections. */
   getReasonsSectionsButtonElement() {
     return document.querySelector(`#${View.ID.REASONS_SECTIONS.BUTTON}`);
   }
+
+  /**
+  Retrieves the block element for "Do Not Have Dreams" based on its class name.
+  @returns {Element} The block element for "Do Not Have Dreams". */
   getDoNotHaveDreamsBlockElement() {
     return document.querySelector(`.${View.CLASSES.DO_NOT_HAVE_DREAMS_BLOCK}`);
   }
+
+  /**
+  Retrieves the button element for "Do Not Have Dream Sections" based on its ID.
+  @returns {Element} The button element for "Do Not Have Dream Sections". */
   getDoNotHaveDreamSectionsButtonElement() {
     return document.querySelector(`#${View.ID.DO_NOT_HAVE_DREAM_SECTIONS.BUTTON}`);
   }
+
+  /**
+  Translates the page content between English and Russian using data from a dictionary JSON file.
+  */
   translatePage() {
     fetch('./dictionary.json').then(response => response.json()).then(data => {
       i18next__WEBPACK_IMPORTED_MODULE_0__["default"].init({
@@ -2613,6 +2657,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controller_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controller.js */ "./js/pages/home/controller.js");
 
 
+/**
+ * home index module.
+ * @module js/pages/home/index
+ */
 
 
 window.addEventListener('DOMContentLoaded', () => {

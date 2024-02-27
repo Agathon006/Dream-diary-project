@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+ * admin index module.
+ * @module js/pages/admin/index
+ */
 import Model from './model.js'
 import View from './view.js'
 import Controller from './controller.js'

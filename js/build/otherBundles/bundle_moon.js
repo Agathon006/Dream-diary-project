@@ -14,6 +14,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js */ "./node_modules/core-js/index.js");
 /* harmony import */ var core_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * moon page controller module.
+ * @module js/pages/moon/controller
+ */
+
 
 class Controller {
   constructor(view, model) {
@@ -28,11 +33,21 @@ class Controller {
     this._initMoonphases();
     this._initCurrentMoonPhaseBorder();
   }
+
+  /**
+  Initializes the translation based on the user's selected language.
+  Calls the view's translatePage method if language is set to 'ru'.
+  @function _initTranslation */
   _initTranslation() {
     if (localStorage.getItem('language') === 'ru') {
       this.view.translatePage();
     }
   }
+
+  /**
+  Initializes the listener for the burger button.
+  Toggles the visibility of the burger content based on user interactions.
+  @function _initBurgerButtonListener */
   _initBurgerButtonListener() {
     document.querySelector('.body').addEventListener('click', event => {
       if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -42,6 +57,15 @@ class Controller {
       }
     });
   }
+
+  /**
+  Initializes the "My Place" button functionality.
+  Gets the element for the "My Place" button and adds a click event listener.
+  Upon clicking the button, it toggles classes for waiting background of forecast day elements,
+  retrieves the user's current geolocation using the navigator.geolocation.getCurrentPosition method,
+  and fetches the weather forecast data for the current location.
+  Upon successful retrieval, it displays the forecast data for the current location in the UI.
+  */
   _initMyPlaceButton() {
     const myPlaceButton = this.view.getMyPlaceButtonElement();
     myPlaceButton.addEventListener('click', () => {
@@ -83,6 +107,10 @@ class Controller {
       });
     });
   }
+
+  /**
+  Initializes the current weather forecast for Minsk by fetching data from the weather API
+  and updating the forecast container with the forecast place information. */
   _initCurrentForecast() {
     this.model.getWeatherForecastMinsk().then(response => response.json()).then(data => {
       const forecastContainer = this.view.getForecastContainerElement(),
@@ -117,6 +145,11 @@ class Controller {
       console.log('Error getting data from weather API: ', error);
     });
   }
+
+  /**
+  Translate weather conditions from English to Russian.
+  @param {string} weatherCondition - The weather condition in English.
+  @returns {string} The corresponding weather condition in Russian. */
   _defineRuWeather(weatherCondition) {
     switch (weatherCondition) {
       case 'Clear':
@@ -141,6 +174,10 @@ class Controller {
         return 'Неизвестно';
     }
   }
+
+  /**
+  Initializes the moon phases by getting the necessary date elements and displaying the current and next moon phases.
+  */
   _initMoonphases() {
     const newMoonDate = this.view.getNewMoonDateSpanElement(),
       growingMoonDate = this.view.getGrowingMoonDateSpanElement(),
@@ -159,6 +196,12 @@ class Controller {
     nextGrowingMoonDate.innerText = `${this._changeOneDay(nextNewMoonDate.innerText, 'increase')} - ${this._changeOneDay(nextFullMoonDate.innerText, 'reduce')}`;
     nextWaningMoonDate.innerText = `${this._changeOneDay(nextFullMoonDate.innerText, 'increase')} - ${this._calculateMoonPhase(1, true)}`;
   }
+
+  /**
+  Calculate the date of the next or previous moon phase based on the given phase ratio.
+  @param {number} phaseRatio - The ratio of the phase cycle completed (between 0 and 1).
+  @param {boolean} next - True if calculating the next phase, false if calculating the previous phase.
+  @returns {Date} The date of the next or previous moon phase. */
   _calculateMoonPhase(phaseRatio, next = false) {
     const synodicMonth = 29.53058867,
       newMoonDateLandmark = new core_js__WEBPACK_IMPORTED_MODULE_0__.Date('January 11, 2024 14:57:00'),
@@ -174,6 +217,13 @@ class Controller {
     }
     return this._handleDateToCommon(nextPhaseDate);
   }
+
+  /**
+  Changes the date by one day based on the given action.
+  @param {string} dateString - The date string in the format "day.month.year".
+  @param {string} action - The action to perform on the date. Can be 'increase' or 'reduce'.
+  @returns {string} The updated date string after changing by one day.
+  */
   _changeOneDay(dateString, action) {
     const parts = dateString.split('.');
     const day = parseInt(parts[0], 10),
@@ -188,6 +238,10 @@ class Controller {
     const nextDate = this._handleDateToCommon(date);
     return nextDate;
   }
+
+  /**
+  Initializes the current moon phase border based on the target date.
+  */
   _initCurrentMoonPhaseBorder() {
     const targetDate = this._handleDateToCommon(new core_js__WEBPACK_IMPORTED_MODULE_0__.Date());
     const spans = this.view.getCurrentMoonPhaseDateSpansElements();
@@ -211,12 +265,23 @@ class Controller {
       }
     });
   }
+
+  /**
+  Format date in common format (dd.mm.yyyy)
+  @param {Date} date - Date object to be formatted
+  @returns {string} - Formatted date in common format
+  */
   _handleDateToCommon(date) {
     const day = date.getDate().toString().padStart(2, '0'),
       month = (date.getMonth() + 1).toString().padStart(2, '0'),
       year = date.getFullYear();
     return `${day}.${month}.${year}`;
   }
+
+  /**
+  Format date in valid format (yyyy-mm-dd)
+  @param {string} date - Date string in common format (dd.mm.yyyy)
+  @returns {string} - Formatted date in valid format */
   _handleDateToValid(date) {
     const parts = date.split('.');
     const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
@@ -236,10 +301,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
+/**
+ * moon page model module.
+ * @module js/pages/moon/model
+ */
 class Model {
+  /**
+  Retrieves the weather forecast for Minsk from OpenWeatherMap API.
+  @returns {Promise<Response>} A promise that resolves with the weather forecast data for Minsk. */
   getWeatherForecastMinsk() {
     return fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Minsk&appid=a94d0a5ac08570add4b47b8da933f247&units=metric`);
   }
+
+  /**
+  Retrieves the weather forecast for the specified location using the latitude and longitude.
+  @param {number} latitude The latitude of the location.
+  @param {number} longitude The longitude of the location.
+  @returns {Promise<Response>} A promise that resolves with the weather forecast data for the specified location. */
   getWeatherForecastForCurrentLocation(latitude, longitude) {
     return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=a94d0a5ac08570add4b47b8da933f247&units=metric`);
   }
@@ -258,6 +336,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ View)
 /* harmony export */ });
 /* harmony import */ var i18next__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! i18next */ "./node_modules/i18next/dist/esm/i18next.js");
+/**
+ * moon page view module.
+ * @module js/pages/moon/view
+ */
+
 
 class View {
   static ID = {
@@ -287,42 +370,108 @@ class View {
       HIDDEN: 'hidden'
     }
   };
+
+  /**
+   * Get the forecast place element.
+   * @returns {Element} The forecast place element.
+   */
   getForecastPlaceElement() {
     return document.querySelector(`#${View.ID.FORECAST.PLACE}`);
   }
+
+  /**
+   * Get the 'My Place' button element in the forecast.
+   * @returns {Element} The 'My Place' button element.
+   */
   getMyPlaceButtonElement() {
     return document.querySelector(`#${View.ID.FORECAST.MY_PLACE_BUTTON}`);
   }
+
+  /**
+   * Get the forecast container element.
+   * @returns {Element} The forecast container element.
+   */
   getForecastContainerElement() {
     return document.querySelector(`#${View.ID.FORECAST.CONTAINER}`);
   }
+
+  /**
+   * Get the new moon date span element.
+   * @returns {Element} The new moon date span element.
+   */
   getNewMoonDateSpanElement() {
     return document.querySelector(`#${View.ID.MOON_PHASES.NEW_MOON_DATE}`);
   }
+
+  /**
+   * Get the growing moon date span element.
+   * @returns {Element} The growing moon date span element.
+   */
   getGrowingMoonDateSpanElement() {
     return document.querySelector(`#${View.ID.MOON_PHASES.GROWING_MOON_DATE}`);
   }
+
+  /**
+   * Get the full moon date span element.
+   * @returns {Element} The full moon date span element.
+   */
   getFullMoonDateSpanElement() {
     return document.querySelector(`#${View.ID.MOON_PHASES.FULL_MOON_DATE}`);
   }
+
+  /**
+   * Get the waning moon date span element.
+   * @returns {Element} The waning moon date span element.
+   */
   getWaningDateSpanElement() {
     return document.querySelector(`#${View.ID.MOON_PHASES.WANING_MOON_DATE}`);
   }
+
+  /**
+  * Returns the span element for the next new moon date.
+  * @returns {Element} The span element for the next new moon date.
+  */
   getNextNewMoonDateSpanElement() {
     return document.querySelector(`#${View.ID.NEXT_MOON_PHASES.NEXT_NEW_MOON_DATE}`);
   }
+
+  /**
+   * Returns the span element for the next growing moon date.
+   * @returns {Element} The span element for the next growing moon date.
+   */
   getNextGrowingMoonDateSpanElement() {
     return document.querySelector(`#${View.ID.NEXT_MOON_PHASES.NEXT_GROWING_MOON_DATE}`);
   }
+
+  /**
+   * Returns the span element for the next full moon date.
+   * @returns {Element} The span element for the next full moon date.
+   */
   getNextFullMoonDateSpanElement() {
     return document.querySelector(`#${View.ID.NEXT_MOON_PHASES.NEXT_FULL_MOON_DATE}`);
   }
+
+  /**
+   * Returns the span element for the next waning moon date.
+   * @returns {Element} The span element for the next waning moon date.
+   */
   getNextWaningDateSpanElement() {
     return document.querySelector(`#${View.ID.NEXT_MOON_PHASES.NEXT_WANING_MOON_DATE}`);
   }
+
+  /**
+   * Returns an array of span elements for the current moon phase dates.
+   * @returns {Element[]} An array of span elements for the current moon phase dates.
+   */
   getCurrentMoonPhaseDateSpansElements() {
     return document.querySelectorAll(`.${View.JS_CLASSES.MOON_PHASES.DATES_SPANS}`);
   }
+
+  /**
+  Changes the color of the specified element based on the cloud cover number.
+  @param {HTMLElement} element - The element to change the color of.
+  @param {number} number - The cloud cover number.
+  @param {HTMLElement} resultElement - The element to display the result text in. */
   whichColorForCloudCover(element, number, resultElement) {
     if (number > 67) {
       element.style.color = 'red';
@@ -350,15 +499,26 @@ class View {
       }
     }
   }
+
+  /**
+  Toggles the 'hidden' class on the specified element, effectively hiding or showing it.
+  @param {Element} element - The element to toggle the 'hidden' class on. */
   toggleClassHidden(element) {
     element.style.transition = 'none';
     element.classList.toggle(View.JS_CLASSES.COMMON.HIDDEN);
   }
+
+  /**
+  Toggles the 'waiting-background' class on all elements with the class 'forecast-day'. */
   toggleClassesWaitingBackgroundOfForecastDayElements() {
     document.querySelectorAll('.forecast-day').forEach(element => {
       element.classList.toggle('waiting-background');
     });
   }
+
+  /**
+  Translates the page content between English and Russian using data from a dictionary JSON file.
+  */
   translatePage() {
     fetch('../dictionary.json').then(response => response.json()).then(data => {
       i18next__WEBPACK_IMPORTED_MODULE_0__["default"].init({
@@ -32668,6 +32828,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controller.js */ "./js/pages/moon/controller.js");
 
 
+/**
+ * moon page index module.
+ * @module js/pages/moon/index
+ */
 
 
 

@@ -5408,6 +5408,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Controller)
 /* harmony export */ });
+/**
+ * user page controller module.
+ * @module js/pages/user/controller
+ */
+
 class Controller {
   constructor(view, model) {
     this.view = view;
@@ -5419,16 +5424,26 @@ class Controller {
     this._initBurgerButtonListener();
     this._getRandomUrlButtonListener();
     this._datepickerListener();
-    this._userProfileListener();
+    this._userProfileInitialization();
     this._passwordRepeatInputListener();
     this._passwordInputListener();
     this._passwordCheckBoxListener();
   }
+
+  /**
+   * Initializes translation based on the stored language preference.
+   * If the stored language is Russian ('ru'), it translates the page using the view's translatePage method.
+   */
   _initTranslation() {
     if (localStorage.getItem('language') === 'ru') {
       this.view.translatePage();
     }
   }
+
+  /**
+   * Initializes a click event listener for the burger button to control the burger content visibility.
+   * Toggles the visibility of the burger content based on the target click and the element's classes.
+   */
   _initBurgerButtonListener() {
     document.querySelector('.body').addEventListener('click', event => {
       if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -5438,6 +5453,12 @@ class Controller {
       }
     });
   }
+
+  /**
+  Event listener for the getRandomUrlButton element
+  Gets a random image URL from the model using the access key
+  Updates the profile image URL and main avatar with the fetched image
+  */
   _getRandomUrlButtonListener() {
     const accessKey = 'LbQIwO2aXDXY-0LkU8nHbgbJvw8n6LB_16Og8cHjOeE',
       profileGetRandomUrlButton = this.view.getRrofileGetRandomUrlButtonElement(),
@@ -5461,10 +5482,18 @@ class Controller {
       });
     });
   }
+
+  /**
+  Event listener for the datepicker element
+  Initializes the datepicker widget on the datepicker element using jQuery UI */
   _datepickerListener() {
     $('#datepicker').datepicker();
   }
-  _userProfileListener() {
+
+  /**
+  Initializes the user profile by fetching user data using the email decoded from JWT
+  and updating the profile elements with the retrieved user information. */
+  _userProfileInitialization() {
     const nincknameInput = this.view.getRrofileNicknameElement(),
       emailInput = this.view.getRrofileEmailElement(),
       passwordInput = this.view.getRrofilePasswordElement(),
@@ -5497,6 +5526,10 @@ class Controller {
       }
     });
   }
+
+  /**
+  Listener function for password edit button
+  @param {Object} userInfo - User information object */
   _passwordEditButtonListener(userInfo) {
     const passwordEditButton = this.view.getPasswordEditButton(),
       passwordInput = this.view.getRrofilePasswordElement(),
@@ -5587,6 +5620,11 @@ class Controller {
       }
     });
   }
+
+  /**
+  Listens for input in the repeat password field and updates UI accordingly.
+  If passwords match and oldPasswordMode is true, changes UI elements.
+  */
   _passwordRepeatInputListener() {
     const passwordEditButton = this.view.getPasswordEditButton(),
       passwordSpan = this.view.getRrofilePasswordSpanElement(),
@@ -5616,6 +5654,12 @@ class Controller {
       }
     });
   }
+
+  /**
+  Checks if the passwords match.
+  @param {HTMLElement} passwordInput - The input element for the password.
+  @param {HTMLElement} repeatPasswordInput - The input element for the repeated password.
+  @returns {boolean} - Returns true if passwords match, false otherwise. */
   _arePasswordsMatches(passwordInput, repeatPasswordInput) {
     if (passwordInput.value === repeatPasswordInput.value) {
       this.view.clearClassWrongInputFromElements();
@@ -5627,6 +5671,9 @@ class Controller {
       return false;
     }
   }
+
+  /**
+  Listens for input events on the password input field and performs actions accordingly */
   _passwordInputListener() {
     const passwordInput = this.view.getRrofilePasswordElement(),
       repeatPasswordInput = this.view.getRrofileRepeatPasswordElement();
@@ -5635,6 +5682,9 @@ class Controller {
       this.view.removeClassRightInput(repeatPasswordInput);
     });
   }
+
+  /**
+  Listens for change events on the password checkbox input field and toggles password visibility */
   _passwordCheckBoxListener() {
     const passwordCheckBox = this.view.getPassworEditCheckBoxInputElement();
     passwordCheckBox.addEventListener('change', () => {
@@ -5649,6 +5699,11 @@ class Controller {
       }
     });
   }
+
+  /**
+  Handles the click event on the edit button for user profile information.
+  @param {object} userInfo - The user information object.
+  @param {string} profileMainAvatar - The URL of the main avatar for the user profile. */
   _editButtonListener(userInfo, profileMainAvatar) {
     const editButton = this.view.getRrofileEditButton(),
       getRandomUrlButton = this.view.getRrofileGetRandomUrlButtonElement();
@@ -5686,9 +5741,20 @@ class Controller {
       }
     });
   }
+
+  /**
+  Checks if any of the profile inputs have been changed
+  @param {HTMLElement} inputs - An array of input elements
+  @param {Array} inputsBeforeEdit - An array of input elements before editing
+  @returns {boolean} - Returns true if any of the inputs have been changed, false otherwise */
   _isProfileChanged(inputs, inputsBeforeEdit) {
     return inputs[0].value !== inputsBeforeEdit[0] || inputs[2].value !== inputsBeforeEdit[2] || inputs[3].value !== inputsBeforeEdit[3] || inputs[4].value !== inputsBeforeEdit[4] || inputs[5].value !== inputsBeforeEdit[5] || inputs[6].value !== inputsBeforeEdit[6];
   }
+
+  /**
+  Checks if validation for a specific input is okay
+  @param {HTMLElement} inputs - An array of input elements
+  @returns {boolean} - Returns true if validation is okay, false otherwise */
   _isValidationOkay(inputs) {
     let isValidationOkay = true;
     if (!inputs[0].value.match(/^[a-zA-Z][a-zA-Z0-9_]{4,14}$/)) {
@@ -5729,9 +5795,23 @@ class Controller {
     }
     return isValidationOkay;
   }
+
+  /**
+  Checks if a given input is a string
+  @param {string} input - The input to be checked
+  @returns {boolean} - Returns true if the input is a string, false otherwise */
   _isThisString(input) {
     return input.match(/^[A-Za-z]+$/);
   }
+
+  /**
+  Edit user profile information and update in database if nickname is not a copy
+  @param {HTMLElement} profileMainAvatar - URL of the user's main avatar image
+  @param {object} userInfo - Information about the user, including ID
+  @param {HTMLElement} inputs - Array of input elements from user profile form
+  @param {HTMLElement} getRandomUrlButton - Function to get a random URL for avatar image
+  @param {HTMLElement} editButton - Function to trigger profile edit
+  @param {Array} inputsBeforeEdit - Array of input values before edit */
   _editUserProfile(profileMainAvatar, userInfo, inputs, getRandomUrlButton, editButton, inputsBeforeEdit) {
     const editedUser = {
       nickname: inputs[0].value,
@@ -5765,6 +5845,15 @@ class Controller {
       });
     }
   }
+
+  /**
+  Updates user profile in the database with the edited user information.
+  @param {number} userId - The id of the user whose profile is being updated.
+  @param {Object} editedUser - The edited user information.
+  @param {HTMLElement} profileMainAvatar - The main avatar element in the profile.
+  @param {HTMLElement[]} inputs - Array of input elements to toggle.
+  @param {HTMLElement} getRandomUrlButton - The button element to toggle for getting random url.
+  @param {HTMLElement} editButton - The button element to toggle for editing. */
   _updateProfileInDb(userId, editedUser, profileMainAvatar, inputs, getRandomUrlButton, editButton) {
     this.model.getPromiseEditUser(userId, editedUser).then(response => {
       if (response.ok) {
@@ -5795,13 +5884,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
+/**
+ * user page model module.
+ * @module js/pages/user/model
+ */
 class Model {
+  /**
+  Fetches a random image URL from Unsplash API.
+  @param {string} accessKey - The access key required to authenticate the request.
+  @returns {Promise} - A promise that resolves to the fetched image URL. */
   getPromiseGetRandomImageUrl(accessKey) {
     return fetch(`https://api.unsplash.com/photos/random?client_id=${accessKey}`);
   }
+
+  /**
+  Validates if a password meets the specified criteria.
+  @param {string} passwordInput - The password to be validated.
+  @returns {boolean} - Returns true if the password meets the criteria, otherwise false. */
   isPasswordOkay(passwordInput) {
     return passwordInput.match(/^(?=.*[a-z])(?=.*[A-Z]).{6,200}$/);
   }
+
+  /**
+  Fetches user data based on the provided email address.
+  @param {string} email - The email address of the user.
+  @returns {Promise} - A promise that resolves to the user data fetched by email. */
   getPromiseGetUserDataByEmail(email) {
     return fetch(`http://localhost:3000/users?email=${email}`).then(response => response.json()).then(data => {
       if (data.length) {
@@ -5813,9 +5920,20 @@ class Model {
       console.error('Error:', error);
     });
   }
+
+  /**
+  Fetches a promise that checks if a nickname exists in the database.
+  @param {string} nickname - The nickname to check in the database.
+  @returns {Promise} - A promise that resolves with the response from the API call. */
   getPromiseIsNicknameInDb(nickname) {
     return fetch(`http://localhost:3000/users?nickname=${nickname}`);
   }
+
+  /**
+  Fetches a promise to edit a user in the database.
+  @param {string} id - The id of the user to edit.
+  @param {object} newData - The new data to update the user with.
+  @returns {Promise} - A promise that resolves with the response from the API call. */
   getPromiseEditUser(id, newData) {
     return fetch(`http://localhost:3000/users/${id}`, {
       method: 'PATCH',
@@ -5841,6 +5959,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ View)
 /* harmony export */ });
 /* harmony import */ var i18next__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! i18next */ "./node_modules/i18next/dist/esm/i18next.js");
+/**
+ * user page view module.
+ * @module js/pages/user/view
+ */
+
 
 class View {
   static ID = {
@@ -5876,97 +5999,213 @@ class View {
       HIDDEN: 'hidden'
     }
   };
+
+  /**
+  Retrieves the profile nickname element from the DOM.
+  @returns {Element} The profile nickname element. */
   getRrofileNicknameElement() {
     return document.querySelector(`#${View.ID.PROFILE.NICKNAME}`);
   }
+
+  /**
+  Retrieves the profile email element from the DOM.
+  @returns {Element} The profile email element. */
   getRrofileEmailElement() {
     return document.querySelector(`#${View.ID.PROFILE.EMAIL}`);
   }
+
+  /**
+  Retrieves the profile password span element from the DOM.
+  @returns {Element} The profile password span element. */
   getRrofilePasswordSpanElement() {
     return document.querySelector(`#${View.ID.PROFILE.PASSWORD_SPAN}`);
   }
+
+  /**
+  Retrieves the profile password element from the DOM.
+  @returns {Element} The profile password element. */
   getRrofilePasswordElement() {
     return document.querySelector(`#${View.ID.PROFILE.PASSWORD}`);
   }
+
+  /**
+  Retrieves the profile repeat password span element from the DOM.
+  @returns {Element} The profile repeat password span element. */
   getRrofileRepeatPasswordSpanElement() {
     return document.querySelector(`#${View.ID.PROFILE.REPEAT_PASSWORD_SPAN}`);
   }
+
+  /**
+  Retrieves the profile repeat password element from the DOM.
+  @returns {Element} The profile repeat password element. */
   getRrofileRepeatPasswordElement() {
     return document.querySelector(`#${View.ID.PROFILE.REPEAT_PASSWORD}`);
   }
+
+  /**
+  Returns the profile image URL element.
+  @returns {Element} The profile image URL element. */
   getRrofileImageUrlElement() {
     return document.querySelector(`#${View.ID.PROFILE.IMAGE_URL}`);
   }
+
+  /**
+  Returns the button element to get a random URL.
+  @returns {Element} The button element to get a random URL. */
   getRrofileGetRandomUrlButtonElement() {
     return document.querySelector(`#${View.ID.PROFILE.GET_RANDOM_URL_BUTTON}`);
   }
+
+  /**
+  Returns the name element of the profile.
+  @returns {Element} The name element of the profile. */
   getRrofileNameElement() {
     return document.querySelector(`#${View.ID.PROFILE.NAME}`);
   }
+
+  /**
+  Returns the surname element of the profile.
+  @returns {Element} The surname element of the profile. */
   getRrofileSurnameElement() {
     return document.querySelector(`#${View.ID.PROFILE.SURNAME}`);
   }
+
+  /**
+  Returns the birth date element of the profile.
+  @returns {Element} The birth date element of the profile. */
   getRrofileBirthDateElement() {
     return document.querySelector(`#${View.ID.PROFILE.BIRTH_DATE}`);
   }
+
+  /**
+  Returns the 'About Me' element of the profile.
+  @returns {Element} The 'About Me' element of the profile. */
   getRrofileAboutMeElement() {
     return document.querySelector(`#${View.ID.PROFILE.ABOUT_ME}`);
   }
+
+  /**
+  Returns the profile avatar element
+  @returns {Element} The profile avatar element */
   getRrofileAvatarElement() {
     return document.querySelector(`#${View.ID.PROFILE.AVATAR}`);
   }
+
+  /**
+  Returns the password edit button element
+  @returns {Element} The password edit button element */
   getPasswordEditButton() {
     return document.querySelector(`#${View.ID.PROFILE.PASSWORD_EDIT_BUTTON}`);
   }
+
+  /**
+  Returns the password edit checkbox part element
+  @returns {Element} The password edit checkbox part element */
   getPasswordEditCheckboxPart() {
     return document.querySelector(`#${View.ID.PROFILE.PASSWORD_EDIT_CHECKBOX_PART}`);
   }
+
+  /**
+  Returns the password edit checkbox input element
+  @returns {Element} The password edit checkbox input element */
   getPassworEditCheckBoxInputElement() {
     return document.querySelector(`#${View.ID.PROFILE.PASSWORD_EDIT_CHECKBOX_BOX}`);
   }
+
+  /**
+  Returns the profile edit button element
+  @returns {Element} The profile edit button element */
   getRrofileEditButton() {
     return document.querySelector(`#${View.ID.PROFILE.EDIT_BUTTON}`);
   }
+
+  /**
+  Returns all profile input elements
+  @returns {NodeList} All profile input elements */
   getRrofileInputs() {
     return document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.ALL_INPUTS}`);
   }
+
+  /**
+  Gets all password input elements within the profile section
+  @returns {NodeList} - List of password input elements */
   getRrofilePasswordInputs() {
     return document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.ALL_PASSWORD_INPUTS}`);
   }
+
+  /**
+  Toggles the 'hidden' class of an element
+  @param {Element} element - The element to toggle the class on */
   toggleClassHidden(element) {
     element.classList.toggle(View.JS_CLASSES.COMMON.HIDDEN);
   }
+
+  /**
+  Updates the source attribute of an image element
+  @param {HTMLImageElement} image - The image element to update
+  @param {string} src - The new source value */
   updateImageSrc(image, src) {
     image.setAttribute('src', src);
   }
+
+  /**
+  Adds the 'wrong-input' class to an element
+  @param {Element} element - The element to add the class to */
   addClassWrongInput(element) {
     element.classList.add(View.JS_CLASSES.PROFILE.WRONG_INPUT);
   }
+
+  /**
+  Removes the 'wrong-input' class from an element
+  @param {Element} element - The element to remove the class from */
   removeClassWrongInput(element) {
     element.classList.remove(View.JS_CLASSES.PROFILE.WRONG_INPUT);
   }
+
+  /**
+  Adds the 'right-input' class to an element
+  @param {Element} element - The element to add the class to */
   addClassRightInput(element) {
     element.classList.add(View.JS_CLASSES.PROFILE.RIGHT_INPUT);
   }
+
+  /**
+  Removes the 'right-input' class from an element
+  @param {Element} element - The element to remove the class from */
   removeClassRightInput(element) {
     element.classList.remove(View.JS_CLASSES.PROFILE.RIGHT_INPUT);
   }
+
+  /**
+  Creates a new span element with a warning message and a specific class, and inserts it after a given element in the DOM.
+  @param {Element} element - The element after which the warning span will be inserted.
+  @param {string} message - The warning message to be displayed in the span element. */
   createWrongSpanElement(element, message) {
     let warningSpan = document.createElement('span');
     warningSpan.innerText = message;
     warningSpan.classList.add(View.JS_CLASSES.PROFILE.WRONG_SPAN);
     element.parentNode.insertBefore(warningSpan, element.nextSibling);
   }
+
+  /**
+  Removes the 'wrong input' class from all elements with that class in the DOM. */
   clearClassWrongInputFromElements() {
     document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.WRONG_INPUT}`).forEach(item => {
       item.classList.remove(View.JS_CLASSES.PROFILE.WRONG_INPUT);
     });
   }
+
+  /**
+  Removes all span elements with the 'wrong span' class from the DOM. */
   clearClassWrongSpanFromElements() {
     document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.WRONG_SPAN}`).forEach(item => {
       item.remove();
     });
   }
+
+  /**
+  Toggles the locked-input class of the specified inputs, excluding the second input.
+  @param {Array<Element>} inputs - An array of input elements to toggle the class on. */
   toggleInputs(inputs) {
     inputs.forEach((input, index) => {
       if (index === 1) {
@@ -5976,9 +6215,16 @@ class View {
       input.classList.toggle('locked-input');
     });
   }
+
+  /**
+  Toggles the waiting-background class of the main element. */
   toggleClassWaitingBackgroundOfMain() {
     document.querySelector('.main').classList.toggle('waiting-background');
   }
+
+  /**
+  Translates the page content between English and Russian using data from a dictionary JSON file.
+  */
   translatePage() {
     fetch('../dictionary.json').then(response => response.json()).then(data => {
       i18next__WEBPACK_IMPORTED_MODULE_0__["default"].init({
@@ -55344,6 +55590,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controller.js */ "./js/pages/user/controller.js");
 
 
+/**
+ * user page index module.
+ * @module js/pages/user/index
+ */
 
 
 

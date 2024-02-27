@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * authorization script.
+ * @module js/authorization
+ */
+
 const jwt = require('jsonwebtoken');
 try {
     const decodedJwt = jwt.verify(localStorage.getItem('token'), localStorage.getItem('secretKey'));

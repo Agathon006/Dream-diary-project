@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * registered_home page index module.
+ * @module js/pages/registered_home/index
+ */
+
 import Model from './model.js'
 import View from './view.js'
 import Controller from './controller.js'

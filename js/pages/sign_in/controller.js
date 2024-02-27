@@ -1,3 +1,8 @@
+/**
+ * sign_in page controller module.
+ * @module js/pages/sign_in/controller
+ */
+
 export default class Controller {
     constructor(view, model) {
         this.view = view;
@@ -11,12 +16,20 @@ export default class Controller {
         this._passwordCheckBoxListener();
     }
 
+    /**
+     * Initializes translation based on the stored language preference.
+     * If the stored language is Russian ('ru'), it translates the page using the view's translatePage method.
+     */
     _initTranslation() {
         if (localStorage.getItem('language') === 'ru') {
             this.view.translatePage();
         }
     }
 
+    /**
+     * Initializes a click event listener for the burger button to control the burger content visibility.
+     * Toggles the visibility of the burger content based on the target click and the element's classes.
+     */
     _initBurgerButtonListener() {
         document.querySelector('.body').addEventListener('click', (event) => {
             if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -28,6 +41,9 @@ export default class Controller {
         });
     }
 
+    /**
+    Initializes a form listener that listens for submit event on the sign in form
+    */
     _initFormListener() {
         const form = this.view.getRegistrerFormElement(),
             SubmitButton = this.view.getSubmitInputElement();
@@ -95,6 +111,9 @@ export default class Controller {
         });
     }
 
+    /**
+    Checks if form validation is okay.
+    @returns {boolean} Returns true if form validation is okay, false otherwise. */
     _isFormValidationOkay() {
         const form = this.view.getRegistrerFormElement(),
             emailInput = this.view.getEmailInputElement(),
@@ -127,6 +146,9 @@ export default class Controller {
         return isValidationOkay;
     }
 
+    /**
+    Listen for changes on the password check box and toggle the password input type accordingly.
+    */
     _passwordCheckBoxListener() {
         const passwordCheckBox = this.view.getPassworCheckBoxInputElement();
         passwordCheckBox.addEventListener('change', () => {

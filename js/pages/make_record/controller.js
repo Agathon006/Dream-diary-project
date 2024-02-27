@@ -1,3 +1,7 @@
+/**
+ * make_record page controller module.
+ * @module js/pages/make_record/controller
+ */
 export default class Controller {
     constructor(view, model) {
         this.view = view;
@@ -13,12 +17,16 @@ export default class Controller {
         this._initFormListener();
     }
 
+    /**
+    Initialize translation based on the selected language stored in local storage. */
     _initTranslation() {
         if (localStorage.getItem('language') === 'ru') {
             this.view.translatePage();
         }
     }
 
+    /**
+    Initialize event listener for burger button click. */
     _initBurgerButtonListener() {
         document.querySelector('.body').addEventListener('click', (event) => {
             if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -30,6 +38,10 @@ export default class Controller {
         });
     }
 
+    /**
+    Initializes the listener for the tags input field.
+    Adds a tag when the user presses Enter or comma, and removes a tag when the user clicks on a tag.
+    */
     _initTagsInputListener() {
         $('#tags-input').on('keyup', function (event) {
             if (event.key === 'Enter' || event.key === ',') {
@@ -50,6 +62,10 @@ export default class Controller {
         });
     }
 
+    /**
+    Initializes the event listener for the dream category select element.
+    When the select element value changes, this function updates the dream category icon element accordingly.
+    */
     _initDreamCategoryListener() {
         const dreamCategorySelect = this.view.getDreamCategorySelectElement(),
             dreamCategoryIcon = this.view.getDreamCategoryIconElement();
@@ -80,6 +96,10 @@ export default class Controller {
         });
     }
 
+    /**
+    Initializes the event listener for the dream mood select element.
+    When the select element value changes, this function updates the dream mood icon element accordingly.
+    */
     _initDreamMoodListener() {
         const dreamMoodSelect = this.view.getDreamMoodSelectElement(),
             dreamMoodIcon = this.view.getDreamMoodIconElement();
@@ -107,6 +127,15 @@ export default class Controller {
         });
     }
 
+    /**
+    Initializes the form submit event listener
+    Prevents form submission
+    Clears any wrong input classes from form elements
+    Extracts form data using FormData and converts it to an object
+    Extracts dream tags from badges on form and adds them to formInfo
+    Validates form data using _isFormValidationOkay method
+    Retrieves email from decoded JWT token and adds it to formInfo
+    Publishes dream record using _publishDreamRecord method */
     _initFormListener() {
         const form = this.view.getRecordFormElement();
 
@@ -149,6 +178,10 @@ export default class Controller {
         });
     }
 
+    /**
+    Validates the form input for dream title and plot.
+    @param {Object} formInfo - Information from the form input.
+    @returns {boolean} - Indicates whether the form validation is okay or not. */
     _isFormValidationOkay(formInfo) {
         const recordTitle = this.view.getRecordTitleInputElement(),
             recordPlot = this.view.getRecordPlotInputElement();
@@ -177,6 +210,9 @@ export default class Controller {
         return isValidationOkay;
     }
 
+    /**
+    Sends the form input to the model to register a new dream record.
+    @param {Object} formInfo - Information from the form input. */
     _publishDreamRecord(formInfo) {
         const submitButton = this.view.getSubmitInputElement();
 

@@ -1,3 +1,8 @@
+/**
+ * moon page controller module.
+ * @module js/pages/moon/controller
+ */
+
 import { Date } from "core-js";
 
 export default class Controller {
@@ -15,12 +20,20 @@ export default class Controller {
         this._initCurrentMoonPhaseBorder()
     }
 
+    /**
+    Initializes the translation based on the user's selected language.
+    Calls the view's translatePage method if language is set to 'ru'.
+    @function _initTranslation */
     _initTranslation() {
         if (localStorage.getItem('language') === 'ru') {
             this.view.translatePage();
         }
     }
 
+    /**
+    Initializes the listener for the burger button.
+    Toggles the visibility of the burger content based on user interactions.
+    @function _initBurgerButtonListener */
     _initBurgerButtonListener() {
         document.querySelector('.body').addEventListener('click', (event) => {
             if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -32,6 +45,14 @@ export default class Controller {
         });
     }
 
+    /**
+    Initializes the "My Place" button functionality.
+    Gets the element for the "My Place" button and adds a click event listener.
+    Upon clicking the button, it toggles classes for waiting background of forecast day elements,
+    retrieves the user's current geolocation using the navigator.geolocation.getCurrentPosition method,
+    and fetches the weather forecast data for the current location.
+    Upon successful retrieval, it displays the forecast data for the current location in the UI.
+    */
     _initMyPlaceButton() {
 
         const myPlaceButton = this.view.getMyPlaceButtonElement();
@@ -84,6 +105,9 @@ export default class Controller {
         });
     }
 
+    /**
+    Initializes the current weather forecast for Minsk by fetching data from the weather API
+    and updating the forecast container with the forecast place information. */
     _initCurrentForecast() {
 
         this.model.getWeatherForecastMinsk()
@@ -126,6 +150,10 @@ export default class Controller {
             });
     }
 
+    /**
+    Translate weather conditions from English to Russian.
+    @param {string} weatherCondition - The weather condition in English.
+    @returns {string} The corresponding weather condition in Russian. */
     _defineRuWeather(weatherCondition) {
         switch (weatherCondition) {
             case 'Clear':
@@ -151,6 +179,9 @@ export default class Controller {
         }
     }
 
+    /**
+    Initializes the moon phases by getting the necessary date elements and displaying the current and next moon phases.
+    */
     _initMoonphases() {
         const newMoonDate = this.view.getNewMoonDateSpanElement(),
             growingMoonDate = this.view.getGrowingMoonDateSpanElement(),
@@ -172,6 +203,11 @@ export default class Controller {
         nextWaningMoonDate.innerText = `${this._changeOneDay(nextFullMoonDate.innerText, 'increase')} - ${this._calculateMoonPhase(1, true)}`
     }
 
+    /**
+    Calculate the date of the next or previous moon phase based on the given phase ratio.
+    @param {number} phaseRatio - The ratio of the phase cycle completed (between 0 and 1).
+    @param {boolean} next - True if calculating the next phase, false if calculating the previous phase.
+    @returns {Date} The date of the next or previous moon phase. */
     _calculateMoonPhase(phaseRatio, next = false) {
         const synodicMonth = 29.53058867,
             newMoonDateLandmark = new Date('January 11, 2024 14:57:00'),
@@ -192,6 +228,12 @@ export default class Controller {
         return this._handleDateToCommon(nextPhaseDate);
     }
 
+    /**
+    Changes the date by one day based on the given action.
+    @param {string} dateString - The date string in the format "day.month.year".
+    @param {string} action - The action to perform on the date. Can be 'increase' or 'reduce'.
+    @returns {string} The updated date string after changing by one day.
+    */
     _changeOneDay(dateString, action) {
         const parts = dateString.split('.');
 
@@ -212,6 +254,9 @@ export default class Controller {
         return nextDate;
     }
 
+    /**
+    Initializes the current moon phase border based on the target date.
+    */
     _initCurrentMoonPhaseBorder() {
 
         const targetDate = this._handleDateToCommon(new Date());
@@ -241,6 +286,11 @@ export default class Controller {
         });
     }
 
+    /**
+    Format date in common format (dd.mm.yyyy)
+    @param {Date} date - Date object to be formatted
+    @returns {string} - Formatted date in common format
+    */
     _handleDateToCommon(date) {
         const day = date.getDate().toString().padStart(2, '0'),
             month = (date.getMonth() + 1).toString().padStart(2, '0'),
@@ -249,6 +299,10 @@ export default class Controller {
         return `${day}.${month}.${year}`;
     }
 
+    /**
+    Format date in valid format (yyyy-mm-dd)
+    @param {string} date - Date string in common format (dd.mm.yyyy)
+    @returns {string} - Formatted date in valid format */
     _handleDateToValid(date) {
         const parts = date.split('.');
         const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;

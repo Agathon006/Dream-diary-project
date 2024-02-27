@@ -5408,6 +5408,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Controller)
 /* harmony export */ });
+/**
+ * make_record page controller module.
+ * @module js/pages/make_record/controller
+ */
 class Controller {
   constructor(view, model) {
     this.view = view;
@@ -5421,11 +5425,17 @@ class Controller {
     this._initDreamMoodListener();
     this._initFormListener();
   }
+
+  /**
+  Initialize translation based on the selected language stored in local storage. */
   _initTranslation() {
     if (localStorage.getItem('language') === 'ru') {
       this.view.translatePage();
     }
   }
+
+  /**
+  Initialize event listener for burger button click. */
   _initBurgerButtonListener() {
     document.querySelector('.body').addEventListener('click', event => {
       if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -5435,6 +5445,11 @@ class Controller {
       }
     });
   }
+
+  /**
+  Initializes the listener for the tags input field.
+  Adds a tag when the user presses Enter or comma, and removes a tag when the user clicks on a tag.
+  */
   _initTagsInputListener() {
     $('#tags-input').on('keyup', function (event) {
       if (event.key === 'Enter' || event.key === ',') {
@@ -5453,6 +5468,11 @@ class Controller {
       $('#tags-input').prop('disabled', false);
     });
   }
+
+  /**
+  Initializes the event listener for the dream category select element.
+  When the select element value changes, this function updates the dream category icon element accordingly.
+  */
   _initDreamCategoryListener() {
     const dreamCategorySelect = this.view.getDreamCategorySelectElement(),
       dreamCategoryIcon = this.view.getDreamCategoryIconElement();
@@ -5481,6 +5501,11 @@ class Controller {
       }
     });
   }
+
+  /**
+  Initializes the event listener for the dream mood select element.
+  When the select element value changes, this function updates the dream mood icon element accordingly.
+  */
   _initDreamMoodListener() {
     const dreamMoodSelect = this.view.getDreamMoodSelectElement(),
       dreamMoodIcon = this.view.getDreamMoodIconElement();
@@ -5506,6 +5531,16 @@ class Controller {
       }
     });
   }
+
+  /**
+  Initializes the form submit event listener
+  Prevents form submission
+  Clears any wrong input classes from form elements
+  Extracts form data using FormData and converts it to an object
+  Extracts dream tags from badges on form and adds them to formInfo
+  Validates form data using _isFormValidationOkay method
+  Retrieves email from decoded JWT token and adds it to formInfo
+  Publishes dream record using _publishDreamRecord method */
   _initFormListener() {
     const form = this.view.getRecordFormElement();
     form.addEventListener('submit', e => {
@@ -5536,6 +5571,11 @@ class Controller {
       this._publishDreamRecord(formInfo);
     });
   }
+
+  /**
+  Validates the form input for dream title and plot.
+  @param {Object} formInfo - Information from the form input.
+  @returns {boolean} - Indicates whether the form validation is okay or not. */
   _isFormValidationOkay(formInfo) {
     const recordTitle = this.view.getRecordTitleInputElement(),
       recordPlot = this.view.getRecordPlotInputElement();
@@ -5560,6 +5600,10 @@ class Controller {
     }
     return isValidationOkay;
   }
+
+  /**
+  Sends the form input to the model to register a new dream record.
+  @param {Object} formInfo - Information from the form input. */
   _publishDreamRecord(formInfo) {
     const submitButton = this.view.getSubmitInputElement();
     this.model.registerNewRecord(JSON.stringify(formInfo)).then(response => {
@@ -5596,7 +5640,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
+/**
+ * make_record page model module.
+ * @module js/pages/make_record/model
+ */
 class Model {
+  /**
+  Checks if the title is okay.
+  @param {string} title - The title to be checked.
+  @returns {boolean} - True if the title is okay, false otherwise. */
   isTitleOkay(title) {
     if (title) {
       return true;
@@ -5604,6 +5656,11 @@ class Model {
       return false;
     }
   }
+
+  /**
+  Checks if the plot is okay.
+  @param {string} plot - The plot to be checked.
+  @returns {boolean} - True if the plot length is greater than 9 characters, false otherwise. */
   isPlotOkay(plot) {
     if (plot.length > 9) {
       return true;
@@ -5611,6 +5668,11 @@ class Model {
       return false;
     }
   }
+
+  /**
+  Registers a new record by making a POST request to the specified URL.
+  @param {Object} data - The data to be sent in the request body.
+  @returns {Promise<Response>} - The Promise that resolves to the response of the POST request. */
   registerNewRecord(data) {
     return fetch(`http://localhost:3000/records`, {
       method: 'POST',
@@ -5636,6 +5698,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ View)
 /* harmony export */ });
 /* harmony import */ var i18next__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! i18next */ "./node_modules/i18next/dist/esm/i18next.js");
+/**
+ * make_record page view module.
+ * @module js/pages/make_record/view
+ */
+
 
 class View {
   static ID = {
@@ -5656,49 +5723,101 @@ class View {
       WRONG_SPAN: 'wrong-span'
     }
   };
+
+  /**
+  Gets the select element for dream category from the document
+  @returns {HTMLElement} The select element for dream category */
   getDreamCategorySelectElement() {
     return document.querySelector(`#${View.ID.RECORD_FORM.DREAM_CATEGORY_SELECT}`);
   }
+
+  /**
+  Gets the icon element for dream category from the document
+  @returns {HTMLElement} The icon element for dream category */
   getDreamCategoryIconElement() {
     return document.querySelector(`#${View.ID.RECORD_FORM.DREAM_CATEGORY_ICON}`);
   }
+
+  /**
+  Gets the select element for dream mood from the document
+  @returns {HTMLElement} The select element for dream mood */
   getDreamMoodSelectElement() {
     return document.querySelector(`#${View.ID.RECORD_FORM.DREAM_MOOD_SELECT}`);
   }
+
+  /**
+  Gets the icon element for dream mood from the document
+  @returns {HTMLElement} The icon element for dream mood */
   getDreamMoodIconElement() {
     return document.querySelector(`#${View.ID.RECORD_FORM.DREAM_MOOD_ICON}`);
   }
+
+  /**
+  Gets the form element for record from the document
+  @returns {HTMLElement} The form element for record */
   getRecordFormElement() {
     return document.querySelector(`#${View.ID.RECORD_FORM.FORM}`);
   }
+
+  /**
+  Gets the input element for record title from the document
+  @returns {HTMLElement} The input element for record title */
   getRecordTitleInputElement() {
     return document.querySelector(`#${View.ID.RECORD_FORM.RECORD_TITLE}`);
   }
+
+  /**
+  Retrieves the record plot input element from the document.
+  @returns {HTMLElement} The record plot input element. */
   getRecordPlotInputElement() {
     return document.querySelector(`#${View.ID.RECORD_FORM.RECORD_PLOT}`);
   }
+
+  /**
+  Retrieves the submit input element from the document.
+  @returns {HTMLElement} The submit input element. */
   getSubmitInputElement() {
     return document.querySelector(`#${View.ID.RECORD_FORM.SUBMIT_INPUT}`);
   }
+
+  /**
+  Adds a class to the provided element to indicate a wrong input.
+  @param {HTMLElement} element - The element to add the class to. */
   addClassWrongInput(element) {
     element.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
   }
+
+  /**
+  Creates a span element with a warning message and inserts it after the provided element.
+  @param {HTMLElement} element - The element to insert the warning span after.
+  @param {string} message - The warning message to display. */
   createWrongSpanElement(element, message) {
     let warningSpan = document.createElement('span');
     warningSpan.innerText = message;
     warningSpan.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_SPAN);
     element.parentNode.insertBefore(warningSpan, element.nextSibling);
   }
+
+  /**
+  Clears the wrong input class from all elements in the document. */
   clearClassWrongInputFromElements() {
     document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT}`).forEach(item => {
       item.classList.remove(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
     });
   }
+
+  /**
+  Removes all elements with the wrong span class from the document.
+  @function clearClassWrongSpanFromElements */
   clearClassWrongSpanFromElements() {
     document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.WRONG_SPAN}`).forEach(item => {
       item.remove();
     });
   }
+
+  /**
+  Translates the page content between English and Russian using data from a dictionary JSON file.
+  */
   translatePage() {
     fetch('../dictionary.json').then(response => response.json()).then(data => {
       i18next__WEBPACK_IMPORTED_MODULE_0__["default"].init({
@@ -55067,6 +55186,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controller.js */ "./js/pages/make_record/controller.js");
 
 
+/**
+ * make_record page index module.
+ * @module js/pages/make_record/index
+ */
 
 
 

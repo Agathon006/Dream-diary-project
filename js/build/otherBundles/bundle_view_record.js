@@ -5408,6 +5408,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Controller)
 /* harmony export */ });
+/**
+ * view_record page controller module.
+ * @module js/pages/view_record/controller
+ */
+
 class Controller {
   constructor(view, model) {
     this.view = view;
@@ -5419,11 +5424,21 @@ class Controller {
     this._initDreamRecord();
     this._initLikeButtonListener();
   }
+
+  /**
+   * Initializes translation based on the stored language preference.
+   * If the stored language is Russian ('ru'), it translates the page using the view's translatePage method.
+   */
   _initTranslation() {
     if (localStorage.getItem('language') === 'ru') {
       this.view.translatePage();
     }
   }
+
+  /**
+   * Initializes a click event listener for the burger button to control the burger content visibility.
+   * Toggles the visibility of the burger content based on the target click and the element's classes.
+   */
   _initBurgerButtonListener() {
     document.querySelector('.body').addEventListener('click', event => {
       if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -5433,6 +5448,11 @@ class Controller {
       }
     });
   }
+
+  /**
+  Initializes the dream record by retrieving the record ID from local storage
+  and updating the views count for the record.
+  */
   _initDreamRecord() {
     const recordId = localStorage.getItem('dreamRecordID'),
       dreamTitle = this.view.getDreamTitleElement(),
@@ -5504,6 +5524,11 @@ class Controller {
       console.error('Error during getting record', error);
     });
   }
+
+  /**
+  Translates the given category to Russian.
+  @param {string} Category - The category to translate.
+  @returns {string} The translated category in Russian. */
   _translateCategoryToRu(Category) {
     switch (Category) {
       case 'Usual':
@@ -5522,6 +5547,11 @@ class Controller {
         return '???';
     }
   }
+
+  /**
+  Translates mood from English to Russian.
+  @param {string} Mood - The mood to be translated.
+  @returns {string} The translated mood in Russian. */
   _translateMoodToRu(Mood) {
     switch (Mood) {
       case 'Typical dream':
@@ -5538,6 +5568,11 @@ class Controller {
         return '???';
     }
   }
+
+  /**
+  Translates the English month name to Russian.
+  @param {string} month - The month name in English.
+  @returns {string} The month name translated to Russian. */
   _translateMonthToRu(month) {
     switch (month) {
       case 'January':
@@ -5568,6 +5603,13 @@ class Controller {
         return '???';
     }
   }
+
+  /**
+  Initializes the event listener for the like button of a dream record.
+  Retrieves the necessary elements from the view and adds a click event listener.
+  Uses JWT to verify the user's token and secret key.
+  Calls the model's method to get the dream record's data and updates the likes number.
+  */
   _initLikeButtonListener() {
     const recordId = localStorage.getItem('dreamRecordID'),
       dreamLikesButton = this.view.getDreamLikesButtonElement(),
@@ -5622,7 +5664,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Model)
 /* harmony export */ });
+/**
+ * view_record page model module.
+ * @module js/pages/view_record/model
+ */
 class Model {
+  /**
+  Updates the number of views for a specific record in the database.
+  @param {number} id - The ID of the record to update.
+  @param {number} newNumber - The new number of views for the record.
+  @returns {Promise} A promise that resolves once the update is complete. */
   getPromiseChangeRecordViews(id, newNumber) {
     return fetch(`http://localhost:3000/records/${id}`, {
       method: 'PATCH',
@@ -5634,6 +5685,13 @@ class Model {
       })
     });
   }
+
+  /**
+  Updates the number of likes and the list of users who liked a specific record in the database.
+  @param {number} id - The ID of the record to update.
+  @param {number} newNumber - The new number of likes for the record.
+  @param {Array} newUsersEmails - An array of user emails who liked the record.
+  @returns {Promise} A promise that resolves once the update is complete. */
   getPromiseChangeRecordLikesAndLikesUsers(id, newNumber, newUsersEmails) {
     return fetch(`http://localhost:3000/records/${id}`, {
       method: 'PATCH',
@@ -5646,12 +5704,27 @@ class Model {
       })
     });
   }
+
+  /**
+  Retrieves a promise to get dream records by ID
+  @param {number} id - The ID of the dream record
+  @returns {Promise} A promise to fetch the dream records */
   getPromiseGetDreamRecords(id) {
     return fetch(`http://localhost:3000/records/${id}`);
   }
+
+  /**
+  Retrieves a promise to get a user by email
+  @param {string} email - The email of the user
+  @returns {Promise} A promise to fetch the user by email */
   getPromiseGetUserByEmail(email) {
     return fetch(`http://localhost:3000/users?email=${email}`);
   }
+
+  /**
+  Determines the month name based on the month number
+  @param {number} monthNumber - The number representing the month (0-11)
+  @returns {string} The name of the month */
   whichMonthNameByNumber(monthNumber) {
     switch (monthNumber) {
       case 0:
@@ -5682,6 +5755,12 @@ class Model {
         console.log('No such month');
     }
   }
+
+  /**
+  Returns the icon path based on the dream category name
+  @param {string} categoryName - The name of the dream category
+  @returns {string} - The icon path for the dream category
+  */
   whichDreamCategoryIcon(categoryName) {
     switch (categoryName) {
       case 'Category':
@@ -5702,6 +5781,12 @@ class Model {
         console.log('No such option in select dream category');
     }
   }
+
+  /**
+  Returns the icon path based on the dream mood name
+  @param {string} moodName - The name of the dream mood
+  @returns {string} - The icon path for the dream mood
+  */
   whichDreamMoodIcon(moodName) {
     switch (moodName) {
       case 'Typical dream':
@@ -5734,6 +5819,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ View)
 /* harmony export */ });
 /* harmony import */ var i18next__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! i18next */ "./node_modules/i18next/dist/esm/i18next.js");
+/**
+ * view_record page view module.
+ * @module js/pages/view_record/view
+ */
+
 
 class View {
   static ID = {
@@ -5754,48 +5844,116 @@ class View {
       PLOT: 'dream-plot'
     }
   };
+
+  /**
+  Retrieves the element for the dream title
+  @returns {Element} The dream title element */
   getDreamTitleElement() {
     return document.querySelector(`#${View.ID.DREAM_RECORD.TITLE}`);
   }
+
+  /**
+  Retrieves the element for the dream date
+  @returns {Element} The dream date element */
   getDreamDateElement() {
     return document.querySelector(`#${View.ID.DREAM_RECORD.DATE}`);
   }
+
+  /**
+  Retrieves the element for the dream views
+  @returns {Element} The dream views element */
   getDreamViewsElement() {
     return document.querySelector(`#${View.ID.DREAM_RECORD.VIEWS}`);
   }
+
+  /**
+  Retrieves the element for the dream likes button
+  @returns {Element} The dream likes button element */
   getDreamLikesButtonElement() {
     return document.querySelector(`#${View.ID.DREAM_RECORD.LIKES_BUTTON}`);
   }
+
+  /**
+  Retrieves the element for the dream likes number
+  @returns {Element} The dream likes number element */
   getDreamLikesNumberElement() {
     return document.querySelector(`#${View.ID.DREAM_RECORD.LIKES_NUMBER}`);
   }
+
+  /**
+  Retrieves the element for the dream like icon
+  @returns {Element} The dream like icon element */
   getDreamLikeIconElement() {
     return document.querySelector(`#${View.ID.DREAM_RECORD.LIKE_ICON}`);
   }
+
+  /**
+  Retrieves the element for the dream category
+  @returns {Element} The dream category element */
   getDreamCategoryElement() {
     return document.querySelector(`#${View.ID.DREAM_RECORD.CATEGORY}`);
   }
+
+  /**
+   * Returns the HTML element for the dream category span
+   * @returns {Element} The dream category span element
+   */
   getDreamCategorySpanElement() {
     return document.querySelector(`#${View.ID.DREAM_RECORD.CATEGORY_SPAN}`);
   }
+
+  /**
+   * Returns the HTML element for the dream mood input field
+   * @returns {Element} The dream mood input field element
+   */
   getDreamMoodElement() {
     return document.querySelector(`#${View.ID.DREAM_RECORD.MOOD}`);
   }
+
+  /**
+   * Returns the HTML element for the dream mood span
+   * @returns {Element} The dream mood span element
+   */
   getDreamMoodSpanElement() {
     return document.querySelector(`#${View.ID.DREAM_RECORD.MOOD_SPAN}`);
   }
+
+  /**
+   * Returns the HTML element for the dream user avatar
+   * @returns {Element} The dream user avatar element
+   */
   getDreamUserAvatarElement() {
     return document.querySelector(`#${View.ID.DREAM_RECORD.USER_AVATAR}`);
   }
+
+  /**
+   * Returns the HTML element for the dream user nickname
+   * @returns {Element} The dream user nickname element
+   */
   getDreamUserNicknameElement() {
     return document.querySelector(`#${View.ID.DREAM_RECORD.USER_NICKNAME}`);
   }
+
+  /**
+   * Returns the HTML element for the dream image
+   * @returns {Element} The dream image element
+   */
   getDreamImageElement() {
     return document.querySelector(`#${View.ID.DREAM_RECORD.IMAGE}`);
   }
+
+  /**
+   * Returns the HTML element for the dream plot input field
+   * @returns {Element} The dream plot input field element
+   */
   getDreamPlotElement() {
     return document.querySelector(`#${View.ID.DREAM_RECORD.PLOT}`);
   }
+
+  /**
+  Toggles the appearance of an icon based on its source URL.
+  @param {HTMLElement} icon - The icon element to toggle. 
+  */
   toggleLikesIcon(icon) {
     if (icon.src.match(/_inactive.svg$/)) {
       icon.src = '../icons/like_active.svg';
@@ -5808,9 +5966,16 @@ class View {
     }
     ;
   }
+
+  /**
+  Toggles the waiting-background class of the main element. */
   toggleClassWaitingBackgroundOfMain() {
     document.querySelector('.main').classList.toggle('waiting-background');
   }
+
+  /**
+  Translates the page content between English and Russian using data from a dictionary JSON file.
+  */
   translatePage() {
     fetch('../dictionary.json').then(response => response.json()).then(data => {
       i18next__WEBPACK_IMPORTED_MODULE_0__["default"].init({
@@ -55161,6 +55326,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controller.js */ "./js/pages/view_record/controller.js");
 
 
+/**
+ * view_record page index module.
+ * @module js/pages/view_record/index
+ */
 
 
 

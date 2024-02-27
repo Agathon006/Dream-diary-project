@@ -1,5 +1,10 @@
 import i18next from 'i18next';
 
+/**
+ * home view module.
+ * @module js/pages/home/view
+ */
+
 export default class View {
 
     static ID = {
@@ -14,19 +19,32 @@ export default class View {
     static CLASSES = {
         DO_NOT_HAVE_DREAMS_BLOCK: 'do-not-have-dreams-block',
     }
+    Assistant
 
+    /**
+    Retrieves the button element for reasons sections based on its ID.
+    @returns {Element} The button element for reasons sections. */
     getReasonsSectionsButtonElement() {
         return document.querySelector(`#${View.ID.REASONS_SECTIONS.BUTTON}`);
     }
 
+    /**
+    Retrieves the block element for "Do Not Have Dreams" based on its class name.
+    @returns {Element} The block element for "Do Not Have Dreams". */
     getDoNotHaveDreamsBlockElement() {
         return document.querySelector(`.${View.CLASSES.DO_NOT_HAVE_DREAMS_BLOCK}`);
     }
 
+    /**
+    Retrieves the button element for "Do Not Have Dream Sections" based on its ID.
+    @returns {Element} The button element for "Do Not Have Dream Sections". */
     getDoNotHaveDreamSectionsButtonElement() {
         return document.querySelector(`#${View.ID.DO_NOT_HAVE_DREAM_SECTIONS.BUTTON}`);
     }
 
+    /**
+    Translates the page content between English and Russian using data from a dictionary JSON file.
+    */
     translatePage() {
         fetch('./dictionary.json')
             .then(response => response.json())
@@ -79,7 +97,7 @@ export default class View {
                 document.querySelector(`#do-not-have-dreams-block-fourth-section-title`).textContent = i18next.t('home.do_not_have_dreams_block_fourth_section_title');
                 document.querySelector(`#do-not-have-dreams-block-fourth-section-plot`).textContent = i18next.t('home.do_not_have_dreams_block_fourth_section_plot');
                 document.querySelector(`#do-not-have-dreams-sections-button`).textContent = i18next.t('home.do_not_have_dreams_sections_button');
-                
+
                 document.querySelector(`#start-using-block-title`).textContent = i18next.t('home.start_using_block_title');
                 document.querySelector(`#start-using-block-subtitle`).textContent = i18next.t('home.start_using_block_subtitle');
                 document.querySelector(`#start-using-block-link`).textContent = i18next.t('home.start_using_block_link');

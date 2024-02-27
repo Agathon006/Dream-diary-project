@@ -1,3 +1,8 @@
+/**
+ * time page controller module.
+ * @module js/pages/time/controller
+ */
+
 export default class Controller {
     constructor(view) {
         this.view = view;
@@ -11,12 +16,20 @@ export default class Controller {
         setInterval(this._updateClocks, 1000);
     }
 
+    /**
+     * Initializes translation based on the stored language preference.
+     * If the stored language is Russian ('ru'), it translates the page using the view's translatePage method.
+     */
     _initTranslation() {
         if (localStorage.getItem('language') === 'ru') {
             this.view.translatePage();
         }
     }
 
+    /**
+     * Initializes a click event listener for the burger button to control the burger content visibility.
+     * Toggles the visibility of the burger content based on the target click and the element's classes.
+     */
     _initBurgerButtonListener() {
         document.querySelector('.body').addEventListener('click', (event) => {
             if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -28,6 +41,9 @@ export default class Controller {
         });
     }
 
+    /**
+    Update the clocks with the current time
+    */
     _updateClocks() {
 
         const currentDate = new Date();

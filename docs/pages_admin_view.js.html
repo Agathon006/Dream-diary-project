@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/admin/view.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/admin/view.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * admin view module.
+ * @module js/pages/admin/view
+ */
+export default class View {
+
+    static ID = {
+        SECTION: {
+            SECTION: 'section',
+        },
+        BUTTONS: {
+            USERS_BUTTON: 'users-button',
+            RECORDS_BUTTON: 'records-button',
+        },
+        MODAL_WINDOW: {
+            MODAL_WRAPPER: 'modal-wrapper',
+        },
+        PAGINATION: {
+            BUTTON_PREV: 'pagination-switcher-button-prev',
+            CURRENT_PAGE_NUMBER: 'current-page-number',
+            BUTTON_NEXT: 'pagination-switcher-button-next',
+        }
+    }
+
+    static JS_CLASSES = {
+        PROFILE: {
+            WRONG_INPUT: 'wrong-input',
+            WRONG_SPAN: 'wrong-span',
+        },
+        RECORD: {
+            TAGS: {
+                CLOSE_BUTTON: 'close',
+            },
+        },
+        COMMON: {
+            HIDDEN: 'hidden',
+            NOT_EXIST: 'not-exist',
+            SELECTED: 'selected',
+            LOCKED_INPUT: 'locked-input',
+        },
+    }
+
+    /**
+    Gets the section element.
+    @returns {Element} - The section element. */
+    getSectionElement() {
+        return document.querySelector(`#${View.ID.SECTION.SECTION}`);
+    }
+
+    /**
+    Gets the users button element.
+    @returns {Element} - The users button element. */
+    getUsersButtonElement() {
+        return document.querySelector(`#${View.ID.BUTTONS.USERS_BUTTON}`);
+    }
+
+    /**
+    Gets the records button element.
+    @returns {Element} - The records button element. */
+    getRecordsButtonElement() {
+        return document.querySelector(`#${View.ID.BUTTONS.RECORDS_BUTTON}`);
+    }
+
+    /**
+    Gets the modal wrapper element.
+    @returns {Element} - The modal wrapper element. */
+    getModalWrapperElement() {
+        return document.querySelector(`#${View.ID.MODAL_WINDOW.MODAL_WRAPPER}`);
+    }
+
+    /**
+    Gets all tags close buttons elements.
+    @returns {NodeList} - List of all tags close buttons elements. */
+    getAllTagsCloseButtons() {
+        return document.querySelectorAll(`.${View.JS_CLASSES.RECORD.TAGS.CLOSE_BUTTON}`);
+    }
+
+    /**
+    Gets the previous button element for pagination.
+    @returns {Element} - The previous button element for pagination. */
+    getButtonPrevElement() {
+        return document.querySelector(`#${View.ID.PAGINATION.BUTTON_PREV}`);
+    }
+
+    /**
+    Gets the current page number element for pagination.
+    @returns {Element} - The current page number element for pagination. */
+    getCurrentPageNumberElement() {
+        return document.querySelector(`#${View.ID.PAGINATION.CURRENT_PAGE_NUMBER}`);
+    }
+
+    /**
+    Retrieves the next button element from the DOM
+    @returns {Element} The next button element */
+    getButtonNextElement() {
+        return document.querySelector(`#${View.ID.PAGINATION.BUTTON_NEXT}`);
+    }
+
+    /**
+    Toggles the hidden class on an element
+    @param {Element} element - The element to toggle the hidden class on */
+    toggleClassHidden(element) {
+        element.classList.toggle(`${View.JS_CLASSES.COMMON.HIDDEN}`);
+    }
+
+    /**
+    Toggles the not exist class on an element
+    @param {Element} element - The element to toggle the not exist class on */
+    toggleClassNotExist(element) {
+        element.classList.toggle(`${View.JS_CLASSES.COMMON.NOT_EXIST}`);
+    }
+
+    /**
+    Toggles the selected class on an element and enables/disables it based on the class state
+    @param {Element} element - The element to toggle the selected class on */
+    toggleClassSelected(element) {
+        if (element.classList.contains(`${View.JS_CLASSES.COMMON.SELECTED}`)) {
+            element.disabled = false;
+            element.classList.remove(`${View.JS_CLASSES.COMMON.SELECTED}`);
+        } else {
+            element.disabled = true;
+            element.classList.add(`${View.JS_CLASSES.COMMON.SELECTED}`);
+        }
+    }
+
+    /**
+    Toggles the class of specified input elements based on their index.
+    @param {Array} inputs - An array of input elements. */
+    toggleInputs(inputs) {
+        inputs.forEach((input, index) => {
+            if (index === 1 || index === 3 || index === 10 || index === 11) {
+                return;
+            }
+            input.classList.toggle(`${View.JS_CLASSES.COMMON.LOCKED_INPUT}`);
+        });
+    }
+
+    /**
+    Adds a specific class to the element to indicate a wrong input.
+    @param {Element} element - The element to add the class to. */
+    addClassWrongInput(element) {
+        element.classList.add(View.JS_CLASSES.PROFILE.WRONG_INPUT);
+    }
+
+    /**
+    Creates a span element with a warning message and inserts it after the specified element.
+    @param {Element} element - The element to insert the warning span after.
+    @param {string} message - The message to display in the warning span. */
+    createWrongSpanElement(element, message) {
+        let warningSpan = document.createElement('span');
+        warningSpan.innerText = message;
+        warningSpan.classList.add(View.JS_CLASSES.PROFILE.WRONG_SPAN);
+        element.parentNode.insertBefore(warningSpan, element.nextSibling);
+    }
+
+    /**
+    Clears the class "wrong input" from all elements with that class. */
+    clearClassWrongInputFromElements() {
+        document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.WRONG_INPUT}`).forEach(item => {
+            item.classList.remove(View.JS_CLASSES.PROFILE.WRONG_INPUT);
+        });
+    }
+
+    /**
+    Removes all elements with the class "wrong span" from the DOM. */
+    clearClassWrongSpanFromElements() {
+        document.querySelectorAll(`.${View.JS_CLASSES.PROFILE.WRONG_SPAN}`).forEach(item => {
+            item.remove();
+        });
+    }
+
+    /**
+    Displays the pagination part of the profile page.
+    @param {number} itemsNumber - The total number of items to display.
+    @param {number} pagesNumber - The total number of pages to show in pagination.
+    @param {number} currentPageNumber - The current page number (default is 1).
+    */
+    displayPaginationPart(itemsNumber, pagesNumber, currentPageNumber = 1) {
+        const section = this.getSectionElement();
+
+        let dynamicContent = '';
+        itemsNumber === 1 ? dynamicContent = 'item' : dynamicContent = 'items';
+
+        section.innerHTML =
+            `&lt;div class="pagination-switcher">
+            &lt;button class="pagination-switcher__button" id="pagination-switcher-button-prev">&lt;&lt;/button>
+            &lt;div class="pagination-switcher__plot">
+                &lt;div class="pagination-switcher__plot-top">
+                    &lt;span class="pagination-switcher__plot-text">Found: &lt;/span>
+                    &lt;span class="pagination-switcher__plot-key">${itemsNumber}&lt;/span>
+                    &lt;span class="pagination-switcher__plot-text"> ${dynamicContent}&lt;/span>
+                &lt;/div>
+                &lt;div class="pagination-switcher__plot-bottom">
+                    &lt;span class="pagination-switcher__plot-text">Page &lt;/span>
+                    &lt;span class="pagination-switcher__plot-key" id="current-page-number">${currentPageNumber}&lt;/span>
+                    &lt;span class="pagination-switcher__plot-text"> of &lt;/span>
+                    &lt;span class="pagination-switcher__plot-key">${pagesNumber}&lt;/span>
+                &lt;/div>
+            &lt;/div>
+            &lt;button class="pagination-switcher__button" id="pagination-switcher-button-next">>&lt;/button>
+        &lt;/div>`
+    }
+
+    /**
+    Display users table based on the provided data
+    @param {object} data - The data containing user information
+    @returns {void}
+    */
+    displayUsersTable(data) {
+        const section = this.getSectionElement();
+
+        let dynamicData = '';
+
+        data.data.forEach(user => {
+
+            dynamicData += `
+                    &lt;tr>
+                        &lt;td class="table-td">${user.id}&lt;/td>
+                        &lt;td class="table-td">${user.nickname}&lt;/td>
+                        &lt;td class="table-td">${user.email}&lt;/td>
+                        &lt;td class="table-td">${user.role}&lt;/td>
+                        &lt;td class="table-td">
+                        &lt;button class="admin-button edit-user-button">details&lt;/button>
+                        &lt;/td>
+                    &lt;/tr>
+                `;
+        });
+
+        section.innerHTML += `
+        &lt;table class="table">
+            &lt;thead class="table-head">
+            &lt;tr class="table-tr">
+                &lt;th class="table-th">ID&lt;/th>
+                &lt;th class="table-th">Nickname&lt;/th>
+                &lt;th class="table-th">Email&lt;/th>
+                &lt;th class="table-th">Role&lt;/th>
+                &lt;th class="table-th">Action&lt;/th>
+            &lt;/tr>
+            &lt;/thead>
+            &lt;tbody id="users-table-body">${dynamicData}&lt;/tbody>
+        &lt;/table>`;
+
+    }
+
+    /**
+     * Renders a table of records based on the provided data.
+     * @param {Object} data - The data object containing records to be displayed.
+     */
+    displayRecordsTable(data) {
+        const section = this.getSectionElement();
+
+        let dynamicData = '';
+
+        data.data.forEach(record => {
+
+            dynamicData += `
+                &lt;tr>
+                    &lt;td class="table-td">${record.id}&lt;/td>
+                    &lt;td class="table-td">${record.dreamTitle}&lt;/td>
+                    &lt;td class="table-td">${record.email}&lt;/td>
+                    &lt;td class="table-td">
+                    &lt;button class="admin-button edit-record-button">details&lt;/button>
+                    &lt;/td>
+                &lt;/tr>
+            `;
+        });
+
+        section.innerHTML += `
+        &lt;table class="table">
+            &lt;thead class="table-head">
+            &lt;tr class="table-tr">
+                &lt;th class="table-th">ID&lt;/th>
+                &lt;th class="table-th">Dream title&lt;/th>
+                &lt;th class="table-th">Email&lt;/th>
+                &lt;th class="table-th">Action&lt;/th>
+            &lt;/tr>
+            &lt;/thead>
+            &lt;tbody id="users-table-body">${dynamicData}&lt;/tbody>
+        &lt;/table>`;
+
+    }
+
+    /**
+     * Renders a user's information in a specific section with options to select user roles.
+     * 
+     * @param {HTMLElement} section - The HTML element where the user information will be displayed.
+     * @param {Object} user - The user object containing information to be displayed.
+     */
+    displayUser(section, user) {
+        let dunamicContentRoles = '';
+        if (user.role === 'user') {
+            dunamicContentRoles = `
+            &lt;option value="admin">Admin&lt;/option>
+            &lt;option value="user" selected>User&lt;/option>
+            `;
+        } else if (user.role === 'admin') {
+            dunamicContentRoles = `
+            &lt;option value="admin" selected>Admin&lt;/option>
+            &lt;option value="user">User&lt;/option>
+            `;
+        }
+
+        section.innerHTML = `                
+        &lt;button class="admin-button" id="return-button">Return&lt;/button>
+        &lt;div class="profile-avatar">
+            &lt;img src="${user.avatar}" class="user-avatar"
+                id="profile-avatar">&lt;/img> 
+        &lt;/div>
+        &lt;input type="text" placeholder="no image url" class="profile-input locked-input"
+        id="avatar-url-input" value="${user.avatar}">
+        &lt;span class="profile-span">ID&lt;/span>
+        &lt;input type="text" placeholder="empty" maxlength="15" class="profile-input locked-input"
+            id="id-input" value="${user.id}">
+        &lt;span class="profile-span">Nickname&lt;/span>
+        &lt;input type="text" placeholder="empty" maxlength="15" class="profile-input locked-input"
+            id="nickname-input" value="${user.nickname}">
+        &lt;span class="profile-span">Email&lt;/span>
+        &lt;input type="text" placeholder="empty" class="profile-input locked-input" id="email-input" value="${user.email}">
+        &lt;span class="profile-span">Role&lt;/span>
+        &lt;select class="profile-input locked-input" id="role-input">${dunamicContentRoles}&lt;/select>
+        &lt;span class="profile-span">Name&lt;/span>
+        &lt;input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input" id="name-input" value="${user.name}">
+        &lt;span class="profile-span">Surname&lt;/span>
+        &lt;input type="text" placeholder="empty" maxlength="20" class="profile-input locked-input"
+            id="surname-input" value="${user.surname}">
+        &lt;span class="profile-span">Birth date&lt;/span>
+        &lt;input type="text" placeholder="empty" id="datepicker"
+            class="datepicker profile-input locked-input" value="${user.birthDate}">
+        &lt;span class="profile-span">About me&lt;/span>
+        &lt;textarea rows="4" placeholder="empty" maxlength="300"
+            class="profile-input locked-input" id="about-input">${user.profileInfo}&lt;/textarea>
+        &lt;div class="button-block">
+            &lt;button class="edit-button">Edit&lt;/button>
+            &lt;button class="delete-button">Delete&lt;/button>
+        &lt;/div>`;
+    }
+
+    /**
+    Displays the record with the given section and record details.
+    @param {HTMLElement} section - The section element where the record will be displayed.
+    @param {Object} record - The record object containing the details to be displayed. */
+    displayRecord(section, record) {
+
+        let dynamicRecordDate = '';
+        let month = record.date.monthNumber,
+            day = record.date.dayNumber;
+        if (++record.date.monthNumber &lt; 10) {
+            month = `0${record.date.monthNumber}`
+        }
+        if (record.date.dayNumber &lt; 10) {
+            day = `0${record.date.dayNumber}`
+        }
+        dynamicRecordDate = `${month}/${day}/${record.date.year}`;
+
+        let dynamicUsersEmailsLength = '';
+        if (record.likesUsersEmails.length === 0) {
+            dynamicUsersEmailsLength = `no emails`;
+        } else if (record.likesUsersEmails.length === 1) {
+            dynamicUsersEmailsLength = `${record.likesUsersEmails.length} email`;
+        } else {
+            dynamicUsersEmailsLength = `${record.likesUsersEmails.length} emails`;
+        }
+
+        let dunamicContentCategories = '';
+        switch (record.dreamCategory) {
+            case 'Usual':
+                dunamicContentCategories = `
+                &lt;option value="Usual" selected>Usual&lt;/option>
+                &lt;option value="Just talking">Just talking&lt;/option>
+                &lt;option value="Nightmare">Nightmare&lt;/option>
+                &lt;option value="Action">Action&lt;/option>
+                &lt;option value="Trash">Trash&lt;/option>
+                &lt;option value="Conscious dream">Conscious dream&lt;/option>
+                `;
+                break;
+            case 'Just talking':
+                dunamicContentCategories = `
+                &lt;option value="Usual">Usual&lt;/option>
+                &lt;option value="Just talking" selected>Just talking&lt;/option>
+                &lt;option value="Nightmare">Nightmare&lt;/option>
+                &lt;option value="Action">Action&lt;/option>
+                &lt;option value="Trash">Trash&lt;/option>
+                &lt;option value="Conscious dream">Conscious dream&lt;/option>
+                `;
+                break;
+            case 'Nightmare':
+                dunamicContentCategories = `
+                &lt;option value="Usual">Usual&lt;/option>
+                &lt;option value="Just talking">Just talking&lt;/option>
+                &lt;option value="Nightmare" selected>Nightmare&lt;/option>
+                &lt;option value="Action">Action&lt;/option>
+                &lt;option value="Trash">Trash&lt;/option>
+                &lt;option value="Conscious dream">Conscious dream&lt;/option>
+                `;
+                break;
+            case 'Action':
+                dunamicContentCategories = `
+                &lt;option value="Usual">Usual&lt;/option>
+                &lt;option value="Just talking">Just talking&lt;/option>
+                &lt;option value="Nightmare">Nightmare&lt;/option>
+                &lt;option value="Action" selected>Action&lt;/option>
+                &lt;option value="Trash">Trash&lt;/option>
+                &lt;option value="Conscious dream">Conscious dream&lt;/option>
+                `;
+                break;
+            case 'Trash':
+                dunamicContentCategories = `
+                &lt;option value="Usual">Usual&lt;/option>
+                &lt;option value="Just talking">Just talking&lt;/option>
+                &lt;option value="Nightmare">Nightmare&lt;/option>
+                &lt;option value="Action">Action&lt;/option>
+                &lt;option value="Trash" selected>Trash&lt;/option>
+                &lt;option value="Conscious dream">Conscious dream&lt;/option>
+                `;
+                break;
+            case 'Conscious dream':
+                dunamicContentCategories = `
+                &lt;option value="Usual">Usual&lt;/option>
+                &lt;option value="Just talking">Just talking&lt;/option>
+                &lt;option value="Nightmare">Nightmare&lt;/option>
+                &lt;option value="Action">Action&lt;/option>
+                &lt;option value="Trash">Trash&lt;/option>
+                &lt;option value="Conscious dream" selected>Conscious dream&lt;/option>
+                `;
+                break;
+        }
+
+        let dunamicContentMoods = '';
+        switch (record.dreamMood) {
+            case 'Typical dream':
+                dunamicContentMoods = `
+                &lt;option value="Typical dream" selected>Typical dream&lt;/option>
+                &lt;option value="Fun dream">Fun dream&lt;/option>
+                &lt;option value="Sad dream">Sad dream&lt;/option>
+                &lt;option value="Terrible">Terrible&lt;/option>
+                &lt;option value="Made me think">Made me think&lt;/option>
+                `;
+                break;
+            case 'Fun dream':
+                dunamicContentMoods = `
+                &lt;option value="Typical dream">Typical dream&lt;/option>
+                &lt;option value="Fun dream" selected>Fun dream&lt;/option>
+                &lt;option value="Sad dream">Sad dream&lt;/option>
+                &lt;option value="Terrible">Terrible&lt;/option>
+                &lt;option value="Made me think">Made me think&lt;/option>
+                `;
+                break;
+            case 'Sad dream':
+                dunamicContentMoods = `
+                &lt;option value="Typical dream">Typical dream&lt;/option>
+                &lt;option value="Fun dream">Fun dream&lt;/option>
+                &lt;option value="Sad dream" selected>Sad dream&lt;/option>
+                &lt;option value="Terrible">Terrible&lt;/option>
+                &lt;option value="Made me think">Made me think&lt;/option>
+                `;
+                break;
+            case 'Terrible':
+                dunamicContentMoods = `
+                &lt;option value="Typical dream">Typical dream&lt;/option>
+                &lt;option value="Fun dream">Fun dream&lt;/option>
+                &lt;option value="Sad dream">Sad dream&lt;/option>
+                &lt;option value="Terrible" selected>Terrible&lt;/option>
+                &lt;option value="Made me think">Made me think&lt;/option>
+                `;
+                break;
+            case 'Made me think':
+                dunamicContentMoods = `
+                &lt;option value="Typical dream">Typical dream&lt;/option>
+                &lt;option value="Fun dream">Fun dream&lt;/option>
+                &lt;option value="Sad dream">Sad dream&lt;/option>
+                &lt;option value="Terrible">Terrible&lt;/option>
+                &lt;option value="Made me think" selected>Made me think&lt;/option>
+                `;
+                break;
+        }
+
+        section.innerHTML = `                
+        &lt;button class="admin-button" id="return-button">Return&lt;/button>
+        &lt;div class="record-image">
+            &lt;img src="${record.dreamImageUrl}" class="record-image"
+                id="record-image">&lt;/img> 
+        &lt;/div>
+        &lt;input type="text" placeholder="no image url" maxlength="500" class="profile-input locked-input"
+        id="record-url-input" value="${record.dreamImageUrl}">
+        &lt;span class="profile-span">ID&lt;/span>
+        &lt;input type="text" placeholder="empty" maxlength="15" class="profile-input locked-input"
+            id="id-input" value="${record.id}">
+        &lt;span class="profile-span">Title&lt;/span>
+        &lt;input type="text" placeholder="empty" maxlength="15" class="profile-input locked-input"
+            id="title-input" value="${record.dreamTitle}">
+        &lt;span class="profile-span">Email&lt;/span>
+        &lt;input type="text" placeholder="empty" class="profile-input locked-input" id="email-input" value="${record.email}">
+        &lt;span class="profile-span">Category&lt;/span>
+        &lt;select class="profile-input locked-input" id="category-input">${dunamicContentCategories}&lt;/select>
+        &lt;span class="profile-span">Mood&lt;/span>
+        &lt;select class="profile-input locked-input" id="moods-input">${dunamicContentMoods}&lt;/select>
+        &lt;span class="profile-span">Tags (1-5)&lt;/span>
+        &lt;textarea name="dreamTags" rows="2" placeholder="love milk, bread, my cheese" maxlength="250"
+            class="profile-input locked-input" id="record-form-tags-input">&lt;/textarea>
+        &lt;div class="record-form__input-plot tags-container" id="record-form-tags-container">&lt;/div>
+        &lt;span class="profile-span">Plot&lt;/span>
+        &lt;textarea rows="4" placeholder="empty" maxlength="300"
+            class="profile-input locked-input" id="plot-input" value="${record.dreamPlot}">&lt;/textarea>
+        &lt;span class="profile-span">Date&lt;/span>
+        &lt;input type="text" placeholder="empty" id="datepicker"
+            class="datepicker profile-input locked-input" value="${dynamicRecordDate}">
+        &lt;span class="profile-span">Views&lt;/span>
+        &lt;input type="text" placeholder="empty" maxlength="50" id="views-input"
+            class="datepicker profile-input locked-input" value="${record.views}">
+        &lt;span class="profile-span">Likes&lt;/span>
+        &lt;input type="text" placeholder="empty" id="likes-input"
+            class="datepicker profile-input locked-input" value="${record.likes}">
+        &lt;span class="profile-span">Like user emails&lt;/span>
+        &lt;input type="text" placeholder="empty" id="likes-user-emails-input"
+            class="datepicker profile-input locked-input" value="${dynamicUsersEmailsLength}">
+        &lt;div class="button-block">
+            &lt;button class="edit-button">Edit&lt;/button>
+            &lt;button class="delete-button">Delete&lt;/button>
+        &lt;/div>`;
+
+        for (let tag of record.dreamTags) {
+            $('#record-form-tags-container').append('&lt;span class="badge badge-primary mr-1">' + tag + ' &lt;button class="close" type="button" aria-label="Close">&lt;span aria-hidden="true">&amp;times;&lt;/span>&lt;/button>&lt;/span>');
+        }
+    }
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-js_authorization.html">js/authorization</a></li><li><a href="module-js_clear_cash.html">js/clear_cash</a></li><li><a href="module-js_pages_admin_controller.html">js/pages/admin/controller</a></li><li><a href="module-js_pages_admin_index.html">js/pages/admin/index</a></li><li><a href="module-js_pages_admin_model.html">js/pages/admin/model</a></li><li><a href="module-js_pages_admin_view.html">js/pages/admin/view</a></li><li><a href="module-js_pages_home_controller.html">js/pages/home/controller</a></li><li><a href="module-js_pages_home_index.html">js/pages/home/index</a></li><li><a href="module-js_pages_home_view.html">js/pages/home/view</a></li><li><a href="module-js_pages_make_record_controller.html">js/pages/make_record/controller</a></li><li><a href="module-js_pages_make_record_index.html">js/pages/make_record/index</a></li><li><a href="module-js_pages_make_record_model.html">js/pages/make_record/model</a></li><li><a href="module-js_pages_make_record_view.html">js/pages/make_record/view</a></li><li><a href="module-js_pages_moon_controller.html">js/pages/moon/controller</a></li><li><a href="module-js_pages_moon_index.html">js/pages/moon/index</a></li><li><a href="module-js_pages_moon_model.html">js/pages/moon/model</a></li><li><a href="module-js_pages_moon_view.html">js/pages/moon/view</a></li><li><a href="module-js_pages_music_controller.html">js/pages/music/controller</a></li><li><a href="module-js_pages_music_index.html">js/pages/music/index</a></li><li><a href="module-js_pages_music_view.html">js/pages/music/view</a></li><li><a href="module-js_pages_register_controller.html">js/pages/register/controller</a></li><li><a href="module-js_pages_register_index.html">js/pages/register/index</a></li><li><a href="module-js_pages_register_model.html">js/pages/register/model</a></li><li><a href="module-js_pages_register_view.html">js/pages/register/view</a></li><li><a href="module-js_pages_registered_home_controller.html">js/pages/registered_home/controller</a></li><li><a href="module-js_pages_registered_home_index.html">js/pages/registered_home/index</a></li><li><a href="module-js_pages_registered_home_model.html">js/pages/registered_home/model</a></li><li><a href="module-js_pages_registered_home_view.html">js/pages/registered_home/view</a></li><li><a href="module-js_pages_sign_in_controller.html">js/pages/sign_in/controller</a></li><li><a href="module-js_pages_sign_in_index.html">js/pages/sign_in/index</a></li><li><a href="module-js_pages_sign_in_model.html">js/pages/sign_in/model</a></li><li><a href="module-js_pages_sign_in_view.html">js/pages/sign_in/view</a></li><li><a href="module-js_pages_time_controller.html">js/pages/time/controller</a></li><li><a href="module-js_pages_time_index.html">js/pages/time/index</a></li><li><a href="module-js_pages_time_view.html">js/pages/time/view</a></li><li><a href="module-js_pages_user_controller.html">js/pages/user/controller</a></li><li><a href="module-js_pages_user_index.html">js/pages/user/index</a></li><li><a href="module-js_pages_user_model.html">js/pages/user/model</a></li><li><a href="module-js_pages_user_view.html">js/pages/user/view</a></li><li><a href="module-js_pages_view_record_controller.html">js/pages/view_record/controller</a></li><li><a href="module-js_pages_view_record_index.html">js/pages/view_record/index</a></li><li><a href="module-js_pages_view_record_model.html">js/pages/view_record/model</a></li><li><a href="module-js_pages_view_record_view.html">js/pages/view_record/view</a></li><li><a href="module-js_theme.html">js/theme</a></li><li><a href="module-js_translation.html">js/translation</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Feb 27 2024 12:27:40 GMT+0300 (Москва, стандартное время)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

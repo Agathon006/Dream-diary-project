@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/view_record/view.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/view_record/view.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * view_record page view module.
+ * @module js/pages/view_record/view
+ */
+
+import i18next from 'i18next';
+
+export default class View {
+
+    static ID = {
+        DREAM_RECORD: {
+            TITLE: 'dream-title',
+            DATE: 'dream-date',
+            VIEWS: 'dream-views',
+            LIKES_BUTTON: 'likes-button',
+            LIKES_NUMBER: 'dream-likes-number',
+            LIKE_ICON: 'dream-like-icon',
+            CATEGORY: 'dream-category',
+            CATEGORY_SPAN: 'dream-category-span',
+            MOOD: 'dream-mood',
+            MOOD_SPAN: 'dream-mood-span',
+            USER_AVATAR: 'dream-user-avatar',
+            USER_NICKNAME: 'dream-user-nickname',
+            IMAGE: 'dream-image',
+            PLOT: 'dream-plot',
+        },
+    }
+
+    /**
+    Retrieves the element for the dream title
+    @returns {Element} The dream title element */
+    getDreamTitleElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.TITLE}`);
+    }
+
+    /**
+    Retrieves the element for the dream date
+    @returns {Element} The dream date element */
+    getDreamDateElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.DATE}`);
+    }
+
+    /**
+    Retrieves the element for the dream views
+    @returns {Element} The dream views element */
+    getDreamViewsElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.VIEWS}`);
+    }
+
+    /**
+    Retrieves the element for the dream likes button
+    @returns {Element} The dream likes button element */
+    getDreamLikesButtonElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.LIKES_BUTTON}`);
+    }
+
+    /**
+    Retrieves the element for the dream likes number
+    @returns {Element} The dream likes number element */
+    getDreamLikesNumberElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.LIKES_NUMBER}`);
+    }
+
+    /**
+    Retrieves the element for the dream like icon
+    @returns {Element} The dream like icon element */
+    getDreamLikeIconElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.LIKE_ICON}`);
+    }
+
+    /**
+    Retrieves the element for the dream category
+    @returns {Element} The dream category element */
+    getDreamCategoryElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.CATEGORY}`);
+    }
+
+    /**
+     * Returns the HTML element for the dream category span
+     * @returns {Element} The dream category span element
+     */
+    getDreamCategorySpanElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.CATEGORY_SPAN}`);
+    }
+
+    /**
+     * Returns the HTML element for the dream mood input field
+     * @returns {Element} The dream mood input field element
+     */
+    getDreamMoodElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.MOOD}`);
+    }
+
+    /**
+     * Returns the HTML element for the dream mood span
+     * @returns {Element} The dream mood span element
+     */
+    getDreamMoodSpanElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.MOOD_SPAN}`);
+    }
+
+    /**
+     * Returns the HTML element for the dream user avatar
+     * @returns {Element} The dream user avatar element
+     */
+    getDreamUserAvatarElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.USER_AVATAR}`);
+    }
+
+    /**
+     * Returns the HTML element for the dream user nickname
+     * @returns {Element} The dream user nickname element
+     */
+    getDreamUserNicknameElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.USER_NICKNAME}`);
+    }
+
+    /**
+     * Returns the HTML element for the dream image
+     * @returns {Element} The dream image element
+     */
+    getDreamImageElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.IMAGE}`);
+    }
+
+    /**
+     * Returns the HTML element for the dream plot input field
+     * @returns {Element} The dream plot input field element
+     */
+    getDreamPlotElement() {
+        return document.querySelector(`#${View.ID.DREAM_RECORD.PLOT}`);
+    }
+
+    /**
+    Toggles the appearance of an icon based on its source URL.
+    @param {HTMLElement} icon - The icon element to toggle. 
+    */
+    toggleLikesIcon(icon) {
+        if (icon.src.match(/_inactive.svg$/)) {
+            icon.src = '../icons/like_active.svg';
+
+            icon.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                icon.style.transform = 'scale(1)';
+            }, 300);
+
+        } else {
+            icon.src = '../icons/like_inactive.svg';
+        };
+    }
+
+    /**
+    Toggles the waiting-background class of the main element. */
+    toggleClassWaitingBackgroundOfMain() {
+        document.querySelector('.main').classList.toggle('waiting-background');
+    }
+
+    /**
+    Translates the page content between English and Russian using data from a dictionary JSON file.
+    */
+    translatePage() {
+        fetch('../dictionary.json')
+            .then(response => response.json())
+            .then(data => {
+                i18next.init({
+                    lng: 'ru',
+                    debug: false,
+                    resources: {
+                        ru: {
+                            translation: data
+                        }
+                    }
+                });
+
+                document.querySelector(`#header-link-home`).textContent = i18next.t('registered_header.home');
+                document.querySelector(`#header-link-time`).textContent = i18next.t('registered_header.moon');
+                document.querySelector(`#header-link-moon`).textContent = i18next.t('registered_header.time');
+                document.querySelector(`#header-link-music`).textContent = i18next.t('registered_header.music');
+                document.querySelector(`#header-link-profile`).textContent = i18next.t('registered_header.profile');
+                document.querySelector(`#header-link-sign-out`).textContent = i18next.t('registered_header.sign_out');
+
+                document.querySelector(`#header-link-home-burger`).textContent = i18next.t('registered_header.home');
+                document.querySelector(`#header-link-time-burger`).textContent = i18next.t('registered_header.time');
+                document.querySelector(`#header-link-moon-burger`).textContent = i18next.t('registered_header.moon');
+                document.querySelector(`#header-link-music-burger`).textContent = i18next.t('registered_header.music');
+                document.querySelector(`#header-link-profile-burger`).textContent = i18next.t('registered_header.profile');
+                document.querySelector(`#header-link-sign-out-burger`).textContent = i18next.t('registered_header.sign_out');
+
+                document.querySelector(`#return-link`).textContent = i18next.t('view_record.return_link');
+                document.querySelector(`#dream-author-span`).textContent = i18next.t('view_record.dream_author_span');
+
+                document.querySelector(`#footer-plot`).textContent = i18next.t('footer.footer_plot');
+            })
+            .catch(error => {
+                console.error('Error loading JSON file:', error);
+            });
+    }
+
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-js_authorization.html">js/authorization</a></li><li><a href="module-js_clear_cash.html">js/clear_cash</a></li><li><a href="module-js_pages_admin_controller.html">js/pages/admin/controller</a></li><li><a href="module-js_pages_admin_index.html">js/pages/admin/index</a></li><li><a href="module-js_pages_admin_model.html">js/pages/admin/model</a></li><li><a href="module-js_pages_admin_view.html">js/pages/admin/view</a></li><li><a href="module-js_pages_home_controller.html">js/pages/home/controller</a></li><li><a href="module-js_pages_home_index.html">js/pages/home/index</a></li><li><a href="module-js_pages_home_view.html">js/pages/home/view</a></li><li><a href="module-js_pages_make_record_controller.html">js/pages/make_record/controller</a></li><li><a href="module-js_pages_make_record_index.html">js/pages/make_record/index</a></li><li><a href="module-js_pages_make_record_model.html">js/pages/make_record/model</a></li><li><a href="module-js_pages_make_record_view.html">js/pages/make_record/view</a></li><li><a href="module-js_pages_moon_controller.html">js/pages/moon/controller</a></li><li><a href="module-js_pages_moon_index.html">js/pages/moon/index</a></li><li><a href="module-js_pages_moon_model.html">js/pages/moon/model</a></li><li><a href="module-js_pages_moon_view.html">js/pages/moon/view</a></li><li><a href="module-js_pages_music_controller.html">js/pages/music/controller</a></li><li><a href="module-js_pages_music_index.html">js/pages/music/index</a></li><li><a href="module-js_pages_music_view.html">js/pages/music/view</a></li><li><a href="module-js_pages_register_controller.html">js/pages/register/controller</a></li><li><a href="module-js_pages_register_index.html">js/pages/register/index</a></li><li><a href="module-js_pages_register_model.html">js/pages/register/model</a></li><li><a href="module-js_pages_register_view.html">js/pages/register/view</a></li><li><a href="module-js_pages_registered_home_controller.html">js/pages/registered_home/controller</a></li><li><a href="module-js_pages_registered_home_index.html">js/pages/registered_home/index</a></li><li><a href="module-js_pages_registered_home_model.html">js/pages/registered_home/model</a></li><li><a href="module-js_pages_registered_home_view.html">js/pages/registered_home/view</a></li><li><a href="module-js_pages_sign_in_controller.html">js/pages/sign_in/controller</a></li><li><a href="module-js_pages_sign_in_index.html">js/pages/sign_in/index</a></li><li><a href="module-js_pages_sign_in_model.html">js/pages/sign_in/model</a></li><li><a href="module-js_pages_sign_in_view.html">js/pages/sign_in/view</a></li><li><a href="module-js_pages_time_controller.html">js/pages/time/controller</a></li><li><a href="module-js_pages_time_index.html">js/pages/time/index</a></li><li><a href="module-js_pages_time_view.html">js/pages/time/view</a></li><li><a href="module-js_pages_user_controller.html">js/pages/user/controller</a></li><li><a href="module-js_pages_user_index.html">js/pages/user/index</a></li><li><a href="module-js_pages_user_model.html">js/pages/user/model</a></li><li><a href="module-js_pages_user_view.html">js/pages/user/view</a></li><li><a href="module-js_pages_view_record_controller.html">js/pages/view_record/controller</a></li><li><a href="module-js_pages_view_record_index.html">js/pages/view_record/index</a></li><li><a href="module-js_pages_view_record_model.html">js/pages/view_record/model</a></li><li><a href="module-js_pages_view_record_view.html">js/pages/view_record/view</a></li><li><a href="module-js_theme.html">js/theme</a></li><li><a href="module-js_translation.html">js/translation</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Feb 27 2024 12:27:40 GMT+0300 (Москва, стандартное время)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

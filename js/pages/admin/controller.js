@@ -1,3 +1,7 @@
+/**
+ * admin controller module.
+ * @module js/pages/admin/controller
+ */
 export default class Controller {
     constructor(view, model) {
         this.view = view;
@@ -12,12 +16,16 @@ export default class Controller {
         this._initSectionListener();
     }
 
+    /**
+    Initializes the admin page by getting the users button element, toggling the selected class, and displaying all users. */
     _initAdminPage() {
         const usersOption = this.view.getUsersButtonElement();
         this.view.toggleClassSelected(usersOption);
         this._displayAllUsers();
     }
 
+    /**
+    Initializes event listener for modal elements */
     _initModalListener() {
         const modalWrapper = this.view.getModalWrapperElement(),
             section = this.view.getSectionElement();
@@ -38,6 +46,10 @@ export default class Controller {
         });
     }
 
+    /**
+    Deletes a user with the given ID and updates the users table in the view.
+    @param {Element} modalWrapper - The modal wrapper element.
+    @param {Element} section - The section element containing the user ID. */
     _deleteUser(modalWrapper, section) {
         this.model.getPromiseDeleteUserById(section.children[4].value)
             .then(response => response.json())
@@ -57,6 +69,10 @@ export default class Controller {
             });
     }
 
+    /**
+    Deletes a record by id and re-fetches all records to update the UI
+    @param {HTMLElement} modalWrapper - The modal wrapper element
+    @param {HTMLElement} section - The section element containing the record to be deleted */
     _deleteRecord(modalWrapper, section) {
         this.model.getPromiseDeleteRecordById(section.children[4].value)
             .then(response => response.json())
@@ -76,6 +92,10 @@ export default class Controller {
             });
     }
 
+    /**
+    Initialize listener for the users button on the view.
+    Toggles selected class on the users and records buttons and displays all users when clicked.
+    */
     _initUsersButtonListener() {
         const usersButton = this.view.getUsersButtonElement(),
             recordsButton = this.view.getRecordsButtonElement();
@@ -88,6 +108,10 @@ export default class Controller {
         });
     }
 
+    /**
+    Initialize listener for the records button on the view.
+    Toggles selected class on the users and records buttons and displays all records when clicked.
+    */
     _initRecordsButtonListener() {
         const usersButton = this.view.getUsersButtonElement(),
             recordsButton = this.view.getRecordsButtonElement();
@@ -100,6 +124,9 @@ export default class Controller {
         });
     }
 
+    /**
+    Initialize listener for the section containing dynamic data using delegation
+    */
     _initSectionListener() {
         const section = this.view.getSectionElement();
         let previousInputs = [],
@@ -216,6 +243,10 @@ export default class Controller {
         });
     }
 
+    /**
+    Display user information by fetching user data from the model based on the provided ID.
+    Also initializes a datepicker for a specific element on the view.
+    @param {number} id - The ID of the user to display. */
     _displayUser(id) {
         this.model.getPromiseGetUserById(id)
             .then(response => response.json())
@@ -228,6 +259,10 @@ export default class Controller {
             });
     }
 
+    /**
+    Display record information by fetching record data from the model based on the provided ID.
+    Also initializes a datepicker for a specific element on the view.
+    @param {number} id - The ID of the record to display. */
     _displayRecord(id) {
         this.model.getPromiseGetRecordById(id)
             .then(response => response.json())
@@ -245,6 +280,10 @@ export default class Controller {
             });
     }
 
+    /**
+    Display all users on the page with pagination controls based on the current page number.
+    @param {number} currentPageNumber - The current page number to display users on.
+    */
     _displayAllUsers(currentPageNumber = 1) {
         this.model.getPromiseGetAllUsers(currentPageNumber)
             .then(response => response.json())
@@ -263,7 +302,7 @@ export default class Controller {
                 } else if (buttonNext.classList.contains('hidden')) {
                     this.view.toggleClassHidden(buttonNext);
                 }
-                
+
                 this.view.displayUsersTable(data);
             })
             .catch(error => {
@@ -271,6 +310,10 @@ export default class Controller {
             });
     }
 
+    /**
+    Display all records on the page with pagination controls based on the current page number.
+    @param {number} currentPageNumber - The current page number to display records on.
+    */
     _displayAllRecords(currentPageNumber = 1) {
         this.model.getPromiseGetAllRecords(currentPageNumber)
             .then(response => response.json())
@@ -297,6 +340,11 @@ export default class Controller {
             });
     }
 
+    /**
+    Initializes handling of save for user profile updates
+    @param {Array} previousInputs - The previous user inputs
+    @param {Array} sectionInputs - The current section inputs
+    @param {Array} recordTags - The tags associated with the record */
     _initHandleSave(previousInputs, sectionInputs, recordTags) {
         if (sectionInputs[0].id === 'avatar-url-input') {
             if (this._isUserValidationOkay(sectionInputs)) {
@@ -318,6 +366,11 @@ export default class Controller {
         }
     }
 
+    /**
+    Initializes the listener for the tags input field on the record form.
+    Allows users to add tags by pressing Enter or comma key.
+    Also handles removing tags when the close button is clicked.
+    */
     _initTagsInputListener() {
         $('#record-form-tags-input').on('keyup', function (event) {
             if (event.key === 'Enter' || event.key === ',') {
@@ -338,6 +391,10 @@ export default class Controller {
         });
     }
 
+    /**
+    Checks if user input validation is okay.
+    @param {Array} inputs - An array of input elements.
+    @returns {boolean} - Returns true if validation is okay, false otherwise. */
     _isUserValidationOkay(inputs) {
         let isValidationOkay = true;
         this.view.clearClassWrongInputFromElements();
@@ -370,6 +427,13 @@ export default class Controller {
         return isValidationOkay;
     }
 
+    /**
+    Checks if a new nickname already exists in the database.
+    If the nickname already exists, it adds a wrong input class and creates a wrong span element.
+    If the nickname is unique, it updates the user data.
+    @param {Element} nicknameInput - The input element for the new nickname.
+    @param {Array} previousInputs - An array of previous input elements.
+    @param {Array} sectionInputs - An array of input elements in the current section. */
     _isNewNicknameExist(nicknameInput, previousInputs, sectionInputs) {
         this.model.getPromiseGetUserByNickname(nicknameInput.value)
             .then(response => response.json())
@@ -386,6 +450,10 @@ export default class Controller {
             });
     }
 
+    /**
+    Updates user data based on section inputs and user ID
+    @param {Object} sectionInputs - The inputs from the section to update user data
+    @param {number} userId - The ID of the user to update */
     _updateUserData(sectionInputs, userId) {
         this.model.getPromiseEditUser(sectionInputs, userId)
             .then(response => response.json())
@@ -406,6 +474,10 @@ export default class Controller {
             });
     }
 
+    /**
+    Checks if record input validation is okay.
+    @param {Array} inputs - An array of input elements.
+    @returns {boolean} - Returns true if validation is okay, false otherwise. */
     _isRecordValidationOkay(inputs) {
         let isValidationOkay = true;
         this.view.clearClassWrongInputFromElements();
@@ -430,6 +502,12 @@ export default class Controller {
         return isValidationOkay;
     }
 
+    /**
+    Updates record data by calling API to edit record and then fetches the updated record
+    by using the record id.
+    @param {Object} sectionInputs - The input data for updating the record section
+    @param {number} recordId - The unique identifier of the record
+    @param {Array} recordTags - The tags associated with the record */
     _updateRecordData(sectionInputs, recordId, recordTags) {
         this.model.getPromiseEditRecord(sectionInputs, recordId, recordTags)
             .then(response => response.json())

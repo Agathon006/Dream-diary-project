@@ -1,3 +1,7 @@
+/**
+ * register page controller module.
+ * @module js/pages/register/controller
+ */
 export default class Controller {
     constructor(view, model) {
         this.view = view;
@@ -12,12 +16,20 @@ export default class Controller {
         this._initFormListener();
     }
 
+    /**
+    Initializes the translation based on the user's selected language.
+    Calls the view's translatePage method if language is set to 'ru'.
+    @function _initTranslation */
     _initTranslation() {
         if (localStorage.getItem('language') === 'ru') {
             this.view.translatePage();
         }
     }
 
+    /**
+    Initializes the listener for the burger button.
+    Toggles the visibility of the burger content based on user interactions.
+    @function _initBurgerButtonListener */
     _initBurgerButtonListener() {
         document.querySelector('.body').addEventListener('click', (event) => {
             if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -29,6 +41,9 @@ export default class Controller {
         });
     }
 
+    /**
+    Google sign in listener function.
+    This function listens for credential response from Google sign in. */
     _googleSignInListener() {
         window.handleCredentialResponse = (response) => {
             // Under development (needed node js)
@@ -52,6 +67,9 @@ export default class Controller {
         }
     }
 
+    /**
+    Listen for changes on the password check box and toggle the password input type accordingly.
+    */
     _passwordCheckBoxListener() {
         const passwordCheckBox = this.view.getPassworCheckBoxInputElement();
         passwordCheckBox.addEventListener('change', () => {
@@ -64,6 +82,8 @@ export default class Controller {
         });
     }
 
+    /**
+    Initializes the form listener for the registration form. */
     _initFormListener() {
         const form = this.view.getRegistrerFormElement(),
             submitButton = this.view.getSubmitInputElement();
@@ -111,6 +131,9 @@ export default class Controller {
         });
     }
 
+    /**
+    Checks if form validation is okay.
+    @returns {boolean} Returns true if form validation is okay, false otherwise. */
     _isFormValidationOkay() {
         const form = this.view.getRegistrerFormElement(),
             nicknameInput = this.view.getNicknameInputElement(),
@@ -153,6 +176,9 @@ export default class Controller {
         return isValidationOkay;
     }
 
+    /**
+    Checks if the provided nickname already exists in the database.
+    @returns {Promise<boolean>} A promise that resolves to a boolean indicating if the nickname exists or not. */
     _getPromiseIsNicknameExist() {
         const form = this.view.getRegistrerFormElement(),
             nicknameInput = this.view.getNicknameInputElement();
@@ -184,6 +210,9 @@ export default class Controller {
             })
     }
 
+    /**
+    Checks if the provided email already exists in the database.
+    @returns {Promise<boolean>} A promise that resolves to a boolean indicating if the email exists or not. */
     _getPromiseIsEmailExist() {
         const form = this.view.getRegistrerFormElement(),
             emailInput = this.view.getEmailInputElement();
@@ -216,6 +245,10 @@ export default class Controller {
             })
     }
 
+    /**
+    Initializes event listeners for a verification code form
+    @param {object} formInfo - Information about the form
+    @param {Element} submitButton - The submit button element */
     _initCodeFormListener(formInfo, submitButton) {
         const form = this.view.getCodeFormElement(),
             numberInputs = this.view.getCodeFormNumberInputs(),
@@ -271,6 +304,12 @@ export default class Controller {
         });
     }
 
+    /**
+    Checks if the entered verification code in the number inputs matches the expected verification code
+    @param {NodeList} numberInputs - List of input elements for the verification code
+    @param {string} verificationCode - Expected verification code to match against
+    @param {Element} form - The form element containing the number inputs
+    @returns {boolean} - Returns true if verification code is correct, false otherwise */
     _isVerificationCodeCorrect(numberInputs, verificationCode, form) {
         numberInputs.forEach((input, index) => {
             this.view.removeClassWrongInput(form);
