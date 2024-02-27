@@ -26,30 +26,52 @@ export default class View {
         },
     }
 
+    /**
+    Get the registration form element from the DOM
+    @returns {Element} The registration form element */
     getRegistrerFormElement() {
         return document.querySelector(`#${View.ID.REGISTER_FORM.FORM}`);
     }
 
+    /**
+    Get the email input element from the registration form
+    @returns {Element} The email input element */
     getEmailInputElement() {
         return document.querySelector(`#${View.ID.REGISTER_FORM.EMAIL_INPUT}`);
     }
 
+    /**
+    Get the password input element from the registration form
+    @returns {Element} The password input element */
     getPasswordInputElement() {
         return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_INPUT}`);
     }
 
+    /**
+    Get the password check box input element from the registration form
+    @returns {Element} The password check box input element */
     getPassworCheckBoxInputElement() {
         return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_CHECKBOX_INPUT}`);
     }
 
+    /**
+    Get the submit input element from the registration form
+    @returns {Element} The submit input element */
     getSubmitInputElement() {
         return document.querySelector(`#${View.ID.REGISTER_FORM.SUBMIT_INPUT}`);
     }
 
+    /**
+    Add a CSS class to indicate a wrong input
+    @param {Element} element - The element to add the class to */
     addClassWrongInput(element) {
         element.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
     }
 
+    /**
+    Create a warning span element with a message and insert it after a specified element
+    @param {Element} element - The element after which the warning span will be inserted
+    @param {string} message - The message to display in the warning span */
     createWrongSpanElement(element, message) {
         let warningSpan = document.createElement('span');
         warningSpan.innerText = message;
@@ -57,6 +79,8 @@ export default class View {
         element.parentNode.insertBefore(warningSpan, element.nextSibling);
     }
 
+    /**
+    Adds the class for correct input to elements that do not have the class for wrong input. */
     addClassRightToNotWrongElements() {
         document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(element => {
             if (!element.classList.contains(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT)) {
@@ -65,6 +89,8 @@ export default class View {
         });
     }
 
+    /**
+    Clears the classes for wrong and correct input from all elements. */
     clearClassWrongAndRightInputFromElements() {
         document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(item => {
             item.classList.remove(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
@@ -72,12 +98,17 @@ export default class View {
         });
     }
 
+    /**
+    Clears the span elements that contain wrong input messages. */
     clearClassWrongSpanFromElements() {
         document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.WRONG_SPAN}`).forEach(item => {
             item.remove();
         });
     }
 
+    /**
+    Translates the page content between English and Russian using data from a dictionary JSON file.
+    */
     translatePage() {
         fetch('../dictionary.json')
             .then(response => response.json())

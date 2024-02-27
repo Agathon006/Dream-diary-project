@@ -5424,11 +5424,21 @@ class Controller {
     this._initFormListener();
     this._passwordCheckBoxListener();
   }
+
+  /**
+   * Initializes translation based on the stored language preference.
+   * If the stored language is Russian ('ru'), it translates the page using the view's translatePage method.
+   */
   _initTranslation() {
     if (localStorage.getItem('language') === 'ru') {
       this.view.translatePage();
     }
   }
+
+  /**
+   * Initializes a click event listener for the burger button to control the burger content visibility.
+   * Toggles the visibility of the burger content based on the target click and the element's classes.
+   */
   _initBurgerButtonListener() {
     document.querySelector('.body').addEventListener('click', event => {
       if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -5438,6 +5448,10 @@ class Controller {
       }
     });
   }
+
+  /**
+  Initializes a form listener that listens for submit event on the sign in form
+  */
   _initFormListener() {
     const form = this.view.getRegistrerFormElement(),
       SubmitButton = this.view.getSubmitInputElement();
@@ -5493,6 +5507,10 @@ class Controller {
       });
     });
   }
+
+  /**
+  Checks if form validation is okay.
+  @returns {boolean} Returns true if form validation is okay, false otherwise. */
   _isFormValidationOkay() {
     const form = this.view.getRegistrerFormElement(),
       emailInput = this.view.getEmailInputElement(),
@@ -5520,6 +5538,10 @@ class Controller {
     }
     return isValidationOkay;
   }
+
+  /**
+  Listen for changes on the password check box and toggle the password input type accordingly.
+  */
   _passwordCheckBoxListener() {
     const passwordCheckBox = this.view.getPassworCheckBoxInputElement();
     passwordCheckBox.addEventListener('change', () => {
@@ -5551,15 +5573,33 @@ __webpack_require__.r(__webpack_exports__);
  * @module js/pages/sign_in/model
  */
 class Model {
+  /**
+  Checks if the email input is in a valid email format.
+  @param {string} emailInput - The email input to be checked.
+  @returns {boolean} - Returns true if the email is in a valid format, otherwise false. */
   isEmailOkay(emailInput) {
     return emailInput.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
   }
+
+  /**
+  Checks if the password input meets the specified criteria.
+  @param {string} passwordInput - The password input to be checked.
+  @returns {boolean} - Returns true if the password meets the criteria, otherwise false. */
   isPasswordOkay(passwordInput) {
     return passwordInput.match(/^(?=.*[a-z])(?=.*[A-Z]).{6,200}$/);
   }
+
+  /**
+  Fetches the list of users from a specified URL.
+  @returns {Promise} - Returns a promise with the list of users from the specified URL. */
   getPromiseDbUsers() {
     return fetch('http://localhost:3000/users');
   }
+
+  /**
+  Creates a JWT token using the user data and stores it in local storage.
+  @param {object} userData - The user data to be stored in the JWT token.
+  */
   createJwt(userData) {
     const jwt = __webpack_require__(/*! jsonwebtoken */ "./node_modules/jsonwebtoken/index.js");
     const payload = userData;
@@ -5610,30 +5650,62 @@ class View {
       INPUT: 'register-form__input'
     }
   };
+
+  /**
+  Get the registration form element from the DOM
+  @returns {Element} The registration form element */
   getRegistrerFormElement() {
     return document.querySelector(`#${View.ID.REGISTER_FORM.FORM}`);
   }
+
+  /**
+  Get the email input element from the registration form
+  @returns {Element} The email input element */
   getEmailInputElement() {
     return document.querySelector(`#${View.ID.REGISTER_FORM.EMAIL_INPUT}`);
   }
+
+  /**
+  Get the password input element from the registration form
+  @returns {Element} The password input element */
   getPasswordInputElement() {
     return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_INPUT}`);
   }
+
+  /**
+  Get the password check box input element from the registration form
+  @returns {Element} The password check box input element */
   getPassworCheckBoxInputElement() {
     return document.querySelector(`#${View.ID.REGISTER_FORM.PASSWORD_CHECKBOX_INPUT}`);
   }
+
+  /**
+  Get the submit input element from the registration form
+  @returns {Element} The submit input element */
   getSubmitInputElement() {
     return document.querySelector(`#${View.ID.REGISTER_FORM.SUBMIT_INPUT}`);
   }
+
+  /**
+  Add a CSS class to indicate a wrong input
+  @param {Element} element - The element to add the class to */
   addClassWrongInput(element) {
     element.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
   }
+
+  /**
+  Create a warning span element with a message and insert it after a specified element
+  @param {Element} element - The element after which the warning span will be inserted
+  @param {string} message - The message to display in the warning span */
   createWrongSpanElement(element, message) {
     let warningSpan = document.createElement('span');
     warningSpan.innerText = message;
     warningSpan.classList.add(View.JS_CLASSES.REGISTER_FORM.WRONG_SPAN);
     element.parentNode.insertBefore(warningSpan, element.nextSibling);
   }
+
+  /**
+  Adds the class for correct input to elements that do not have the class for wrong input. */
   addClassRightToNotWrongElements() {
     document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(element => {
       if (!element.classList.contains(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT)) {
@@ -5641,17 +5713,27 @@ class View {
       }
     });
   }
+
+  /**
+  Clears the classes for wrong and correct input from all elements. */
   clearClassWrongAndRightInputFromElements() {
     document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.INPUT}`).forEach(item => {
       item.classList.remove(View.JS_CLASSES.REGISTER_FORM.WRONG_INPUT);
       item.classList.remove(View.JS_CLASSES.REGISTER_FORM.RIGHT_INPUT);
     });
   }
+
+  /**
+  Clears the span elements that contain wrong input messages. */
   clearClassWrongSpanFromElements() {
     document.querySelectorAll(`.${View.JS_CLASSES.REGISTER_FORM.WRONG_SPAN}`).forEach(item => {
       item.remove();
     });
   }
+
+  /**
+  Translates the page content between English and Russian using data from a dictionary JSON file.
+  */
   translatePage() {
     fetch('../dictionary.json').then(response => response.json()).then(data => {
       i18next__WEBPACK_IMPORTED_MODULE_0__["default"].init({
