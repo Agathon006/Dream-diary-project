@@ -4,29 +4,39 @@
  */
 
 export default class Controller {
+
     constructor(view, model) {
         this.view = view;
         this.model = model;
 
         this.oldPasswordMode = true;
     }
+
     init() {
         this._initTranslation();
         this._initBurgerButtonListener();
         this._getRandomUrlButtonListener();
         this._datepickerListener();
-        this._userProfileListener();
+        this._userProfileInitialization();
         this._passwordRepeatInputListener();
         this._passwordInputListener();
         this._passwordCheckBoxListener();
     }
 
+    /**
+     * Initializes translation based on the stored language preference.
+     * If the stored language is Russian ('ru'), it translates the page using the view's translatePage method.
+     */
     _initTranslation() {
         if (localStorage.getItem('language') === 'ru') {
             this.view.translatePage();
         }
     }
 
+    /**
+     * Initializes a click event listener for the burger button to control the burger content visibility.
+     * Toggles the visibility of the burger content based on the target click and the element's classes.
+     */
     _initBurgerButtonListener() {
         document.querySelector('.body').addEventListener('click', (event) => {
             if (event.target.id === 'burger-button' || event.target.parentNode.id === 'burger-button') {
@@ -38,6 +48,11 @@ export default class Controller {
         });
     }
 
+    /**
+    Event listener for the getRandomUrlButton element
+    Gets a random image URL from the model using the access key
+    Updates the profile image URL and main avatar with the fetched image
+    */
     _getRandomUrlButtonListener() {
         const accessKey = 'LbQIwO2aXDXY-0LkU8nHbgbJvw8n6LB_16Og8cHjOeE',
             profileGetRandomUrlButton = this.view.getRrofileGetRandomUrlButtonElement(),
@@ -66,11 +81,17 @@ export default class Controller {
         });
     }
 
+    /**
+    Event listener for the datepicker element
+    Initializes the datepicker widget on the datepicker element using jQuery UI */
     _datepickerListener() {
         $('#datepicker').datepicker();
     }
 
-    _userProfileListener() {
+    /**
+    Initializes the user profile by fetching user data using the email decoded from JWT
+    and updating the profile elements with the retrieved user information. */
+    _userProfileInitialization() {
         const nincknameInput = this.view.getRrofileNicknameElement(),
             emailInput = this.view.getRrofileEmailElement(),
             passwordInput = this.view.getRrofilePasswordElement(),
@@ -111,6 +132,9 @@ export default class Controller {
             });
     }
 
+    /**
+    Listener function for password edit button
+    @param {Object} userInfo - User information object */
     _passwordEditButtonListener(userInfo) {
         const passwordEditButton = this.view.getPasswordEditButton(),
             passwordInput = this.view.getRrofilePasswordElement(),
@@ -207,6 +231,10 @@ export default class Controller {
         })
     }
 
+    /**
+    Listens for input in the repeat password field and updates UI accordingly.
+    If passwords match and oldPasswordMode is true, changes UI elements.
+    */
     _passwordRepeatInputListener() {
         const passwordEditButton = this.view.getPasswordEditButton(),
             passwordSpan = this.view.getRrofilePasswordSpanElement(),
@@ -238,6 +266,11 @@ export default class Controller {
         });
     }
 
+    /**
+    Checks if the passwords match.
+    @param {HTMLElement} passwordInput - The input element for the password.
+    @param {HTMLElement} repeatPasswordInput - The input element for the repeated password.
+    @returns {boolean} - Returns true if passwords match, false otherwise. */
     _arePasswordsMatches(passwordInput, repeatPasswordInput) {
         if (passwordInput.value === repeatPasswordInput.value) {
             this.view.clearClassWrongInputFromElements()
@@ -250,6 +283,8 @@ export default class Controller {
         }
     }
 
+    /**
+    Listens for input events on the password input field and performs actions accordingly */
     _passwordInputListener() {
         const passwordInput = this.view.getRrofilePasswordElement(),
             repeatPasswordInput = this.view.getRrofileRepeatPasswordElement();
@@ -260,6 +295,8 @@ export default class Controller {
         });
     }
 
+    /**
+    Listens for change events on the password checkbox input field and toggles password visibility */
     _passwordCheckBoxListener() {
         const passwordCheckBox = this.view.getPassworEditCheckBoxInputElement();
         passwordCheckBox.addEventListener('change', () => {
@@ -275,6 +312,10 @@ export default class Controller {
         });
     }
 
+    /**
+    Handles the click event on the edit button for user profile information.
+    @param {object} userInfo - The user information object.
+    @param {string} profileMainAvatar - The URL of the main avatar for the user profile. */
     _editButtonListener(userInfo, profileMainAvatar) {
         const editButton = this.view.getRrofileEditButton(),
             getRandomUrlButton = this.view.getRrofileGetRandomUrlButtonElement();
@@ -318,10 +359,19 @@ export default class Controller {
         })
     }
 
+    /**
+    Checks if any of the profile inputs have been changed
+    @param {HTMLElement} inputs - An array of input elements
+    @param {Array} inputsBeforeEdit - An array of input elements before editing
+    @returns {boolean} - Returns true if any of the inputs have been changed, false otherwise */
     _isProfileChanged(inputs, inputsBeforeEdit) {
         return inputs[0].value !== inputsBeforeEdit[0] || inputs[2].value !== inputsBeforeEdit[2] || inputs[3].value !== inputsBeforeEdit[3] || inputs[4].value !== inputsBeforeEdit[4] || inputs[5].value !== inputsBeforeEdit[5] || inputs[6].value !== inputsBeforeEdit[6];
     }
 
+    /**
+    Checks if validation for a specific input is okay
+    @param {HTMLElement} inputs - An array of input elements
+    @returns {boolean} - Returns true if validation is okay, false otherwise */
     _isValidationOkay(inputs) {
         let isValidationOkay = true;
         if (!inputs[0].value.match(/^[a-zA-Z][a-zA-Z0-9_]{4,14}$/)) {
@@ -363,10 +413,22 @@ export default class Controller {
         return isValidationOkay;
     }
 
+    /**
+    Checks if a given input is a string
+    @param {string} input - The input to be checked
+    @returns {boolean} - Returns true if the input is a string, false otherwise */
     _isThisString(input) {
         return input.match(/^[A-Za-z]+$/);
     }
 
+    /**
+    Edit user profile information and update in database if nickname is not a copy
+    @param {HTMLElement} profileMainAvatar - URL of the user's main avatar image
+    @param {object} userInfo - Information about the user, including ID
+    @param {HTMLElement} inputs - Array of input elements from user profile form
+    @param {HTMLElement} getRandomUrlButton - Function to get a random URL for avatar image
+    @param {HTMLElement} editButton - Function to trigger profile edit
+    @param {Array} inputsBeforeEdit - Array of input values before edit */
     _editUserProfile(profileMainAvatar, userInfo, inputs, getRandomUrlButton, editButton, inputsBeforeEdit) {
 
         const editedUser = {
@@ -407,6 +469,14 @@ export default class Controller {
         }
     }
 
+    /**
+    Updates user profile in the database with the edited user information.
+    @param {number} userId - The id of the user whose profile is being updated.
+    @param {Object} editedUser - The edited user information.
+    @param {HTMLElement} profileMainAvatar - The main avatar element in the profile.
+    @param {HTMLElement[]} inputs - Array of input elements to toggle.
+    @param {HTMLElement} getRandomUrlButton - The button element to toggle for getting random url.
+    @param {HTMLElement} editButton - The button element to toggle for editing. */
     _updateProfileInDb(userId, editedUser, profileMainAvatar, inputs, getRandomUrlButton, editButton) {
         this.model.getPromiseEditUser(userId, editedUser)
             .then(response => {

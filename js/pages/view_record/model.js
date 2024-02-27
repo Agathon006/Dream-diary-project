@@ -4,6 +4,11 @@
  */
 export default class Model {
 
+    /**
+    Updates the number of views for a specific record in the database.
+    @param {number} id - The ID of the record to update.
+    @param {number} newNumber - The new number of views for the record.
+    @returns {Promise} A promise that resolves once the update is complete. */
     getPromiseChangeRecordViews(id, newNumber) {
         return fetch(`http://localhost:3000/records/${id}`, {
             method: 'PATCH',
@@ -16,6 +21,12 @@ export default class Model {
         })
     }
 
+    /**
+    Updates the number of likes and the list of users who liked a specific record in the database.
+    @param {number} id - The ID of the record to update.
+    @param {number} newNumber - The new number of likes for the record.
+    @param {Array} newUsersEmails - An array of user emails who liked the record.
+    @returns {Promise} A promise that resolves once the update is complete. */
     getPromiseChangeRecordLikesAndLikesUsers(id, newNumber, newUsersEmails) {
         return fetch(`http://localhost:3000/records/${id}`, {
             method: 'PATCH',
@@ -29,14 +40,26 @@ export default class Model {
         })
     }
 
+    /**
+    Retrieves a promise to get dream records by ID
+    @param {number} id - The ID of the dream record
+    @returns {Promise} A promise to fetch the dream records */
     getPromiseGetDreamRecords(id) {
         return fetch(`http://localhost:3000/records/${id}`)
     }
 
+    /**
+    Retrieves a promise to get a user by email
+    @param {string} email - The email of the user
+    @returns {Promise} A promise to fetch the user by email */
     getPromiseGetUserByEmail(email) {
         return fetch(`http://localhost:3000/users?email=${email}`)
     }
 
+    /**
+    Determines the month name based on the month number
+    @param {number} monthNumber - The number representing the month (0-11)
+    @returns {string} The name of the month */
     whichMonthNameByNumber(monthNumber) {
 
         switch (monthNumber) {
@@ -69,6 +92,11 @@ export default class Model {
         }
     }
 
+    /**
+    Returns the icon path based on the dream category name
+    @param {string} categoryName - The name of the dream category
+    @returns {string} - The icon path for the dream category
+    */
     whichDreamCategoryIcon(categoryName) {
 
         switch (categoryName) {
@@ -91,6 +119,11 @@ export default class Model {
         }
     }
 
+    /**
+    Returns the icon path based on the dream mood name
+    @param {string} moodName - The name of the dream mood
+    @returns {string} - The icon path for the dream mood
+    */
     whichDreamMoodIcon(moodName) {
 
         switch (moodName) {
