@@ -52,7 +52,7 @@ https://github.com/Agathon006/Dream_diary_project/assets/64129058/84bbccff-7771-
 ## Additional features
 
 1. To load seed files just launch **load_seed.js** script, if users/records are empty, according seeds files (users/records) will be uploaded
-1. To update all local branches with remote origin main branch i created bash script which you can in app root:
+1. To update all local branches with remote origin main branch i created bash script which you can run in app root:
    `./update_branches.sh`
 1. There are mocha modules for app testing and one example script, but there no testing scripts actually yet, nevertheless to run test scripts you need to run this in app root:
    `npx mocha test`
