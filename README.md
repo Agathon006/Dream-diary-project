@@ -12,9 +12,9 @@
 
 ## Instruction for launching this project
 
-1. Install all needed server dependencies:
+1. Install all needed dependencies:
    `npm install`
-1. Run the json-server (back app):
+1. Run the json-server (back app), your server must work on [localhost:3000](http://localhost:3000):
    `npx json-server db.json`
 1. Run the front app with some server (you can use [MAMP](https://www.mamp.info/en/windows/) for example). Attention: do not use LiveServer from VS Code for this as it can cause problems with POST / PUT / DELETE requests to the server.
 
@@ -39,3 +39,9 @@
 - JSON-Web-Token (JWT)
 - i18next
 - seeds files
+---
+
+## APIs used in the project
+
+- [HTML](https://api.unsplash.com)
+- [CSS](https://api.openweathermap.org)
