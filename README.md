@@ -6,7 +6,7 @@
 
 ## Video demo:
 
-
+https://github.com/Agathon006/Dream_diary_project/assets/64129058/84bbccff-7771-4d59-b923-dd26c0eefddc
 
 ---
 
