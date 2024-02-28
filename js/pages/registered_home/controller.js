@@ -178,7 +178,7 @@ export default class Controller {
                     .then(data => {
                         if (data.length) {
                             this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[moodSelect.selectedIndex].value,
-                                moodSelect.options[moodSelect.selectedIndex].value, data[0].email,
+                                moodSelect.options[moodSelect.selectedIndex].value,
                                 dreamSortSelect.options[dreamSortSelect.selectedIndex].value, data[0].email);
                         } else {
                             console.log('User not found');
@@ -471,8 +471,10 @@ export default class Controller {
 
                             const dreamSearchInput = this.view.getDreamSearchInputElement(),
                                 categorySelect = this.view.getDreamCategorySelectElement(),
-                                moodSelect = this.view.getDreamMoodSelectElement();
-                            this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, data[0].email);
+                                moodSelect = this.view.getDreamMoodSelectElement(),
+                                dreamSortSelect = this.view.getDreamSortSelectElement();
+
+                            this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, dreamSortSelect.options[dreamSortSelect.selectedIndex].value, data[0].email);
                         } else {
                             console.log('User not found');
                         }
@@ -502,8 +504,10 @@ export default class Controller {
 
                 const dreamSearchInput = this.view.getDreamSearchInputElement(),
                     categorySelect = this.view.getDreamCategorySelectElement(),
-                    moodSelect = this.view.getDreamMoodSelectElement();
-                this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value);
+                    moodSelect = this.view.getDreamMoodSelectElement(),
+                    dreamSortSelect = this.view.getDreamSortSelectElement();
+
+                this._initDreamRecords(1, dreamSearchInput.value, categorySelect.options[categorySelect.selectedIndex].value, moodSelect.options[moodSelect.selectedIndex].value, dreamSortSelect.options[dreamSortSelect.selectedIndex].value);
             }
         });
     }
