@@ -43,5 +43,5 @@
 
 ## APIs used in the project
 
-- [HTML](https://api.unsplash.com)
-- [CSS](https://api.openweathermap.org)
+- [unsplash](https://api.unsplash.com)
+- [openweathermap](https://api.openweathermap.org)
