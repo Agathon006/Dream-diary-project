@@ -13,7 +13,6 @@
       "avatar": ""
     },
     {
-      "id": "1f98",
       "nickname": "Procti113",
       "email": "john_proctor@gmail.com",
       "password": "4asdhGFA12d",
@@ -25,7 +24,6 @@
       "avatar": "https://cdn.pixabay.com/photo/2023/08/06/18/16/trees-8173530_1280.jpg"
     },
     {
-      "id": "01ac",
       "nickname": "Bishop142",
       "email": "edward_bishop@gmail.com",
       "password": "ads3289Fsa",
@@ -37,7 +35,6 @@
       "avatar": "https://cdn.pixabay.com/photo/2023/11/14/11/07/sparrow-8387465_1280.jpg"
     },
     {
-      "id": "1d12",
       "nickname": "Young126",
       "email": "alice_young@gmail.com",
       "password": "ads3saFsd2289sa",
@@ -51,7 +48,6 @@
   ],
   "records": [
     {
-      "id": "2a8f",
       "dreamImageUrl": "https://pixabay.com/get/g92d817d5529d6d4e08c714784ff0315f4219f802996f7439382250d71e77ffb3cdef012cd37150b090977c72e09a04ff_640.jpg",
       "dreamTitle": "Lost in a Maze",
       "dreamCategory": "Trash",
@@ -74,7 +70,6 @@
       "likesUsersEmails": []
     },
     {
-      "id": "992a",
       "dreamImageUrl": "https://pixabay.com/get/g765b316d518947c430ed7ca82db4eaf977d646a4407edb3ec2d37bdce2f798f77b6589821566226125fce543e7d8deec_640.jpg",
       "dreamTitle": "The Haunted Mansion",
       "dreamCategory": "Nightmare",
@@ -97,7 +92,6 @@
       "likesUsersEmails": []
     },
     {
-      "id": "f236",
       "dreamImageUrl": "https://pixabay.com/get/g92f34d0f170142771ea747d0133d3fb99b4ce3c9c6be390321653a3e1111506e890cedfcdae5e3c644c2d32c1b0190a0_640.jpg",
       "dreamTitle": "The Time Traveler",
       "dreamCategory": "Action",
@@ -115,14 +109,11 @@
         "year": 2023,
         "weekNumber": 4
       },
-      "views": 73,
-      "likes": 1,
-      "likesUsersEmails": [
-        "agaton615@gmail.com"
-      ]
+      "views": 72,
+      "likes": 0,
+      "likesUsersEmails": []
     },
     {
-      "id": "3c28",
       "dreamImageUrl": "https://pixabay.com/get/g2c46e19a6b3726a98d4eab373578239c100951a1889384ae60a572490c499a50cbb64e779c9112ea2baaf3e946cf5f7a_640.jpg",
       "dreamTitle": "The Wandering Souls",
       "dreamCategory": "Usual",
@@ -145,7 +136,6 @@
       "likesUsersEmails": []
     },
     {
-      "id": "05e8",
       "dreamImageUrl": "https://pixabay.com/get/g337d1e2866810ffc3bc751af39d1a9496d4fbc5019159ae3de5c1b073fdbdbfbe26fee636eb630cb6748a17bbca9aa7d_640.jpg",
       "dreamTitle": "The Carnival of Dreams",
       "dreamCategory": "Conscious dream",
@@ -168,7 +158,6 @@
       "likesUsersEmails": []
     },
     {
-      "id": "c4af",
       "dreamImageUrl": "https://pixabay.com/get/g71ab20e6291003fa4895b91c83e1df1acab28ad40ac2cae45b702726c2e2e749aaf9142a0bdc3acc1b936c91420e8547_640.jpg",
       "dreamTitle": "The Mirror Dimension",
       "dreamCategory": "Just talking",
@@ -191,7 +180,6 @@
       "likesUsersEmails": []
     },
     {
-      "id": "2ec4",
       "dreamImageUrl": "https://pixabay.com/get/g4b7e9788bb27e1d6f80e16f09852c78dc175ff3769d677c43d777c9a07ab35b897f4176d63cd9bdf9ddcc38b0c5d2dac_640.jpg",
       "dreamTitle": "The Infinite Library",
       "dreamCategory": "Usual",
@@ -214,7 +202,6 @@
       "likesUsersEmails": []
     },
     {
-      "id": "93e5",
       "dreamImageUrl": "https://pixabay.com/get/gef9dd934efad30203f7226d19cd0f383ea2b9836b85470392070c19235c76a2fd40004aa5bdb5c0868eb90dbed61a8ce_640.jpg",
       "dreamTitle": "The City of Light",
       "dreamCategory": "Conscious dream",
@@ -237,7 +224,6 @@
       "likesUsersEmails": []
     },
     {
-      "id": "a0fc",
       "dreamImageUrl": "https://pixabay.com/get/g3da041f31c27564e329bc8ff39a679f6b326c05da7b501c7ced205cf40f8219b451a1f48103f65c00a937521ee215c25_640.jpg",
       "dreamTitle": "The Echoing Caves",
       "dreamCategory": "Trash",
