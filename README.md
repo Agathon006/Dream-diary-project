@@ -10,7 +10,7 @@ https://github.com/Agathon006/Dream_diary_project/assets/64129058/84bbccff-7771-
 
 ---
 
-## Instruction for launching this project
+## Instruction for launching
 
 1. Install all needed dependencies:
    `npm install`
@@ -20,7 +20,7 @@ https://github.com/Agathon006/Dream_diary_project/assets/64129058/84bbccff-7771-
 
 ---
 
-## Technologies used in the project
+## Technologies
 
 - HTML
 - CSS
@@ -42,7 +42,7 @@ https://github.com/Agathon006/Dream_diary_project/assets/64129058/84bbccff-7771-
 
 ---
 
-## APIs used in the project
+## APIs
 
 - [unsplash](https://api.unsplash.com)
 - [openweathermap](https://api.openweathermap.org)
